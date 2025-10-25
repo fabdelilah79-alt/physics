@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تمارين السنة الثالثة إعدادي - الفيزياء والكيمياء</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- قائمة التنقل العلوية -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-atom"></i>
+                <span>الفيزياء والكيمياء</span>
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <!-- المستوى الأول -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>1AC</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="lessons-1ac.html" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الدروس</span>
+                        </a>
+                        <a href="exercises-1ac.html" class="dropdown-item">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>التمارين</span>
+                        </a>
+                        <a href="resources-1ac.html" class="dropdown-item">
+                            <i class="fas fa-folder-open"></i>
+                            <span>الموارد الإضافية</span>
+                        </a>
+                    </div>
+                </li>
+                
+                <!-- المستوى الثاني -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>2AC</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="lessons-2ac.html" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الدروس</span>
+                        </a>
+                        <a href="exercises-2ac.html" class="dropdown-item">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>التمارين</span>
+                        </a>
+                        <a href="resources-2ac.html" class="dropdown-item">
+                            <i class="fas fa-folder-open"></i>
+                            <span>الموارد الإضافية</span>
+                        </a>
+                    </div>
+                </li>
+                
+                <!-- المستوى الثالث -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>3AC</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="lessons-3ac.html" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الدروس</span>
+                        </a>
+                        <a href="exercises-3ac.html" class="dropdown-item">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>التمارين</span>
+                        </a>
+                        <a href="resources-3ac.html" class="dropdown-item">
+                            <i class="fas fa-folder-open"></i>
+                            <span>الموارد الإضافية</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- الحاوية الرئيسية -->
+    <div class="container">
+        <!-- زر العودة -->
+        <a href="index.html" class="btn btn-back">
+            <i class="fas fa-arrow-right"></i>
+            <span>العودة للصفحة الرئيسية</span>
+        </a>
+
+        <!-- عنوان الصفحة -->
+        <section class="hero-section">
+            <div class="hero-icon">✏️</div>
+            <h1 class="hero-title">تمارين السنة الثالثة إعدادي</h1>
+            <p class="hero-subtitle">تدرب واختبر معلوماتك مع تمارين متنوعة ومفصلة</p>
+        </section>
+
+        <!-- قائمة التمارين -->
+        <section>
+            <h2 class="section-title">جميع التمارين</h2>
+            <div class="cards-grid" id="exercisesContainer">
+                <!-- سيتم تحميل التمارين من JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>موقع تعليمي - الفيزياء والكيمياء</strong></p>
+            <p>تعلم، استكشف، وتفوق في رحلتك العلمية</p>
+            <p style="margin-top: 1rem;">
+                <i class="fas fa-heart" style="color: #f5576c;"></i>
+                صُمم بكل حب لطلاب العلوم
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    <script>
+        // تحميل تمارين المستوى الثالث
+        document.addEventListener('DOMContentLoaded', function() {
+            renderExercises('3ac');
+        });
+    </script>
+</body>
+</html>

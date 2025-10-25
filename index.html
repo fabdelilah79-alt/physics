@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع تعليمي - الفيزياء والكيمياء</title>
+    <meta name="description" content="موقع تعليمي شامل لمادة الفيزياء والكيمياء للمستويات الإعدادية">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- قائمة التنقل العلوية -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-atom"></i>
+                <span>الفيزياء والكيمياء</span>
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <!-- المستوى الأول -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>1AC</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="lessons-1ac.html" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الدروس</span>
+                        </a>
+                        <a href="exercises-1ac.html" class="dropdown-item">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>التمارين</span>
+                        </a>
+                        <a href="resources-1ac.html" class="dropdown-item">
+                            <i class="fas fa-folder-open"></i>
+                            <span>الموارد الإضافية</span>
+                        </a>
+                    </div>
+                </li>
+                
+                <!-- المستوى الثاني -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>2AC</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="lessons-2ac.html" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الدروس</span>
+                        </a>
+                        <a href="exercises-2ac.html" class="dropdown-item">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>التمارين</span>
+                        </a>
+                        <a href="resources-2ac.html" class="dropdown-item">
+                            <i class="fas fa-folder-open"></i>
+                            <span>الموارد الإضافية</span>
+                        </a>
+                    </div>
+                </li>
+                
+                <!-- المستوى الثالث -->
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-book"></i>
+                        <span>3AC</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="lessons-3ac.html" class="dropdown-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>الدروس</span>
+                        </a>
+                        <a href="exercises-3ac.html" class="dropdown-item">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span>التمارين</span>
+                        </a>
+                        <a href="resources-3ac.html" class="dropdown-item">
+                            <i class="fas fa-folder-open"></i>
+                            <span>الموارد الإضافية</span>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- الحاوية الرئيسية -->
+    <div class="container">
+        <!-- قسم الترحيب -->
+        <section class="hero-section">
+            <div class="hero-icon">🔬</div>
+            <h1 class="hero-title">مرحباً بك في عالم الفيزياء والكيمياء</h1>
+            <p class="hero-subtitle">استكشف، تعلم، وتفوق في رحلتك العلمية مع أفضل المحتوى التعليمي</p>
+        </section>
+
+        <!-- المستويات الدراسية -->
+        <section>
+            <h2 class="section-title">اختر مستواك الدراسي</h2>
+            <div class="cards-grid">
+                <!-- المستوى الأول -->
+                <div class="card">
+                    <div class="card-icon blue">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="card-title">السنة الأولى إعدادي - 1AC</h3>
+                    <p class="card-description">
+                        ابدأ رحلتك العلمية مع أساسيات الفيزياء والكيمياء. تعرف على المادة، الذرات، والحركة.
+                    </p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-book-open"></i> 5 دروس</span>
+                        <span><i class="fas fa-pen"></i> 3 تمارين</span>
+                    </div>
+                    <a href="lessons-1ac.html" class="btn btn-primary">
+                        <span>ابدأ التعلم</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+
+                <!-- المستوى الثاني -->
+                <div class="card">
+                    <div class="card-icon purple">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h3 class="card-title">السنة الثانية إعدادي - 2AC</h3>
+                    <p class="card-description">
+                        تعمق في دراسة التفاعلات الكيميائية، الكهرباء، والضوء. طور مهاراتك العلمية.
+                    </p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-book-open"></i> 5 دروس</span>
+                        <span><i class="fas fa-pen"></i> 3 تمارين</span>
+                    </div>
+                    <a href="lessons-2ac.html" class="btn btn-primary">
+                        <span>ابدأ التعلم</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+
+                <!-- المستوى الثالث -->
+                <div class="card">
+                    <div class="card-icon pink">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="card-title">السنة الثالثة إعدادي - 3AC</h3>
+                    <p class="card-description">
+                        استعد للامتحانات مع الميكانيك، الكيمياء العضوية، والطاقة الكهربائية.
+                    </p>
+                    <div class="card-meta">
+                        <span><i class="fas fa-book-open"></i> 5 دروس</span>
+                        <span><i class="fas fa-pen"></i> 3 تمارين</span>
+                    </div>
+                    <a href="lessons-3ac.html" class="btn btn-primary">
+                        <span>ابدأ التعلم</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- لماذا الفيزياء والكيمياء؟ -->
+        <section class="info-section">
+            <h2 class="section-title">لماذا تدرس الفيزياء والكيمياء؟</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-lightbulb" style="color: #fbbf24;"></i>
+                    <h3>فهم العالم</h3>
+                    <p>اكتشف كيف يعمل العالم من حولك من خلال القوانين العلمية</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-brain" style="color: #8b5cf6;"></i>
+                    <h3>تطوير التفكير</h3>
+                    <p>نمِّ مهارات التفكير النقدي وحل المشكلات</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-rocket" style="color: #3b82f6;"></i>
+                    <h3>مستقبل مشرق</h3>
+                    <p>افتح أبواب العديد من المجالات المهنية المستقبلية</p>
+                </div>
+                
+                <div class="info-card">
+                    <i class="fas fa-flask-vial" style="color: #10b981;"></i>
+                    <h3>التجارب العملية</h3>
+                    <p>تعلم من خلال التجارب والممارسة العملية</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- الوصول السريع -->
+        <section>
+            <h2 class="section-title">الوصول السريع</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon cyan">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="card-title">جميع الدروس</h3>
+                    <p class="card-description">
+                        استعرض جميع دروس المستويات الثلاثة في مكان واحد
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="lessons-1ac.html" class="btn btn-outline">1AC</a>
+                        <a href="lessons-2ac.html" class="btn btn-outline">2AC</a>
+                        <a href="lessons-3ac.html" class="btn btn-outline">3AC</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon green">
+                        <i class="fas fa-pen-to-square"></i>
+                    </div>
+                    <h3 class="card-title">التمارين التفاعلية</h3>
+                    <p class="card-description">
+                        تدرب واختبر معلوماتك مع تمارين متنوعة ومفصلة
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="exercises-1ac.html" class="btn btn-outline">1AC</a>
+                        <a href="exercises-2ac.html" class="btn btn-outline">2AC</a>
+                        <a href="exercises-3ac.html" class="btn btn-outline">3AC</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon orange">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h3 class="card-title">الموارد التعليمية</h3>
+                    <p class="card-description">
+                        فيديوهات تعليمية، ملفات PDF، وروابط مفيدة
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="resources-1ac.html" class="btn btn-outline">1AC</a>
+                        <a href="resources-2ac.html" class="btn btn-outline">2AC</a>
+                        <a href="resources-3ac.html" class="btn btn-outline">3AC</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- التذييل -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p><strong>موقع تعليمي - الفيزياء والكيمياء</strong></p>
+            <p>تعلم، استكشف، وتفوق في رحلتك العلمية</p>
+            <p style="margin-top: 1rem;">
+                <i class="fas fa-heart" style="color: #f5576c;"></i>
+                صُمم بكل حب لطلاب العلوم
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
