@@ -1153,17 +1153,28 @@ SCENES.effets = (host, o = {}) => {
   const vF = vec(f, pb, 0, 0, 0, 0, C.red, 3); const lF = f.g({parent: pb}); vlab(f, lF, 0, 0, 'F', C.red, 20, 'middle');
   // c) glace
   const pc = panel(2, 'c', 'Blocs de glace frottés');
-  iceCube(f, pc, 60, 170, 80, 0); const ice2 = f.g({parent: pc}); iceCube(f, ice2, 0, 0, 70, 0);
-  const drops = [...Array(4)].map((_, k) => f.ell(70 + k * 22, 252, 7, 3, {fill: '#9fd3f5', opacity: .8, parent: pc}));
-  tag(f, pc, 125, 80, 'glace à 0 °C', {size: 14, w: 92});
+  // bloc inférieur posé sur la paillasse (y de 170 à 250) ; bloc supérieur frotté sur lui : zone de contact y = 170
+  iceCube(f, pc, 65, 170, 80, 0); const ice2 = f.g({parent: pc}); iceCube(f, ice2, 0, 0, 70, 0);
+  const film = f.rect(68, 166, 74, 7, {rx: 3.5, fill: '#7fc4f0', opacity: 0, parent: pc});       // eau de fusion dans la zone frottée
+  const dripL = f.path('', {stroke: '#7fc4f0', 'stroke-width': 4, 'stroke-linecap': 'round', fill: 'none', opacity: .85, parent: pc});
+  const dripR = f.path('', {stroke: '#7fc4f0', 'stroke-width': 4, 'stroke-linecap': 'round', fill: 'none', opacity: .85, parent: pc});
+  const puddle = f.ell(105, 251, 0, 3, {fill: '#9fd3f5', opacity: .85, parent: pc});
+  f.line(143, 170, 164, 158, {stroke: C.ink2, 'stroke-width': 1.2, parent: pc});
+  tag(f, pc, 168, 156, 'zone frottée', {size: 12, w: 72, anchor: 'start'});
+  tag(f, pc, 125, 72, 'glace à 0 °C', {size: 14, w: 92});
   // d) allumette
   const pd = panel(3, 'd', 'Allumette frottée');
   f.rect(30, 200, 190, 40, {rx: 4, fill: '#c2452d', stroke: '#7a2a1a', 'stroke-width': 1, parent: pd});
   f.rect(40, 208, 170, 24, {rx: 3, fill: '#5a3a2a', parent: pd}); const rr = rng(4); for (let i = 0; i < 60; i++) f.circ(42 + rr() * 166, 210 + rr() * 20, .9, {fill: '#2b1a10', parent: pd});
+  // allumette : la tête (rouge) frotte sur le frottoir ; le bâtonnet monte vers la droite (main hors champ)
   const match = f.g({parent: pd});
-  f.rect(-4, -90, 8, 90, {rx: 2, fill: '#e8c98a', stroke: '#b8935a', 'stroke-width': .8, parent: match});
-  f.ell(0, -94, 7, 9, {fill: '#a3161f', parent: match});
-  const flame = f.path('M0,-100 C-12,-118 -6,-136 0,-150 C6,-136 12,-118 0,-100 Z', {fill: f.lg('fl6', [[0, '#fff1c9'], [.5, '#ffb347'], [1, '#f07f1e']]), parent: match});
+  f.rect(-2, -104, 8, 100, {rx: 2, fill: '#e8c98a', stroke: '#b8935a', 'stroke-width': .8, transform: 'rotate(35 2 -4)', parent: match});
+  f.ell(0, -4, 9, 7, {fill: f.rg('tete6', [[0, '#e0535c'], [1, '#7a141c']], .35, .3, .8), parent: match});
+  const spark = f.g({parent: pd});
+  [[-10, -6], [-16, 2], [-6, -12]].forEach(([dx, dy]) => f.circ(dx, dy, 2, {fill: '#ffd166', parent: spark}));
+  const flame = f.g({parent: pd});
+  f.circ(0, -22, 16, {fill: '#ffb347', opacity: .4, filter: d.blur4, parent: flame});
+  f.path('M0,-10 C-12,-20 -8,-36 0,-52 C8,-36 12,-20 0,-10 Z', {fill: f.lg('fl6', [[0, '#fff1c9'], [.5, '#ffb347'], [1, '#f07f1e']], 0, 1, 0, 0), parent: flame});
   f.frame();
   return {update(t){
     const tt = o.book ? 2.6 : t % 6;
@@ -1172,10 +1183,15 @@ SCENES.effets = (host, o = {}) => {
     setT(drill, 0, 4 * k); let ds = ''; for (let y = 152; y < 196; y += 8){ const ph = (o.book ? 0 : t * 30) + y; ds += `M121,${y} L129,${y + 4 + Math.sin(ph) }`; } spir.setAttribute('d', ds);
     // b
     const xe = 120 + 70 * clamp(tt / 3, 0, 1); sp.set(28, xe); setT(hook, xe, 170); setVec(vF, xe + 50, 170, xe + 50 + 20 + (xe - 120) * .5, 170); setT(lF, xe + 68 + (xe - 120) * .25, 156);
-    // c
-    const kc = o.book ? .5 : tt; setT(ice2, 70 + 20 * Math.sin(kc * 6), 104); drops.forEach((e, i) => e.setAttribute('opacity', f2(clamp(tt / 2 - i * .4, 0, .85))));
-    // d
-    const u = clamp(tt / 1.6, 0, 1); setT(match, lerp(60, 190, u), 214, 18); flame.setAttribute('opacity', u >= 1 ? 1 : 0);
+    // c : le bloc supérieur va et vient ; l'eau apparaît dans la zone frottée, puis coule le long du bloc inférieur
+    const kc = o.book ? .5 : tt, wv = clamp(tt / 4, 0, 1); setT(ice2, 70 + 18 * Math.sin(kc * 6), 100);
+    film.setAttribute('opacity', f2(.85 * clamp(tt / 1.2, 0, 1)));
+    const ld = 78 * clamp((tt - 1) / 2.5, 0, 1); dripL.setAttribute('d', ld > 1 ? `M67,172 L67,${f2(172 + ld)}` : ''); dripR.setAttribute('d', ld > 1 ? `M143,172 L143,${f2(172 + ld * .8)}` : '');
+    puddle.setAttribute('rx', f2(46 * clamp((tt - 1.8) / 2.5, 0, 1)));
+    // d : la tête glisse sur le frottoir, puis s'enflamme
+    const u = clamp(tt / 1.6, 0, 1), xm = lerp(55, 185, u), ym = 207; setT(match, xm, ym);
+    spark.setAttribute('transform', `translate(${f2(xm)},${f2(ym)})`); spark.setAttribute('opacity', u > .6 && u < 1 ? 1 : 0);
+    flame.setAttribute('transform', `translate(${f2(xm)},${f2(ym)})`); flame.setAttribute('opacity', u >= 1 ? 1 : 0);
   }};
 };
 

@@ -25,6 +25,14 @@
   frottement f) au milieu I de la surface de contact entre le solide et le support (point marqué « I »).
 - Document de mesure à l'échelle exacte (60 px = 1 cm) avec barre d'échelle ; « imprimer à 100 % ».
 - Contrôler chaque figure exportée sur une planche (lisibilité, chevauchements, couleurs).
+- **Vérifier la justesse physique de chaque détail de chaque figure et animation**, au même titre que le texte.
+  Pour chaque objet, se demander : « est-ce ainsi dans la réalité ? ». Exemples d’erreurs déjà commises :
+  allumette enflammée du côté du bois (c’est la **tête** qui frotte le frottoir et qui s’enflamme) ; glace qui fond
+  loin de la **zone frottée** (l’eau apparaît au contact, puis coule) ; forces de contact dessinées depuis le centre
+  d’inertie (elles partent du **milieu de la surface de contact**). Vérifier aussi : sens des mouvements et des
+  rotations, sens et point d’application des vecteurs, orientation des objets (avant, haut, côté actif), niveaux de
+  liquide horizontaux, cohérence des valeurs affichées avec les données, causes et effets au bon endroit et au bon moment.
+- Avant la livraison, relire chaque figure et chaque animation avec cette liste ; corriger avant d’envoyer.
 
 ## Contenu
 - **Chaque question d’activité doit pouvoir être traitée avec les seuls documents fournis** (et les prérequis réels des élèves).
