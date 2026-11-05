@@ -21,6 +21,8 @@
 - Voiture : **type coupé**, avant clairement à droite, roues qui tournent dans le bon sens.
 - **Mains** correctes (poing qui serre, paume à plat…) : fonctions `fist`, `handFlat`.
 - Une figure de document ne montre pas la réponse d'une question (mode `o.book`).
+- Points d'application : le poids au centre d'inertie G ; les forces de contact (réaction R, composante normale R_N,
+  frottement f) au milieu I de la surface de contact entre le solide et le support (point marqué « I »).
 - Document de mesure à l'échelle exacte (60 px = 1 cm) avec barre d'échelle ; « imprimer à 100 % ».
 - Contrôler chaque figure exportée sur une planche (lisibilité, chevauchements, couleurs).
 
