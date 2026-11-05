@@ -1,0 +1,651 @@
+% =====================================================================
+%  Mouvement de rotation d'un solide indéformable autour d'un axe fixe
+%  Chapitre de manuel de Physique-Chimie (1re année du baccalauréat)
+%  Compilation : xelatex rotation.tex  (deux passes)
+%  Les figures sont conçues en HTML/SVG (dossier figures_html/) et
+%  exportées en PNG dans images/ (script figures_html/render.py).
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.2cm,left=1.9cm,right=2.1cm,headsep=6mm,footskip=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[BoldFont={* Bold},ItalicFont={* Italic},BoldItalicFont={* Bold Italic}]
+\newfontfamily\poppinsmedium{Poppins Medium}
+\newfontfamily\poppinslight{Poppins Light}
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+
+\usepackage{xcolor}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.misc}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{eso-pic}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{microtype}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=4}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt plus 1pt}
+\linespread{1.07}
+\emergencystretch=3em
+\tolerance=2500
+
+% ---------- Couleurs (identiques à la charte des figures) ----------
+\definecolor{cInk}{HTML}{1B2A41}
+\definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8}
+\definecolor{cSky}{HTML}{8EC5FF}
+\definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}
+\definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6}
+\definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300}
+\definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\arc}[1]{\overparen{#1}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}   % mot-clé des questions
+\newcommand{\hl}[1]{{\bfseries\color{cRed}#1}}             % mise en évidence
+\newcommand{\imp}[1]{\textbf{#1}}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+
+% Pastille « Doc n »
+\newcommand{\docbadge}[2][cBlue]{\tikz[baseline=(b.base)]\node[fill=#1,text=white,rounded corners=6pt,inner xsep=5pt,inner ysep=2.2pt,font=\sffamily\bfseries\footnotesize](b){Doc #2};}
+% Document illustré : [largeur]{n}{légende}{image}
+\newcommand{\docimg}[4][0.485\linewidth]{%
+  \begin{minipage}[t]{#1}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{1.4mm}
+    {\sffamily\small\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+% Figure numérotée simple
+\newcommand{\figcap}[1]{\par\vspace{1mm}{\centering\sffamily\small\color{cInk2}#1\par}}
+
+% Formule encadrée
+\newtcbox{\formule}[1][cRed]{on line, enhanced, colback=white, colframe=#1, boxrule=1pt, arc=2.5mm,
+  left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm, boxsep=0pt}
+
+% ---------- Rubriques (boîtes) ----------
+% \begin{rub}[options]{couleur}{icône}{titre}
+\newtcolorbox{rub}[4][]{%
+  enhanced, breakable,
+  colback=#2!4!white, colframe=#2!75!white, boxrule=0.9pt, arc=3mm,
+  left=4.5mm, right=4.5mm, top=6.5mm, bottom=3.5mm,
+  before skip=6mm, after skip=4mm,
+  title={\raisebox{-2.35mm}{\includegraphics[height=7.6mm]{ic_#3}}\hspace{2.2mm}#4},
+  fonttitle=\sffamily\bfseries\fontsize{11.5}{13}\selectfont\color{white},
+  attach boxed title to top left={xshift=5mm,yshift=-4.4mm},
+  boxed title style={enhanced, colback=#2, colframe=#2, arc=4.3mm, boxrule=0pt,
+     left=0.4mm, right=4.5mm, top=0.5mm, bottom=0.5mm},
+  #1}
+
+% Encadré secondaire (méthode, rappel, le saviez-vous) — non sécable
+\newtcolorbox{encart}[4][]{%
+  enhanced, colback=#2!6!white, colframe=#2!6!white, boxrule=0pt, arc=2.5mm,
+  left=13mm, right=3mm, top=2mm, bottom=2mm, before skip=3mm, after skip=3mm,
+  borderline west={1.6pt}{0pt}{#2},
+  overlay={\node[anchor=north west] at ([xshift=2mm,yshift=-2mm]frame.north west)
+     {\includegraphics[width=8.5mm]{ic_#3}};},
+  fontupper=\small,
+  title={#4}, detach title, before upper={{\sffamily\bfseries\color{#2}\tcbtitle}\par\smallskip},
+  #1}
+
+% Situation de départ (bulle)
+\newtcolorbox{situation}{%
+  enhanced, colback=cAmber!9!white, colframe=cAmber!9!white, boxrule=0pt, arc=3mm,
+  left=16mm, right=4mm, top=2.5mm, bottom=2.5mm, before skip=2mm, after skip=3mm,
+  overlay={\node at ([xshift=8mm]frame.west) {\includegraphics[width=10mm]{ic_situation}};
+           \draw[cAmber, line width=1.4pt, rounded corners=3mm] (frame.south west) rectangle (frame.north east);}}
+
+% Sous-titre à l'intérieur d'une rubrique
+\newcommand{\soustitre}[2][cTeal]{\par\medskip{\sffamily\bfseries\color{#1}\MakeUppercase{#2}}\par\smallskip}
+
+% Listes
+\setlist[enumerate,1]{label={\tikz[baseline=(n.base)]\node[circle,fill=cBlue,text=white,inner sep=0pt,minimum size=5.2mm,font=\sffamily\bfseries\footnotesize](n){\arabic*};},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=3pt, topsep=3pt}
+\newlist{reps}{enumerate}{1}
+\setlist[reps]{label={\tikz[baseline=(n.base)]\node[circle,fill=cGreen,text=white,inner sep=0pt,minimum size=5.2mm,font=\sffamily\bfseries\footnotesize](n){\arabic*};},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=4pt, topsep=3pt}
+\newlist{appq}{enumerate}{1}
+\setlist[appq]{label={\sffamily\bfseries\color{cPurple}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\newlist{exq}{enumerate}{1}
+\setlist[exq]{label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\setlist[itemize,1]{label={\color{cOrange}\small$\blacktriangleright$}, leftmargin=6mm, itemsep=2pt, topsep=2pt}
+\setlist[itemize,2]{label={\color{cInk2}\small$\bullet$}, leftmargin=5mm, itemsep=1pt, topsep=1pt}
+
+% ---------- Titres de sections ----------
+\titleformat{\section}[block]
+  {\sffamily\bfseries\fontsize{18}{22}\selectfont\color{cInk}}
+  {\tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=10.5mm,minimum height=10.5mm,inner sep=0pt,font=\sffamily\bfseries\fontsize{18}{22}\selectfont](n){\thesection};}
+  {4mm}{}[\vspace{1.2mm}{\color{cOrange}\titlerule[1.3pt]}]
+\titlespacing*{\section}{0pt}{8mm}{4mm}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{PHYSIQUE}}\enspace·\enspace Mécanique}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre 1\enspace·\enspace Rotation d’un solide autour d’un axe fixe}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7.5mm,inner sep=0pt]{\thepage};}
+% onglet latéral
+\AddToShipoutPictureBG{%
+  \ifnum\value{page}>1
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[cOrange,rounded corners=2.5mm] ([xshift=-6.5mm,yshift=-3.2cm]current page.north east) rectangle ([xshift=3mm,yshift=-7.2cm]current page.north east);
+    \node[rotate=-90,text=white,font=\sffamily\bfseries\footnotesize] at ([xshift=-3.3mm,yshift=-5.2cm]current page.north east) {CHAPITRE 1};
+  \end{tikzpicture}\fi}
+
+% =====================================================================
+\begin{document}
+% =====================================================================
+
+% ---------------------- PAGE D'OUVERTURE ----------------------
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at (current page.north west) {\includegraphics[width=\paperwidth]{opener}};
+  \node[anchor=north west,text width=12.2cm,align=left,inner sep=0] at ([xshift=1.9cm,yshift=-2.3cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12} PHYSIQUE\enspace·\enspace PARTIE 1 — MÉCANIQUE}\par\vspace{5mm}
+    \tikz\node[fill=cOrange,text=white,rounded corners=4mm,inner xsep=4mm,inner ysep=1.6mm,font=\sffamily\bfseries\large]{Chapitre 1};\par\vspace{5mm}
+    {\sffamily\bfseries\fontsize{27}{33}\selectfont\color{white}Mouvement de rotation d’un solide indéformable autour d’un axe fixe\par}};
+\end{tikzpicture}
+\vspace*{8.55cm}
+
+{\large\itshape Portes, manèges, roues, ventilateurs, aiguilles de montre… et même la Terre : autour de nous, d’innombrables objets tournent autour d’un axe. Comment décrire précisément ces mouvements ? Comment repérer la position d’un point d’un objet qui tourne, et mesurer \og à quelle vitesse\fg{} il tourne ?\par}
+\vspace{4mm}
+
+\begin{minipage}[t]{0.485\linewidth}
+\begin{tcolorbox}[enhanced,colback=cBlue!5,colframe=cBlue!5,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cBlue}Objectifs du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small]
+Je vais apprendre à :
+\begin{itemize}
+  \item distinguer un mouvement de rotation d’un mouvement de translation ;
+  \item repérer un point d’un solide en rotation par son abscisse angulaire $\theta$ et son abscisse curviligne $s$ ;
+  \item calculer une vitesse linéaire et une vitesse angulaire instantanées à partir d’un enregistrement ;
+  \item utiliser la relation $V = R\,\omega$ ;
+  \item établir et exploiter les équations horaires d’une rotation uniforme ;
+  \item calculer la période $T$ et la fréquence $f$ d’un mouvement de rotation uniforme.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\begin{tcolorbox}[enhanced,colback=cGreen!6,colframe=cGreen!6,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cGreen}Je dois déjà savoir},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small]
+\begin{itemize}
+  \item définir la trajectoire d’un point et calculer une vitesse moyenne $V_m = \dfrac{d}{\Delta t}$ ;
+  \item convertir un angle de degrés en radians ;
+  \item calculer le périmètre d’un cercle : $2\pi R$.
+\end{itemize}
+\end{tcolorbox}
+\vspace{1mm}
+\begin{tcolorbox}[enhanced,colback=cOrange!7,colframe=cOrange!7,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cOrange}Plan du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\sffamily]
+\textcolor{cOrange}{\textbf{1}}\enspace Mouvement de rotation et repérage d’un point\par
+\textcolor{cOrange}{\textbf{2}}\enspace Vitesse linéaire et vitesse angulaire\par
+\textcolor{cOrange}{\textbf{3}}\enspace Rotation uniforme et équations horaires\par
+\textcolor{cOrange}{\textbf{\,✎}}\enspace Exercices d’application et de synthèse
+\end{tcolorbox}
+\end{minipage}
+
+\begin{encart}{cCyan}{savoir}{Le saviez-vous ?}
+Sur une photographie à pose longue du ciel nocturne (bandeau ci-dessus), les étoiles tracent des arcs de cercle ayant tous le même centre, situé près de l’étoile Polaire. Ce ne sont pas les étoiles qui tournent : c’est la Terre qui tourne autour de l’axe des pôles, entraînant l’appareil photo avec elle !
+\end{encart}
+
+\newpage
+% =====================================================================
+\section{Mouvement de rotation et repérage d’un point}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 1\enspace·\enspace Notion de rotation et repérage d’un point}
+\begin{situation}
+\textbf{Situation de départ.} Portes qui s’ouvrent, manèges, téléphériques… Au quotidien, nous croisons de nombreux objets en mouvement. Pour les étudier, le physicien doit d’abord les classer. \textbf{Comment distinguer avec précision un mouvement de rotation d’un mouvement de translation ? Et comment repérer, à chaque instant, la position d’un point d’un objet qui tourne ?}
+\end{situation}
+
+Les documents 1 à 4 présentent quatre mouvements de la vie courante : un manège à nacelles (doc 1), une cabine de téléphérique qui avance le long de son câble (doc 2), une barrière de péage qui s’ouvre (doc 3) et une grande roue de parc d’attractions, avec ses bras métalliques et ses cabines (doc 4). Sur les documents 2 et 4, on a représenté en noir un segment reliant le plancher au plafond d’une cabine ; sur le document 3, les positions successives de deux points $M$ et $N$ du bras de la barrière.
+
+\medskip
+\docimg{1}{Manège à nacelles}{doc1_manege}\hfill
+\docimg{2}{Téléphérique : trois positions successives d’une cabine}{doc2_telepherique}
+
+\medskip
+\docimg{3}{Barrière de péage qui s’ouvre}{doc3_barriere}\hfill
+\docimg{4}{Grande roue : bras métalliques et cabines}{doc4_granderoue}
+
+\medskip
+Pour repérer la position d’un point d’un objet en rotation, on utilise le schéma du document 5 : un point $G$ se déplace sur une trajectoire circulaire de centre $O$ et de rayon $R$. Sa position est repérée par rapport à l’axe $(Ox)$, qui coupe la trajectoire au point de référence $A$.
+
+\medskip
+\begin{minipage}[c]{0.5\linewidth}\centering
+\includegraphics[width=0.94\linewidth]{doc5_reperage}\par\vspace{1mm}
+{\sffamily\small\docbadge{5}\enspace\color{cInk2}Repérage d’un point sur un cercle}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}
+\begin{encart}{cInk2}{rappel}{Rappel mathématique : le radian}
+Un tour complet correspond à un angle de $\ang{360}$, soit $2\pi~\text{rad}$.\par
+Pour convertir un angle :
+\[ \theta\,(\text{rad}) = \theta\,(\degree)\times\frac{\pi}{180} \]
+Exemples : $\ang{90} = \dfrac{\pi}{2}~\text{rad} \approx 1{,}57~\text{rad}$ ;\\ $\ang{180} = \pi~\text{rad}$.
+\end{encart}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Observer.} Observez la cabine du téléphérique (doc 2) et une cabine de la grande roue (doc 4). Comment le segment noir tracé entre le plancher et le plafond de la cabine se déplace-t-il au cours du temps par rapport à sa direction initiale ? Quelle est alors la nature du mouvement de ces cabines ?
+  \item \kw{Comparer.} Observez maintenant le bras de la barrière (doc 3) ou un bras de la grande roue (doc 4). Les points $M$ et $N$ de la barrière ont-ils la même trajectoire ? Que représente le point de fixation $O$ de la barrière (ou le centre de la roue) pour l’ensemble de ces trajectoires ?
+  \item \kw{Déduire.} À partir de la question 2, proposez une définition du mouvement de rotation d’un solide autour d’un axe fixe. Indiquez ensuite, parmi les objets des documents 1 à 4, ceux qui sont animés d’un mouvement de rotation.
+  \item \kw{Repérer.} Sur le document 5, le point $G$ se déplace sur un cercle de rayon $R$ constant. Proposez deux méthodes pour localiser précisément $G$ à l’instant $t$ par rapport au point de référence $A$ : l’une utilisant un angle, l’autre une longueur mesurée sur la trajectoire.
+  \item \kw{Généraliser.} En mathématiques, quelle relation lie la longueur $s$ d’un arc de cercle, le rayon $R$ du cercle et l’angle au centre $\theta$ exprimé en radians ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{Réponses}
+\begin{reps}
+  \item Le segment reste \textbf{parallèle à lui-même} pendant tout le mouvement : il garde la même direction. Les cabines sont donc en \textbf{mouvement de translation} : translation rectiligne pour la cabine du téléphérique (le câble est ici rectiligne) et translation circulaire pour les cabines de la grande roue.
+  \item Non. Les points $M$ et $N$ décrivent des arcs de cercle de \textbf{rayons différents} ($N$, plus éloigné de $O$, décrit le plus grand). Tous ces cercles ont pourtant le \textbf{même centre} : le point de fixation $O$ de la barrière (ou le centre de la roue). Ce point appartient à l’\textbf{axe de rotation}, perpendiculaire au plan du mouvement.
+  \item Un solide est en rotation autour d’un axe fixe lorsque tous ses points décrivent des cercles centrés sur cet axe, à l’exception des points situés sur l’axe, qui restent immobiles. Sont en rotation : le manège (doc 1), le bras de la barrière (doc 3) et la roue avec ses bras (doc 4).
+  \item On peut repérer $G$ :
+  \begin{itemize}
+    \item par l’\textbf{angle} $\theta$ formé par l’axe $(Ox)$ et le rayon $(OG)$ ;
+    \item par la \textbf{longueur de l’arc} $s = \arc{AG}$, mesurée sur le cercle à partir du point $A$.
+  \end{itemize}
+  \item La longueur d’un arc est égale au produit du rayon par l’angle au centre exprimé en radians : $s = R\cdot\theta$.\\
+  Vérification : pour un tour complet, $\theta = 2\pi~\text{rad}$ et $s = 2\pi R$, on retrouve bien le périmètre du cercle.
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt]{cRed}{retenir}{À retenir}
+\begin{minipage}[t]{0.52\linewidth}
+\sfb{\color{cRed}Mouvement de rotation autour d’un axe fixe}\par\smallskip
+Un solide indéformable est en \textbf{mouvement de rotation autour d’un axe fixe} $(\Delta)$ lorsque :
+\begin{itemize}
+  \item tous ses points (hors de l’axe) décrivent des \textbf{trajectoires circulaires centrées sur l’axe} $(\Delta)$ ;
+  \item ces cercles sont situés dans des \textbf{plans perpendiculaires à} $(\Delta)$ ;
+  \item les points situés sur l’axe restent \textbf{immobiles}.
+\end{itemize}
+\medskip
+\sfb{\color{cRed}Mouvement de translation}\par\smallskip
+Un solide est en \textbf{translation} lorsque tout segment reliant deux de ses points \textbf{reste parallèle à lui-même} au cours du mouvement (exemple : les cabines d’une grande roue).
+\end{minipage}\hfill
+\begin{minipage}[t]{0.44\linewidth}\vspace{-2mm}\centering
+\includegraphics[width=\linewidth]{fig_rotation3d}\par
+{\sffamily\footnotesize\color{cInk2}Chaque point $M$ décrit un cercle de centre $H$ situé sur l’axe.}
+\end{minipage}
+
+\bigskip
+\sfb{\color{cRed}Repérage d’un point $M$ d’un solide en rotation} {\small (voir doc 5)}\par\smallskip
+\renewcommand{\arraystretch}{1.55}
+\begin{tabularx}{\linewidth}{>{\sffamily\bfseries\small}p{3.3cm} >{\centering\arraybackslash}p{4.2cm} X >{\centering\arraybackslash}p{1.8cm}}
+\arrayrulecolor{cRed!40}\toprule
+{\color{cRed}Grandeur} & {\sffamily\bfseries\small\color{cRed}Définition} & {\sffamily\bfseries\small\color{cRed}Signification} & {\sffamily\bfseries\small\color{cRed}Unité SI}\\\midrule
+Abscisse angulaire & $\theta(t) = \big(\vect{Ox},\vect{OM}\big)$ & angle orienté dont a tourné le rayon $OM$ depuis l’axe $(Ox)$ & radian (rad)\\
+Abscisse curviligne & $s(t) = \arc{AM}$ & longueur algébrique de l’arc, comptée à partir de $A$ dans le sens positif & mètre (m)\\\bottomrule
+\end{tabularx}
+
+\medskip
+\begin{center}
+\formule{$\displaystyle s(t) = R\cdot\theta(t)$}\qquad
+{\small avec $s$ en m, $R$ en m (rayon de la trajectoire) et $\theta$ en rad.}
+\end{center}
+\end{rub}
+
+\begin{rub}{cPurple}{application}{Application\enspace·\enspace La porte qui s’ouvre}
+\begin{minipage}[c]{0.5\linewidth}
+Une porte de largeur $L = \qty{90}{cm}$ tourne autour de l’axe de ses charnières d’un angle de $\ang{45}$ (figure ci-contre, vue de dessus).
+\begin{appq}
+  \item Exprimer cet angle en radians.
+  \item En déduire la distance parcourue sur sa trajectoire (longueur de l’arc) par la poignée, située à l’extrémité de la porte.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.45\linewidth}\centering
+\includegraphics[width=\linewidth]{app1_porte}
+\end{minipage}
+\end{rub}
+
+\newpage
+% =====================================================================
+\section{Vitesse linéaire et vitesse angulaire instantanées}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 2\enspace·\enspace Vitesse linéaire et vitesse angulaire}
+\begin{situation}
+\textbf{Situation de départ.} Sur un disque en rotation, les points situés près du bord semblent aller très vite, tandis que ceux qui sont proches du centre paraissent lents. Pourtant, le disque tourne \og d’un seul bloc\fg{}. \textbf{Comment évaluer la vitesse d’un point à un instant précis ? Et comment traduire mathématiquement la \og vitesse de rotation\fg{} commune à tout le disque ?}
+\end{situation}
+
+On a enregistré le mouvement d’un solide en rotation autour d’un axe fixe, sur une table à coussin d’air. Le document 6 montre les positions successives prises par deux points $A$ et $B$ du solide.
+
+\begin{itemize}
+  \item L’intervalle de temps séparant deux positions consécutives est constant : $\tau = \qty{40}{ms}$.
+  \item Le point $A$ est situé à $R_A = OA = \qty{6}{cm}$ de l’axe, et le point $B$ à $R_B = OB = \qty{12}{cm}$.
+  \item Le document est reproduit à l’\textbf{échelle 1/2} : $\qty{1}{cm}$ sur le document représente $\qty{2}{cm}$ en réalité.
+\end{itemize}
+
+\begin{center}
+\includegraphics[width=9cm]{doc6_enregistrement}\par\vspace{1mm}
+{\sffamily\small\docbadge{6}\enspace\color{cInk2}Enregistrement des positions de $A$ et $B$ (intervalle $\tau$)}
+\end{center}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Vitesse linéaire instantanée.} Pour calculer la vitesse $V_{A1}$ du point $A$ lors de son passage en $A_1$ (à la date $t_1$), on l’assimile à la vitesse moyenne entre la position précédente $A_0$ et la position suivante $A_2$ ; la portion de trajectoire correspondante est un arc de cercle. Exprimer $V_{A1}$ en fonction de la longueur de l’arc $\arc{A_0A_2}$ et de l’intervalle de temps $\tau$.
+  \item \kw{Calcul linéaire.} On mesure sur le document : $\arc{A_0A_2} \approx \qty{1,8}{cm}$ et $\arc{B_0B_2} \approx \qty{3,6}{cm}$. En tenant compte de l’échelle, on obtient en réalité $\arc{A_0A_2} \approx 2\times\qty{1,8}{cm} = \qty{3,6}{cm}$ et $\arc{B_0B_2} \approx 2\times\qty{3,6}{cm} = \qty{7,2}{cm}$.
+  Calculer les vitesses linéaires instantanées $V_{A1}$ et $V_{B1}$. Lequel des deux points est le plus rapide ?
+  \item \kw{Vitesse angulaire instantanée.} De la même manière, on définit la vitesse angulaire instantanée $\omega_1$ (lire \og oméga\fg{}) du solide à la date $t_1$ comme le quotient de l’angle balayé entre les positions 0 et 2 par la durée de ce balayage. Donner l’expression de $\omega_1$ en fonction de $\Delta\theta = \theta_2 - \theta_0$ et de $\tau$.
+  \item \kw{Calcul angulaire.} À l’aide d’un rapporteur, on mesure l’angle balayé entre les positions 0 et 2 : on trouve $\Delta\theta_A = \Delta\theta_B \approx \ang{34}$, soit environ $\qty{0,6}{rad}$. Calculer les vitesses angulaires instantanées $\omega_{A1}$ et $\omega_{B1}$. Que remarquez-vous ?
+  \item \kw{Synthèse.} Calculer les produits $R_A\cdot\omega_{A1}$ et $R_B\cdot\omega_{B1}$, puis les comparer aux vitesses $V_{A1}$ et $V_{B1}$ de la question 2. En déduire la relation générale qui lie $V_i$, $R$ et $\omega_i$.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{Réponses}
+\begin{reps}
+  \item La durée du parcours de $A_0$ à $A_2$ est $t_2 - t_0 = 2\tau$. D’où :
+  \[ V_{A1} = \frac{\arc{A_0A_2}}{2\tau} \]
+  \item $V_{A1} = \dfrac{3{,}6\times10^{-2}}{2\times40\times10^{-3}} = \qty{0,45}{m.s^{-1}}$\qquad et\qquad $V_{B1} = \dfrac{7{,}2\times10^{-2}}{2\times40\times10^{-3}} = \qty{0,90}{m.s^{-1}}$.\\
+  Le point $B$, deux fois plus éloigné de l’axe que $A$, est deux fois plus rapide.
+  \item La durée du balayage est toujours $2\tau$ :\quad $\omega_1 = \dfrac{\theta_2 - \theta_0}{2\tau}$.
+  \item $\omega_{A1} = \dfrac{0{,}6}{2\times40\times10^{-3}} = \qty{7,5}{rad.s^{-1}}$\qquad et\qquad $\omega_{B1} = \dfrac{0{,}6}{2\times40\times10^{-3}} = \qty{7,5}{rad.s^{-1}}$.\\
+  On remarque que $\omega_{A1} = \omega_{B1}$ : à un instant donné, \textbf{tous les points du solide ont la même vitesse angulaire}.
+  \item $R_A\cdot\omega_{A1} = 0{,}06\times7{,}5 = \qty{0,45}{m.s^{-1}} = V_{A1}$\qquad et\qquad $R_B\cdot\omega_{B1} = 0{,}12\times7{,}5 = \qty{0,90}{m.s^{-1}} = V_{B1}$.\\
+  La relation cherchée est donc : $V_i = R\cdot\omega_i$.
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt]{cRed}{retenir}{À retenir}
+\sfb{\color{cRed}Vitesse linéaire instantanée $V_i$}\par\smallskip
+C’est la vitesse d’un point du solide à la date $t_i$. On la calcule en encadrant la position $i$ par la position précédente $(i-1)$ et la position suivante $(i+1)$ :
+\begin{center}
+\formule{$\displaystyle V_i = \frac{s_{i+1} - s_{i-1}}{t_{i+1} - t_{i-1}} = \frac{s_{i+1} - s_{i-1}}{2\tau}$}\qquad {\small $V_i$ en $\unit{m.s^{-1}}$}
+\end{center}
+Le vecteur vitesse $\vec{V}_i$ est \textbf{tangent à la trajectoire} au point considéré et orienté dans le sens du mouvement. La vitesse linéaire \textbf{augmente avec la distance à l’axe}.
+
+\medskip
+\sfb{\color{cRed}Vitesse angulaire instantanée $\omega_i$}\par\smallskip
+Elle caractérise la rotation de l’\textbf{ensemble du solide} à la date $t_i$ :
+\begin{center}
+\formule{$\displaystyle \omega_i = \frac{\theta_{i+1} - \theta_{i-1}}{t_{i+1} - t_{i-1}} = \frac{\theta_{i+1} - \theta_{i-1}}{2\tau}$}\qquad {\small $\omega_i$ en $\unit{rad.s^{-1}}$}
+\end{center}
+À un instant donné, \hl{tous les points d’un solide en rotation ont la même vitesse angulaire}.
+
+\medskip
+\begin{minipage}[c]{0.5\linewidth}
+\sfb{\color{cRed}Relation entre vitesse linéaire et vitesse angulaire}\par\smallskip
+À chaque instant, la vitesse linéaire d’un point situé à la distance $R$ de l’axe est proportionnelle à la vitesse angulaire du solide :
+\begin{center}
+\formule{$\displaystyle V_i = R\cdot\omega_i$}
+\end{center}
+{\small $V_i$ en $\unit{m.s^{-1}}$ ; $R$ en m ; $\omega_i$ en $\unit{rad.s^{-1}}$.}\par\medskip
+Conséquence : un point deux fois plus éloigné de l’axe va deux fois plus vite.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{fig_vitesse}
+\end{minipage}
+\end{rub}
+
+\begin{encart}{cOrange}{methode}{Méthode : calculer une vitesse instantanée sur un enregistrement}
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item Repérer la position $i$ étudiée et les positions voisines $i-1$ et $i+1$.
+  \item Mesurer l’arc (ou l’angle) entre $i-1$ et $i+1$ ; tenir compte de l’échelle du document.
+  \item Convertir en unités SI : longueurs en m, angles en rad, durées en s ($\qty{1}{ms} = \qty{e-3}{s}$).
+  \item Diviser par la durée $2\tau$ (et non $\tau$ : il y a deux intervalles entre $i-1$ et $i+1$).
+\end{enumerate}
+\end{encart}
+
+\begin{rub}{cPurple}{application}{Application rapide\enspace·\enspace Le plateau du four à micro-ondes}
+\begin{minipage}[c]{0.53\linewidth}
+Le plateau d’un four à micro-ondes tourne autour d’un axe vertical passant par son centre $O$. Un grain de riz est tombé à $\qty{10}{cm}$ du centre, et une miette de pain se trouve au bord du plateau, à $\qty{15}{cm}$ du centre.
+\begin{appq}
+  \item Les positions angulaires du plateau ont été enregistrées à intervalles réguliers $\tau = \qty{0,5}{s}$. Entre les dates $t_{i-1}$ et $t_{i+1}$, le plateau passe de $\theta_{i-1} = \qty{0}{rad}$ à $\theta_{i+1} = \pi/2~\text{rad}$. Calculer la vitesse angulaire instantanée $\omega_i$ du plateau.
+  \item Le grain de riz et la miette de pain ont-ils la même vitesse angulaire ? Justifier.
+  \item Calculer la vitesse linéaire instantanée du grain de riz, puis celle de la miette de pain, à la date $t_i$.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.43\linewidth}\centering
+\includegraphics[width=\linewidth]{app2_microondes}
+\end{minipage}
+\end{rub}
+
+\newpage
+% =====================================================================
+\section{Mouvement de rotation uniforme et équations horaires}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 3\enspace·\enspace Rotation uniforme et équations horaires}
+\begin{situation}
+\textbf{Situation de départ.} Pour modéliser le mouvement d’un objet qui tourne (une aiguille de montre, un satellite, une éolienne…) et prévoir sa position future, le physicien utilise des outils mathématiques appelés \textbf{équations horaires}. \textbf{Comment construire l’équation horaire d’un mouvement de rotation très régulier ?}
+\end{situation}
+
+\begin{minipage}[c]{0.5\linewidth}
+Revenons à l’enregistrement de l’activité 2 : les positions successives sont régulièrement espacées, la vitesse angulaire $\omega$ garde donc la même valeur tout au long du mouvement.
+
+On considère un point $M$ du solide, situé à la distance $R$ de l’axe (doc 7).
+\begin{itemize}
+  \item Au déclenchement du chronomètre ($t = \qty{0}{s}$), $M$ est repéré par l’abscisse angulaire initiale $\theta_0$.
+  \item À une date $t$ quelconque, sa position est repérée par l’abscisse angulaire $\theta(t)$.
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc7_pointM}\par\vspace{1mm}
+{\sffamily\small\docbadge{7}\enspace\color{cInk2}Positions de $M$ à $t=0$ et à la date $t$}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Nommer le mouvement.} Sachant que la vitesse angulaire $\omega$ ne varie pas au cours du temps, comment qualifieriez-vous ce mouvement de rotation ?
+  \item \kw{Équation horaire angulaire.} Depuis le départ, l’angle a varié de $\Delta\theta = \theta(t) - \theta_0$ pendant la durée $\Delta t = t - 0 = t$. En utilisant la définition $\omega = \dfrac{\Delta\theta}{\Delta t}$, exprimer $\theta(t)$ en fonction de $\omega$, $t$ et $\theta_0$.
+  \item \kw{Équation horaire curviligne.} Multiplier chaque terme de l’équation obtenue à la question 2 par le rayon $R$. En utilisant les relations $s = R\cdot\theta$ et $V = R\cdot\omega$, en déduire l’équation horaire de l’abscisse curviligne $s(t)$.
+  \item \kw{Périodicité.} Le point $M$ repasse régulièrement par les mêmes positions. Comment appelle-t-on la durée nécessaire pour effectuer exactement un tour complet (angle de $2\pi$ radians) ? Exprimer cette durée $T$ en fonction de $\omega$.
+  \item \kw{Fréquence.} Si un tour dure $T$ secondes, combien de tours sont effectués en une seconde ? Comment s’appelle cette grandeur et quelle est son unité ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{Réponses}
+\begin{reps}
+  \item Puisque $\omega$ est constante, le mouvement est une \textbf{rotation uniforme}.
+  \item $\omega = \dfrac{\theta(t) - \theta_0}{t}$ ; en isolant $\theta(t)$, on obtient l’équation horaire : $\theta(t) = \omega\cdot t + \theta_0$.
+  \item On multiplie par $R$ : $R\cdot\theta(t) = R\cdot\omega\cdot t + R\cdot\theta_0$, ce qui donne directement $s(t) = V\cdot t + s_0$, où $s_0 = R\cdot\theta_0$ est l’abscisse curviligne initiale.
+  \item Cette durée est la \textbf{période} $T$. Pour un tour, $\Delta\theta = 2\pi$ pendant $\Delta t = T$, donc $\omega = \dfrac{2\pi}{T}$, soit $T = \dfrac{2\pi}{\omega}$.
+  \item Le nombre de tours effectués par seconde est la \textbf{fréquence} $f$ (parfois notée $N$). C’est l’inverse de la période : $f = \dfrac{1}{T}$. Elle s’exprime en \textbf{hertz} (Hz) : $\qty{1}{Hz} = \qty{1}{tour.s^{-1}} = \qty{1}{s^{-1}}$.
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt]{cRed}{retenir}{À retenir}
+\sfb{\color{cRed}Rotation uniforme}\par\smallskip
+Un solide est en \textbf{mouvement de rotation uniforme} autour d’un axe fixe lorsque sa \textbf{vitesse angulaire $\omega$ est constante}.
+
+\medskip
+\begin{minipage}[c]{0.5\linewidth}
+\sfb{\color{cRed}Équations horaires}\par\smallskip
+Ce sont les fonctions mathématiques qui donnent la position en fonction du temps :
+\begin{center}
+\formule{$\theta(t) = \omega\cdot t + \theta_0$}\enspace{\small (rad)}\\[2.5mm]
+\formule{$s(t) = V\cdot t + s_0$}\enspace{\small (m)}
+\end{center}
+avec $V = R\cdot\omega$ et $s_0 = R\cdot\theta_0$.\par\smallskip
+La courbe $\theta = f(t)$ est une \textbf{droite} de coefficient directeur $\omega$ et d’ordonnée à l’origine $\theta_0$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{fig_graphe_theta}
+\end{minipage}
+
+\medskip
+\sfb{\color{cRed}Période $T$ et fréquence $f$}\par\smallskip
+\begin{center}
+\formule{$\displaystyle T = \frac{2\pi}{\omega}$}\enspace{\small (s)}\qquad\qquad
+\formule{$\displaystyle f = \frac{1}{T} = \frac{\omega}{2\pi}$}\enspace{\small (Hz)}\qquad\qquad
+\formule{$\omega = 2\pi f$}
+\end{center}
+{\small\textbf{Attention aux unités :} une fréquence donnée en tours par minute (tr/min) se convertit en hertz en divisant par 60 : $f\,(\text{Hz}) = \dfrac{N\,(\text{tr/min})}{60}$.}
+\end{rub}
+
+\begin{rub}{cPurple}{application}{Application\enspace·\enspace Le ventilateur}
+\begin{minipage}[c]{0.62\linewidth}
+Les pales d’un ventilateur tournent d’un mouvement uniforme à la fréquence de 300 tours par minute ($\qty{300}{tr/min}$).
+\begin{appq}
+  \item Convertir cette fréquence en hertz (tours par seconde).
+  \item En déduire la vitesse angulaire $\omega$ du ventilateur.
+  \item Écrire l’équation horaire $\theta(t)$, en considérant que $\theta_0 = 0$.
+  \item Calculer la période $T$ de rotation des pales.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.3\linewidth}\centering
+\includegraphics[width=\linewidth]{app3_ventilateur}
+\end{minipage}
+\end{rub}
+
+\newpage
+% =====================================================================
+%  EXERCICES
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cInk, colframe=cInk, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=5mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_exercices}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Exercices d’application et de synthèse}
+\end{tcolorbox}
+
+\begin{rub}{cOrange}{questions}{Je vérifie mes connaissances\enspace·\enspace Vrai ou faux ?}
+Pour chaque affirmation, dire si elle est vraie ou fausse, puis corriger les affirmations fausses.
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\alph*)}, leftmargin=6mm, itemsep=1pt]
+  \item Lors d’une rotation autour d’un axe fixe, tous les points du solide ont la même vitesse linéaire.
+  \item À un instant donné, tous les points d’un solide en rotation ont la même vitesse angulaire.
+  \item Les cabines d’une grande roue sont animées d’un mouvement de rotation.
+  \item Dans le Système international, l’abscisse angulaire s’exprime en degrés.
+  \item Pour une rotation uniforme, la courbe $\theta = f(t)$ est une droite.
+  \item Si la fréquence de rotation double, la période est divisée par deux.
+\end{enumerate}
+\end{rub}
+
+% ---------------- Exercice 1 ----------------
+\begin{rub}{cOrange}{exercices}{Exercice 1\enspace·\enspace La rotation de la Terre}
+\begin{minipage}[c]{0.58\linewidth}
+La Terre tourne autour de l’axe des pôles d’un mouvement que l’on considère comme uniforme : elle effectue un tour en $\qty{24}{h}$ (durée d’un jour solaire moyen). Son rayon à l’équateur vaut environ $R = \qty{6400}{km}$.
+\begin{exq}
+  \item Exprimer la période de rotation $T$ de la Terre en secondes.
+  \item En déduire, étape par étape, sa vitesse angulaire $\omega$ en $\unit{rad.s^{-1}}$.
+  \item Calculer la vitesse linéaire $V$ d’un point $P$ situé sur l’équateur terrestre. Donner le résultat en $\unit{m.s^{-1}}$, puis en $\unit{km.h^{-1}}$.
+  \item Un point situé au pôle Nord a-t-il la même vitesse linéaire ? Justifier.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.38\linewidth}\centering
+\includegraphics[width=\linewidth]{ex1_terre}
+\end{minipage}
+\begin{encart}[before skip=3mm, after skip=0mm]{cCyan}{savoir}{Le saviez-vous ?}
+Par rapport aux étoiles lointaines, la Terre effectue en réalité un tour en $\qty{23}{h}~\qty{56}{min}$ environ (jour sidéral). La différence avec les 24 h du jour solaire vient du déplacement de la Terre autour du Soleil.
+\end{encart}
+\end{rub}
+
+% ---------------- Exercice 2 ----------------
+\begin{rub}{cOrange}{exercices}{Exercice 2\enspace·\enspace Poulies et transmission du mouvement}
+Le moteur d’une scie circulaire entraîne une petite poulie (A) de rayon $R_A = \qty{2}{cm}$. Cette poulie est reliée par une courroie à une grande poulie (B) de rayon $R_B = \qty{10}{cm}$. La lame de la scie, de rayon $R_L = \qty{15}{cm}$, est solidaire de la poulie (B). Le moteur tourne à $N_A = \qty{1500}{tr/min}$.
+
+\begin{center}
+\includegraphics[width=11cm]{ex2_poulies}
+\end{center}
+
+{\small\textit{Donnée : la courroie ne glisse pas sur les poulies ; la vitesse linéaire de tous les points de la courroie est donc la même, et égale à celle des points de la périphérie de chaque poulie.}}
+\begin{exq}
+  \item Calculer la fréquence $f_A$ (en Hz), puis la vitesse angulaire $\omega_A$ de la poulie (A).
+  \item Calculer la vitesse linéaire $V$ de la courroie.
+  \item En déduire la vitesse angulaire $\omega_B$ de la poulie (B) et la comparer à $\omega_A$.
+  \item Un point matériel se trouve à l’extrémité de la lame de scie. Écrire son équation horaire angulaire $\theta(t)$, sachant qu’à $t = 0$, $\theta_0 = \pi~\text{rad}$.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 3 ----------------
+\begin{rub}{cOrange}{exercices}{Exercice 3\enspace·\enspace Exploitation graphique}
+\begin{minipage}[c]{0.55\linewidth}
+Un élève a enregistré le mouvement de rotation d’un disque, puis a tracé la courbe représentant l’évolution de l’abscisse angulaire d’un point du disque en fonction du temps : $\theta = f(t)$. Il obtient une droite passant par l’origine et par le point de coordonnées ($t = \qty{2}{s}$ ; $\theta = 4\pi~\text{rad}$).
+\begin{exq}
+  \item Quelle est la nature de la fonction mathématique représentée ? Que peut-on en déduire sur la nature du mouvement de rotation ?
+  \item Déterminer la valeur du coefficient directeur de cette droite. À quelle grandeur physique correspond-il ?
+  \item En déduire l’équation horaire angulaire $\theta(t)$ du mouvement.
+  \item Le rayon du disque est $R = \qty{10}{cm}$. En déduire l’équation horaire de l’abscisse curviligne $s(t)$ d’un point de la périphérie du disque.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.42\linewidth}\centering
+\includegraphics[width=\linewidth]{ex3_graphe}
+\end{minipage}
+\end{rub}
+
+\newpage
+% =====================================================================
+%  CORRIGÉS
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cGreen, colframe=cGreen, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=4mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_corrige}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Éléments de correction}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small
+\setlength{\columnsep}{7mm}
+\newcommand{\corr}[1]{\par\medskip{\sffamily\bfseries\color{cGreen}#1}\par\smallskip}
+
+\corr{Application · La porte qui s’ouvre}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item $\theta = 45\times\dfrac{\pi}{180} = \dfrac{\pi}{4}~\text{rad} \approx \qty{0,785}{rad}$.
+  \item $s = R\cdot\theta = L\cdot\theta = 0{,}90\times\dfrac{\pi}{4} \approx \qty{0,71}{m}$, soit environ $\qty{71}{cm}$.
+\end{enumerate}
+
+\corr{Application rapide · Le four à micro-ondes}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item $\omega_i = \dfrac{\theta_{i+1}-\theta_{i-1}}{2\tau} = \dfrac{\pi/2 - 0}{2\times0{,}5} = \dfrac{\pi}{2} \approx \qty{1,57}{rad.s^{-1}}$.
+  \item Oui : ils sont entraînés par le même solide (le plateau) ; à un instant donné, tous ses points ont la même vitesse angulaire.
+  \item Grain de riz : $V = 0{,}10\times1{,}57 \approx \qty{0,16}{m.s^{-1}}$.\\ Miette de pain : $V = 0{,}15\times1{,}57 \approx \qty{0,24}{m.s^{-1}}$.
+\end{enumerate}
+
+\corr{Application · Le ventilateur}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item $f = \dfrac{300}{60} = \qty{5}{Hz}$.
+  \item $\omega = 2\pi f = 10\pi \approx \qty{31,4}{rad.s^{-1}}$.
+  \item $\theta(t) = 10\pi\, t$ \;($\theta$ en rad, $t$ en s).
+  \item $T = \dfrac{1}{f} = \qty{0,2}{s}$.
+\end{enumerate}
+
+\corr{Vrai ou faux ?}
+a) Faux : $V = R\,\omega$ dépend de la distance $R$ à l’axe. \quad b) Vrai. \quad c) Faux : elles sont en translation circulaire (le segment plancher–plafond reste vertical). \quad d) Faux : en radians (rad). \quad e) Vrai : $\theta(t) = \omega t + \theta_0$. \quad f) Vrai : $T = 1/f$.
+
+\corr{Exercice 1 · La rotation de la Terre}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item $T = 24\times3600 = \qty{86400}{s}$.
+  \item $\omega = \dfrac{2\pi}{T} = \dfrac{2\pi}{86\,400} \approx \qty{7,27e-5}{rad.s^{-1}}$.
+  \item $V = R\,\omega = 6{,}4\times10^{6}\times7{,}27\times10^{-5} \approx \qty{465}{m.s^{-1}}$, soit $465\times3{,}6 \approx \qty{1,67e3}{km.h^{-1}}$.
+  \item Non : le pôle Nord est situé sur l’axe de rotation ($R = 0$), sa vitesse linéaire est nulle ; il tourne seulement sur lui-même.
+\end{enumerate}
+
+\corr{Exercice 2 · Poulies}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item $f_A = \dfrac{1500}{60} = \qty{25}{Hz}$ ;\quad $\omega_A = 2\pi f_A = 50\pi \approx \qty{157}{rad.s^{-1}}$.
+  \item $V = R_A\,\omega_A = 0{,}02\times157 \approx \qty{3,14}{m.s^{-1}}$.
+  \item $\omega_B = \dfrac{V}{R_B} = \dfrac{3{,}14}{0{,}10} \approx \qty{31,4}{rad.s^{-1}}$ ($=10\pi$). Donc $\omega_B = \dfrac{\omega_A}{5}$ : la grande poulie tourne 5 fois moins vite, car $\dfrac{\omega_B}{\omega_A} = \dfrac{R_A}{R_B}$.
+  \item La lame, solidaire de (B), tourne à $\omega_B = 10\pi~\unit{rad.s^{-1}}$ : $\theta(t) = 10\pi\,t + \pi$ (rad). Le rayon $R_L$ n’intervient pas dans l’équation angulaire ; il servirait à calculer $V = R_L\,\omega_B \approx \qty{4,7}{m.s^{-1}}$.
+\end{enumerate}
+
+\corr{Exercice 3 · Exploitation graphique}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item Fonction linéaire ($\theta = k\,t$) : le coefficient $k$ est constant, la vitesse angulaire est constante, le mouvement est une rotation uniforme (avec $\theta_0 = 0$).
+  \item $k = \dfrac{4\pi - 0}{2 - 0} = 2\pi \approx \qty{6,28}{rad.s^{-1}}$ : c’est la vitesse angulaire $\omega$.
+  \item $\theta(t) = 2\pi\,t$ (rad).
+  \item $s(t) = R\,\theta(t) = 0{,}10\times2\pi\,t = 0{,}2\pi\,t \approx 0{,}628\,t$ (m).
+\end{enumerate}
+\end{multicols}
+
+\end{document}

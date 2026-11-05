@@ -1,0 +1,275 @@
+% =====================================================================
+%  Fiche pédagogique — Chapitre 3 (chimie) : La concentration et les solutions électrolytiques
+% =====================================================================
+\usepackage[version=4]{mhchem}
+\newcommand{\Matiere}{Chimie}
+\newcommand{\Partie}{Partie 1 — Mesure des quantités de matière}
+\newcommand{\NumChap}{3}
+\newcommand{\TitreChap}{La concentration et les solutions électrolytiques}
+\newcommand{\TitreCourt}{La concentration et les solutions électrolytiques}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{2 h}
+\newcommand{\Banniere}{opener_ch3.jpg}
+\newcommand{\BanniereDecalage}{4.2cm}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{2 heures — une séance\\ Cours-activités}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Chimie · Partie 1 · § 2.2\\ Concentration et solutions électrolytiques}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séance}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Déterminer des quantités de matière}, par le calcul ou expérimentalement, au moyen de \textbf{mesures physiques} et de mesures chimiques, notamment dans les \textbf{solutions électrolytiques} {\color{cInk2}(compétence spécifique de la partie 1 de chimie, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} comprendre la structure d’un solide ionique et la polarité des molécules pour expliquer la dissolution ; écrire l’équation de dissolution ; préparer une solution de concentration donnée ; distinguer la concentration du soluté apporté $C$ de la concentration effective $[X]$ des ions.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} observer des modèles cristallins, interpréter l’expérience du filet d’eau et celle du jet d’eau, mettre en évidence les ions par des tests, relier la conduction du courant à la présence d’ions.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} écrire correctement formules statistiques, ions et équations de dissolution avec les états physiques (s), (l), (g), (aq) ; décrire les étapes de la dissolution ; argumenter (polaire / apolaire).}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} modèles cristallins 3D animés, simulation de l’hydratation des ions, vidéo de l’expérience du jet d’eau.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode pour écrire une formule statistique (neutralité), protocole de préparation d’une solution par dissolution, organisation d’un calcul ($m = C\cdot V\cdot M$).}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} les marais salants et l’eau de mer, le sel de cuisine, les sérums physiologiques ; sécurité au laboratoire (acides, nitrate d’argent, lunettes et gants).}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séance, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — décrire un solide ionique (empilement d’anions et de cations, chaque ion entouré d’ions de signe opposé) et savoir que sa cohésion est assurée par l’\textbf{interaction électrostatique} ;}
+\pt{\textbf{O2} — écrire la \textbf{formule statistique} d’un solide ionique à partir de la neutralité électrique ;}
+\pt{\textbf{O3} — reconnaître une liaison polarisée et une \textbf{molécule polaire} (non-coïncidence de $G_+$ et $G_-$), en s’appuyant sur le tableau périodique ;}
+\pt{\textbf{O4} — décrire la \textbf{dissolution} (dislocation, hydratation, dispersion) et l’obtention d’une solution électrolytique à partir d’un solide, d’un liquide ou d’un gaz ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — écrire l’\textbf{équation de dissolution} en précisant les états physiques (s), (l), (g), (aq) ;}
+\pt{\textbf{O6} — déterminer la concentration du soluté apporté $C = n/V$ et \textbf{préparer} une solution par dissolution ;}
+\pt{\textbf{O7} — distinguer $C$ de la \textbf{concentration effective} $[X]$ des ions et calculer $[X]$ à l’aide des coefficients de l’équation de dissolution.}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} déterminer la quantité de matière d’un solide ionique à partir de sa masse, et celle d’un soluté dans une solution homogène à partir de sa concentration et du volume ; savoir que l’attraction entre un ion et ses voisins est d’origine électrique ; écrire l’équation de dissolution ; déterminer la concentration d’une solution électrolytique et la distinguer de la concentration effective des ions.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et du chapitre 2}
+\pt{les ions monoatomiques et polyatomiques, leur charge et leur formule ;}
+\pt{la liaison covalente (doublet d’électrons mis en commun) et la classification périodique des éléments ;}
+\pt{la mole, la masse molaire et la relation $n = m/M$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{l’interaction électrique : deux charges de signes opposés s’attirent, de même signe se repoussent (électrisation par frottement) ;}
+\pt{les tests d’ions (nitrate d’argent pour \ce{Cl-}, papier pH) ;}
+\pt{les conversions de volume : mL, L ; la proportionnalité.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{modèles moléculaires et cristallins (boules) : chlorure de sodium, fluorure de calcium ;}
+\pt{règle en plastique, chiffon de laine, robinet (ou burette) pour le filet d’eau ;}
+\pt{bécher, eau distillée, chlorure de sodium, deux électrodes, générateur 6 V, ampèremètre (ou lampe témoin), fils ;}
+\pt{vidéo de l’expérience du jet d’eau ; papier pH ; solution de nitrate d’argent ;}
+\pt{balance, coupelle, spatule, entonnoir, fiole jaugée de 250 mL avec bouchon, pissette, sulfate de sodium ; lunettes et gants.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (34 diapositives) ;}
+\pt{\textbf{livre de l’élève} (version à compléter) et livre du professeur ;}
+\pt{\textbf{fiche d’activités} imprimée (une page, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — chimie, partie 1, § 2.2 « La concentration et les solutions électrolytiques » : le solide ionique ; obtention d’une solution électrolytique par dissolution de solides ioniques, de liquides ou de gaz dans l’eau ; polarité d’une molécule (\ce{HCl}, \ce{H2O}) en lien avec la classification périodique ; hydratation des ions, cas particulier du proton ; concentration du soluté apporté $C$ et concentration effective $[X]$.}
+\pt{Activité préconisée : préparer des solutions électrolytiques et détecter les ions qu’elles contiennent. Orientations : se limiter à la formule statistique du solide ionique (ni maille ni calcul) ; ne pas présenter le moment dipolaire ; introduire l’électronégativité sans définition précise, à partir du tableau périodique ; écrire \ce{H^+_{(aq)}} (\ce{H3O+} accepté) ; vérifier les états physiques ; écrire $(\ce{Na^+_{(aq)}} + \ce{Cl^-_{(aq)}})$ et non \ce{NaCl} pour la solution.}
+\pt{Supports du chapitre 3 : livre (versions professeur et élève), présentation animée, fiche d’activités. Manuels scolaires agréés de physique-chimie de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\bloc{2}{fi_chemin}{Déroulement de la séance}
+
+\noindent\frise{cCyan/6/Mise en route, cTeal/22/P1 · Solide ionique, cBlue/26/P2 · Molécules polaires, cPurple/29/P3 · Dissolution, cOrange/29/P4 · Concentrations, cGreen/8/Bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% ---------------------------------------------------------------------
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil et rappel des prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Accueille les apprenants, distribue la fiche d’activités et le livre de l’élève.}
+ \pt{Projette la diapositive de titre (cristal de sel en rotation, ions hydratés) et annonce le plan en quatre parties.}
+ \pt{Questions flash : « Donner la formule de l’ion sulfate », « Qu’est-ce qu’une liaison covalente ? », « Deux charges de même signe… ? », « Calculer $n$ pour 5,85 g de \ce{NaCl} ($M = \qty{58,5}{g.mol^{-1}}$) ».}}
+{\pt{Répond oralement ou sur l’ardoise : \ce{SO4^{2-}} ; doublet d’électrons mis en commun ; elles se repoussent ; $n = 5{,}85/58{,}5 = \qty{0,100}{mol}$.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} formules d’ions exactes ; signe de l’interaction ; calcul de $n$.\par\vspace{.8mm}
+ \regul Rappel au tableau des ions usuels et de leur charge.}
+{6}{0 h 06}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Le solide ionique et sa cohésion}{22 min · objectifs O1 et O2}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Comment les ions forment-ils un cristal ?}{\diapo{2}}}
+{\pt{Projette la diapo 2 (marais salant animé : l’eau s’évapore, le sel cristallise).}
+ \pt{Montre des cristaux de sel à la loupe : formes cubiques.}
+ \pt{Pose le problème : comment les ions s’organisent-ils pour former un cristal stable ?}}
+{\pt{Observe la forme régulière des cristaux.}
+ \pt{Propose : « les ions sont rangés », « les + attirent les − ».}}
+{\diag Hypothèses formulées.}
+{3}{0 h 09}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Des ions bien rangés (docs 1 et 2)}{\diapo{3--4} \support{Livre · Act. 1} \support{Fiche}}}
+{\pt{Fait manipuler les modèles cristallins en boules et projette les cristaux 3D en rotation (diapo 3) ; fait compter les voisins de \ce{Na+}.}
+ \pt{Organise le travail en binômes sur les questions 1 à 3 ; aide à relier cohésion et interaction électrique.}
+ \pt{Corrige au clic (diapo 4).}}
+{\pt{Constate l’alternance régulière des ions ; compte 6 voisins \ce{Cl-} autour de chaque \ce{Na+}.}
+ \pt{Identifie l’attraction électrostatique entre ions de signes opposés.}
+ \pt{Établit la neutralité du cristal et écrit \ce{NaCl} et \ce{CaF2} ($2 + 2\times(-1) = 0$).}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} 6 voisins ; « attraction électrostatique » ; formule \ce{CaF2} justifiée par la neutralité.\par\vspace{.8mm}
+ \regul Erreur fréquente : écrire les charges dans la formule statistique (« \ce{Ca^{2+}F^-2} »).}
+{11}{0 h 20}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Solide ionique, cohésion, formule statistique}{\diapo{5--6} \support{Livre}}}
+{\pt{Fait formuler la définition, projette les diapos 5 (ions qui vibrent et s’attirent) et 6 (formule statistique, méthode).}
+ \pt{Demande de compléter les trous de l’« À retenir ».}}
+{\pt{Complète l’« À retenir ».}
+ \pt{Applique la méthode à \ce{Fe2O3} ($2\times3 = 3\times2$).}}
+{\form Question flash : « formule du chlorure de magnésium (\ce{Mg^{2+}}, \ce{Cl-}) ? » $\to$ \ce{MgCl2}.}
+{4}{0 h 24}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{L’oxyde d’aluminium}{\diapo{7} \support{Livre}}}
+{\pt{Projette l’énoncé (ions qui apparaissent un à un, charge totale affichée) ; travail individuel ; correction au clic.}}
+{\pt{Trouve 2 \ce{Al^{3+}} pour 3 \ce{O^{2-}} ($+6 - 6 = 0$) et écrit \ce{Al2O3}.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} formule \ce{Al2O3} justifiée par la neutralité.}
+{4}{0 h 28}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Les molécules polaires}{26 min · objectif O3}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{L’eau dissout le sel, pas l’huile : pourquoi ?}{\diapo{8}}}
+{\pt{Réalise (ou projette, diapo 8) : sel + eau, huile + eau.}
+ \pt{Pose le problème : qu’est-ce qui caractérise la molécule d’eau du point de vue électrique ?}}
+{\pt{Observe : le sel disparaît, l’huile forme une couche.}
+ \pt{Propose une hypothèse sur la nature électrique de l’eau.}}
+{\diag Pertinence des hypothèses.}
+{3}{0 h 31}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Filet d’eau, électronégativité, molécules polaires (docs 3 à 5)}{\diapo{9--11} \support{Livre · Act. 2} \support{Fiche}}}
+{\pt{Réalise l’expérience de la règle frottée approchée d’un filet d’eau (doc 3, animation diapo 9).}
+ \pt{Présente l’électronégativité à partir du tableau périodique (doc 4), sans définition précise, conformément aux orientations.}
+ \pt{Projette les modèles de \ce{HCl} et \ce{H2O} (doc 5, diapo 10) : déformation du nuage électronique, charges partielles, puis barycentres $G_+$ et $G_-$.}
+ \pt{Fait traiter les questions 1 à 3 en binômes ; corrige au clic (diapo 11).}}
+{\pt{Observe la déviation du filet ; l’attribue à des charges électriques sur les molécules d’eau.}
+ \pt{Repère que Cl est plus électronégatif que H : $-\delta$ sur Cl, $+\delta$ sur H.}
+ \pt{Constate que $G_+$ et $G_-$ ne coïncident pas : molécule polaire.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} charges partielles placées sur le bon atome ; argument « barycentres distincts ».\par\vspace{.8mm}
+ \regul Ne pas introduire le moment dipolaire (hors programme).}
+{14}{0 h 45}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{Liaison polarisée ; molécule polaire ou apolaire}{\diapo{12} \support{Livre}}}
+{\pt{Projette la diapo 12 ; fait reformuler les définitions.}
+ \pt{Donne des exemples apolaires : \ce{H2}, \ce{CH4}, \ce{CO2}.}}
+{\pt{Complète l’« À retenir ».}
+ \pt{Classe des molécules : polaire / apolaire.}}
+{\form Question orale : « Une molécule à liaisons polarisées est-elle toujours polaire ? ».}
+{5}{0 h 50}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{La molécule de dioxyde de carbone}{\diapo{13} \support{Livre}}}
+{\pt{Projette l’énoncé (molécule linéaire animée) ; travail individuel ; correction au clic.}}
+{\pt{Place $-\delta$ sur chaque O et $+2\delta$ sur C.}
+ \pt{Montre que $G_+$ et $G_-$ sont confondus sur C : molécule apolaire.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} conclusion « apolaire » justifiée par la géométrie linéaire.}
+{4}{0 h 54}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · La dissolution : solutions électrolytiques}{29 min · objectifs O4 et O5}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Le sel disparaît… et l’eau devient conductrice}{\diapo{14}}}
+{\pt{Projette la diapo 14 (la lampe s’allume quand le sel se dissout).}
+ \pt{Pose le problème : comment un cristal ionique devient-il une solution conductrice ?}}
+{\pt{Relie conduction du courant et porteurs de charges.}}
+{\diag Mobilisation de la notion de courant électrique.}
+{3}{0 h 57}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Conductivité, jet d’eau, hydratation des ions (docs 6 à 8)}{\diapo{15--17} \support{Livre · Act. 3} \support{Fiche}}}
+{\pt{Réalise l’expérience 1 : eau distillée, puis eau salée, entre deux électrodes (doc 6).}
+ \pt{Projette l’expérience du jet d’eau (vidéo ou animation, doc 7) ; réalise les tests : papier pH et nitrate d’argent sur une solution d’acide chlorhydrique.}
+ \pt{Projette l’animation de l’hydratation (doc 8, diapo 16) et fait décrire les trois étapes.}
+ \pt{Fait traiter les questions 1 à 3 ; corrige au clic (diapo 17).}}
+{\pt{Constate qu’un courant passe dans l’eau salée : présence d’ions mobiles.}
+ \pt{Explique la montée de l’eau par la dissolution très rapide de \ce{HCl} ; identifie \ce{H+} et \ce{Cl-} par les tests.}
+ \pt{Décrit dislocation, hydratation, dispersion.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} « solution électrolytique » définie ; ions identifiés par les tests ; ordre des trois étapes.\par\vspace{.8mm}
+ \regul Sécurité : nitrate d’argent (taches), acide (lunettes, gants).}
+{15}{1 h 12}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{Solution électrolytique ; équations de dissolution}{\diapo{18--19} \support{Livre}}}
+{\pt{Projette les diapos 18 et 19 ; écrit au tableau les trois équations modèles (solide \ce{NaCl}, liquide \ce{HNO3}, gaz \ce{HCl}).}
+ \pt{Insiste sur les états physiques, la conservation des éléments et des charges, l’écriture \ce{H^+_{(aq)}} (\ce{H3O+} accepté) et l’écriture $(\ce{Na^+_{(aq)}} + \ce{Cl^-_{(aq)}})$ de la solution.}}
+{\pt{Complète l’« À retenir ».}
+ \pt{Vérifie la conservation des éléments et des charges sur chaque équation.}}
+{\form Écriture au tableau de l’équation de dissolution de \ce{KCl}.\par
+ \textit{Indicateur :} états physiques présents.}
+{6}{1 h 18}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Le chlorure de fer (III)}{\diapo{20} \support{Livre}}}
+{\pt{Projette l’énoncé ; travail individuel ; correction au clic.}}
+{\pt{Écrit \ce{FeCl3_{(s)} -> Fe^{3+}_{(aq)} + 3Cl^-_{(aq)}} et vérifie : 1 Fe, 3 Cl ; $+3 - 3 = 0$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} coefficient 3 devant \ce{Cl-} ; conservation vérifiée.}
+{5}{1 h 23}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Partie 4 · Concentration apportée et concentration effective}{29 min · objectifs O6 et O7}
+\etape{cOrange}{\axe{cAmber}{ic_situation}{Situation de départ}{Combien d’ions dans un litre ?}{\diapo{21}}}
+{\pt{Projette la diapo 21 (loupe sur une solution) ; pose le problème de la concentration réelle des ions.}}
+{\pt{Rappelle la notion de concentration vue au tronc commun.}}
+{\diag Rappel de $C = n/V$.}
+{2}{1 h 25}
+\etape{cOrange}{\axe{cTeal}{ic_activite}{Activité 4}{Dissoudre du sulfate de sodium (doc 9)}{\diapo{22--23} \support{Livre · Act. 4} \support{Fiche}}}
+{\pt{Projette l’animation (diapo 22) : chaque unité de \ce{Na2SO4} libère 2 \ce{Na+} et 1 \ce{SO4^{2-}} ; les compteurs et les barres apparaissent.}
+ \pt{Fait traiter les questions 1 à 3 en binômes ; corrige au clic (diapo 23).}}
+{\pt{Écrit $C = n/V$.}
+ \pt{Établit $n(\ce{Na+}) = 2n$ et $n(\ce{SO4^{2-}}) = n$, puis $[\ce{Na+}] = 2C$ et $[\ce{SO4^{2-}}] = C$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} rôle des coefficients de l’équation ; notations $C$ et $[X]$ non confondues.\par\vspace{.8mm}
+ \regul Erreur fréquente : $[\ce{Na+}] = C$.}
+{12}{1 h 37}
+\etape{cOrange}{\axe{cRed}{ic_retenir}{À retenir et méthode}{$C$ et $[X]$ ; préparer une solution par dissolution}{\diapo{24--25} \support{Livre}}}
+{\pt{Projette la diapo 24, puis réalise devant la classe la préparation d’une solution de sulfate de sodium dans une fiole jaugée en suivant la diapo 25 (peser, introduire, dissoudre, compléter au trait de jauge, homogénéiser).}}
+{\pt{Complète l’« À retenir ».}
+ \pt{Calcule la masse à peser : $m = C\cdot V\cdot M$ ; décrit les étapes du protocole.}}
+{\form Un apprenant énonce le protocole pendant la manipulation.\par
+ \textit{Indicateurs :} ordre des étapes ; lecture au bas du ménisque.}
+{10}{1 h 47}
+\etape{cOrange}{\axe{cPurple}{ic_application}{Application}{Une solution de chlorure de magnésium}{\diapo{26} \support{Livre}}}
+{\pt{Projette l’énoncé ; travail individuel ; correction au clic.}}
+{\pt{Écrit \ce{MgCl2_{(s)} -> Mg^{2+}_{(aq)} + 2Cl^-_{(aq)}}.}
+ \pt{Calcule $[\ce{Mg^{2+}}] = \qty{0,10}{mol.L^{-1}}$ et $[\ce{Cl-}] = \qty{0,20}{mol.L^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} $[\ce{Cl-}] = 2C$.}
+{5}{1 h 52}
+% ---------------------------------------------------------------------
+\partie{cGreen}{Bilan et évaluation de la séance}{8 min}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ? — L’essentiel du chapitre}{\diapo{27} \diapo{34}}}
+{\pt{Lance le « Vrai ou faux ? » (diapo 27) : réponses à main levée, puis correction au clic.}
+ \pt{Projette « L’essentiel du chapitre » (diapo 34).}
+ \pt{Donne le travail à la maison (exercices 1 à 3 du livre).}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}
+ \pt{Note le travail à faire.}}
+{\somm Taux de bonnes réponses au vrai-faux (objectif : au moins 5 sur 6).\par
+ \textit{Exploitation :} repérer les notions à reprendre en début de séance suivante.}
+{8}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Exercice 1} — Le chlorométhane est-il polaire ? : objectif O3.}
+\pt{\textbf{Exercice 2} — Équations de dissolution : objectifs O5 et O7.}
+\pt{\textbf{Exercice 3} — Préparer une solution de chlorure de calcium : objectifs O6 et O7.}
+\pt{Correction projetée au début de la séance suivante (diapos 28 à 33).}
+\pt{Soutien : écrire les formules statistiques de \ce{K+}/\ce{O^{2-}} et \ce{Al^{3+}}/\ce{Cl-}. Approfondissement : « Le saviez-vous ? » sur les ions de l’eau de mer.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séance (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séance :}\lignevide}
+\end{minipage}
+
+\end{document}

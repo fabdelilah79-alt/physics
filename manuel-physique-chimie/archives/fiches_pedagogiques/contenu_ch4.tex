@@ -1,0 +1,222 @@
+% =====================================================================
+%  Fiche pédagogique — Chapitre 4 (chimie) : Applications au suivi d’une transformation chimique
+% =====================================================================
+\usepackage[version=4]{mhchem}
+\newcommand{\Matiere}{Chimie}
+\newcommand{\Partie}{Partie 1 — Mesure des quantités de matière}
+\newcommand{\NumChap}{4}
+\newcommand{\TitreChap}{Applications au suivi\\ d’une transformation chimique}
+\newcommand{\TitreCourt}{Applications au suivi d’une transformation chimique}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{2 h}
+\newcommand{\Banniere}{opener_ch4.jpg}
+\newcommand{\BanniereDecalage}{4.2cm}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{2 heures — une séance\\ Cours-activités}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Chimie · Partie 1 · § 2.3\\ Applications au suivi d’une transformation chimique}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séance}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Déterminer des quantités de matière}, par le calcul ou expérimentalement, au moyen de \textbf{mesures physiques} et de mesures chimiques, et les exploiter pour \textbf{suivre l’évolution d’un système chimique} {\color{cInk2}(compétence spécifique de la partie 1 de chimie, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} décrire l’évolution d’un système chimique à l’aide de l’\textbf{avancement} et du \textbf{tableau d’avancement} ; déterminer le réactif limitant et le bilan de matière ; relier la quantité de gaz formé à une mesure de \textbf{pression} (manomètre) ou de \textbf{volume}, grâce à l’équation d’état des gaz parfaits.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} observer un précipité, suivre une transformation au manomètre, identifier un gaz par un test, \textbf{prévoir} par le calcul puis \textbf{confronter} la prévision à la mesure ($1025 + 37 = \qty{1062}{hPa}$).}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} écrire des équations ajustées avec les états physiques ; présenter un tableau d’avancement lisible ; rédiger un bilan de matière avec les unités.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animation des quantités de matière en fonction de $x$ (graphe et barres), enregistrement de la pression $P = f(t)$, capteur de pression avec interface si le lycée en dispose.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en trois étapes pour $x_{max}$ et le réactif limitant ; méthode en quatre étapes du tableau d’avancement à la pression ou au volume ; conversions en unités SI (L $\to$ m\textsuperscript{3}, °C $\to$ K, hPa $\to$ Pa).}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} élimination des phosphates dans les stations d’épuration, gonflage des coussins de sécurité (airbags), production de chaux ; sécurité au laboratoire (acide chlorhydrique concentré : lunettes, gants ; dihydrogène inflammable).}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séance, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — définir l’\textbf{avancement} $x$ d’une réaction (en mol) et décrire l’évolution des quantités de matière d’un système chimique en fonction de $x$ ;}
+\pt{\textbf{O2} — construire le \textbf{tableau d’avancement} d’une transformation (état initial, au cours de la transformation, état final) ;}
+\pt{\textbf{O3} — déterminer l’\textbf{avancement maximal} $x_{max}$ et le \textbf{réactif limitant} à partir de l’équation et des quantités initiales, puis établir le \textbf{bilan de matière} à l’état final ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O4} — reconnaître un \textbf{mélange stœchiométrique} : $\dfrac{n_i(\mathrm{A})}{a} = \dfrac{n_i(\mathrm{B})}{b}$ ;}
+\pt{\textbf{O5} — utiliser un \textbf{manomètre} pour suivre la pression au cours d’une transformation et calculer une \textbf{quantité de matière gazeuse} ;}
+\pt{\textbf{O6} — \textbf{prévoir} la pression finale (volume connu) ou le volume final (pression connue) d’un gaz formé à température constante : $P\cdot V = n\cdot R\cdot T$ en unités SI.}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} décrire l’évolution des quantités de matière dans un système chimique au cours d’une transformation en fonction de l’avancement de la réaction ; déterminer le réactif limitant à partir de l’équation de la réaction et des quantités de matière initiales des réactifs ; prévoir le volume final (pression connue) ou la pression finale (volume connu) d’un système produisant une quantité de matière $n$ de gaz à température constante $T$.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et des chapitres 2 et 3}
+\pt{la transformation chimique : réactifs, produits, équation de la réaction ajustée (conservation des éléments et des charges) ;}
+\pt{la quantité de matière : $n = \dfrac{m}{M}$, $n = C\cdot V$ ;}
+\pt{l’équation d’état des gaz parfaits $P\cdot V = n\cdot R\cdot T$ et ses unités SI ;}
+\pt{les ions en solution et les tests d’identification usuels.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{conversions : mL $\to$ L $\to$ m\textsuperscript{3} ; hPa $\to$ Pa ; $T = \theta + 273$ ;}
+\pt{écriture scientifique et chiffres significatifs ;}
+\pt{résolution d’une équation du premier degré ($n_i - a\,x = 0$) ; lecture d’un graphe.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{solutions de nitrate de calcium et de phosphate de sodium à \qty{0,20}{mol.L^{-1}}, éprouvettes graduées de 25 mL, bécher de 100 mL ;}
+\pt{erlenmeyer (fiole) avec bouchon percé et tube, \textbf{manomètre absolu} (ou capteur de pression avec interface), thermomètre, balance, grenaille de zinc, acide chlorhydrique ;}
+\pt{tube à essais et allumette (test du dihydrogène) ;}
+\pt{solution de sulfate de fer(II) acidifiée, solution de permanganate de potassium, burette (exercice 1) ; lunettes et gants.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (28 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (une page, avec deux tableaux d’avancement vides, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — chimie, partie 1, § 2.3 « Applications au suivi d’une transformation chimique » : évolution d’un système au cours d’une transformation chimique ; avancement, tableau descriptif (tableau d’avancement) et bilan de matière.}
+\pt{Activités proposées par le programme : réaliser une transformation chimique au cours de laquelle se forme un produit gazeux ; réaliser, chaque fois que possible, les tests d’identification des réactifs et des produits ; mesurer, à température constante, le volume d’un gaz (pression connue) ou la pression d’un gaz (volume connu) ; utiliser un manomètre absolu ou différentiel pour mesurer la variation de pression au cours de la transformation ; calculer une quantité de matière gazeuse ; réaliser l’expérience de migration des ions à l’aide d’un générateur de tension continue {\color{cInk2}(non traitée dans cette séance : à programmer en travaux pratiques)}.}
+\pt{Supports du chapitre 4 : présentation animée et fiche d’activités. Manuels scolaires agréés de physique-chimie de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\bloc{2}{fi_chemin}{Déroulement de la séance}
+
+\noindent\frise{cCyan/6/Mise en route, cTeal/48/P1 · Tableau d’avancement, cBlue/48/P2 · Gaz formé, cOrange/10/Exercice 1, cGreen/8/Bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% ---------------------------------------------------------------------
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil et rappel des prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Accueille les apprenants, distribue la fiche d’activités, que chacun colle dans son cahier.}
+ \pt{Projette la diapositive de titre (précipité qui se forme, graphe de l’avancement) et annonce le plan en deux parties.}
+ \pt{Questions flash : « $n$ pour \qty{20}{mL} de solution à \qty{0,20}{mol.L^{-1}} ? », « \qty{20}{\degreeCelsius} en kelvins ? », « \qty{1,1}{L} en m\textsuperscript{3} ? », « Énoncer l’équation d’état des gaz parfaits et ses unités ».}}
+{\pt{Répond oralement : $n = C\cdot V = \qty{4,0e-3}{mol}$ ; $T = \qty{293}{K}$ ; $\qty{1,1e-3}{m^3}$ ; $P\cdot V = n\cdot R\cdot T$ ($P$ en Pa, $V$ en m\textsuperscript{3}, $T$ en K).}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} relation $n = C\cdot V$ ; conversions exactes ; unités SI.\par\vspace{.8mm}
+ \regul Rappel au tableau des conversions (mL, L, m\textsuperscript{3} ; °C, K).}
+{6}{0 h 06}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Évolution d’un système chimique : le tableau d’avancement}{48 min · objectifs O1 à O4}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Un précipité qui se forme}{\diapo{2}}}
+{\pt{Verse devant la classe une solution de phosphate de sodium dans une solution de nitrate de calcium : un précipité blanc apparaît (animation diapo 2).}
+ \pt{Pose le problème : comment décrire l’évolution des quantités de toutes les espèces jusqu’à l’arrêt de la transformation ?}}
+{\pt{Observe la formation instantanée du solide blanc.}
+ \pt{Propose : « des ions disparaissent », « on peut calculer ce qui se forme ».}}
+{\diag Hypothèses formulées.}
+{3}{0 h 09}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Un précipité qui se forme (doc 1)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Présente les données (diapo 3) et introduit l’\textbf{avancement} $x$ : il disparaît $3x$ ions \ce{Ca^{2+}} et $2x$ ions \ce{PO4^{3-}}, il se forme $x$ unités \ce{Ca3(PO4)2}.}
+ \pt{Organise le travail en binômes : questions 1 et 2 (diapo 4), puis tableau d’avancement de la question 3 à compléter sur la fiche (diapo 5).}
+ \pt{Fait chercher $x_{max}$ (question 4) ; montre l’animation des quantités de matière en fonction de $x$ (graphe et barres, diapo 6) ; fait généraliser (question 5).}
+ \pt{Corrige au clic, question par question.}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Écrit \ce{3Ca^{2+}_{(aq)} + 2PO4^{3-}_{(aq)} -> Ca3(PO4)2_{(s)}} ; calcule $n_i(\ce{Ca^{2+}}) = \qty{4,0}{mmol}$ et $n_i(\ce{PO4^{3-}}) = \qty{3,0}{mmol}$.}
+ \pt{Complète le tableau : $4{,}0 - 3x$ ; $3{,}0 - 2x$ ; $x$.}
+ \pt{Trouve $x_1 \approx \qty{1,33}{mmol}$ et $x_2 = \qty{1,5}{mmol}$, donc $x_{max} \approx \qty{1,33}{mmol}$ : \ce{Ca^{2+}} est limitant ; bilan : 0 ; \qty{0,33}{mmol} ; \qty{1,33}{mmol}.}
+ \pt{Établit la condition $\dfrac{n_i(\ce{Ca^{2+}})}{3} = \dfrac{n_i(\ce{PO4^{3-}})}{2}$.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} coefficients reportés dans le tableau ; choix de la plus petite valeur de $x$ ; unités.\par\vspace{.8mm}
+ \regul Erreur fréquente : « le réactif limitant est celui qui a la plus petite quantité » ; ici \ce{Ca^{2+}} (4,0 mmol) est limitant.}
+{28}{0 h 37}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir et méthode}{Avancement, tableau d’avancement, réactif limitant, mélange stœchiométrique}{\diapo{7--9} \support{Cahier}}}
+{\pt{Fait formuler les définitions par les apprenants, puis projette les diapos 7 et 8 et laisse le temps de recopier l’« À retenir ».}
+ \pt{Présente la méthode en trois étapes (diapo 9) et insiste sur le piège des coefficients.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}
+ \pt{Reformule la méthode : $x = n_i/a$ pour chaque réactif, puis la plus petite valeur.}}
+{\form Question flash : « \qty{2,0}{mol} de \ce{H2} et \qty{2,0}{mol} de \ce{O2} : \ce{2H2 + O2 -> 2H2O}, quel est le réactif limitant ? » $\to$ \ce{H2} ($2{,}0/2 < 2{,}0/1$).}
+{8}{0 h 45}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{La combustion du carbone}{\diapo{10--11} \support{Cahier}}}
+{\pt{Projette l’énoncé (combustion animée, vue microscopique des molécules) ; travail individuel dans le cahier ; passe dans les rangs.}
+ \pt{Corrige au clic (diapos 10 et 11).}}
+{\pt{Dresse le tableau : $0{,}50 - x$ ; $0{,}20 - x$ ; $x$.}
+ \pt{Trouve $x_{max} = \qty{0,20}{mol}$ : \ce{O2} est limitant ; bilan : \qty{0,30}{mol} de C, 0 de \ce{O2}, \qty{0,20}{mol} de \ce{CO2}.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} tableau complet ; réactif limitant justifié ; bilan avec unités.}
+{9}{0 h 54}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Prévoir la pression ou le volume d’un gaz formé}{48 min · objectifs O3, O5 et O6}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Un gaz dans un flacon fermé}{\diapo{12}}}
+{\pt{Projette la diapo 12 (fiole fermée, manomètre et courbe $P = f(t)$ animés).}
+ \pt{Pose le problème : peut-on prévoir par le calcul la pression finale à partir des quantités initiales ?}}
+{\pt{Relie l’augmentation de la pression à la formation d’un gaz.}}
+{\diag Mobilisation de l’équation d’état des gaz parfaits.}
+{3}{0 h 57}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Du zinc dans l’acide, en flacon fermé (doc 2)}{\diapo{13--16} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Réalise l’expérience : grenaille de zinc + acide chlorhydrique dans la fiole fermée reliée au manomètre ; fait relever la pression initiale et la pression finale (diapo 13).}
+ \pt{Identifie le gaz dans un tube à essais à part : une allumette enflammée provoque une légère détonation (test du dihydrogène).}
+ \pt{Fait traiter en binômes les questions 1 et 2 (diapo 14), puis le tableau d’avancement de la question 3 sur la fiche (diapo 15), puis les questions 4 et 5 (diapo 16) ; corrige au clic.}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Calcule $n_i(\ce{Zn}) = 0{,}11/65{,}4 \approx \qty{1,68e-3}{mol}$ et $n_i(\ce{H+}) = \qty{0,100}{mol}$ ; écrit \ce{Zn_{(s)} + 2H^+_{(aq)} -> Zn^{2+}_{(aq)} + H2_{(g)}}.}
+ \pt{Complète le tableau ; trouve $x_{max} = \qty{1,68e-3}{mol}$ : le zinc est limitant ; $n(\ce{H2}) = x_{max}$.}
+ \pt{Calcule $P(\ce{H2}) = \dfrac{n\cdot R\cdot T}{V_{gaz}} \approx \qty{3,7e3}{Pa} = \qty{37}{hPa}$ et vérifie $1025 + 37 = \qty{1062}{hPa}$ : la prévision correspond à la mesure.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} conversions en unités SI ($V$ en m\textsuperscript{3}) ; $n(\ce{H2}) = x_{max}$ ; comparaison prévision / mesure.\par\vspace{.8mm}
+ \regul Erreur fréquente : $V$ laissé en litres (pression 1000 fois trop petite). Sécurité : acide concentré (lunettes, gants), pas de flamme près de la fiole.}
+{28}{1 h 25}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir et méthode}{Pression ou volume d’un gaz formé}{\diapo{17--18} \support{Cahier}}}
+{\pt{Projette la diapo 17 : $P = \dfrac{n_{gaz}\cdot R\cdot T}{V}$ et $V = \dfrac{n_{gaz}\cdot R\cdot T}{P}$, unités SI ; laisse le temps de recopier.}
+ \pt{Présente la méthode en quatre étapes avec le schéma animé (diapo 18).}}
+{\pt{Recopie l’« À retenir » dans son cahier.}
+ \pt{Cite l’enchaînement : quantités initiales $\to$ tableau $\to$ $x_{max}$ $\to$ $n_{gaz}$ $\to$ $P$ ou $V$.}}
+{\form Question orale : « dans quelle unité exprimer $V$ dans $P\cdot V = n\cdot R\cdot T$ ? » $\to$ m\textsuperscript{3}.}
+{8}{1 h 33}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{La décomposition du calcaire}{\diapo{19--20} \support{Cahier}}}
+{\pt{Projette l’énoncé (fiole chauffée, manomètre « $P$ = ? ») ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $n_i(\ce{CaCO3}) = \qty{0,100}{mol}$ ; tableau : $x_{max} = \qty{0,100}{mol}$, donc $n(\ce{CO2}) = \qty{0,100}{mol}$.}
+ \pt{Calcule $P = \dfrac{0{,}100\times8{,}314\times293}{\num{5,0e-3}} \approx \qty{4,87e4}{Pa}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} $V = \qty{5,0e-3}{m^3}$ ; résultat avec unité.}
+{9}{1 h 42}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Réinvestissement en classe}{10 min · objectifs O2 et O3}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 1}{Ions fer(II) et ions permanganate}{\diapo{22--23} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 22) ; ajoute devant la classe, à la burette, du permanganate à une solution acidifiée de fer(II) : la teinte violette disparaît, puis persiste.}
+ \pt{Fait chercher en binômes, puis corrige au clic (diapo 23, animation jusqu’à la teinte violette finale).}}
+{\pt{Recopie l’énoncé et le résout dans le cahier : tableau ($3{,}0 - 5x$ ; $1{,}0 - x$ ; $5x$ ; $x$).}
+ \pt{Trouve $x_{max} = \qty{0,60}{mmol}$ : \ce{Fe^{2+}} limitant ; il reste \qty{0,40}{mmol} de \ce{MnO4-} : la solution finale est violette.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} lien entre le réactif en excès et la couleur observée.}
+{10}{1 h 52}
+% ---------------------------------------------------------------------
+\partie{cGreen}{Bilan et évaluation de la séance}{8 min}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ? — L’essentiel du chapitre}{\diapo{21} \diapo{28}}}
+{\pt{Lance le « Vrai ou faux ? » (diapo 21) : réponses à main levée, puis correction au clic.}
+ \pt{Projette « L’essentiel du chapitre » (diapo 28).}
+ \pt{Donne le travail à la maison : exercices 2 et 3 (énoncés projetés, diapos 24 et 26, à recopier et à résoudre dans le cahier).}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}
+ \pt{Note le travail à faire.}}
+{\somm Taux de bonnes réponses au vrai-faux (objectif : au moins 5 sur 6).\par
+ \textit{Exploitation :} repérer les notions à reprendre en début de séance suivante.}
+{8}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Exercice 2} — Un mélange stœchiométrique (hydroxyde de fer(III)) : objectifs O3 et O4.}
+\pt{\textbf{Exercice 3} — Un ballon gonflé au dihydrogène : objectifs O3 et O6.}
+\pt{Correction projetée au début de la séance suivante (diapos 25 et 27).}
+\pt{Soutien : reprendre l’application 1 avec $n_i(\ce{C}) = \qty{0,10}{mol}$ et $n_i(\ce{O2}) = \qty{0,20}{mol}$ (le réactif limitant change). Approfondissement : un coussin de sécurité doit contenir \qty{60}{L} de diazote à \qty{20}{\degreeCelsius} sous \qty{1,3e5}{Pa} ; avec \ce{2NaN3 -> 2Na + 3N2}, calculer la masse d’azoture de sodium nécessaire ($M = \qty{65}{g.mol^{-1}}$).}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séance (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séance :}\lignevide}
+\end{minipage}
+
+\end{document}

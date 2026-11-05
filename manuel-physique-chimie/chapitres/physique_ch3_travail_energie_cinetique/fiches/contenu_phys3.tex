@@ -1,0 +1,319 @@
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 3 : Travail et énergie cinétique (5 h, trois séances)
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{3}
+\newcommand{\TitreChap}{Travail et énergie cinétique}
+\newcommand{\TitreCourt}{Travail et énergie cinétique}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{5 h}
+\newcommand{\Banniere}{opener_phys3.jpg}
+\newcommand{\BanniereDecalage}{1.3cm}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\Mom}{\mathcal{M}}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{5 heures — trois séances\\ 2 h + 2 h + 1 h}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1 · § 3.1\\ Travail et énergie cinétique}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séquence}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Travail mécanique et énergie :} \textbf{interpréter les transferts d’énergie} et les phénomènes de \textbf{conservation et de dissipation} dans diverses situations de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} le travail, forme de \textbf{transfert d’énergie} : \textbf{énergie cinétique} (translation, rotation), \textbf{moment d’inertie}, \textbf{théorème de l’énergie cinétique} établi expérimentalement puis appliqué à des situations-problèmes (freinage, chute, treuil).}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} situations-problèmes ; mesures (cellule photoélectrique, table à coussin d’air) ; modélisation par une droite, puis généralisation.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} tableaux, graphes, vecteurs et unités ; énoncé rigoureux du théorème.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations ; régression linéaire au tableur ou à la calculatrice.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en six étapes pour appliquer le théorème ; conversions d’unités.}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} sécurité routière ; éoliennes ; volant d’inertie ; sécurité au laboratoire.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séquence, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — reconnaître un mouvement de \textbf{translation} (rectiligne, curviligne, circulaire) ;}
+\pt{\textbf{O2} — connaître et utiliser l’expression de l’\textbf{énergie cinétique} d’un solide en translation $\Ec = \frac{1}{2}m\cdot V^2$ et son unité ;}
+\pt{\textbf{O3} — connaître et utiliser l’expression $\Ec = \frac{1}{2}J_\Delta\cdot\omega^2$ d’un solide en rotation autour d’un axe fixe ; connaître l’unité du \textbf{moment d’inertie} et utiliser $J_\Delta$ d’un disque, d’un cylindre, d’une poulie ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O4} — établir \textbf{expérimentalement} la relation entre la variation de l’énergie cinétique et la somme des travaux des forces (chute libre, plan incliné sans frottement) ;}
+\pt{\textbf{O5} — \textbf{énoncer} le théorème de l’énergie cinétique pour un solide en translation ou en rotation autour d’un axe fixe, valable même pour des forces non constantes ;}
+\pt{\textbf{O6} — \textbf{appliquer} le théorème avec méthode pour calculer une vitesse, une vitesse angulaire, une distance, un angle de rotation ou une force.}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} connaître l’expression de l’énergie cinétique d’un solide en translation et son unité ; connaître l’expression de l’énergie cinétique d’un solide en rotation autour d’un axe fixe ; connaître l’unité du moment d’inertie ; connaître l’énoncé du théorème de l’énergie cinétique et l’exploiter dans les deux cas : translation d’un solide, rotation d’un solide autour d’un axe fixe.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et des chapitres 1 et 2}
+\pt{poids $P = m\cdot g$ ; réaction d’un plan (avec ou sans frottement) ; bilan des forces ; référentiel ;}
+\pt{vitesse moyenne et vitesse instantanée ($V_i \approx M_{i-1}M_{i+1}/2\tau$) ; exploitation d’un enregistrement ;}
+\pt{rotation autour d’un axe fixe : $\omega$, $V = r\cdot\omega$, $\omega = 2\pi N/60$ (chapitre 1) ;}
+\pt{travail d’une force constante $W = \vect F\cdot\vect{AB}$, travail du poids $W = m\cdot g\cdot(z_A - z_B)$, travail d’un couple ou d’une force de moment constant $W = \Mom_\Delta\cdot\Delta\theta$ (chapitre 2).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{carré et racine carrée ; fonction sinus ; résolution d’une équation du premier degré ;}
+\pt{coefficient directeur et ordonnée à l’origine d’une droite ; tracé d’un graphe ;}
+\pt{conversions : \unit{g} $\to$ \unit{kg}, \unit{cm} $\to$ \unit{m}, \unit{km.h^{-1}} $\to$ \unit{m.s^{-1}}, tours $\to$ radians ; écriture scientifique et chiffres significatifs.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{tube de Newton (plume, liège, bille) et pompe à vide ;}
+\pt{billes d’acier de masses différentes, pain de pâte à modeler, règle graduée ;}
+\pt{chute libre : électroaimant sur potence, bille d’acier, cellule photoélectrique et chronomètre électronique (ou interface d’acquisition) ;}
+\pt{table à coussin d’air inclinable, mobile autoporteur, générateur d’impulsions, feuille d’enregistrement, cales ;}
+\pt{disque ou poulie sur axe fixe, éventuellement entraîné par un petit moteur (tachymètre).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (37 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis 3 et 4, à coller dans le cahier ; doc 8 à l’échelle 1) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices, papier millimétré, tableur.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, § 3 « Le travail, une des formes de transfert d’énergie » ; 3.1 « Travail et énergie cinétique » : définition de l’énergie cinétique d’un solide et unité (cas de la translation ; cas de la rotation autour d’un axe fixe) ; moment d’inertie par rapport à un axe fixe et unité ; théorème de l’énergie cinétique dans les deux cas précédents.}
+\pt{Activités proposées : approche qualitative de la notion d’énergie cinétique à partir de données, d’exemples ou de logiciels, en translation et en rotation ; étude expérimentale de la chute libre d’un solide, ou du glissement sans frottement d’un solide sur un plan incliné, soumis seulement à son poids et à la réaction du plan, pour mettre en évidence la relation entre la variation de l’énergie cinétique et la somme des travaux des forces appliquées.}
+\pt{Orientations : introduire l’énergie cinétique à partir d’exemples et de documents, en translation et en rotation ; donner l’expression du moment d’inertie de quelques corps homogènes (disque, cylindre, poulie) ; limiter l’étude expérimentale du théorème au cas de la translation sans frottement, puis généraliser ; se limiter aux situations de translation et de rotation autour d’un axe fixe ; le théorème reste valable même si la force ou son moment n’est pas constant. Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{7cm}
+\bloc{2}{fi_chemin}{Déroulement de la séquence (trois séances)}
+
+\seance{1}{2 h}{énergie cinétique d’un solide en translation, puis en rotation autour d’un axe fixe}
+\frise[120]{cCyan/10/Mise en route, cTeal/47/Partie 1 · Translation, cBlue/53/Partie 2 · Rotation, cGreen/10/Bilan}
+\seance{2}{2 h}{théorème de l’énergie cinétique : étude expérimentale, puis généralisation et méthode}
+\frise[120]{cCyan/8/Rappels, cPurple/71/Partie 3 · Théorème (expérience), cOrange/36/Partie 4 · Généralisation, cGreen/5/Bilan}
+\seance{3}{1 h}{exercices d’application et de synthèse, évaluation}
+\noindent\begin{minipage}{0.5\linewidth}\frise[60]{cCyan/5/Rappels, cOrange/50/Exercices, cGreen/5/Bilan}\end{minipage}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% =====================================================================
+\partie{cInk}{Séance 1 · Énergie cinétique (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, plan et prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; projette la diapositive de titre et annonce le plan des trois séances.}
+ \pt{Questions flash : « Travail du poids d’un corps de \qty{2}{kg} qui descend de \qty{3}{m} ? », « Travail d’un couple de moment \qty{0,5}{N.m} pendant un tour ? », « \qty{600}{tr/min} en \unit{rad.s^{-1}} ? », « \qty{72}{km.h^{-1}} en \unit{m.s^{-1}} ? ».}}
+{\pt{Répond oralement : \qty{60}{J} ; $0{,}5\times2\pi \approx \qty{3,1}{J}$ ; $20\pi \approx \qty{62,8}{rad.s^{-1}}$ ; \qty{20}{m.s^{-1}}.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} signe et calcul du travail du poids ; conversions maîtrisées.\par\vspace{.8mm}
+ \regul Rappel au tableau de $W(\vect P) = m\cdot g\cdot(z_A - z_B)$ et de $W = \Mom_\Delta\cdot\Delta\theta$.}
+{10}{0 h 10}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Énergie cinétique d’un solide en translation}{47 min · objectifs O1 et O2}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Un camion et une petite voiture}{\diapo{2}}}
+{\pt{Projette l’animation (diapo 2) : lors d’un choc, un camion lourd et rapide fait plus de dégâts qu’une petite voiture lente.}
+ \pt{Pose le problème : de quelles grandeurs dépend l’énergie liée au mouvement, et comment la calculer ?}}
+{\pt{Propose : « la masse », « la vitesse » ; formule des hypothèses.}}
+{\diag Hypothèses formulées.}
+{4}{0 h 14}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{L’énergie d’un corps en mouvement (docs 1 à 3)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Projette les translations animées (diapo 3) : fait suivre le vecteur $\vect{AB}$.}
+ \pt{Réalise l’expérience du tube de Newton (avec air, puis après avoir fait le vide) et lâche des billes sur la pâte à modeler (séries 1 et 2) ; fait comparer les empreintes (diapo 4).}
+ \pt{Fait traiter les questions 1 à 6 en binômes ; corrige au clic (diapos 5 et 6).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Constate que $\vect{AB}$ reste constant ; distingue translations rectiligne, curviligne et circulaire.}
+ \pt{Définit la chute libre ; relie la profondeur de l’empreinte à $V$ et à $m$ ; conclut $\Ec = \frac{1}{2}m\cdot V^2$, en joules.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} nacelle de grande roue reconnue en translation (circulaire) ; rôle de $m$ et de $V$.\par\vspace{.8mm}
+ \regul Erreur fréquente : confondre translation circulaire et rotation (comparer la nacelle et la roue).}
+{26}{0 h 40}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Translation ; $\Ec = \frac{1}{2}m\cdot V^2$}{\diapo{7} \support{Cahier}}}
+{\pt{Fait formuler la définition de la translation et l’expression de $\Ec$ ; projette la diapo 7 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « si $V$ double, $\Ec$ est multipliée par ? » $\to$ 4.}
+{8}{0 h 48}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Une voiture qui accélère}{\diapo{8} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic ; fait le lien avec la sécurité routière.}}
+{\pt{Convertit : \qty{1200}{kg}, \qty{15}{m.s^{-1}}, \qty{30}{m.s^{-1}} ; calcule $E_{\mathrm{C}1} = \qty{1,35e5}{J}$ et $E_{\mathrm{C}2} = \qty{5,40e5}{J}$ ; conclut : $\times\,4$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversions ; carré de la vitesse.}
+{9}{0 h 57}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Énergie cinétique d’un solide en rotation autour d’un axe fixe}{53 min · objectif O3}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Une éolienne qui tourne}{\diapo{9}}}
+{\pt{Projette l’éolienne animée (diapo 9) : le centre d’inertie du rotor est immobile, pourtant le rotor stocke de l’énergie.}
+ \pt{Fait remarquer que les points du rotor n’ont pas tous la même vitesse : $\frac{1}{2}m\cdot V^2$ ne s’applique pas directement.}}
+{\pt{Propose : « additionner les énergies des différentes parties ».}}
+{\diag Idée de décomposition du solide.}
+{3}{1 h 00}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{L’énergie d’un solide qui tourne (docs 4 et 5)}{\diapo{10--12} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Projette le disque animé (diapo 10) : vitesses $V_i = r_i\cdot\omega$ proportionnelles à la distance à l’axe.}
+ \pt{Montre deux solides de même masse (disque plein et anneau) lâchés sur un même plan, ou entraînés par une même ficelle : celui dont la matière est loin de l’axe démarre moins vite (doc 5, diapo 11).}
+ \pt{Fait traiter les questions 1 à 4 en binômes ; corrige au clic (diapo 12).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Écrit $E_{\mathrm{C}i} = \frac{1}{2}m_i\cdot r_i^2\cdot\omega^2$, met $\frac{1}{2}\omega^2$ en facteur et obtient $\Ec = \frac{1}{2}\big(\sum m_i\cdot r_i^2\big)\omega^2$.}
+ \pt{Identifie $J_\Delta$ (masse et répartition de la matière ; \unit{kg.m^2}) et écrit $\Ec = \frac{1}{2}J_\Delta\cdot\omega^2$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} factorisation justifiée par « même $\omega$ » ; unité de $J_\Delta$.\par\vspace{.8mm}
+ \regul Erreur fréquente : utiliser $N$ en \unit{tr/min} au lieu de $\omega$ en \unit{rad.s^{-1}}.}
+{25}{1 h 25}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir et rappel}{$\Ec = \frac{1}{2}J_\Delta\cdot\omega^2$ ; tableau des moments d’inertie}{\diapo{13} \support{Cahier}}}
+{\pt{Projette la diapo 13 : expression de $\Ec$, définition de $J_\Delta$, moments d’inertie du disque, du cylindre (poulie), de l’anneau, de la sphère et de la tige ; rappelle $\omega = 2\pi N/60$ et $V = r\cdot\omega$.}
+ \pt{Laisse le temps de recopier ; précise que les expressions de $J_\Delta$ sont données, non démontrées.}}
+{\pt{Recopie l’« À retenir » et le tableau des moments d’inertie dans son cahier.}}
+{\form Question orale : « disque et anneau de même masse et même rayon : lequel a le plus grand $J_\Delta$ ? » $\to$ l’anneau.}
+{12}{1 h 37}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Un disque qui tourne}{\diapo{14} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $J_\Delta = \qty{0,080}{kg.m^2}$ ; $\omega = 20\pi \approx \qty{62,8}{rad.s^{-1}}$ ; $\Ec \approx \qty{158}{J}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} $r$ en mètres ; conversion de $N$ en $\omega$.}
+{13}{1 h 50}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 1}{Synthèse et travail à faire}{\diapo{7} \diapo{13}}}
+{\pt{Fait comparer oralement les deux expressions de $\Ec$ (translation, rotation) et leurs unités.}
+ \pt{Donne le travail : relire les deux « À retenir » ; calculer l’énergie cinétique d’un anneau de \qty{4,0}{kg} et de rayon \qty{20}{cm} à \qty{600}{tr/min}, puis comparer avec le disque de l’application (énoncé dicté).}}
+{\pt{Énonce les deux expressions ; note le travail à faire.}}
+{\form Synthèse orale.\par
+ \textit{Indicateur :} les deux expressions et les unités sans erreur.}
+{10}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 2 · Théorème de l’énergie cinétique (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction du travail à faire}{\diapo{13}}}
+{\pt{Corrige l’exercice de l’anneau : $J_\Delta = m\cdot r^2 = \qty{0,16}{kg.m^2}$ ; $\Ec \approx \qty{316}{J}$, le double de celle du disque.}
+ \pt{Questions flash sur les expressions de $\Ec$ et les unités.}}
+{\pt{Compare ses résultats ; explique : matière plus loin de l’axe.}}
+{\diag Vérification du travail personnel.\par\vspace{.8mm}
+ \regul Reprendre la conversion $N \to \omega$ si besoin.}
+{8}{0 h 08}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Théorème de l’énergie cinétique : étude expérimentale}{71 min · objectif O4}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Un skieur qui descend une pente}{\diapo{15}}}
+{\pt{Projette le skieur (diapo 15) : sa vitesse augmente pendant que son poids travaille. Pose le problème : quelle relation entre $\Delta\Ec$ et le travail des forces ?}}
+{\pt{Propose : « l’énergie gagnée est égale au travail du poids ».}}
+{\diag Hypothèse à tester.}
+{4}{0 h 12}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3 (1)}{Chute libre d’une bille (doc 6)}{\diapo{16} \diapo{18} \diapo{19} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Réalise la chute libre (électroaimant, cellule photoélectrique, chronomètre) pour quelques positions de la cellule (diapo 16) ; complète avec les mesures du doc 6.}
+ \pt{Répartit les calculs entre les binômes (questions 1 et 2) ; fait tracer $\Ec = f\big(W(\vect P)\big)$ sur papier millimétré ou au tableur ; corrige au clic (diapos 18 et 19).}}
+{\pt{Calcule $V_i = d/\Delta t$, $E_{\mathrm{C}i}$ et $W_{A_1\to A_i}(\vect P)$ ; complète le tableau dans le cahier.}
+ \pt{Trace la droite ; trouve $b = E_{\mathrm{C}1} \approx \qty{0,051}{J}$ et $a \approx 0{,}95 \approx 1$ ; conclut $\Delta\Ec = W(\vect P)$.}}
+{\form Vérification des tableaux et des tracés.\par
+ \textit{Indicateurs :} unités SI ($d$ en \unit{m}, $\Delta t$ en \unit{s}) ; interprétation de l’ordonnée à l’origine.\par\vspace{.8mm}
+ \regul Erreur fréquente : prendre $W$ depuis le point de départ au lieu de $A_1$.}
+{25}{0 h 37}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3 (2)}{Mobile sur une table inclinée (docs 7 et 8)}{\diapo{17} \diapo{20} \diapo{21} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Réalise l’enregistrement sur la table à coussin d’air inclinée (diapo 17) ; fait mesurer $d_i$ et $D_i$ sur le doc 8 (échelle 1).}
+ \pt{Fait faire le bilan des forces ($\vect P$, $\vect R$ perpendiculaire au plan) et traiter les questions 3 à 5 ; corrige au clic (diapos 20 et 21).}}
+{\pt{Mesure les distances à la règle ; calcule $V_i = d_i/2\tau$, $E_{\mathrm{C}i}$ et $W(\vect P) = m\cdot g\cdot D_i\cdot\sin\alpha$.}
+ \pt{Trace la droite ($a \approx 0{,}96$) ; conclut $\Delta\Ec = \sum W(\vect F_{\text{ext}})$ car $W(\vect R) = 0$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} $W(\vect R) = 0$ justifié ; généralisation à la somme des travaux.\par\vspace{.8mm}
+ \regul Erreur fréquente : $V_i = d_i/\tau$ (oubli du facteur 2).}
+{25}{1 h 02}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{Théorème de l’énergie cinétique (translation)}{\diapo{22} \support{Cahier}}}
+{\pt{Fait énoncer le théorème ; insiste sur « référentiel galiléen » et « forces extérieures » ; projette la diapo 22 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question orale : « travail résistant : que devient $\Ec$ ? » $\to$ elle diminue.}
+{7}{1 h 09}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{La descente d’un skieur}{\diapo{23} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $W(\vect P) \approx \qty{1,34e4}{J}$ et $W(\vect R) = 0$ ; applique le théorème : $V_B = \sqrt{2g\cdot AB\cdot\sin\alpha} \approx \qty{18,3}{m.s^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} bilan des forces ; dénivelé $AB\cdot\sin\alpha$.}
+{10}{1 h 19}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Partie 4 · Généralisation du théorème et méthode}{36 min · objectifs O5 et O6}
+\etape{cOrange}{\axe{cAmber}{ic_situation}{Situation de départ}{Poulie, treuil, meule}{\diapo{24}}}
+{\pt{Projette le treuil animé (diapo 24) : le théorème s’applique-t-il à un solide en rotation ?}}
+{\pt{Propose d’utiliser $\Ec = \frac{1}{2}J_\Delta\cdot\omega^2$.}}
+{\diag Mobilisation de l’énergie cinétique de rotation.}
+{3}{1 h 22}
+\etape{cOrange}{\axe{cTeal}{ic_activite}{Activité 4}{Du solide en translation au solide en rotation (doc 9)}{\diapo{25--26} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Projette le volant entraîné par un moteur (diapo 25) ; si possible, montre une poulie lancée puis freinée.}
+ \pt{Fait traiter les questions 1 à 3 ; souligne, conformément aux orientations, que le théorème reste valable si les forces ou leurs moments varient ; corrige au clic (diapo 26).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; écrit $\frac{1}{2}J_\Delta\cdot\omega_2^2 - \frac{1}{2}J_\Delta\cdot\omega_1^2 = \sum W_{1\to2}(\vect F_{\text{ext}})$.}
+ \pt{Énonce le théorème général ; propose les étapes de la méthode.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} énoncé complet (référentiel, forces extérieures, deux instants).}
+{12}{1 h 34}
+\etape{cOrange}{\axe{cRed}{ic_retenir}{À retenir et méthode}{Théorème général ; méthode en six étapes}{\diapo{27--28} \support{Cahier}}}
+{\pt{Projette la diapo 27 (énoncé général, cas de la translation et de la rotation) puis la méthode (diapo 28) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » et la méthode dans son cahier.}}
+{\form Question orale : « une force dont la droite d’action coupe l’axe travaille-t-elle ? » $\to$ non.}
+{10}{1 h 44}
+\etape{cOrange}{\axe{cPurple}{ic_application}{Application}{Une poulie mise en rotation}{\diapo{29} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier en suivant la méthode ; correction au clic.}}
+{\pt{Calcule $J_\Delta = \qty{1,0e-2}{kg.m^2}$ ; $W = \Mom_\Delta\cdot\Delta\theta = 0{,}50\times20\pi \approx \qty{31,4}{J}$ ; $\omega_2 \approx \qty{79,3}{rad.s^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} 10 tours $= 20\pi$ rad ; travaux nuls du poids et de la réaction de l’axe.}
+{11}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 2}{Synthèse et travail à faire}{\diapo{28}}}
+{\pt{Fait réciter la méthode ; donne le travail : exercice 1 (énoncé projeté, diapo 31, à recopier et à commencer dans le cahier).}}
+{\pt{Note le travail à faire.}}
+{\form Synthèse orale de la méthode.}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 3 · Exercices et évaluation (1 h)}{0 h 00 $\to$ 1 h 00 · objectifs O2 à O6}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Le théorème et la méthode}{\diapo{27} \diapo{28}}}
+{\pt{Fait réénoncer le théorème et les six étapes de la méthode.}}
+{\pt{Énonce le théorème et la méthode.}}
+{\diag Rappel oral.}
+{5}{0 h 05}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ?}{\diapo{30}}}
+{\pt{Lance le « Vrai ou faux ? » : réponses à main levée, puis correction au clic.}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}}
+{\form Taux de bonnes réponses (objectif : au moins 5 sur 6).\par\vspace{.8mm}
+ \regul Reprendre les affirmations les plus échouées.}
+{8}{0 h 13}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 1}{Un solide sur une piste}{\diapo{31--32} \support{Cahier}}}
+{\pt{Vérifie le travail commencé ; fait terminer l’exercice ; corrige au clic avec l’animation (diapo 32).}}
+{\pt{Calcule $W(\vect P) = \qty{5,0}{J}$, $V_B \approx \qty{4,47}{m.s^{-1}}$, $W(\vect f) = \qty{-3,0}{J}$, $V_C \approx \qty{2,83}{m.s^{-1}}$, $BD \approx \qty{4,17}{m}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} signe du travail de $\vect f$ ; état final « arrêt » ($\Ec = 0$).}
+{15}{0 h 28}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 2}{Le freinage d’un cylindre}{\diapo{33--34} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail en binômes dans le cahier ; corrige au clic (diapo 34).}}
+{\pt{Calcule $J_\Delta = \qty{0,20}{kg.m^2}$, $\omega_0 = 10\pi$, $E_{\mathrm{C}0} \approx \qty{98,7}{J}$, $\Mom_\Delta(\vect f) = \qty{-1,0}{N.m}$ ; trouve $\Delta\theta \approx \qty{98,7}{rad}$, soit 15,7 tours.}}
+{\form Observation des binômes.\par
+ \textit{Indicateur :} travail d’une force de moment constant en rotation.}
+{12}{0 h 40}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 3}{Un treuil et une charge}{\diapo{35--36} \support{Cahier}}}
+{\pt{Projette l’énoncé ; guide la décomposition en deux systèmes (S) et (C) ; travail individuel ; corrige au clic (diapo 36).}}
+{\pt{Écrit $V = r\cdot\omega$ et $h = r\cdot\Delta\theta$ ; applique le théorème à (S) et à (C) ; additionne : $V = \sqrt{10} \approx \qty{3,16}{m.s^{-1}}$ ; $T \approx \qty{6,67}{N}$.}}
+{\somm Exercice individuel (évaluation de fin de chapitre).\par
+ \textit{Indicateurs :} choix des systèmes ; travail de la tension pour chacun ; résultat numérique avec unité.}
+{15}{0 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{L’essentiel}{Synthèse du chapitre}{\diapo{37}}}
+{\pt{Projette « L’essentiel du chapitre » (diapo 37) ; donne le travail à la maison (encadré ci-dessous).}}
+{\pt{Relit la synthèse ; note le travail à faire.}}
+{\somm Bilan des exercices.\par
+ \textit{Exploitation :} repérer les notions à reprendre avant le chapitre suivant.}
+{5}{1 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Après la séance 1} — énergie cinétique d’un anneau en rotation, comparée à celle du disque : objectif O3.}
+\pt{\textbf{Après la séance 2} — exercice 1 (énoncé projeté, diapo 31, à recopier et à commencer dans le cahier) : objectifs O5 et O6.}
+\pt{\textbf{Après la séance 3} — terminer et recopier au propre l’exercice 3 (diapo 35) : objectif O6.}
+\pt{Soutien : refaire l’application « poulie » avec un couple de moment \qty{0,25}{N.m} pendant 20 tours et comparer $\omega_2$. Approfondissement : dans l’exercice 1, calculer la hauteur à laquelle il faudrait lâcher (S) pour qu’il s’arrête exactement en C.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séquence (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séquence :}\lignevide}
+\end{minipage}
+
+\end{document}

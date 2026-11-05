@@ -1,0 +1,545 @@
+% =====================================================================
+%  Corps du chapitre 3 de physique : Travail et énergie cinétique
+% =====================================================================
+\begin{document}
+% =====================================================================
+
+% ---------------------- PAGE D'OUVERTURE ----------------------
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at (current page.north west) {\includegraphics[width=\paperwidth]{opener.jpg}};
+  \node[anchor=north west,text width=11.2cm,align=left,inner sep=0] at ([xshift=1.9cm,yshift=-2.3cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12} PHYSIQUE\enspace·\enspace PARTIE 1 — TRAVAIL MÉCANIQUE ET ÉNERGIE}\par\vspace{5mm}
+    \tikz\node[fill=cOrange,text=white,rounded corners=4mm,inner xsep=4mm,inner ysep=1.6mm,font=\sffamily\bfseries\large]{Chapitre 3};\par\vspace{5mm}
+    {\titlefont\bfseries\fontsize{28}{34}\selectfont\color{white}Travail et\\ énergie cinétique\par}};
+\end{tikzpicture}
+\vspace*{8.25cm}
+
+{\large\itshape Un camion lancé à vive allure, une éolienne qui tourne, un skieur qui dévale une pente : tous ces corps en mouvement possèdent une énergie liée à leur mouvement. Comment la calculer ? Et comment le travail des forces fait-il varier cette énergie ?\par}
+\vspace{2.5mm}
+
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cBlue!5,colframe=cBlue!5,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cBlue}Objectifs du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+Je vais apprendre à :
+\begin{itemize}
+  \item calculer l’énergie cinétique d’un solide en translation ;
+  \item calculer l’énergie cinétique d’un solide en rotation autour d’un axe fixe et utiliser le moment d’inertie ;
+  \item établir le théorème de l’énergie cinétique à partir de mesures ;
+  \item appliquer ce théorème en translation et en rotation.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cGreen!6,colframe=cGreen!6,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cGreen}Je dois déjà savoir},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+\begin{itemize}
+  \item calculer le travail d’une force constante et celui du poids : $W = \vect F\cdot\vect{AB}$ ; $W(\vect P) = m\cdot g\cdot(z_A - z_B)$ ;
+  \item calculer le travail d’un couple de moment constant : $W = \Mom\cdot\Delta\theta$ (chapitre 2) ;
+  \item utiliser $V = r\cdot\omega$ et $\omega = \dfrac{2\pi N}{60}$ (chapitre 1).
+\end{itemize}
+\end{tcolorbox}
+\vspace{1mm}
+\begin{tcolorbox}[enhanced,colback=cOrange!7,colframe=cOrange!7,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cOrange}Plan du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\sffamily]
+\textcolor{cOrange}{\textbf{1}}\enspace Énergie cinétique d’un solide en translation\par
+\textcolor{cOrange}{\textbf{2}}\enspace Énergie cinétique d’un solide en rotation\par
+\textcolor{cOrange}{\textbf{3}}\enspace Théorème de l’énergie cinétique : étude expérimentale\par
+\textcolor{cOrange}{\textbf{4}}\enspace Généralisation et méthode\par
+\raisebox{-0.8mm}{\includegraphics[height=3.6mm]{ic_exercices}}\enspace Exercices d’application et de synthèse
+\end{tcolorbox}
+\end{minipage}
+
+\begin{encart}{cCyan}{savoir}{Le saviez-vous ?}
+Le mot « cinétique » vient du grec \textit{kinêsis}, « mouvement ». Certains véhicules récupèrent l’énergie du freinage en faisant tourner très vite un volant d’inertie : l’énergie est stockée sous forme d’énergie cinétique de rotation, puis restituée au démarrage.
+\end{encart}
+
+\newpage
+% =====================================================================
+\section{Énergie cinétique d’un solide en translation}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 1\enspace·\enspace L’énergie d’un corps en mouvement}
+\begin{situation}
+\textbf{Situation de départ.} Un camion lourd lancé à vive allure provoque, lors d’un choc, des dégâts bien plus importants qu’une petite voiture qui roule lentement. Un corps en mouvement possède donc une énergie liée à son mouvement. \textbf{De quelles grandeurs dépend cette énergie, et comment la calculer pour un solide en translation ?}
+\end{situation}
+
+\textbf{Doc 1.} On repère deux points A et B d’un solide en mouvement : la cabine d’un ascenseur, une cabine de téléphérique et une nacelle de grande roue. Le vecteur $\vect{AB}$ est représenté à plusieurs instants.\par\smallskip
+{\centering\includegraphics[width=0.94\linewidth]{doc1_translations}\par\vspace{1mm}
+{\sffamily\small\docbadge{1}\enspace\color{cInk2}Trois solides en mouvement : on suit le vecteur $\vect{AB}$}\par}
+
+\medskip
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+\textbf{Doc 2.} Le tube de Newton est un tube de verre qui contient une plume, un morceau de liège et une bille d’acier. On retourne le tube et on observe la chute des trois objets, d’abord en présence d’air, puis après avoir aspiré l’air avec une pompe à vide.\par\medskip
+\textbf{Doc 3.} On lâche des billes sans vitesse initiale au-dessus d’un morceau neuf de pâte à modeler et on observe l’empreinte laissée par chaque bille.\par\smallskip
+\textbf{Série 1} : la même bille est lâchée de trois hauteurs $h$ ; on donne sa vitesse $V$ juste avant l’impact.\par\smallskip
+\centerline{\mesures[1.15cm]{3}{%
+$h$ (\unit{m}) & 2,5 & 1,3 & 0,5\\ \hline
+$V$ (\unit{m.s^{-1}}) & 7,0 & 5,0 & 3,1\\ \hline}}\par\smallskip
+\textbf{Série 2} : trois billes de masses $m = \qty{58}{g}$, $\qty{230}{g}$ et $\qty{530}{g}$ sont lâchées de la même hauteur.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=\linewidth]{doc2_tube_newton}\par\vspace{1mm}
+{\sffamily\small\docbadge{2}\enspace\color{cInk2}Tube de Newton : avec air, puis dans le vide}
+\end{minipage}
+
+\medskip
+{\centering\includegraphics[width=0.94\linewidth]{doc3_pate}\par\vspace{1mm}
+{\sffamily\small\docbadge{3}\enspace\color{cInk2}Empreintes laissées dans la pâte à modeler (coupe)}\par}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Observer.} Comment évolue le vecteur $\vect{AB}$ au cours du mouvement de chaque solide du doc 1 ? Définir le mouvement de translation et distinguer ses trois types.
+  \item \kw{Définir.} Qu’est-ce qu’un mouvement de chute libre ? Quel est l’intérêt du tube de Newton (doc 2) ?
+  \item \kw{Exploiter.} D’après la série 1 du doc 3, comment varie la vitesse $V$ de la bille juste avant l’impact quand la hauteur de chute $h$ augmente ?
+  \item \kw{Comparer.} Comment la déformation de la pâte à modeler varie-t-elle avec la vitesse $V$ de la bille ?
+  \item \kw{Comparer.} D’après la série 2, comment la déformation varie-t-elle avec la masse $m$ de la bille, pour une même hauteur de chute ?
+  \item \kw{Conclure.} Pendant la chute, le travail du poids $W(\vect P)$ donne de l’énergie à la bille. De quelles grandeurs dépend cette énergie ? Donner l’expression de l’énergie cinétique de translation et son unité.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Le vecteur $\vect{AB}$ garde la même direction, le même sens et la même longueur : $\vect{AB} = \vect{\text{Cte}}$. Un solide est en translation si tout segment qui relie deux de ses points reste parallèle à lui-même. Translation rectiligne (ascenseur : trajectoires droites), curviligne (téléphérique : trajectoires courbes superposables), circulaire (nacelle : trajectoires circulaires de même rayon, de centres différents).}
+  \item \rep{Un corps est en chute libre s’il n’est soumis qu’à son poids. Le tube de Newton permet de supprimer l’action de l’air : dans le vide, la plume, le liège et la bille tombent ensemble, du même mouvement.}
+  \item \rep{Plus la hauteur de chute est grande, plus la vitesse juste avant l’impact est grande : $V$ passe de $\qty{3,1}{m.s^{-1}}$ ($h = \qty{0,5}{m}$) à $\qty{7,0}{m.s^{-1}}$ ($h = \qty{2,5}{m}$).}
+  \item \rep{La déformation (profondeur de l’empreinte) augmente quand la vitesse $V$ augmente.}
+  \item \rep{Pour une même hauteur, l’empreinte est d’autant plus profonde que la masse $m$ de la bille est grande.}
+  \item \rep{L’énergie acquise par la bille augmente avec sa masse $m$ et avec sa vitesse $V$ : c’est l’énergie cinétique $\Ec = \frac{1}{2}\,m\cdot V^2$, qui s’exprime en joules (J).}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Mouvement de translation}\par\smallskip
+Un solide est en translation si tout vecteur $\vect{AB}$ joignant deux de ses points garde la \trou{même direction}, le \trou{même sens} et la \trou{même longueur} au cours du mouvement. La translation peut être \trou{rectiligne}, \trou{curviligne} ou \trou{circulaire}.
+
+\medskip
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+\sfb{\color{cRed}Énergie cinétique d’un solide en translation}\par\smallskip
+Un solide de masse $m$ en translation à la vitesse $V$ (dans un référentiel donné) possède l’énergie cinétique :
+\begin{center}\formule{\trou{$\Ec = \dfrac{1}{2}\,m\cdot V^2$}}\end{center}
+$\Ec$ en joules (\trou{J}), $m$ en \trou{kilogrammes (kg)}, $V$ en \trou{\unit{m.s^{-1}}}. L’énergie cinétique est une grandeur \trou{positive} ; elle est proportionnelle au \trou{carré de la vitesse}.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=\linewidth]{fig_ec_translation}
+\end{minipage}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Une voiture qui accélère}
+\begin{minipage}[c]{0.56\linewidth}\RaggedRight
+Une voiture de masse $m = \qty{1,2}{t}$ roule en ligne droite à la vitesse $V_1 = \qty{54}{km.h^{-1}}$, puis accélère jusqu’à $V_2 = \qty{108}{km.h^{-1}}$.
+\begin{appq}
+  \item Convertir la masse et les deux vitesses dans les unités du Système international.
+  \item Calculer l’énergie cinétique $E_{\mathrm{C}1}$ à la vitesse $V_1$, puis $E_{\mathrm{C}2}$ à la vitesse $V_2$.
+  \item Comparer $E_{\mathrm{C}1}$ et $E_{\mathrm{C}2}$. Quel est l’effet du doublement de la vitesse ?
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}\centering
+\includegraphics[width=\linewidth]{app1_voiture}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Énergie cinétique d’un solide en rotation autour d’un axe fixe}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 2\enspace·\enspace L’énergie d’un solide qui tourne}
+\begin{situation}
+\textbf{Situation de départ.} Une éolienne, le rotor d’une turbine ou le volant d’inertie d’un moteur tournent autour d’un axe fixe sans se déplacer : leur centre d’inertie reste immobile. Ils stockent pourtant beaucoup d’énergie. Or, dans un solide qui tourne, les points ne vont pas tous à la même vitesse. \textbf{Comment calculer l’énergie cinétique d’un solide en rotation ?}
+\end{situation}
+
+\begin{minipage}[c]{0.55\linewidth}\RaggedRight
+\textbf{Doc 4.} Un solide indéformable tourne autour d’un axe fixe $(\Delta)$ à la vitesse angulaire $\omega$. On le décompose en petits éléments de matière $M_i$, de masses $m_i$, situés à la distance $r_i$ de l’axe. Chaque élément décrit un cercle à la vitesse $V_i = r_i\cdot\omega$. L’énergie cinétique du solide est la somme des énergies cinétiques de ses éléments.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}\centering
+\includegraphics[width=0.92\linewidth]{doc4_points}\par\vspace{1mm}
+{\sffamily\small\docbadge{4}\enspace\color{cInk2}Points d’un solide en rotation}
+\end{minipage}
+
+\medskip
+\textbf{Doc 5.} Des solides homogènes de même masse $m$ (disque, anneau, cylindre, sphère, tige) tournent autour d’un axe $(\Delta)$. À vitesse angulaire égale, leur énergie cinétique dépend de leur forme et de la position de l’axe, c’est-à-dire de la façon dont la matière est répartie autour de l’axe.\par\smallskip
+{\centering\includegraphics[width=0.9\linewidth]{doc5_solides}\par\vspace{1mm}
+{\sffamily\small\docbadge{5}\enspace\color{cInk2}Quelques solides homogènes et leur axe de rotation $(\Delta)$}\par}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Exprimer.} Exprimer l’énergie cinétique $E_{\mathrm{C}i}$ d’un élément $M_i$ en fonction de $m_i$ et $V_i$, puis en fonction de $m_i$, $r_i$ et $\omega$.
+  \item \kw{Établir.} Établir l’expression de l’énergie cinétique du solide $\Ec = \sum E_{\mathrm{C}i}$ en mettant en facteur les termes communs à tous les éléments.
+  \item \kw{Identifier.} La grandeur $J_\Delta = \sum m_i\cdot r_i^2$ est le moment d’inertie du solide par rapport à l’axe $(\Delta)$. De quoi dépend-elle ? Quelle est son unité ?
+  \item \kw{Formuler.} Écrire l’expression de l’énergie cinétique d’un solide en rotation autour d’un axe fixe.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$E_{\mathrm{C}i} = \frac{1}{2}\,m_i\cdot V_i^2$ ; comme $V_i = r_i\cdot\omega$ : $E_{\mathrm{C}i} = \frac{1}{2}\,m_i\cdot r_i^2\cdot\omega^2$.}
+  \item \rep{Tous les éléments ont la même vitesse angulaire $\omega$ (solide indéformable) : $\Ec = \sum \frac{1}{2}\,m_i\cdot r_i^2\cdot\omega^2 = \frac{1}{2}\big(\sum m_i\cdot r_i^2\big)\,\omega^2$.}
+  \item \rep{$J_\Delta$ dépend de la masse du solide, de ses dimensions et de la répartition de la matière autour de l’axe (donc de la position de l’axe). Unité : le kilogramme mètre carré (\unit{kg.m^2}).}
+  \item \rep{$\Ec = \frac{1}{2}\,J_\Delta\cdot\omega^2$.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.5\linewidth}\RaggedRight
+\sfb{\color{cRed}Énergie cinétique d’un solide en rotation}\par\smallskip
+Pour un solide en rotation autour d’un axe fixe $(\Delta)$ à la vitesse angulaire $\omega$ :
+\begin{center}\formule{\trou{$\Ec = \dfrac{1}{2}\,J_\Delta\cdot\omega^2$}}\end{center}
+$\Ec$ en joules, $\omega$ en \trou{\unit{rad.s^{-1}}}, $J_\Delta$ : \trou{moment d’inertie} du solide par rapport à l’axe $(\Delta)$, en \trou{\unit{kg.m^2}}.\par\smallskip
+$J_\Delta = \sum m_i\cdot r_i^2$ dépend de la \trou{masse} du solide et de la \troul{répartition de la matière autour de l’axe.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}\vspace{0pt}
+{\sffamily\footnotesize\bfseries\color{cRed}Moments d’inertie de solides homogènes de masse $m$}\par\smallskip
+{\renewcommand{\arraystretch}{1.45}\setlength{\tabcolsep}{4pt}\arrayrulecolor{cRed!35}\small
+\begin{tabular}{|>{\RaggedRight\arraybackslash}p{3.55cm}|>{\centering\arraybackslash}p{2.1cm}|}\hline
+\rowcolor{cRed!8}\sfb{\footnotesize Solide (axe de symétrie)} & \sfb{\footnotesize $J_\Delta$}\\ \hline
+Disque ou cylindre plein de rayon $r$ & $\frac{1}{2}\,m\cdot r^2$\\ \hline
+Anneau (cerceau) de rayon $r$ & $m\cdot r^2$\\ \hline
+Sphère pleine de rayon $r$ & $\frac{2}{5}\,m\cdot r^2$\\ \hline
+Tige de longueur $l$, axe au milieu & $\frac{1}{12}\,m\cdot l^2$\\ \hline
+Tige de longueur $l$, axe à une extrémité & $\frac{1}{3}\,m\cdot l^2$\\ \hline
+\end{tabular}}
+\end{minipage}
+\end{rub}
+
+\begin{rappel}
+Vitesse angulaire et fréquence de rotation : $\omega = 2\pi f = \dfrac{2\pi N}{60}$ ($N$ en tours par minute) ; vitesse d’un point situé à la distance $r$ de l’axe : $V = r\cdot\omega$.
+\end{rappel}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un disque qui tourne}
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+Un disque homogène de masse $m = \qty{4,0}{kg}$ et de rayon $r = \qty{20}{cm}$ tourne autour d’un axe fixe $(\Delta)$ passant par son centre et perpendiculaire à son plan, à la vitesse constante $N = \qty{600}{tr/min}$.
+\begin{appq}
+  \item Calculer le moment d’inertie $J_\Delta$ du disque.
+  \item Calculer sa vitesse angulaire $\omega$ en \unit{rad.s^{-1}}.
+  \item Calculer son énergie cinétique.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=\linewidth]{app2_disque}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Théorème de l’énergie cinétique : étude expérimentale}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 3\enspace·\enspace Travail et variation de l’énergie cinétique}
+\begin{situation}
+\textbf{Situation de départ.} Quand un solide tombe ou glisse sur un plan incliné, sa vitesse augmente : son énergie cinétique augmente. Dans le même temps, les forces qui s’exercent sur lui travaillent. \textbf{Quelle relation existe-t-il entre la variation de l’énergie cinétique d’un solide et le travail des forces qui lui sont appliquées ?}
+\end{situation}
+
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+\textbf{Doc 6. Chute libre.} Un électroaimant retient une bille d’acier de masse $m = \qty{24}{g}$ et de diamètre $d = \qty{1,8}{cm}$. On coupe le courant : la bille tombe sans vitesse initiale et traverse le faisceau d’une cellule photoélectrique reliée à un chronomètre électronique, qui mesure la durée $\Delta t$ d’occultation du faisceau (passage du diamètre de la bille). On place la cellule successivement aux points $A_1$ à $A_7$, à la distance $h$ sous le point de départ ($g = \qty{10}{N.kg^{-1}}$).\par\smallskip
+\centerline{\mesures[0.82cm]{7}{%
+Point & $A_1$ & $A_2$ & $A_3$ & $A_4$ & $A_5$ & $A_6$ & $A_7$\\ \hline
+$h$ (\unit{m}) & 0,20 & 0,40 & 0,60 & 0,80 & 1,00 & 1,20 & 1,40\\ \hline
+$\Delta t$ (\unit{ms}) & 8,70 & 6,38 & 5,18 & 4,48 & 4,05 & 3,70 & 3,48\\ \hline}}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=0.86\linewidth]{doc6_chute}\par\vspace{1mm}
+{\sffamily\small\docbadge{6}\enspace\color{cInk2}Chute libre et cellule photoélectrique}
+\end{minipage}
+
+\medskip
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc7_table}\par\vspace{1mm}
+{\sffamily\small\docbadge{7}\enspace\color{cInk2}Mobile autoporteur sur une table inclinée}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 7. Plan incliné.} Un mobile autoporteur de masse $m = \qty{732}{g}$ est lâché sans vitesse initiale sur une table à coussin d’air inclinée d’un angle $\alpha = 10^\circ$ ; les frottements sont négligeables. On enregistre les positions $M_0, M_1, \dots, M_7$ de son centre d’inertie à des intervalles de temps égaux $\tau = \qty{60}{ms}$ (doc 8).
+\end{minipage}
+
+\medskip
+{\centering\includegraphics[width=15.5cm]{doc8_enregistrement}\par\vspace{1mm}
+{\sffamily\small\docbadge{8}\enspace\color{cInk2}Enregistrement à l’échelle 1 (positions du centre d’inertie)}\par}
+\smallskip
+On note $d_i = M_{i-1}M_{i+1}$ et $D_i = M_1M_i$ :\par\smallskip
+\centerline{\mesures[1.05cm]{6}{%
+Point & $M_1$ & $M_2$ & $M_3$ & $M_4$ & $M_5$ & $M_6$\\ \hline
+$d_i$ (\unit{cm}) & 1,2 & 2,4 & 3,6 & 4,7 & 5,9 & 7,2\\ \hline
+$D_i$ (\unit{cm}) & 0 & 0,9 & 2,4 & 4,5 & 7,1 & 10,4\\ \hline}}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Calculer.} Chute libre (doc 6) : calculer en chaque point $A_i$ la vitesse $V_i = \dfrac{d}{\Delta t}$, l’énergie cinétique $E_{\mathrm{C}i}$ et le travail du poids $W_{A_1\to A_i}(\vect P) = m\cdot g\cdot(h_i - h_1)$. Présenter les résultats dans un tableau.
+  \item \kw{Analyser.} Tracer la courbe $\Ec = f\big(W(\vect P)\big)$. Quelle est sa forme ? Interpréter son ordonnée à l’origine, calculer son coefficient directeur et en déduire une relation entre la variation d’énergie cinétique $\Delta\Ec = E_{\mathrm{C}i} - E_{\mathrm{C}1}$ et $W(\vect P)$.
+  \item \kw{Inventorier.} Plan incliné (docs 7 et 8) : faire le bilan des forces qui s’exercent sur le mobile. Exprimer la somme de leurs travaux entre $M_1$ et $M_i$ en fonction de $m$, $g$, $D_i$ et $\alpha$.
+  \item \kw{Calculer.} Exprimer la vitesse $V_i$ en fonction de $d_i$ et $\tau$. Calculer $E_{\mathrm{C}i}$ et $W_{M_1\to M_i}(\vect P)$ pour les points $M_1$ à $M_6$.
+  \item \kw{Généraliser.} La courbe $\Ec = f\big(W(\vect P)\big)$ du mobile est une droite. Écrire son équation et en déduire la relation générale entre $\Delta\Ec$ et la somme des travaux des forces extérieures.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$m = \qty{0,024}{kg}$ ; $d = \qty{0,018}{m}$. Par exemple en $A_1$ : $V_1 = \dfrac{0{,}018}{8{,}70\times10^{-3}} \approx \qty{2,07}{m.s^{-1}}$ et $E_{\mathrm{C}1} = \frac{1}{2}\times0{,}024\times2{,}07^2 \approx \qty{0,051}{J}$.}\par\smallskip
+  {\centering\mesures[0.88cm]{7}{%
+  Point & $A_1$ & $A_2$ & $A_3$ & $A_4$ & $A_5$ & $A_6$ & $A_7$\\ \hline
+  $V_i$ (\unit{m.s^{-1}}) & \cel{2,07} & \cel{2,82} & \cel{3,47} & \cel{4,02} & \cel{4,44} & \cel{4,86} & \cel{5,17}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $E_{\mathrm{C}i}$ (\unit{J}) & \cel{0,051} & \cel{0,096} & \cel{0,145} & \cel{0,194} & \cel{0,237} & \cel{0,284} & \cel{0,321}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $W(\vect P)$ (\unit{J}) & \cel{0} & \cel{0,048} & \cel{0,096} & \cel{0,144} & \cel{0,192} & \cel{0,240} & \cel{0,288}\\[\ifeleve 3mm\else 0mm\fi] \hline}\par}
+  \item \ifeleve\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}\RaggedRight\rep{La courbe est une droite qui ne passe pas par l’origine, d’équation $\Ec = a\cdot W(\vect P) + b$. Son ordonnée à l’origine est l’énergie cinétique de la bille en $A_1$ : $b = E_{\mathrm{C}1} \approx \qty{0,051}{J}$. Son coefficient directeur vaut $a \approx 0{,}95$, voisin de 1 aux incertitudes de mesure près. Donc $\Ec = W(\vect P) + E_{\mathrm{C}1}$, soit $\Delta\Ec = E_{\mathrm{C}i} - E_{\mathrm{C}1} = W_{A_1\to A_i}(\vect P)$.}\end{minipage}\hfill\begin{minipage}[t]{0.46\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_chute_eleve}\end{minipage}
+  \else\begin{minipage}[t]{0.55\linewidth}\vspace{0pt}\RaggedRight La courbe est une droite qui ne passe pas par l’origine, d’équation $\Ec = a\cdot W(\vect P) + b$. Son ordonnée à l’origine est l’énergie cinétique de la bille en $A_1$ : $b = E_{\mathrm{C}1} \approx \qty{0,051}{J}$. Son coefficient directeur vaut $a \approx 0{,}95$, voisin de 1 aux incertitudes de mesure près. Donc $\Ec = W(\vect P) + E_{\mathrm{C}1}$, soit $\Delta\Ec = E_{\mathrm{C}i} - E_{\mathrm{C}1} = W_{A_1\to A_i}(\vect P)$.\end{minipage}\hfill\begin{minipage}[t]{0.42\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_chute}\end{minipage}\fi
+  \item \rep{Le mobile est soumis à son poids $\vect P$ et à la réaction $\vect R$ du plan, perpendiculaire au plan car les frottements sont négligeables : $W(\vect R) = 0$. Le centre d’inertie descend de $h = D_i\cdot\sin\alpha$, donc $\sum W_{M_1\to M_i} = W(\vect P) = m\cdot g\cdot D_i\cdot\sin\alpha$.}
+  \item \rep{$V_i = \dfrac{d_i}{2\tau}$, d’où $E_{\mathrm{C}i} = \frac{1}{2}\,m\left(\dfrac{d_i}{2\tau}\right)^2$. En $M_1$ : $V_1 = \dfrac{1{,}2\times10^{-2}}{0{,}120} = \qty{0,10}{m.s^{-1}}$ et $E_{\mathrm{C}1} = \frac{1}{2}\times0{,}732\times0{,}10^2 \approx \qty{3,66e-3}{J}$.}\par\smallskip
+  {\centering\mesures[1.05cm]{6}{%
+  Point & $M_1$ & $M_2$ & $M_3$ & $M_4$ & $M_5$ & $M_6$\\ \hline
+  $V_i$ (\unit{m.s^{-1}}) & \cel{0,100} & \cel{0,200} & \cel{0,300} & \cel{0,392} & \cel{0,492} & \cel{0,600}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $E_{\mathrm{C}i}$ ($10^{-3}$ \unit{J}) & \cel{3,66} & \cel{14,6} & \cel{32,9} & \cel{56,1} & \cel{88,5} & \cel{132}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $W(\vect P)$ ($10^{-3}$ \unit{J}) & \cel{0} & \cel{11,4} & \cel{30,5} & \cel{57,2} & \cel{90,2} & \cel{132}\\[\ifeleve 3mm\else 0mm\fi] \hline}\par}
+  \item \ifeleve\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}\RaggedRight\rep{Droite d’équation $\Ec = a\cdot W(\vect P) + b$, avec $a \approx 0{,}96 \approx 1$ et $b \approx \qty{3e-3}{J}$, voisin de $E_{\mathrm{C}1} \approx \qty{3,7e-3}{J}$. Donc $\Ec - E_{\mathrm{C}1} = W(\vect P)$. Comme $W(\vect R) = 0$, $W(\vect P)$ est la somme des travaux des forces extérieures : $\Delta\Ec = \sum W_{M_1\to M_i}(\vect F_{\text{ext}})$.}\end{minipage}\hfill\begin{minipage}[t]{0.46\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_table_eleve}\end{minipage}
+  \else\begin{minipage}[t]{0.55\linewidth}\vspace{0pt}\RaggedRight Droite d’équation $\Ec = a\cdot W(\vect P) + b$, avec $a \approx 0{,}96 \approx 1$ et $b \approx \qty{3e-3}{J}$, voisin de $E_{\mathrm{C}1} \approx \qty{3,7e-3}{J}$. Donc $\Ec - E_{\mathrm{C}1} = W(\vect P)$. Comme $W(\vect R) = 0$, $W(\vect P)$ est la somme des travaux des forces extérieures : $\Delta\Ec = \sum W_{M_1\to M_i}(\vect F_{\text{ext}})$.\end{minipage}\hfill\begin{minipage}[t]{0.42\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_table}\end{minipage}\fi
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Théorème de l’énergie cinétique (solide en translation)}\par\smallskip
+Dans un \trou{référentiel galiléen}, la variation de l’énergie cinétique d’un solide en translation entre deux positions A et B est égale à la \troul{somme des travaux des forces extérieures qui lui sont appliquées entre ces deux positions :}
+\begin{center}\formule{\trou{$\Delta\Ec = E_{\mathrm{C}B} - E_{\mathrm{C}A} = \dfrac{1}{2}\,m\cdot V_B^2 - \dfrac{1}{2}\,m\cdot V_A^2 = \sum W_{A\to B}(\vect F_{\text{ext}})$}}\end{center}
+Si la somme des travaux est positive (travail moteur), l’énergie cinétique \trou{augmente} ; si elle est négative (travail résistant), l’énergie cinétique \trou{diminue}. Le référentiel terrestre est considéré comme galiléen.
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace La descente d’un skieur}
+\begin{minipage}[c]{0.56\linewidth}\RaggedRight
+Un skieur et son équipement, de masse totale $m = \qty{80}{kg}$, partent sans vitesse initiale du point A d’une piste rectiligne inclinée de $\alpha = 20^\circ$ sur l’horizontale. Ils atteignent le point B, avec $AB = \qty{50}{m}$. Les frottements sont négligeables ; $g = \qty{9,8}{N.kg^{-1}}$.
+\begin{appq}
+  \item Faire le bilan des forces extérieures et calculer le travail de chacune entre A et B.
+  \item Appliquer le théorème de l’énergie cinétique entre A et B pour calculer la vitesse $V_B$.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}\centering
+\includegraphics[width=\linewidth]{app3_skieur}
+\end{minipage}
+\end{rub}
+
+\needspace{9cm}
+% =====================================================================
+\section{Généralisation du théorème de l’énergie cinétique}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 4\enspace·\enspace Du solide en translation au solide en rotation}
+\begin{situation}
+\textbf{Situation de départ.} Le théorème a été vérifié pour un solide en translation. Une poulie qui soulève une charge, un treuil actionné par un moteur ou une meule qu’on freine sont des solides en rotation autour d’un axe fixe. \textbf{Le théorème s’applique-t-il encore ? Comment l’utiliser avec méthode ?}
+\end{situation}
+
+\begin{minipage}[c]{0.56\linewidth}\RaggedRight
+\textbf{Doc 9.} Un volant de moment d’inertie $J_\Delta$ tourne autour d’un axe fixe $(\Delta)$, dans un référentiel galiléen. Sous l’action de forces extérieures (dont certaines ont un moment non nul par rapport à l’axe), sa vitesse angulaire passe de $\omega_1$ à l’instant $t_1$ à $\omega_2$ à l’instant $t_2$.\par\smallskip
+Chaque élément de matière du volant subit une variation d’énergie cinétique égale au travail des forces qui s’exercent sur lui. En additionnant ces relations pour tous les éléments du solide indéformable, on obtient une relation pour le solide entier, valable même si les forces ou leurs moments ne sont pas constants.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}\centering
+\includegraphics[width=\linewidth]{doc9_volant}\par\vspace{1mm}
+{\sffamily\small\docbadge{9}\enspace\color{cInk2}Volant entraîné par un moteur}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Écrire.} Écrire le théorème de l’énergie cinétique pour le volant du doc 9, dont la vitesse angulaire passe de $\omega_1$ à $\omega_2$.
+  \item \kw{Énoncer.} Énoncer le théorème de l’énergie cinétique valable pour un solide en translation ou en rotation autour d’un axe fixe. Reste-t-il valable si les forces ou leurs moments varient ?
+  \item \kw{Ordonner.} Quelles étapes faut-il suivre pour appliquer ce théorème à un système mécanique ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$\Delta\Ec = \frac{1}{2}\,J_\Delta\cdot\omega_2^2 - \frac{1}{2}\,J_\Delta\cdot\omega_1^2 = \sum W_{1\to2}(\vect F_{\text{ext}})$.}
+  \item \rep{Dans un référentiel galiléen, la variation de l’énergie cinétique d’un solide indéformable, en translation ou en rotation autour d’un axe fixe, entre deux instants, est égale à la somme des travaux des forces extérieures appliquées entre ces deux instants. Oui : le théorème reste valable même si les forces ou leurs moments ne sont pas constants.}
+  \item \rep{Définir le système ; choisir le référentiel (supposé galiléen) ; préciser l’état initial et l’état final ; faire le bilan des forces extérieures ; calculer le travail de chaque force ; écrire le théorème avec l’expression de $\Ec$ adaptée au mouvement, puis résoudre.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Théorème de l’énergie cinétique}\par\smallskip
+Dans un référentiel galiléen, la variation de l’énergie cinétique d’un solide indéformable (en translation ou en rotation autour d’un axe fixe) entre deux instants $t_1$ et $t_2$ est égale à la \troul{somme des travaux de toutes les forces extérieures appliquées au solide entre ces deux instants :}
+\begin{center}\formule{\trou{$\Delta\Ec = E_{\mathrm{C}2} - E_{\mathrm{C}1} = \sum W_{1\to2}(\vect F_{\text{ext}})$}}\end{center}
+\begin{minipage}[t]{0.48\linewidth}\RaggedRight
+\sfb{\color{cRed}Translation}\par\smallskip
+\centerline{\trou{$\dfrac{1}{2}\,m\cdot V_2^2 - \dfrac{1}{2}\,m\cdot V_1^2 = \sum W_{1\to2}(\vect F_{\text{ext}})$}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}\RaggedRight
+\sfb{\color{cRed}Rotation autour d’un axe fixe}\par\smallskip
+\centerline{\trou{$\dfrac{1}{2}\,J_\Delta\cdot\omega_2^2 - \dfrac{1}{2}\,J_\Delta\cdot\omega_1^2 = \sum W_{1\to2}(\vect F_{\text{ext}})$}}
+\end{minipage}\par\medskip
+Le théorème reste valable même si les forces ou leurs moments ne sont \trou{pas constants}.
+\end{rub}
+
+\begin{encart}{cOrange}{methode}{Méthode : appliquer le théorème de l’énergie cinétique}
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=5mm, itemsep=0pt, topsep=1pt]
+  \item Définir le \textbf{système} étudié.
+  \item Choisir le \textbf{référentiel} (le référentiel terrestre est supposé galiléen).
+  \item Préciser l’\textbf{état initial} et l’\textbf{état final} (positions, vitesses).
+  \item Faire le \textbf{bilan des forces} extérieures appliquées au système.
+  \item Calculer le \textbf{travail} de chaque force entre l’état initial et l’état final (une force perpendiculaire au déplacement, ou dont la droite d’action coupe l’axe de rotation, ne travaille pas).
+  \item Écrire le \textbf{théorème} avec l’expression de $\Ec$ adaptée (translation ou rotation) et résoudre.
+\end{enumerate}
+\end{encart}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Une poulie mise en rotation}
+\begin{minipage}[c]{0.58\linewidth}\RaggedRight
+Une poulie homogène, assimilée à un disque de masse $M = \qty{2,0}{kg}$ et de rayon $r = \qty{10}{cm}$, peut tourner sans frottement autour de son axe horizontal fixe $(\Delta)$. Initialement au repos, elle est soumise à un couple moteur de moment constant $\Mom_\Delta = \qty{0,50}{N.m}$ pendant 10 tours.
+\begin{appq}
+  \item Calculer le moment d’inertie $J_\Delta$ de la poulie.
+  \item Faire le bilan des actions mécaniques sur la poulie et calculer la somme de leurs travaux pour 10 tours.
+  \item Appliquer le théorème de l’énergie cinétique pour calculer la vitesse angulaire $\omega_2$ au bout de 10 tours.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.38\linewidth}\centering
+\includegraphics[width=\linewidth]{app4_poulie}
+\end{minipage}
+\end{rub}
+
+% =====================================================================
+%  EXERCICES
+% =====================================================================
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcolorbox}[enhanced, colback=cInk, colframe=cInk, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0mm, after skip=5mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_exercices}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Exercices d’application et de synthèse}
+\end{tcolorbox}
+\begin{rub}[unbreakable, before skip=0mm, after skip=0mm]{cOrange}{questions}{Je vérifie mes connaissances\enspace·\enspace Vrai ou faux ?}
+Pour chaque affirmation, dire si elle est vraie ou fausse, puis corriger les affirmations fausses.
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\alph*)}, leftmargin=6mm, itemsep=1pt]
+  \item Si la vitesse d’un solide en translation double, son énergie cinétique double.
+  \item L’énergie cinétique est une grandeur toujours positive ou nulle.
+  \item Le moment d’inertie d’un solide ne dépend que de sa masse.
+  \item Dans $\Ec = \frac{1}{2}\,J_\Delta\cdot\omega^2$, la vitesse angulaire s’exprime en tours par minute.
+  \item Si la somme des travaux des forces extérieures est nulle, la vitesse du solide ne varie pas.
+  \item Le théorème de l’énergie cinétique ne s’applique que si les forces sont constantes.
+\end{enumerate}
+\end{rub}
+\end{minipage}\par\medskip
+
+% ---------------- Exercice 1 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 1\enspace·\enspace Un solide sur une piste}
+Un solide (S) quasi ponctuel de masse $m = \qty{500}{g}$ est lâché sans vitesse initiale en A, au sommet d’une piste située dans un plan vertical :
+\begin{itemize}
+  \item une partie rectiligne AB, inclinée de $\alpha = 30^\circ$ sur l’horizontale, de longueur $AB = \qty{2,0}{m}$, où les frottements sont négligeables ;
+  \item une partie horizontale rugueuse qui commence en B, sur laquelle les frottements équivalent à une force constante $\vect f$, opposée au mouvement, de valeur $f = \qty{1,2}{N}$. Le point C de cette partie est tel que $BC = \qty{2,5}{m}$.
+\end{itemize}
+{\centering\includegraphics[width=11cm]{ex1_piste}\par}
+On prend $g = \qty{10}{N.kg^{-1}}$.
+\begin{exq}
+  \item Calculer le travail du poids de (S) entre A et B.
+  \item Appliquer le théorème de l’énergie cinétique entre A et B pour calculer l’énergie cinétique et la vitesse de (S) en B.
+  \item Faire le bilan des forces qui s’exercent sur (S) entre B et C et calculer le travail de chacune.
+  \item Calculer la vitesse $V_C$ de (S) en C.
+  \item (S) s’arrête en un point D de la partie horizontale. Calculer la distance BD.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 2 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 2\enspace·\enspace Le freinage d’un cylindre}
+\begin{minipage}[c]{0.66\linewidth}\RaggedRight
+Un cylindre homogène de masse $M = \qty{10}{kg}$ et de rayon $R = \qty{20}{cm}$ tourne à la vitesse constante $N_0 = \qty{300}{tr/min}$ autour de son axe de symétrie horizontal fixe $(\Delta)$. On coupe le moteur et on applique, tangentiellement à la surface du cylindre, une force de frottement constante $\vect f$ de valeur $f = \qty{5,0}{N}$, qui s’oppose à la rotation jusqu’à l’arrêt. Les frottements sur l’axe sont négligeables.
+\begin{exq}
+  \item Calculer le moment d’inertie $J_\Delta$ du cylindre et sa vitesse angulaire initiale $\omega_0$.
+  \item Calculer son énergie cinétique au début du freinage.
+  \item Exprimer le moment de $\vect f$ par rapport à $(\Delta)$, puis son travail pour une rotation d’angle $\Delta\theta$.
+  \item Appliquer le théorème de l’énergie cinétique pour calculer l’angle $\Delta\theta$ et le nombre de tours effectués avant l’arrêt.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.3\linewidth}\centering
+\includegraphics[width=\linewidth]{ex2_frein}
+\end{minipage}
+\end{rub}
+
+% ---------------- Exercice 3 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 3\enspace·\enspace Un treuil et une charge}
+\begin{minipage}[c]{0.68\linewidth}\RaggedRight
+Un treuil est formé d’un cylindre homogène (C) de masse $M = \qty{4,0}{kg}$ et de rayon $r = \qty{10}{cm}$, mobile sans frottement autour d’un axe horizontal fixe $(\Delta)$. Un fil inextensible, de masse négligeable, enroulé sans glisser sur le cylindre, porte à son extrémité un corps (S) de masse $m = \qty{1,0}{kg}$. On abandonne le système sans vitesse initiale ; (S) descend d’une hauteur $h = \qty{1,5}{m}$. On prend $g = \qty{10}{N.kg^{-1}}$.
+\begin{exq}
+  \item Calculer le moment d’inertie $J_\Delta$ du cylindre.
+  \item Établir la relation entre la vitesse $V$ de (S) et la vitesse angulaire $\omega$ du cylindre, puis entre $h$ et l’angle de rotation $\Delta\theta$.
+  \item Appliquer le théorème de l’énergie cinétique à (S), puis au cylindre (C), en faisant apparaître la tension $T$ du fil.
+  \item En additionnant les deux relations, calculer la vitesse $V$ de (S) après une descente de \qty{1,5}{m}, puis la tension $T$ du fil.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\linewidth}\centering
+\includegraphics[width=\linewidth]{ex3_treuil}
+\end{minipage}
+\end{rub}
+
+\ifeleve\needspace{7cm}\else\needspace{12cm}\fi
+% =====================================================================
+%  CORRIGÉS
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cGreen, colframe=cGreen, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=4mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_corrige}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}\titrecorriges}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small\RaggedRight
+\setlength{\columnsep}{7mm}
+\newcommand{\corr}[1]{\par\ifeleve\needspace{7\baselineskip}\medskip\else\smallskip\fi{\sffamily\bfseries\color{cGreen}#1}\par\nopagebreak\smallskip}
+
+\corr{Application 1 · La voiture}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$m = \qty{1200}{kg}$ ; $V_1 = \dfrac{54}{3{,}6} = \qty{15}{m.s^{-1}}$ ; $V_2 = \dfrac{108}{3{,}6} = \qty{30}{m.s^{-1}}$.}
+  \item \rep{$E_{\mathrm{C}1} = \frac{1}{2}\times1200\times15^2 = \qty{1,35e5}{J}$ ;\\ $E_{\mathrm{C}2} = \frac{1}{2}\times1200\times30^2 = \qty{5,40e5}{J}$.}
+  \item \rep{$\dfrac{E_{\mathrm{C}2}}{E_{\mathrm{C}1}} = 4$ : quand la vitesse double, l’énergie cinétique est multipliée par 4 (elle est proportionnelle à $V^2$).}
+\end{enumerate}
+
+\corr{Application 2 · Le disque}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$J_\Delta = \frac{1}{2}\,m\cdot r^2 = \frac{1}{2}\times4{,}0\times0{,}20^2 = \qty{8,0e-2}{kg.m^2}$.}
+  \item \rep{$\omega = \dfrac{2\pi N}{60} = \dfrac{2\pi\times600}{60} = 20\pi \approx \qty{62,8}{rad.s^{-1}}$.}
+  \item \rep{$\Ec = \frac{1}{2}\,J_\Delta\cdot\omega^2 = \frac{1}{2}\times0{,}080\times(20\pi)^2 \approx \qty{158}{J}$.}
+\end{enumerate}
+
+\corr{Application 3 · Le skieur}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{Poids $\vect P$ et réaction normale $\vect R_N$. $W(\vect R_N) = 0$ car $\vect R_N \perp \vect{AB}$ ;\\ $W(\vect P) = m\cdot g\cdot AB\cdot\sin\alpha = 80\times9{,}8\times50\times\sin20^\circ$\\ $W(\vect P) \approx \qty{1,34e4}{J}$.}
+  \item \rep{$\frac{1}{2}\,m\cdot V_B^2 - 0 = W(\vect P) + W(\vect R_N)$, d’où\\ $V_B = \sqrt{2\,g\cdot AB\cdot\sin\alpha} = \sqrt{2\times9{,}8\times50\times\sin20^\circ} \approx \qty{18,3}{m.s^{-1}}$.}
+\end{enumerate}
+
+\corr{Application 4 · La poulie}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$J_\Delta = \frac{1}{2}\,M\cdot r^2 = \frac{1}{2}\times2{,}0\times0{,}10^2 = \qty{1,0e-2}{kg.m^2}$.}
+  \item \rep{Poids $\vect P$, réaction $\vect R$ de l’axe et couple moteur. Les droites d’action de $\vect P$ et $\vect R$ coupent l’axe : $W(\vect P) = W(\vect R) = 0$. $\Delta\theta = 10\times2\pi = 20\pi$ rad ;\\ $W = \Mom_\Delta\cdot\Delta\theta = 0{,}50\times20\pi = 10\pi \approx \qty{31,4}{J}$.}
+  \item \rep{$\frac{1}{2}\,J_\Delta\cdot\omega_2^2 - 0 = 10\pi$, d’où\\ $\omega_2 = \sqrt{\dfrac{2\times31{,}4}{0{,}010}} \approx \qty{79,3}{rad.s^{-1}}$ (environ \qty{757}{tr/min}).}
+\end{enumerate}
+
+\corr{Vrai ou faux ?}
+\begin{enumerate}[label={\sffamily\bfseries\alph*)},leftmargin=5mm,itemsep=0pt]
+  \item \rep{Faux : $\Ec$ est proportionnelle à $V^2$ ; elle est multipliée par 4.}
+  \item \rep{Vrai : $m > 0$ et $V^2 \ge 0$ (ou $J_\Delta > 0$ et $\omega^2 \ge 0$).}
+  \item \rep{Faux : il dépend aussi de la répartition de la matière autour de l’axe.}
+  \item \rep{Faux : en \unit{rad.s^{-1}}.}
+  \item \rep{Vrai : $\Delta\Ec = 0$, donc la vitesse finale est égale à la vitesse initiale.}
+  \item \rep{Faux : il reste valable si les forces ou leurs moments varient.}
+\end{enumerate}
+
+\corr{Exercice 1 · La piste}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$W_{A\to B}(\vect P) = m\cdot g\cdot AB\cdot\sin\alpha = 0{,}50\times10\times2{,}0\times0{,}5 = \qty{5,0}{J}$.}
+  \item \rep{$W(\vect R_N) = 0$ ; $E_{\mathrm{C}B} - 0 = \qty{5,0}{J}$, d’où $E_{\mathrm{C}B} = \qty{5,0}{J}$ et\\ $V_B = \sqrt{\dfrac{2\,E_{\mathrm{C}B}}{m}} = \sqrt{20} \approx \qty{4,47}{m.s^{-1}}$.}
+  \item \rep{$\vect P$, $\vect R_N$ et $\vect f$ : $W(\vect P) = 0$ et $W(\vect R_N) = 0$ (perpendiculaires au déplacement) ; $W(\vect f) = -f\cdot BC = -1{,}2\times2{,}5 = \qty{-3,0}{J}$.}
+  \item \rep{$E_{\mathrm{C}C} = 5{,}0 - 3{,}0 = \qty{2,0}{J}$, d’où $V_C = \sqrt{8} \approx \qty{2,83}{m.s^{-1}}$.}
+  \item \rep{Entre B et D : $0 - E_{\mathrm{C}B} = -f\cdot BD$, d’où $BD = \dfrac{5{,}0}{1{,}2} \approx \qty{4,17}{m}$.}
+\end{enumerate}
+
+\corr{Exercice 2 · Le cylindre}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$J_\Delta = \frac{1}{2}\,M\cdot R^2 = \qty{0,20}{kg.m^2}$ ; $\omega_0 = \dfrac{2\pi\times300}{60} = 10\pi \approx \qty{31,4}{rad.s^{-1}}$.}
+  \item \rep{$E_{\mathrm{C}0} = \frac{1}{2}\times0{,}20\times(10\pi)^2 \approx \qty{98,7}{J}$.}
+  \item \rep{$\Mom_\Delta(\vect f) = -f\cdot R = \qty{-1,0}{N.m}$ ; $W(\vect f) = -f\cdot R\cdot\Delta\theta = -1{,}0\times\Delta\theta$.}
+  \item \rep{$W(\vect P) = W(\vect R) = 0$ ; $0 - E_{\mathrm{C}0} = -f\cdot R\cdot\Delta\theta$, d’où $\Delta\theta = \dfrac{98{,}7}{1{,}0} \approx \qty{98,7}{rad}$, soit $n = \dfrac{\Delta\theta}{2\pi} \approx 15{,}7$ tours.}
+\end{enumerate}
+
+\corr{Exercice 3 · Le treuil}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$J_\Delta = \frac{1}{2}\,M\cdot r^2 = \frac{1}{2}\times4{,}0\times0{,}10^2 = \qty{2,0e-2}{kg.m^2}$.}
+  \item \rep{Le fil ne glisse pas : $V = r\cdot\omega$ et $h = r\cdot\Delta\theta$.}
+  \item \rep{(S) : $\frac{1}{2}\,m\cdot V^2 = m\cdot g\cdot h - T\cdot h$ \quad (1)\\ (C) : $\frac{1}{2}\,J_\Delta\cdot\omega^2 = T\cdot r\cdot\Delta\theta = T\cdot h$, soit $\frac{1}{4}\,M\cdot V^2 = T\cdot h$ \quad (2)}
+  \item \rep{(1) + (2) : $\frac{1}{2}\Big(m + \dfrac{M}{2}\Big)V^2 = m\cdot g\cdot h$, d’où $V = \sqrt{\dfrac{2\,m\cdot g\cdot h}{m + M/2}} = \sqrt{10} \approx \qty{3,16}{m.s^{-1}}$ ;\\ $T = \dfrac{M\cdot V^2}{4h} = \dfrac{4{,}0\times10}{6{,}0} \approx \qty{6,67}{N}$.}
+\end{enumerate}
+\end{multicols}
+
+\end{document}

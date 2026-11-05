@@ -1,0 +1,253 @@
+% =====================================================================
+%  Fiche pédagogique — Chapitre 1 (physique) : Mouvement de rotation d’un solide autour d’un axe fixe
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{1}
+\newcommand{\TitreChap}{Mouvement de rotation d’un solide indéformable autour d’un axe fixe}
+\newcommand{\TitreCourt}{Rotation d’un solide autour d’un axe fixe}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{2 h}
+\newcommand{\Banniere}{opener_ch1.jpg}
+\newcommand{\BanniereDecalage}{8.4cm}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{2 heures — une séance\\ Cours-activités}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1\\ Travail mécanique et énergie}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séance}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Interpréter les transferts d’énergie} et les phénomènes de conservation et de dissipation de l’énergie dans des situations variées de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la partie « Travail mécanique et énergie », physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} décrire et caractériser le mouvement de rotation d’un solide autour d’un axe fixe (abscisses angulaire et curviligne, vitesses angulaire et linéaire, rotation uniforme). Ces outils sont indispensables pour calculer, dans les chapitres suivants, le travail d’une force et l’énergie cinétique d’un solide en rotation.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} classer des mouvements réels à partir d’observations (docs 1 à 4), exploiter un enregistrement (mesures, calculs), généraliser la relation $V = R\cdot\omega$.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} décrire un mouvement avec un vocabulaire précis (trajectoire, axe, translation) ; utiliser les symboles $\theta$, $s$, $\omega$, $V$, $T$, $f$ et le langage mathématique (radian, équation horaire, droite).}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} présentation animée (solides en rotation, enregistrement), logiciel de pointage vidéo (option) pour enregistrer une rotation.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} mesurer sur un document (règle, rapporteur), tenir compte d’une échelle, organiser un calcul (conversions ms $\to$ s, cm $\to$ m, degrés $\to$ radians).}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} objets techniques du quotidien (manège, téléphérique, barrière de péage, ventilateur, scie circulaire), rotation de la Terre ; prudence près des objets en rotation.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séance, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — \textbf{reconnaître} un mouvement de rotation autour d’un axe fixe et le distinguer d’un mouvement de translation ;}
+\pt{\textbf{O2} — \textbf{repérer} la position d’un point d’un solide en rotation par son abscisse angulaire $\theta$ et son abscisse curviligne $s$, et utiliser $s = R\cdot\theta$ ;}
+\pt{\textbf{O3} — connaître l’expression de la \textbf{vitesse angulaire} instantanée et son unité ($\unit{rad.s^{-1}}$) ; la calculer à partir d’un enregistrement ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O4} — calculer la \textbf{vitesse linéaire} instantanée d’un point et connaître la relation $V = R\cdot\omega$ ;}
+\pt{\textbf{O5} — connaître les caractéristiques de la \textbf{rotation uniforme} : $\omega$ constante, période $T = 2\pi/\omega$, fréquence $f = 1/T$ ;}
+\pt{\textbf{O6} — établir et exploiter les \textbf{équations horaires} $\theta(t) = \omega\cdot t + \theta_0$ et $s(t) = V\cdot t + s_0$.}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} reconnaître le mouvement de rotation ; connaître le repérage d’un point d’un solide en rotation autour d’un axe fixe, l’expression de la vitesse angulaire et son unité, la relation entre vitesse angulaire et vitesse linéaire, les caractéristiques de la rotation uniforme ; exploiter les équations horaires $\theta(t)$ et $s(t)$.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Mécanique (tronc commun)}
+\pt{relativité du mouvement, référentiel, trajectoire ;}
+\pt{vitesse moyenne $V_m = d/\Delta t$ et vitesse instantanée ;}
+\pt{mouvement de translation ; mouvement rectiligne uniforme et son équation horaire $x(t) = V\cdot t + x_0$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils mathématiques}
+\pt{mesure d’un angle en degrés et en radians ($\pi~\text{rad} = \ang{180}$) ;}
+\pt{périmètre du cercle $2\pi R$ et longueur d’un arc ;}
+\pt{fonction affine, droite et coefficient directeur.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences et mesures}
+\pt{table à coussin d’air avec un solide (disque) mobile autour d’un axe fixe et enregistreur à étincelles ;}
+\pt{enregistrement du doc 6 imprimé à l’échelle 1/2 ; règle graduée, rapporteur, ficelle, calculatrice ;}
+\pt{objets réels : roue de vélo montée sur son axe, ventilateur, porte de la classe ;}
+\pt{option : smartphone et logiciel de pointage vidéo.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (31 diapositives) ;}
+\pt{\textbf{livre de l’élève} (version à compléter) et livre du professeur ;}
+\pt{\textbf{fiche d’activités} imprimée (une page, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, papier millimétré.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : compétences transversales (§ 2.1), compétences spécifiques (§ 2), programme de la 1\textsuperscript{re} année du baccalauréat — physique, « Mouvement de rotation d’un solide indéformable autour d’un axe fixe » : abscisse curviligne, abscisse angulaire, vitesse angulaire ; vitesse d’un point du solide ; rotation uniforme (période, fréquence, équation horaire).}
+\pt{Activités préconisées par le programme : s’appuyer sur des documents et des exemples tirés de l’environnement de l’apprenant ; réaliser et exploiter des enregistrements du mouvement d’un point d’un solide en rotation ; mettre en évidence expérimentalement les caractéristiques de la rotation uniforme.}
+\pt{Supports du chapitre 1 : livre (versions professeur et élève), présentation animée, fiche d’activités. Manuels scolaires agréés de physique-chimie de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\bloc{2}{fi_chemin}{Déroulement de la séance}
+
+\noindent\frise{cCyan/7/Mise en route, cTeal/34/Partie 1 · Rotation et repérage, cBlue/39/Partie 2 · Vitesses V et ω, cPurple/33/Partie 3 · Rotation uniforme, cGreen/7/Bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% ---------------------------------------------------------------------
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil et rappel des prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Accueille les apprenants, distribue la fiche d’activités (à coller dans le cahier) et le livre de l’élève.}
+ \pt{Projette la diapositive de titre (grande roue animée) et annonce le plan et les objectifs.}
+ \pt{Pose des questions flash : « Qu’est-ce que la trajectoire d’un point ? », « Convertir $\ang{90}$ en radians », « Périmètre d’un cercle de rayon 10 cm ? », « Vitesse moyenne d’un cycliste qui parcourt 300 m en 1 min ? ».}
+ \pt{Corrige les confusions (degré / radian, vitesse moyenne / instantanée).}}
+{\pt{Colle la fiche d’activités, prépare règle, rapporteur et calculatrice.}
+ \pt{Répond aux questions : $\ang{90} = \pi/2~\text{rad} \approx \qty{1,57}{rad}$ ; $2\pi R \approx \qty{62,8}{cm}$ ; $V = \qty{5}{m.s^{-1}}$.}}
+{\diag Questions flash à main levée ou sur ardoise.\par
+ \textit{Indicateurs :} conversion degré $\to$ radian ; formule du périmètre ; $V = d/\Delta t$.\par\vspace{.8mm}
+ \regul Rappel : $\pi~\text{rad} = \ang{180}$.}
+{7}{0 h 07}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Mouvement de rotation et repérage d’un point}{34 min · objectifs O1 et O2}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Rotation ou translation ? Comment repérer un point qui tourne ?}{\diapo{2}}}
+{\pt{Projette la diapo 2 (porte, manège et téléphérique animés).}
+ \pt{Fait ouvrir la porte de la classe : « Que fait la poignée ? Et les charnières ? ».}
+ \pt{Pose le problème : comment distinguer une rotation d’une translation, et repérer à chaque instant un point qui tourne ?}}
+{\pt{Observe et décrit les mouvements avec ses mots.}
+ \pt{Propose : « la poignée décrit un arc de cercle, les charnières restent fixes ».}}
+{\diag Vocabulaire mobilisé : trajectoire, cercle, axe.}
+{3}{0 h 10}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Notion de rotation et repérage d’un point (docs 1 à 5)}{\diapo{3--6} \support{Livre · Act. 1} \support{Fiche}}}
+{\pt{Projette les docs 1 à 4 animés (manège, téléphérique, barrière de péage, grande roue) ; fait suivre le segment noir des cabines et les points $M$ et $N$ de la barrière.}
+ \pt{Organise le travail en binômes sur les questions 1 à 3 ; fait comparer les trajectoires de $M$ et $N$ (cercles de même centre, rayons différents).}
+ \pt{Présente le doc 5 (point $G$ sur un cercle) et les deux repérages possibles : un angle, une longueur d’arc (questions 4 et 5).}
+ \pt{Fait vérifier $s = R\cdot\theta$ sur un tour complet ($\theta = 2\pi$, $s = 2\pi R$) ; corrige au clic (diapos 5 et 6).}}
+{\pt{Constate que le segment reste parallèle à lui-même : les cabines sont en translation (rectiligne pour le téléphérique, circulaire pour la grande roue).}
+ \pt{Constate que $M$ et $N$ décrivent des cercles de même centre $O$ et de rayons différents.}
+ \pt{Propose une définition de la rotation autour d’un axe fixe.}
+ \pt{Propose deux repérages : l’abscisse angulaire $\theta$ et l’abscisse curviligne $s$ ; établit $s = R\cdot\theta$ ($\theta$ en rad).}}
+{\form Observation des binômes ; correction collective.\par
+ \textit{Indicateurs :} distinction rotation / translation justifiée ; définition citant « cercles centrés sur l’axe », « plans perpendiculaires à l’axe », « points de l’axe immobiles » ; $s = R\theta$ avec $\theta$ en radians.\par\vspace{.8mm}
+ \regul Grande roue : la roue tourne, les cabines sont en translation circulaire. Revoir l’animation au ralenti (bouton pause).}
+{20}{0 h 30}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Rotation, translation ; abscisses $\theta$ et $s$ ; $s = R\cdot\theta$}{\diapo{7--8} \support{Livre}}}
+{\pt{Fait formuler la définition, puis projette les diapos 7 et 8 (solide en rotation en 3D, tableau de repérage).}
+ \pt{Insiste sur les unités SI (rad, m) et sur le sens positif choisi.}
+ \pt{Demande de compléter les trous de l’« À retenir » dans le livre de l’élève.}}
+{\pt{Complète l’« À retenir » du livre.}
+ \pt{Recopie le tableau de repérage ($\theta$ en rad, $s$ en m).}}
+{\form Questions orales : « Une cabine de grande roue est-elle en rotation ? » ; « En quelle unité exprime-t-on $\theta$ dans $s = R\theta$ ? ».}
+{6}{0 h 36}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{La porte qui s’ouvre}{\diapo{9} \support{Livre}}}
+{\pt{Projette l’énoncé (porte animée, vue de dessus) ; laisse 3 min de travail individuel.}
+ \pt{Corrige au clic.}}
+{\pt{Convertit $\ang{45} = \pi/4~\text{rad} \approx \qty{0,785}{rad}$.}
+ \pt{Calcule $s = L\cdot\theta = 0{,}90\times\pi/4 \approx \qty{0,71}{m}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversion en radians ; $R = L = \qty{0,90}{m}$ ; résultat de 0,71 m.}
+{5}{0 h 41}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Vitesse linéaire et vitesse angulaire instantanées}{39 min · objectifs O3 et O4}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Comment évaluer la vitesse d’un point qui tourne ?}{\diapo{10}}}
+{\pt{Projette la diapo 10 (disque animé : les points du bord vont plus vite que ceux du centre).}
+ \pt{Pose le problème : comment évaluer la vitesse d’un point à un instant précis ? Comment traduire la « vitesse de rotation » commune à tout le disque ?}}
+{\pt{Remarque que tous les points font un tour dans la même durée mais parcourent des distances différentes.}
+ \pt{Propose de mesurer une distance parcourue pendant une durée très courte.}}
+{\diag Pertinence des propositions ; lien avec la vitesse moyenne.}
+{3}{0 h 44}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Exploiter l’enregistrement d’une rotation (doc 6)}{\diapo{11--13} \support{Livre · Act. 2} \support{Fiche}}}
+{\pt{Réalise l’enregistrement sur la table à coussin d’air (ou montre l’animation de la diapo 11) ; distribue le doc 6 (échelle 1/2, $\tau = \qty{40}{ms}$).}
+ \pt{Explique la méthode d’encadrement : $V_i$ est assimilée à la vitesse moyenne entre les positions $i-1$ et $i+1$.}
+ \pt{Fait mesurer les arcs $\arc{A_0A_2}$ et $\arc{B_0B_2}$ (règle, ficelle) et l’angle balayé (rapporteur).}
+ \pt{Circule et vérifie la prise en compte de l’échelle et des conversions.}
+ \pt{Corrige au clic (diapos 12 et 13) ; fait comparer $\omega_A$ et $\omega_B$, puis $R\cdot\omega$ et $V$.}}
+{\pt{Écrit $V_{A1} = \dfrac{\arc{A_0A_2}}{2\tau}$.}
+ \pt{Mesure les arcs (1,8 cm et 3,6 cm), en déduit les longueurs réelles (3,6 cm et 7,2 cm).}
+ \pt{Calcule $V_{A1} = \qty{0,45}{m.s^{-1}}$ et $V_{B1} = \qty{0,90}{m.s^{-1}}$.}
+ \pt{Mesure $\Delta\theta \approx \ang{34} \approx \qty{0,6}{rad}$ ; calcule $\omega_{A1} = \omega_{B1} = \qty{7,5}{rad.s^{-1}}$.}
+ \pt{Vérifie $R_A\cdot\omega = V_{A1}$ et $R_B\cdot\omega = V_{B1}$ ; généralise $V = R\cdot\omega$.}}
+{\form Correction collective ; vérification des mesures.\par
+ \textit{Indicateurs :} mesures correctes avec l’échelle ; conversions (ms $\to$ s, cm $\to$ m, ° $\to$ rad) ; égalité $\omega_A = \omega_B$ interprétée ; relation $V = R\omega$ formulée.\par\vspace{.8mm}
+ \regul Oubli de l’échelle 1/2 ou du facteur $2\tau$ : refaire le calcul pas à pas au tableau.}
+{25}{1 h 09}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{$V_i$ et $\omega_i$ instantanées ; $V = R\cdot\omega$}{\diapo{14--15} \support{Livre}}}
+{\pt{Projette les diapos 14 (vitesses instantanées) et 15 (relation $V = R\omega$, vecteurs vitesse animés).}
+ \pt{Souligne : même $\omega$ pour tous les points ; $V$ augmente avec $R$ ; vecteur vitesse tangent à la trajectoire.}}
+{\pt{Complète les trous de l’« À retenir ».}
+ \pt{Représente les vecteurs vitesse de $A$ et de $B$.}}
+{\form Question orale : « Un point deux fois plus éloigné de l’axe va-t-il plus vite ? De combien ? ».}
+{6}{1 h 15}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Le plateau du four à micro-ondes}{\diapo{16} \support{Livre}}}
+{\pt{Projette l’énoncé ; travail individuel ; correction au clic.}}
+{\pt{Calcule $\omega_i = \dfrac{\pi/2}{2\times0{,}5} \approx \qty{1,57}{rad.s^{-1}}$.}
+ \pt{Justifie que le grain de riz et la miette ont la même $\omega$.}
+ \pt{Calcule $V_{\text{riz}} \approx \qty{0,16}{m.s^{-1}}$ et $V_{\text{miette}} \approx \qty{0,24}{m.s^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} formule d’encadrement ; $V = R\omega$ avec $R$ en mètres.}
+{5}{1 h 20}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Mouvement de rotation uniforme et équations horaires}{33 min · objectifs O5 et O6}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Comment prévoir la position d’un objet qui tourne régulièrement ?}{\diapo{17}}}
+{\pt{Projette la diapo 17 (aiguille de montre et éolienne animées).}
+ \pt{Pose le problème : comment construire l’équation horaire d’une rotation très régulière ?}}
+{\pt{Remarque que des angles égaux sont balayés pendant des durées égales.}
+ \pt{Fait le lien avec le mouvement rectiligne uniforme $x(t) = V\cdot t + x_0$.}}
+{\diag Mobilisation du mouvement rectiligne uniforme.}
+{3}{1 h 23}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Rotation uniforme et équations horaires (doc 7)}{\diapo{18--20} \support{Livre · Act. 3} \support{Fiche}}}
+{\pt{Projette le doc 7 (positions de $M$ à $t = 0$ et à $t$) et l’animation de $\theta(t)$.}
+ \pt{Guide l’établissement de $\theta(t) = \omega t + \theta_0$ à partir de $\omega = \Delta\theta/\Delta t$, puis la multiplication par $R$ pour obtenir $s(t)$.}
+ \pt{Introduit la période (durée d’un tour) et la fréquence (nombre de tours par seconde).}
+ \pt{Corrige au clic (diapos 19 et 20).}}
+{\pt{Nomme le mouvement : rotation uniforme.}
+ \pt{Établit $\theta(t) = \omega\cdot t + \theta_0$, puis $s(t) = V\cdot t + s_0$ avec $s_0 = R\theta_0$.}
+ \pt{Définit $T$ et établit $T = 2\pi/\omega$ ; définit $f = 1/T$ (en hertz).}}
+{\form Passage au tableau ; correction collective.\par
+ \textit{Indicateurs :} démonstration rigoureuse des équations horaires ; $T = 2\pi/\omega$ et $f = 1/T$ ; unités (s, Hz).\par\vspace{.8mm}
+ \regul Analogie avec le mouvement rectiligne uniforme ($x \leftrightarrow s$, $V \leftrightarrow \omega$).}
+{17}{1 h 40}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{Équations horaires ; période et fréquence}{\diapo{21--22} \support{Livre}}}
+{\pt{Projette les diapos 21 (graphe $\theta = f(t)$ : droite de pente $\omega$ et d’ordonnée à l’origine $\theta_0$) et 22 ($T$ et $f$).}
+ \pt{Insiste sur la conversion des tr/min en Hz (diviser par 60).}}
+{\pt{Complète les trous de l’« À retenir ».}
+ \pt{Lit $\omega$ et $\theta_0$ sur un graphe.}}
+{\form Question flash : « 600 tr/min, combien de hertz ? ».}
+{6}{1 h 46}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Le ventilateur}{\diapo{23} \support{Livre}}}
+{\pt{Projette l’énoncé (ventilateur animé) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $f = 300/60 = \qty{5}{Hz}$, puis $\omega = 2\pi f = 10\pi \approx \qty{31,4}{rad.s^{-1}}$.}
+ \pt{Écrit $\theta(t) = 10\pi\, t$ et calcule $T = 1/f = \qty{0,2}{s}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversion tr/min $\to$ Hz ; $\omega = 2\pi f$ ; équation horaire avec $\theta_0 = 0$ ; $T = \qty{0,2}{s}$.}
+{7}{1 h 53}
+% ---------------------------------------------------------------------
+\partie{cGreen}{Bilan et évaluation de la séance}{7 min}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ? — L’essentiel du chapitre}{\diapo{24} \diapo{31}}}
+{\pt{Lance le « Vrai ou faux ? » (diapo 24) : réponses à main levée, puis correction au clic.}
+ \pt{Projette « L’essentiel du chapitre » (diapo 31) pour la synthèse finale.}
+ \pt{Donne le travail à la maison (exercices 1 à 3 du livre).}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}
+ \pt{Note le travail à faire.}}
+{\somm Taux de bonnes réponses au vrai-faux (objectif : au moins 5 sur 6).\par
+ \textit{Exploitation :} repérer les notions à reprendre au début de la séance suivante.}
+{7}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Exercice 1} — La rotation de la Terre : objectifs O3 à O5.}
+\pt{\textbf{Exercice 2} — Exploitation graphique : objectifs O5 et O6.}
+\pt{\textbf{Exercice 3} — Poulies et transmission du mouvement : objectifs O4 et O5.}
+\pt{Correction projetée au début de la séance suivante (diapos 25 à 30).}
+\pt{Soutien : refaire l’application de la porte pour un angle de \ang{120}. Approfondissement : filmer un ventilateur et pointer la position d’une pale.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séance (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séance :}\lignevide}
+\end{minipage}
+
+\end{document}
