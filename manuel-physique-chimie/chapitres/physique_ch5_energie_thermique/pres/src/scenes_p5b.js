@@ -122,7 +122,7 @@ SCENES.plaques = (host, o = {}) => {
   const chrono = display(f, sc, cx - 55, 24, 110, 58, 'DURÉE', {noShadow: true});
   const rays = f.g({parent: sc});
   tag(f, sc, cx, 236, 'même distance des deux plaques', {size: 13, w: 200});
-  if (!o.book) f.T(W - 12, H - 30, 'animation accélérée', {cls: 'lbl-s', size: 12, anchor: 'end', fill: '#ffffff', parent: sc});
+  if (!o.book) f.T(cx, H - 8, 'animation accélérée', {cls: 'lbl-s', size: 12, anchor: 'middle', fill: '#ffffff', parent: sc});
   f.frame();
   return {update(t){
     const tm = o.book ? 0 : Math.min((t % 12) / 1, 10), ph = o.book ? 0 : t * 6;

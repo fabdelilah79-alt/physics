@@ -114,20 +114,20 @@ S.append(slide("activite", "Activité 1", "Influence de la masse et de Δθ", *P
     "    " + fig("chauffage", doc(1, "Deux masses d’eau sur des réchauds identiques"), '{"exp":1}'))))
 
 S.append(slide("activite", "Activité 1", "Influence de la nature du corps", *P1, "Activité 1 · doc 3", cols("1fr", "1fr",
-    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 3.</b> On chauffe pendant la <b>même durée</b> de $4,0~\u{min}$ (donc avec la même énergie) $200~\u{g}$ d’eau et $200~\u{g}$ d’huile végétale.") + "\n      " + T_EXP3 + "\n    </div>",
+    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 3.</b> On chauffe pendant la <b>même durée</b> de $4,0~\u{min}$ (donc avec la même énergie) $200~\u{g}$ d’eau et $200~\u{g}$ d’huile végétale.") + "\n      " + T_EXP3 + "\n      " + card(rf"<b>Information.</b> $Q$ : chaleur <b>reçue</b> par un corps ($Q > 0$ s’il reçoit de l’énergie, $Q < 0$ s’il en cède). Sans changement d’état, $Q$ est égale au produit de la masse $m$, de $Δθ = θ_f − θ_i$ et d’un coefficient $c$ qui ne dépend que de la nature du corps : sa <b>chaleur massique</b>, en ${CU}$ (eau : 4185 ; huile : ≈ 2000). $C = m·c$ est la <b>capacité thermique</b> du corps.", "small") + "\n    </div>",
     "    " + fig("chauffage", doc(3, "Eau et huile, même durée de chauffage"), '{"exp":3}'))))
 
 S.append(slide("questions", "Questions", "Activité 1 — Masse, Δθ et nature du corps", *P1, "Questions 1 et 2", cols("1.2fr", ".8fr",
-    qlist(q(1, "Docs 1 et 2 : comment $Q$ varie-t-elle avec la masse $m$, puis avec $Δθ = θ_f − θ_i$ ?",
+    qlist(q(1, "Docs 1 et 2 : montrer que $Q$ est proportionnelle à la masse $m$, puis à $Δθ = θ_f − θ_i$.",
             "Masse double ⇒ durée double ⇒ énergie double : $Q$ est <b>proportionnelle à $m$</b>.<br>$Δθ$ double, triple ⇒ durée double, triple : $Q$ est <b>proportionnelle à $Δθ$</b>.", "Établir."),
-          q(2, "Doc 3 : pourquoi l’huile s’échauffe-t-elle davantage que l’eau ? Quelle grandeur introduire ?",
-            "Pour même masse et même énergie, $Δθ$ dépend de la <b>nature du corps</b> (environ 2 fois plus pour l’huile). Le coefficient de proportionnalité est la <b>chaleur massique</b> $c$ du corps.", "Interpréter.")),
+          q(2, "Doc 3 : pour même masse et même énergie, $Δθ$ est-il le même pour l’eau et l’huile ? Expliquer à l’aide des chaleurs massiques de l’information.",
+            "Non : $Δθ$ est environ 2 fois plus grand pour l’huile. Sa <b>chaleur massique</b> (≈ 2000) est environ 2 fois plus petite que celle de l’eau (4185) : pour la même énergie, $Δθ = \frac{Q}{m·c}$ est 2 fois plus grand.", "Interpréter.")),
     "    " + fig("chauffage", doc(3, "Même énergie, Δθ différents"), '{"exp":3}'))))
 
 S.append(slide("questions", "Questions", "Activité 1 — Expression de Q", *P1, "Questions 3 et 4", cols("1.25fr", ".75fr",
-    qlist(q(3, "Écrire l’expression de $Q$ pour un corps pur de masse $m$ dont la température passe de $θ_i$ à $θ_f$ (sans changement d’état). Unités ?",
+    qlist(q(3, "À l’aide de l’information, écrire l’expression de $Q$ pour un corps pur de masse $m$ dont la température passe de $θ_i$ à $θ_f$ (sans changement d’état). Unités ?",
             rf"$Q = m·c·Δθ = m·c·(θ_f − θ_i)$ : $Q$ en J, $m$ en kg, $Δθ$ en °C (ou K, même écart), $c$ en ${CU}$.", "Écrire."),
-          q(4, "Définir la chaleur massique $c$ et la capacité thermique $C$. Que signifie le signe de $Q$ ?",
+          q(4, r"Que représente $c$ si $m = 1~\u{kg}$ et $Δθ = 1~\u{°C}$ ? Que représente $C = m·c$ ? Signe de $Q$ quand le corps se refroidit ?",
             rf"$c$ : énergie qui élève de $1~\u{{°C}}$ la température de $1~\u{{kg}}$ du corps. $C = m·c$ (en ${MU}$) : $Q = C·Δθ$.<br>$θ_f > θ_i$ : $Q > 0$, le corps <b>reçoit</b> ; $θ_f < θ_i$ : $Q < 0$, il <b>cède</b>.", "Définir.")),
     "    " + fig("transfert"))))
 
@@ -162,7 +162,7 @@ S.append(slide("situation", "Situation de départ", "Partie 2 — Mélanger des 
     "    " + fig("equilibre"))))
 
 S.append(slide("activite", "Activité 2", "Le calorimètre — protocole 1", *P2, "Activité 2 · doc 4", cols("1.1fr", ".9fr",
-    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 4.</b> Un <b>calorimètre</b> est une enceinte thermiquement isolée : les corps qu’il contient échangent de la chaleur entre eux jusqu’à l’<b>équilibre thermique</b>. Le bilan ne dépend que de l’état initial et de l’état final.<br><b>Protocole 1 ($μ$ du calorimètre).</b> $m_1 = 200~\u{g}$ d’eau froide à $θ_1 = 18,0~\u{°C}$ ; on ajoute $m_2 = 200~\u{g}$ d’eau tiède à $θ_2 = 42,5~\u{°C}$ ; équilibre : $θ_e = 29,5~\u{°C}$.", "small") + "\n    </div>",
+    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 4.</b> Un <b>calorimètre</b> est une enceinte thermiquement isolée : les corps qu’il contient échangent de la chaleur jusqu’à l’<b>équilibre thermique</b> (même température pour tous, constante). L’énergie cédée par les corps qui se refroidissent est entièrement reçue par ceux qui s’échauffent ; le bilan ne dépend que des états initial et final. Le calorimètre reçoit $Q = μ·(θ_f − θ_i)$, $μ$ : sa <b>capacité thermique</b>.<br><b>Protocole 1 ($μ$ du calorimètre).</b> $m_1 = 200~\u{g}$ d’eau froide à $θ_1 = 18,0~\u{°C}$ ; on ajoute $m_2 = 200~\u{g}$ d’eau tiède à $θ_2 = 42,5~\u{°C}$ ; équilibre : $θ_e = 29,5~\u{°C}$.", "small") + "\n    </div>",
     "    " + fig("calorimetre", doc(4, "Calorimètre de Berthelot (coupe)"), '{"labels":1,"mode":"eau","th0":18,"th1":29.5}'))))
 
 S.append(slide("activite", "Activité 2", "Protocole 2 — chaleur massique de l’aluminium", *P2, "Activité 2 · protocole 2", cols("1.1fr", ".9fr",
@@ -170,7 +170,7 @@ S.append(slide("activite", "Activité 2", "Protocole 2 — chaleur massique de l
     "    " + fig("calorimetre", doc(4, "Le bloc d’aluminium dans le calorimètre"), '{"mode":"metal","th0":20,"th1":28.3}'))))
 
 S.append(slide("questions", "Questions", "Activité 2 — Équation calorimétrique", *P2, "Questions 1 et 2", cols("1.25fr", ".75fr",
-    qlist(q(1, "Quand des corps sont-ils en équilibre thermique ? Énoncer l’équation calorimétrique. De quels états dépend le bilan ?",
+    qlist(q(1, "D’après le doc 4 : quand des corps sont-ils en équilibre thermique ? Que vaut la somme $Q_1 + Q_2 + …$ des chaleurs échangées (<b>équation calorimétrique</b>) ? De quels états dépend le bilan ?",
             "Quand leurs températures sont <b>égales et constantes</b>. Dans une enceinte isolée : $ΣQ_i = 0$. Le bilan ne dépend que de l’<b>état initial</b> et de l’<b>état final</b>.", "Définir."),
           q(2, "Protocole 1 : exprimer $Q_1$ reçue par le calorimètre et l’eau froide, et $Q_2$ cédée par l’eau tiède.",
             r"$Q_1 = (μ + m_1·c_e)(θ_e − θ_1) > 0$ ; $Q_2 = m_2·c_e·(θ_e − θ_2) < 0$", "Exprimer.")),
@@ -209,7 +209,7 @@ S.append(slide("situation", "Situation de départ", "Partie 3 — La glace qui f
     "    " + fig("courbeGlace"))))
 
 S.append(slide("activite", "Activité 3", "Courbe d’échauffement et chaleur latente", *P3, "Activité 3 · doc 5", cols("1fr", "1fr",
-    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 5.</b> On chauffe à puissance constante $100~\u{g}$ de glace prise à $−10~\u{°C}$ et on relève sa température.<br><b>Chaleur latente.</b> À pression constante, un corps pur change d’état à température constante ($θ_{\u{fus}} = 0~\u{°C}$ pour la glace sous la pression atmosphérique normale). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m·L$, où $L$ est la <b>chaleur latente</b>.", "small") + "\n    </div>",
+    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 5.</b> On chauffe à puissance constante $100~\u{g}$ de glace prise à $−10~\u{°C}$ et on relève sa température.<br><b>Chaleur latente.</b> À pression constante, un corps pur change d’état à température constante ($θ_{\u{fus}} = 0~\u{°C}$ pour la glace sous la pression atmosphérique normale). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m·L$, où $L$ est la <b>chaleur latente</b>. La fusion se fait en recevant de la chaleur ; la solidification, inverse, en cède autant.", "small") + "\n    </div>",
     "    " + fig("courbeGlace", doc(5, "Température de la glace chauffée")))))
 
 S.append(slide("activite", "Activité 3", "Mesurer la chaleur latente de fusion de la glace", *P3, "Activité 3 · doc 6", cols("1.1fr", ".9fr",
@@ -219,7 +219,7 @@ S.append(slide("activite", "Activité 3", "Mesurer la chaleur latente de fusion 
 S.append(slide("questions", "Questions", "Activité 3 — Le palier et la chaleur latente", *P3, "Questions 1 et 2", cols("1.15fr", ".85fr",
     qlist(q(1, "Doc 5 : décrire les trois parties de la courbe. La glace reçoit-elle de l’énergie pendant le palier ?",
             r"La glace s’échauffe de $−10$ à $0~\u{°C}$ ; la température reste à $0~\u{°C}$ pendant la <b>fusion</b> (palier) ; puis l’eau liquide s’échauffe. Pendant le palier, la glace reçoit de l’énergie, qui sert à <b>changer son état</b>.", "Exploiter."),
-          q(2, "Définir la chaleur latente $L$ ; écrire $Q$ lors d’un changement d’état ; unité de $L$ ?",
+          q(2, r"D’après $Q = m·L$, que représente $L$ si $m = 1~\u{kg}$ ? Son unité ? Signe de $Q$ pour une fusion, une solidification ?",
             r"Chaleur à échanger avec $1~\u{kg}$ d’un corps pur pour qu’il change complètement d’état (température et pression constantes). $Q = m·L$, $L$ en $\u{J·kg^{−1}}$. Fusion, vaporisation : $Q > 0$ ; solidification, liquéfaction : $Q = −m·L < 0$.", "Définir.")),
     "    " + fig("courbeGlace", None, '{"labels":1}'))))
 
@@ -252,19 +252,19 @@ S.append(slide("situation", "Situation de départ", "Partie 4 — La chaleur du 
     "    " + fig("soleilTerre"))))
 
 S.append(slide("activite", "Activité 4", "Un thermomètre sous vide", *P4, "Activité 4 · doc 7", cols(".9fr", "1.1fr",
-    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 7.</b> Un thermomètre au réservoir <b>noirci</b> est placé sous une cloche en verre où l’on a fait le <b>vide</b> : plus d’air autour de lui. Une lampe infrarouge, à l’extérieur, est dirigée vers le réservoir. Dès l’allumage, la température indiquée augmente rapidement.") + "\n    </div>",
+    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 7.</b> Un thermomètre au réservoir <b>noirci</b> est placé sous une cloche en verre où l’on a fait le <b>vide</b> : plus d’air autour de lui. Une lampe infrarouge, à l’extérieur, est dirigée vers le réservoir. Dès l’allumage, la température indiquée augmente rapidement.<br>La lampe émet lumière et infrarouge : des <b>ondes électromagnétiques</b> qui transportent de l’énergie, même dans le vide. Ce mode de transfert s’appelle le <b>rayonnement</b>.") + "\n    </div>",
     "    " + fig("cloche", doc(7, "Thermomètre sous une cloche à vide")))))
 
 S.append(slide("activite", "Activité 4", "Plaque noire et plaque blanche", *P4, "Activité 4 · doc 8", rows(
-    "    " + card(r"<b>Doc 8.</b> Deux plaques métalliques identiques, l’une peinte en <b>noir mat</b>, l’autre en <b>blanc brillant</b>, sont placées à la <b>même distance</b> d’une lampe. Un thermomètre est fixé sur chaque plaque.", "small"),
+    "    " + card(r"<b>Doc 8.</b> Deux plaques métalliques identiques, l’une peinte en <b>noir mat</b>, l’autre en <b>blanc brillant</b>, sont placées à la <b>même distance</b> d’une lampe ; un thermomètre est fixé sur chaque plaque. Une surface <b>absorbe</b> une partie du rayonnement reçu et <b>réfléchit</b> le reste.<br><b>Doc 9.</b> Dans un solide, la chaleur se propage de proche en proche sans déplacement de matière : <b>conduction</b>. Dans un liquide ou un gaz, la matière chaude se déplace : <b>convection</b>. Ces deux modes ont besoin de matière.", "small"),
     [fig("plaques", doc(8, "Plaque noire et plaque blanche")), '<div style="display:grid;place-items:center">' + T_PL + "</div>"], "1.1fr .9fr")))
 
 S.append(slide("questions", "Questions", "Activité 4 — Le rayonnement", *P4, "Questions 1 à 3", cols("1.4fr", ".6fr",
-    qlist(q(1, "Doc 7 : comment le thermomètre placé dans le vide reçoit-il de l’énergie ? Nommer ce mode de transfert.",
+    qlist(q(1, "Doc 7 : pourquoi l’énergie ne peut-elle pas arriver au thermomètre par l’air ? Par quel mode de transfert la reçoit-il ?",
             "Le vide empêche les transferts qui ont besoin de matière. Le réservoir absorbe l’énergie transportée par les <b>ondes électromagnétiques</b> (infrarouge, lumière) émises par la lampe : c’est le <b>rayonnement</b>.", "Expliquer."),
-          q(2, "Doc 8 : comparer l’échauffement des deux plaques. Rôle de la couleur et de l’aspect de la surface ?",
+          q(2, "Doc 8 : comparer l’échauffement des deux plaques. Laquelle absorbe le plus le rayonnement ? Laquelle le réfléchit le plus ?",
             r"En 10 min : $+24,3~\u{°C}$ (noire) contre $+7,3~\u{°C}$ (blanche). Une surface <b>sombre et mate absorbe</b> la plus grande partie du rayonnement ; une surface blanche ou brillante en <b>réfléchit</b> la plus grande partie.", "Comparer."),
-          q(3, "Exemples de rayonnement dans la vie courante. En quoi diffère-t-il de la conduction et de la convection ?",
+          q(3, "Exemples de rayonnement d’après les documents. D’après le doc 9, quelle différence essentielle avec la conduction et la convection ?",
             "Soleil → Terre, chauffe-eau solaires, fours infrarouges, caméras thermiques. Conduction : de proche en proche, sans déplacement de matière ; convection : avec déplacement de matière (liquide, gaz) ; rayonnement : ondes électromagnétiques, <b>même dans le vide</b>.", "Distinguer.")),
     "    " + fig("plaques"))))
 

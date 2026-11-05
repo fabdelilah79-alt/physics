@@ -315,22 +315,25 @@ Durée (\unit{min}) & 4,0 & 8,0 & 12,0\\ \hline}}
 \centerline{\mesures[1.5cm]{2}{%
 Liquide & eau & huile\\ \hline
 $\Delta\theta$ (\unit{\degreeCelsius}) & 10,0 & 20,9\\ \hline}}
-\end{minipage}
+\end{minipage}\par\medskip
+\begin{tcolorbox}[enhanced,colback=white,colframe=cTeal!45,boxrule=.6pt,arc=2mm,left=3mm,right=3mm,top=1.5mm,bottom=1.5mm]
+\textbf{Information : chaleur massique et capacité thermique.} On note $Q$ la quantité de chaleur \emph{reçue} par un corps : $Q > 0$ si le corps reçoit réellement de l’énergie, $Q < 0$ s’il en cède. Sans changement d’état, on admet que $Q$ est égale au produit de la masse $m$, de la variation de température $\Delta\theta = \theta_f - \theta_i$ et d’un coefficient $c$ qui ne dépend que de la nature du corps : sa \textbf{chaleur massique}, en \cu{} (eau : 4\,185 ; huile : environ 2\,000). Le produit $C = m\cdot c$, en \muu, est la \textbf{capacité thermique} du corps.
+\end{tcolorbox}
 \end{rub}
 
 \begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
 \begin{enumerate}
-  \item \kw{Établir.} Exploiter les docs 1 et 2 : comment la quantité de chaleur $Q$ reçue par l’eau varie-t-elle avec sa masse $m$, puis avec la variation de sa température $\Delta\theta = \theta_f - \theta_i$ ?
-  \item \kw{Interpréter.} Exploiter le doc 3 : pour la même masse et la même énergie reçue, pourquoi l’huile s’échauffe-t-elle davantage que l’eau ? Quelle grandeur faut-il introduire ?
-  \item \kw{Écrire.} Écrire l’expression de la quantité de chaleur $Q$ échangée par un corps pur de masse $m$ dont la température passe de $\theta_i$ à $\theta_f$, sans changement d’état. Préciser les unités.
-  \item \kw{Définir.} Définir la chaleur massique $c$ d’un corps pur et la capacité thermique $C$ d’un corps. Que signifie le signe de $Q$ ?
+  \item \kw{Établir.} Exploiter les docs 1 et 2 pour montrer que la quantité de chaleur $Q$ reçue par l’eau est proportionnelle à sa masse $m$, puis à la variation de sa température $\Delta\theta = \theta_f - \theta_i$.
+  \item \kw{Interpréter.} Doc 3 : pour la même masse et la même énergie reçue, l’élévation de température est-elle la même pour l’eau et pour l’huile ? Expliquer ce résultat à l’aide des chaleurs massiques données dans l’information.
+  \item \kw{Écrire.} À l’aide de l’information, écrire l’expression de la quantité de chaleur $Q$ échangée par un corps pur de masse $m$ dont la température passe de $\theta_i$ à $\theta_f$, sans changement d’état. Préciser l’unité de chaque grandeur.
+  \item \kw{Définir.} D’après cette expression, que représente $c$ quand $m = \qty{1}{kg}$ et $\Delta\theta = \dC{1}$ ? Que représente la capacité thermique $C = m\cdot c$ ? Quel est le signe de $Q$ quand le corps se refroidit, et que signifie-t-il ?
 \end{enumerate}
 \end{rub}
 
 \begin{rub}{cGreen}{reponses}{\titrereponses}
 \begin{reps}
   \item \rep{Doc 1 : pour la même élévation de température, il faut une durée double, donc une énergie double, pour une masse double : $Q$ est proportionnelle à $m$. Doc 2 : pour une même masse, la durée (donc $Q$) double et triple quand $\Delta\theta$ double et triple : $Q$ est proportionnelle à $\Delta\theta$.}
-  \item \rep{Pour une même masse et une même énergie, l’élévation de température dépend de la nature du corps : elle est environ deux fois plus grande pour l’huile. Le coefficient de proportionnalité entre $Q$ et $m\cdot\Delta\theta$ dépend donc de la substance : c’est sa chaleur massique $c$.}
+  \item \rep{Pour une même masse et une même énergie, l’élévation de température dépend de la nature du corps : elle est environ deux fois plus grande pour l’huile. En effet, la chaleur massique de l’huile (environ \num{2000}) est environ deux fois plus petite que celle de l’eau (\num{4185}) : pour la même énergie, $\Delta\theta = \dfrac{Q}{m\cdot c}$ est deux fois plus grande.}
   \item \rep{$Q = m\cdot c\cdot\Delta\theta = m\cdot c\cdot(\theta_f - \theta_i)$, avec $Q$ en joules (J), $m$ en kilogrammes (kg), $\Delta\theta$ en degrés Celsius (ou en kelvins, l’écart est le même) et $c$ en \cu{} (ou \unit{J.kg^{-1}.K^{-1}}).}
   \item \rep{La chaleur massique $c$ est l’énergie qu’il faut fournir à \qty{1}{kg} du corps pour élever sa température de \dC{1} sans changement d’état. La capacité thermique $C = m\cdot c$ (en \muu) est l’énergie qui élève de \dC{1} la température du corps : $Q = C\cdot\Delta\theta$. Si $\theta_f > \theta_i$, $Q > 0$ : le corps reçoit de la chaleur ; si $\theta_f < \theta_i$, $Q < 0$ : il en cède.}
 \end{reps}
@@ -386,7 +389,7 @@ Un chauffe-eau électrique contient $V = \qty{100}{L}$ d’eau à la températur
 \end{situation}
 
 \begin{minipage}[c]{0.53\linewidth}\RaggedRight
-\textbf{Doc 4. Le calorimètre.} Un calorimètre est une enceinte thermiquement isolée : il n’échange pratiquement pas de chaleur avec l’extérieur. Les corps placés à l’intérieur échangent de la chaleur entre eux jusqu’à l’\textbf{équilibre thermique}. Le bilan des échanges ne dépend que de l’état initial et de l’état final.\par\medskip
+\textbf{Doc 4. Le calorimètre.} Un calorimètre est une enceinte thermiquement isolée : il n’échange pratiquement pas de chaleur avec l’extérieur. Les corps placés à l’intérieur échangent de la chaleur entre eux jusqu’à l’\textbf{équilibre thermique} : tous les corps ont alors la même température, qui reste constante. Comme le calorimètre n’échange pas d’énergie avec l’extérieur, l’énergie cédée par les corps qui se refroidissent est entièrement reçue par ceux qui s’échauffent. Le bilan des échanges ne dépend que de l’état initial et de l’état final. Le calorimètre et ses accessoires s’échauffent aussi : leur \textbf{capacité thermique} $\mu$ est l’énergie qui élève leur température de \dC{1}, et ils reçoivent $Q = \mu\cdot(\theta_f - \theta_i)$.\par\medskip
 \textbf{Protocole 1 : capacité thermique $\mu$ du calorimètre.} Le calorimètre contient $m_1 = \qty{200}{g}$ d’eau froide, en équilibre à $\theta_1 = \dC{18,0}$. On ajoute rapidement $m_2 = \qty{200}{g}$ d’eau tiède à $\theta_2 = \dC{42,5}$. Après agitation, la température d’équilibre est $\theta_e = \dC{29,5}$.
 \end{minipage}\hfill
 \begin{minipage}[c]{0.44\linewidth}\centering
@@ -398,7 +401,7 @@ Un chauffe-eau électrique contient $V = \qty{100}{L}$ d’eau à la températur
 
 \begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
 \begin{enumerate}
-  \item \kw{Définir.} Quand dit-on que des corps en contact sont en équilibre thermique ? Énoncer l’équation calorimétrique dans une enceinte isolée. De quels états dépend le bilan ?
+  \item \kw{Définir.} D’après le doc 4, quand des corps en contact sont-ils en équilibre thermique ? Que vaut la somme $Q_1 + Q_2 + \dots$ des quantités de chaleur échangées par tous les corps du calorimètre ? Cette relation s’appelle l’\textbf{équation calorimétrique}. De quels états dépend le bilan ?
   \item \kw{Exprimer.} Protocole 1 : exprimer la chaleur $Q_1$ reçue par le calorimètre et l’eau froide, puis la chaleur $Q_2$ cédée par l’eau tiède.
   \item \kw{Calculer.} Appliquer l’équation calorimétrique au protocole 1 pour exprimer, puis calculer, la capacité thermique $\mu$ du calorimètre.
   \item \kw{Déterminer.} Protocole 2 : faire le bilan des chaleurs échangées par le calorimètre, l’eau et l’aluminium, puis calculer la chaleur massique $c_m$ de l’aluminium. La comparer à la valeur du tableau.
@@ -459,7 +462,7 @@ Un calorimètre de capacité thermique $\mu = \qty{120}{J.\degreeCelsius^{-1}}$ 
 
 \begin{minipage}[c]{0.47\linewidth}\RaggedRight
 \textbf{Doc 5. Courbe d’échauffement de la glace.} On chauffe à puissance constante \qty{100}{g} de glace prise à \dC{-10} et on relève sa température au cours du temps.\par\medskip
-\textbf{Chaleur latente.} À pression constante, un corps pur change d’état à une température constante, caractéristique du corps : \dC{0} pour la fusion de la glace sous la pression atmosphérique normale ($\tfus$). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m\cdot L$, où $L$ est la \textbf{chaleur latente} de changement d’état.
+\textbf{Chaleur latente.} À pression constante, un corps pur change d’état à une température constante, caractéristique du corps : \dC{0} pour la fusion de la glace sous la pression atmosphérique normale ($\tfus$). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m\cdot L$, où $L$ est la \textbf{chaleur latente} de changement d’état, caractéristique du corps et du changement d’état. La fusion se fait en recevant de la chaleur ; la solidification, transformation inverse, cède la même quantité de chaleur.
 \end{minipage}\hfill
 \begin{minipage}[c]{0.5\linewidth}\centering
 \includegraphics[width=\linewidth]{doc5_courbe}\par\vspace{1mm}
@@ -477,7 +480,7 @@ Un calorimètre de capacité thermique $\mu = \qty{120}{J.\degreeCelsius^{-1}}$ 
 \begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
 \begin{enumerate}
   \item \kw{Exploiter.} Doc 5 : décrire les trois parties de la courbe. Comment évolue la température pendant la fusion ? La glace reçoit-elle de l’énergie pendant ce palier ?
-  \item \kw{Définir.} Définir la chaleur latente de changement d’état $L$ d’un corps pur ; écrire la chaleur $Q$ échangée lors d’un changement d’état et préciser l’unité de $L$.
+  \item \kw{Définir.} D’après la relation $Q = m\cdot L$, que représente $L$ quand $m = \qty{1}{kg}$ ? Quelle est son unité ? Quel est le signe de $Q$ pour une fusion, puis pour une solidification ?
   \item \kw{Décrire.} Doc 6 : décrire les deux étapes subies par le glaçon entre son introduction (solide à \dC{0,0}) et l’état final (liquide à $\theta_e$). Exprimer la chaleur totale $Q_g$ qu’il reçoit.
   \item \kw{Exprimer.} Exprimer la chaleur $Q_{ce}$ cédée par le calorimètre et la masse $m_1$ d’eau.
   \item \kw{Calculer.} Appliquer l’équation calorimétrique pour exprimer, puis calculer, la chaleur latente de fusion de la glace $L_f$.
@@ -537,7 +540,7 @@ On sort d’un congélateur un bloc de glace de masse $m = \qty{500}{g}$, à $\t
 \end{situation}
 
 \begin{minipage}[c]{0.5\linewidth}\RaggedRight
-\textbf{Doc 7. Thermomètre sous vide.} On place sous une cloche en verre un thermomètre dont le réservoir est noirci, puis on fait le vide sous la cloche : il n’y a plus d’air autour du thermomètre. Une lampe infrarouge, placée à l’extérieur, est dirigée vers le réservoir. Dès l’allumage de la lampe, la température indiquée par le thermomètre augmente rapidement.
+\textbf{Doc 7. Thermomètre sous vide.} On place sous une cloche en verre un thermomètre dont le réservoir est noirci, puis on fait le vide sous la cloche : il n’y a plus d’air autour du thermomètre. Une lampe infrarouge, placée à l’extérieur, est dirigée vers le réservoir. Dès l’allumage de la lampe, la température indiquée par le thermomètre augmente rapidement.\par\smallskip La lampe émet de la lumière et du rayonnement infrarouge : ce sont des \textbf{ondes électromagnétiques}, qui transportent de l’énergie et se propagent même dans le vide. Ce mode de transfert d’énergie s’appelle le \textbf{rayonnement}.
 \end{minipage}\hfill
 \begin{minipage}[c]{0.46\linewidth}\centering
 \includegraphics[width=\linewidth]{doc7_cloche}\par\vspace{1mm}
@@ -548,26 +551,27 @@ On sort d’un congélateur un bloc de glace de masse $m = \qty{500}{g}$, à $\t
 {\sffamily\small\docbadge{8}\enspace\color{cInk2}Plaque noire et plaque blanche}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.5\linewidth}\RaggedRight
-\textbf{Doc 8. Plaque noire et plaque blanche.} Deux plaques métalliques identiques, l’une peinte en noir mat, l’autre en blanc brillant, sont placées à la même distance d’une lampe. Un thermomètre est fixé sur chaque plaque :\par\smallskip
+\textbf{Doc 8. Plaque noire et plaque blanche.} Deux plaques métalliques identiques, l’une peinte en noir mat, l’autre en blanc brillant, sont placées à la même distance d’une lampe. Un thermomètre est fixé sur chaque plaque. Une surface qui reçoit un rayonnement en \textbf{absorbe} une partie, qui l’échauffe, et \textbf{réfléchit} le reste :\par\smallskip
 \centerline{\small\mesures[0.6cm]{6}{%
 $t$ (\unit{min}) & 0 & 2 & 4 & 6 & 8 & 10\\ \hline
 $\theta_{\text{noire}}$ (\unit{\degreeCelsius}) & 20,0 & 28,5 & 34,6 & 39,0 & 42,1 & 44,3\\ \hline
 $\theta_{\text{blanche}}$ (\unit{\degreeCelsius}) & 20,0 & 22,6 & 24,4 & 25,7 & 26,6 & 27,3\\ \hline}}
 \end{minipage}\par\medskip
-\textbf{Dans la vie courante.} Le même phénomène explique le chauffage de la Terre par le Soleil, le fonctionnement des chauffe-eau solaires, l’effet de serre ou les caméras thermiques, qui détectent l’infrarouge émis par tout corps chaud.
+\textbf{Doc 9. Les autres modes de transfert thermique.} Dans un solide, la chaleur se propage de proche en proche, sans déplacement de matière : c’est la \textbf{conduction} (le manche d’une cuillère plongée dans le thé chaud s’échauffe). Dans un liquide ou un gaz, la matière chaude se déplace et transporte l’énergie : c’est la \textbf{convection} (l’eau chauffée au fond d’une casserole monte). Ces deux modes ont besoin de matière.\par\medskip
+\textbf{Dans la vie courante.} Le rayonnement explique le chauffage de la Terre par le Soleil, le fonctionnement des chauffe-eau solaires, l’effet de serre ou les caméras thermiques, qui détectent l’infrarouge émis par tout corps chaud.
 \end{rub}
 
 \begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
 \begin{enumerate}
-  \item \kw{Expliquer.} Doc 7 : comment le thermomètre placé dans le vide peut-il recevoir de l’énergie ? Nommer ce mode de transfert.
-  \item \kw{Comparer.} Doc 8 : comparer l’échauffement des deux plaques exposées au même rayonnement. Quel est le rôle de la couleur et de l’aspect de la surface ?
-  \item \kw{Distinguer.} Citer des exemples de transfert d’énergie par rayonnement dans la vie courante. En quoi le rayonnement se distingue-t-il de la conduction et de la convection ?
+  \item \kw{Expliquer.} Doc 7 : pourquoi l’énergie ne peut-elle pas arriver au thermomètre par l’intermédiaire de l’air ? Par quel mode de transfert le thermomètre reçoit-il de l’énergie ?
+  \item \kw{Comparer.} Doc 8 : comparer l’échauffement des deux plaques exposées au même rayonnement. Laquelle absorbe le plus le rayonnement ? Laquelle le réfléchit le plus ?
+  \item \kw{Distinguer.} Citer, d’après les documents, des exemples de transfert d’énergie par rayonnement. En utilisant le doc 9, quelle différence essentielle y a-t-il entre le rayonnement et la conduction ou la convection ?
 \end{enumerate}
 \end{rub}
 
 \begin{rub}{cGreen}{reponses}{\titrereponses}
 \begin{reps}
-  \item \rep{Le vide empêche les transferts qui ont besoin de matière. Le réservoir reçoit l’énergie transportée par les ondes électromagnétiques (infrarouge et lumière visible) émises par la lampe, et l’absorbe : c’est le transfert par rayonnement.}
+  \item \rep{Il n’y a plus d’air sous la cloche : aucun transfert ne peut passer par la matière. Le réservoir reçoit l’énergie transportée par les ondes électromagnétiques (infrarouge et lumière visible) émises par la lampe, et l’absorbe : c’est le transfert par rayonnement.}
   \item \rep{En 10 minutes, la plaque noire mate s’échauffe de \dC{24,3}, la plaque blanche brillante de \dC{7,3} seulement. Une surface sombre et mate absorbe la plus grande partie du rayonnement reçu ; une surface blanche ou brillante en réfléchit la plus grande partie.}
   \item \rep{Chauffage de la Terre par le Soleil à travers le vide, chauffe-eau solaires (absorbeurs noirs), lampes et fours infrarouges, caméras thermiques. La conduction se fait de proche en proche dans la matière, sans déplacement de matière ; la convection s’accompagne d’un déplacement de matière dans un liquide ou un gaz ; le rayonnement est transporté par des ondes électromagnétiques et se propage même dans le vide.}
 \end{reps}

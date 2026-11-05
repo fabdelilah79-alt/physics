@@ -27,6 +27,14 @@
 - Contrôler chaque figure exportée sur une planche (lisibilité, chevauchements, couleurs).
 
 ## Contenu
+- **Chaque question d’activité doit pouvoir être traitée avec les seuls documents fournis** (et les prérequis réels des élèves).
+  Toute notion nouvelle qu’une question demande d’écrire, de nommer ou d’utiliser (expression d’une grandeur, nom d’un
+  phénomène, définition, convention de signe, relation comme l’équation calorimétrique…) figure dans un document ou dans un
+  encadré « Information » de l’activité, avant les questions. Les questions renvoient alors à ce document
+  (« à l’aide de l’information… », « d’après le doc n… ») et font raisonner : montrer, exploiter, interpréter, déduire.
+  Ne jamais demander « Définir X » ou « Écrire l’expression de X » si rien ne permet à l’élève de le trouver.
+  Relire chaque question avant la livraison en se demandant : « avec quoi l’élève répond-il ? ». Même règle pour la fiche
+  d’activités et la présentation (les cartes des documents reprennent les informations).
 - Reformuler le cours comme un livre d'élève ; corriger les incohérences numériques, garder
   3 chiffres significatifs dans les calculs intermédiaires ; recalculer tout par script.
 - Quand une notion n'est pas connue des élèves (ex. produit scalaire), ajouter un document qui l'explique
