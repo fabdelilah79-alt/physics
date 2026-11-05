@@ -6,6 +6,7 @@
 | Physique ch2 | Travail et puissance d'une force | livré ; doc 3 « produit scalaire » ajouté, question 3 reformulée |
 | Physique ch3 | Travail et énergie cinétique (5 h) | livré — sources complètes dans chapitres/physique_ch3_travail_energie_cinetique |
 | Physique ch4 | Énergie potentielle de pesanteur et énergie mécanique (§ 3.2 et 3.3, 5 h) | livré — chapitres/physique_ch4_energie_mecanique (livrables/ : PDF, HTML, .tex) ; application 3 corrigée (AB = 0,40 m), doc 5 « débit d’air réduit » ajouté, « livre » de l’application 1 remplacé par un dictionnaire ; doc 6 corrigé (R, R_N et f appliquées au milieu I du contact) |
+| Physique ch5 | L’énergie thermique : le transfert thermique (§ 4, 4 h) | livré — chapitres/physique_ch5_energie_thermique ; μ du protocole 2 rendu cohérent (109 au lieu de 60, θ'e = 28,3 °C), θe du glaçon 13,3 °C (Lf ≈ 3,35×10⁵), températures de fusion notées θ_fus, docs 2, 3 et 8 complétés |
 | Chimie ch1–ch5 | dont « Grandeurs physiques liées aux quantités de matière » | fiches pédagogiques dans archives/fiches_pedagogiques |
 
 ## Décisions techniques à retenir
@@ -26,3 +27,7 @@
   et le paquet Python `playwright` à la version du Playwright Node installé (navigateurs déjà dans /opt/pw-browsers).
 - Orientations (§ 3.2) : en sciences expérimentales, se limiter aux situations où la constante de Epp est nulle ; le ch4 garde la question
   « référence sur la table » (application 1) pour montrer que ΔEpp ne dépend pas de la référence.
+- Ch5 : verrerie et appareils de thermique ajoutés à `commun/presentation/src/realisme.js` : `liquidGrad`, `beaker3D`, `hotPlate`,
+  `probeThermo` (thermomètre numérique à sonde), `iceCube`, `metalBlock`, `calorimeter` (Berthelot en coupe), `steam`.
+  `glassThermo`, `irLamp`, `wavy` (rayonnement) sont dans les scènes du ch5 (à déplacer dans realisme.js s’ils resservent).
+- Dans gen_slides.py, toute chaîne contenant `\u{…}` doit être brute (`r"…"`), sinon Python lit `\u` comme un échappement Unicode.

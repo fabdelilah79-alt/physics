@@ -213,3 +213,100 @@ function skier(f, parent, x, y, s = 1, ang = 0, o = {}){
   f.line(36, -62, 4, -2, {stroke: '#5d6978', 'stroke-width': 2.4, parent: g});                          // bâton
   return g;
 }
+
+/* ---------- Verrerie et appareils de thermique (ajoutés au chapitre 5 de physique) ---------- */
+// liquide en dégradé (couleur de base col)
+function liquidGrad(f, col){ return f.lg(uid('lq'), [[0, tint(col, .3), .85], [.5, col, .9], [1, shade(col, .18), .92]], 0, 0, 1, 0); }
+// bécher en perspective : centre du fond (cx, yb), largeur w, hauteur h ; o.level (0..1), o.liq (couleur)
+// renvoie {content (groupe pour le liquide et les objets, sous les parois), front, yl (surface du liquide), rx, ry}
+function beaker3D(f, parent, cx, yb, w, h, o = {}){
+  const g = f.g({parent}), rx = w / 2, ry = Math.max(4, w * .1), yt = yb - h, glass = '#7d93a8';
+  if (!o.noShadow) shadowEll(f, g, cx, yb + 3, rx * 1.05, ry * .7, .25);
+  f.path(`M${f2(cx - rx)},${f2(yt)} L${f2(cx - rx)},${f2(yb)} A${f2(rx)},${f2(ry)} 0 0 0 ${f2(cx + rx)},${f2(yb)} L${f2(cx + rx)},${f2(yt)} Z`,
+    {fill: f.lg(uid('gl'), [[0, '#ffffff', .45], [.5, '#e3f0fa', .2], [1, '#ffffff', .45]], 0, 0, 1, 0), stroke: 'none', parent: g});
+  f.ell(cx, yt, rx, ry, {fill: '#eef6fc', opacity: .35, stroke: 'none', parent: g});
+  const content = f.g({parent: g});
+  let yl = yb;
+  if (o.level){
+    yl = yb - h * o.level; const c = o.liq || '#9fd3f5';
+    f.path(`M${f2(cx - rx + 2)},${f2(yl)} L${f2(cx - rx + 2)},${f2(yb)} A${f2(rx - 2)},${f2(ry - 1)} 0 0 0 ${f2(cx + rx - 2)},${f2(yb)} L${f2(cx + rx - 2)},${f2(yl)} Z`, {fill: liquidGrad(f, c), stroke: 'none', parent: content});
+    f.ell(cx, yl, rx - 2, ry - 1, {fill: tint(c, .4), stroke: shade(c, .2), 'stroke-width': .8, opacity: .95, parent: content});
+  }
+  const front = f.g({parent: g});
+  f.line(cx - rx, yt, cx - rx, yb, {stroke: glass, 'stroke-width': 1.8, parent: front});
+  f.line(cx + rx, yt, cx + rx, yb, {stroke: glass, 'stroke-width': 1.8, parent: front});
+  f.path(`M${f2(cx - rx)},${f2(yb)} A${f2(rx)},${f2(ry)} 0 0 0 ${f2(cx + rx)},${f2(yb)}`, {stroke: glass, 'stroke-width': 1.8, fill: 'none', parent: front});
+  f.ell(cx, yt, rx, ry, {fill: 'none', stroke: glass, 'stroke-width': 1.8, parent: front});
+  f.path(`M${f2(cx - rx - 1)},${f2(yt)} q-7,-2 -9,-8`, {stroke: glass, 'stroke-width': 1.8, fill: 'none', parent: front});   // bec
+  f.rect(cx - rx + w * .1, yt + ry + 5, Math.max(3, w * .055), h * .72, {rx: 2, fill: '#ffffff', opacity: .6, parent: front});
+  if (!o.noGrad) for (let k = 1; k <= 4; k++){ const y = yb - h * k / 5; f.line(cx + rx * .5, y, cx + rx * (k % 2 ? .72 : .82), y, {stroke: '#5d7f96', 'stroke-width': 1, parent: front}); }
+  return {g, content, front, yl, rx, ry, yt, yb, cx};
+}
+// plaque chauffante électrique : centre du bas (cx, yb), largeur w ; renvoie {g, top, glow}
+function hotPlate(f, parent, cx, yb, w, o = {}){
+  const g = f.g({parent}), h = o.h || 34;
+  if (!o.noShadow) shadowEll(f, g, cx, yb + 2, w * .55, 5, .3);
+  f.rect(cx - w / 2, yb - h, w, h, {rx: 6, fill: f.lg(uid('hp'), [[0, '#eef2f6'], [1, '#9aa7b6']]), stroke: '#5d6978', 'stroke-width': 1, parent: g});
+  f.rect(cx - w / 2 + 4, yb - h - 7, w - 8, 9, {rx: 3, fill: '#2b3440', parent: g});
+  const glow = f.rect(cx - w / 2 + 9, yb - h - 5, w - 18, 4, {rx: 2, fill: '#ff5a2a', opacity: 0, filter: realDefs(f).blur2, parent: g});
+  f.circ(cx + w / 2 - 16, yb - h / 2, 8, {fill: f.rg(uid('kn'), [[0, '#ffffff'], [1, '#5d6978']], .35, .3, .8), stroke: '#3b4654', 'stroke-width': .8, parent: g});
+  const led = f.circ(cx - w / 2 + 14, yb - h / 2, 3.2, {fill: '#7c8896', parent: g});
+  const set = on => { glow.setAttribute('opacity', on ? .9 : 0); led.setAttribute('fill', on ? '#ff3b30' : '#7c8896'); };
+  set(!!o.on);
+  return {g, top: yb - h - 7, set};
+}
+// thermomètre numérique à sonde : boîtier en (x, yTop), sonde jusqu'à yTip ; renvoie le texte de l'écran
+function probeThermo(f, parent, x, yTop, yTip, o = {}){
+  const w = o.w || 96, h = o.h || 62, g = f.g({parent});
+  f.rect(x - 2.5, yTop + h - 4, 5, yTip - (yTop + h - 4), {rx: 2.5, fill: f.lg(uid('pr'), [[0, '#7c8896'], [.4, '#e9eef3'], [1, '#5d6978']], 0, 0, 1, 0), parent: g});
+  f.line(x, yTop + h + 2, x, yTop + h + 14, {stroke: '#1b2a41', 'stroke-width': 7, 'stroke-linecap': 'round', parent: g});
+  return display(f, g, x - w / 2, yTop, w, h, o.title || 'θ (°C)', {noShadow: true});
+}
+// glaçon translucide (coin haut gauche en (x, y), côté s, angle a)
+function iceCube(f, parent, x, y, s, a = 0){
+  const g = f.g({parent}); g.setAttribute('transform', `translate(${f2(x)},${f2(y)}) rotate(${f2(a)})`);
+  f.rect(0, 0, s, s, {rx: s * .18, fill: f.lg(uid('ic'), [[0, '#f4fbff', .95], [.6, '#c9e7f7', .85], [1, '#9fcde8', .9]]), stroke: '#8fbcd8', 'stroke-width': 1, parent: g});
+  f.path(`M${f2(s * .18)},${f2(s * .25)} L${f2(s * .55)},${f2(s * .2)}`, {stroke: '#ffffff', 'stroke-width': s * .08, 'stroke-linecap': 'round', opacity: .9, parent: g});
+  f.circ(s * .7, s * .62, s * .07, {fill: '#ffffff', opacity: .7, parent: g});
+  return g;
+}
+// bloc (cylindre) métallique vu de face : centre du haut (x, y), largeur w, hauteur h, couleur col ; o.hook : fil de suspension
+function metalBlock(f, parent, x, y, w, h, col = '#b8c2cc', o = {}){
+  const g = f.g({parent}), ry = w * .16;
+  if (o.hook) f.line(x, y - o.hook, x, y, {stroke: '#3b4654', 'stroke-width': 1.4, parent: g});
+  f.path(`M${f2(x - w / 2)},${f2(y)} L${f2(x - w / 2)},${f2(y + h)} A${f2(w / 2)},${f2(ry)} 0 0 0 ${f2(x + w / 2)},${f2(y + h)} L${f2(x + w / 2)},${f2(y)} Z`,
+    {fill: f.lg(uid('mb'), [[0, shade(col, .35)], [.35, tint(col, .55)], [.65, col], [1, shade(col, .45)]], 0, 0, 1, 0), stroke: shade(col, .5), 'stroke-width': .9, parent: g});
+  f.ell(x, y, w / 2, ry, {fill: tint(col, .3), stroke: shade(col, .5), 'stroke-width': .9, parent: g});
+  return g;
+}
+// calorimètre de Berthelot en coupe : centre du bas (cx, yb), largeur w, hauteur h ; o.level (0..1) du liquide
+// renvoie {content (groupe dans le vase intérieur), yl (surface du liquide), xL, xR, yIn (fond intérieur), lidY, stir (agitateur), probeX}
+function calorimeter(f, parent, cx, yb, w, h, o = {}){
+  const g = f.g({parent}), d = realDefs(f), t = h * .0;
+  if (!o.noShadow) shadowEll(f, g, cx, yb + 3, w * .55, 6, .3);
+  f.rect(cx - w / 2, yb - h, w, h, {rx: 10, fill: f.lg(uid('cx'), [[0, '#5d6978'], [.3, '#c3ccd6'], [.7, '#9aa7b6'], [1, '#3b4654']], 0, 0, 1, 0), stroke: '#2b3440', 'stroke-width': 1.2, parent: g});
+  const e1 = 9, e2 = w * .13;
+  f.rect(cx - w / 2 + e1, yb - h + 2, w - 2 * e1, h - e1 - 2, {rx: 6, fill: f.lg(uid('is'), [[0, '#f3e3b8'], [1, '#d9c28a']]), parent: g});
+  const r = rng(11); for (let i = 0; i < 70; i++) f.circ(cx - w / 2 + e1 + 2 + r() * (w - 2 * e1 - 4), yb - h + 6 + r() * (h - e1 - 10), 1 + r() * 1.6, {fill: '#c2a866', opacity: .55, parent: g});
+  const xL = cx - w / 2 + e2, xR = cx + w / 2 - e2, yIn = yb - e2 * .9;
+  f.rect(xL - 3, yb - h + 4, xR - xL + 6, yIn - (yb - h + 4) + 3, {rx: 4, fill: f.lg(uid('vi'), [[0, '#8a96a8'], [.4, '#f4f7fa'], [1, '#7c8896']], 0, 0, 1, 0), parent: g});
+  f.rect(xL, yb - h + 4, xR - xL, yIn - (yb - h + 4), {rx: 3, fill: '#f7fbfe', parent: g});
+  const content = f.g({parent: g}); let yl = yIn;
+  if (o.level){ yl = yIn - (yIn - (yb - h + 4)) * o.level; f.rect(xL, yl, xR - xL, yIn - yl, {rx: 2, fill: liquidGrad(f, o.liq || '#9fd3f5'), parent: content});
+    f.rect(xL, yl, xR - xL, 2.5, {fill: '#ffffff', opacity: .7, parent: content}); }
+  // couvercle, agitateur, thermomètre
+  const lidY = yb - h - 12;
+  f.rect(cx - w / 2 - 5, lidY, w + 10, 16, {rx: 5, fill: f.lg(uid('ld'), [[0, '#3b4654'], [1, '#1b2430']]), parent: g});
+  const sx = cx - (xR - xL) * .25, probeX = cx + (xR - xL) * .22;
+  const stir = f.g({parent: g});
+  f.rect(sx - 2, lidY - 34, 4, yIn - 10 - (lidY - 34), {fill: f.lg(uid('ag'), [[0, '#7c8896'], [.5, '#eef2f6'], [1, '#5d6978']], 0, 0, 1, 0), parent: stir});
+  f.rect(sx - 9, lidY - 42, 18, 10, {rx: 4, fill: '#d62839', parent: stir});
+  f.ell(sx, yIn - 12, (xR - xL) * .18, 4, {fill: 'none', stroke: '#7c8896', 'stroke-width': 3, parent: stir});
+  return {g, content, yl, xL, xR, yIn, lidY, stir, probeX, sx};
+}
+// petits filets de vapeur au-dessus d'un point (animés par setT de phase)
+function steam(f, parent, x, y, n = 3, o = {}){
+  const g = f.g({parent, opacity: o.op || .7});
+  const P = [...Array(n)].map((_, i) => f.path(`M${f2(x + (i - (n - 1) / 2) * (o.gap || 14))},${f2(y)} q-7,-12 0,-24 t0,-24`, {stroke: '#ffffff', 'stroke-width': 4, 'stroke-linecap': 'round', fill: 'none', filter: realDefs(f).blur2, parent: g}));
+  return {g, update(t){ P.forEach((p, i) => { const k = ((t * .6 + i / n) % 1); p.setAttribute('transform', `translate(0,${f2(-k * 18)})`); p.setAttribute('opacity', f2(Math.sin(Math.PI * k))); }); }};
+}

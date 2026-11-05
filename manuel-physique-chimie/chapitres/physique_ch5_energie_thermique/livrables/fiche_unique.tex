@@ -1,0 +1,149 @@
+% =====================================================================
+%  Fiche d’activités : les 4 activités du chapitre 5 (physique)
+%  L’énergie thermique : le transfert thermique — deux pages A4
+%  (activités 1 et 2 page 1, activités 3 et 4 page 2)
+%  (sans situation de départ, sans zone de nom, sans bandeau de titre)
+%  À coller dans le cahier. Compilation : xelatex fiche_unique.tex (deux passes)
+% =====================================================================
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,top=.75cm,bottom=.6cm,left=.8cm,right=.8cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,tikz,array}
+\usepackage[most]{tcolorbox}
+\graphicspath{{images/}}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 8em}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=5}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cTeal}{HTML}{0E8F8A} \definecolor{cSoft}{HTML}{F4F7FB}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\color{cInk}
+
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}
+\NewDocumentCommand{\docbadge}{m}{\tikz[baseline=(b.base)]\node[fill=cBlue,text=white,rounded corners=4pt,inner xsep=3pt,inner ysep=1.4pt,font=\sffamily\bfseries\tiny](b){Doc #1};}
+% document : {largeur}{n}{légende}{image}
+\newcommand{\doc}[4]{%
+  \begin{minipage}[t]{#1}\vspace{0pt}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{.5mm}
+    {\sffamily\scriptsize\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+\NewDocumentCommand{\pastille}{m m}{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=3.9mm,font=\sffamily\bfseries\tiny](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}}, leftmargin=6mm, labelsep=1.8mm, itemsep=2pt, topsep=2pt, parsep=0pt}
+% séparateur discret entre les activités
+\newcommand{\sep}[1]{\par\vspace{2.5mm}%
+  \noindent\tikz[baseline=(t.base)]\node[fill=cTeal,text=white,rounded corners=3pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\bfseries\scriptsize](t){Activité #1};%
+  \hspace{2mm}{\color{cTeal!70}\leaders\hrule height .7pt\hfill\kern0pt}\par\vspace{1mm}}
+
+% ---------- tableau de mesures compact ----------
+\newcommand{\mesures}[3][0.8cm]{{\renewcommand{\arraystretch}{1.2}\setlength{\arrayrulewidth}{.5pt}\arrayrulecolor{cTeal!55}\setlength{\tabcolsep}{3pt}%
+  \begin{tabular}{|>{\sffamily\scriptsize\bfseries\color{cTeal}}l|*{#2}{>{\centering\arraybackslash}p{#1}|}}\hline #3\end{tabular}}}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\cu}{\unit{J.kg^{-1}.\degreeCelsius^{-1}}}
+\newcommand{\tfus}{\theta_{\mathrm{fus}}}
+\begin{document}
+\small\RaggedRight
+\setlength{\parskip}{0pt}
+% =====================================================================
+\sep{1}
+\begin{minipage}[t]{0.66\linewidth}\vspace{0pt}\RaggedRight
+Des réchauds électriques identiques fournissent la même énergie par minute : l’énergie reçue est proportionnelle à la durée de chauffage. Les liquides sont pris à $\theta_i = \dC{20,0}$.\par\vspace{.5mm}
+\textbf{Doc 1.} Pour élever la température de $\Delta\theta = \dC{15}$ : \qty{3,0}{min} pour \qty{100}{g} d’eau, \qty{6,0}{min} pour \qty{200}{g} d’eau.\par\vspace{.5mm}
+\textbf{Doc 2.} \qty{200}{g} d’eau : durée de chauffage selon $\Delta\theta = \theta_f - \theta_i$.\enspace
+\mesures[0.6cm]{3}{%
+$\Delta\theta$ (\unit{\degreeCelsius}) & 10 & 20 & 30\\ \hline
+Durée (\unit{min}) & 4,0 & 8,0 & 12,0\\ \hline}\par\vspace{.5mm}
+\textbf{Doc 3.} Même durée de chauffage (\qty{4,0}{min}), donc même énergie, pour \qty{200}{g} d’eau et \qty{200}{g} d’huile.\enspace
+\mesures[0.75cm]{2}{%
+Liquide & eau & huile\\ \hline
+$\Delta\theta$ (\unit{\degreeCelsius}) & 10,0 & 20,9\\ \hline}\par\vspace{.5mm}
+\begin{enumerate}
+  \item \kw{Établir.} Docs 1 et 2 : comment la quantité de chaleur $Q$ reçue par l’eau varie-t-elle avec sa masse $m$, puis avec $\Delta\theta = \theta_f - \theta_i$ ?
+  \item \kw{Interpréter.} Doc 3 : pour la même masse et la même énergie, pourquoi l’huile s’échauffe-t-elle davantage ? Quelle grandeur faut-il introduire ?
+  \item \kw{Écrire.} Écrire l’expression de $Q$ échangée par un corps pur de masse $m$ dont la température passe de $\theta_i$ à $\theta_f$, sans changement d’état. Préciser les unités.
+  \item \kw{Définir.} Définir la chaleur massique $c$ et la capacité thermique $C$ d’un corps. Que signifie le signe de $Q$ ?
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\vspace{0pt}\centering
+\doc{\linewidth}{1}{Deux masses d’eau}{doc1_chauffage}\par\vspace{1mm}
+\doc{\linewidth}{3}{Eau et huile}{doc3_eau_huile}
+\end{minipage}
+
+% =====================================================================
+\sep{2}
+\begin{minipage}[t]{0.74\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 4. Le calorimètre.} Enceinte thermiquement isolée : les corps qu’il contient échangent de la chaleur jusqu’à l’équilibre thermique ; le bilan ne dépend que de l’état initial et de l’état final.\par\vspace{.4mm}
+\textbf{Protocole 1.} $m_1 = \qty{200}{g}$ d’eau froide en équilibre à $\theta_1 = \dC{18,0}$ dans le calorimètre ; on ajoute $m_2 = \qty{200}{g}$ d’eau tiède à $\theta_2 = \dC{42,5}$ ; équilibre : $\theta_e = \dC{29,5}$.\par\vspace{.4mm}
+\textbf{Protocole 2.} Un cylindre d’aluminium ($m_m = \qty{150}{g}$, $\theta_m = \dC{100,0}$) est introduit dans le même calorimètre contenant $m_e = \qty{250}{g}$ d’eau à $\theta_0 = \dC{20,0}$ ; équilibre : $\theta'_e = \dC{28,3}$. $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.\par\vspace{.5mm}
+\begin{enumerate}
+  \item \kw{Définir.} Quand des corps sont-ils en équilibre thermique ? Énoncer l’équation calorimétrique dans une enceinte isolée. De quels états dépend le bilan ?
+  \item \kw{Exprimer.} Protocole 1 : exprimer la chaleur $Q_1$ reçue par le calorimètre et l’eau froide, et la chaleur $Q_2$ cédée par l’eau tiède.
+  \item \kw{Calculer.} Calculer la capacité thermique $\mu$ du calorimètre.
+  \item \kw{Déterminer.} Protocole 2 : faire le bilan des chaleurs échangées, puis calculer la chaleur massique $c_m$ de l’aluminium (valeur admise : \qty{897}{J.kg^{-1}.\degreeCelsius^{-1}}).
+\end{enumerate}
+\end{minipage}\hfill
+\doc{0.24\linewidth}{4}{Calorimètre (coupe)}{doc4_calorimetre}
+
+\newpage
+% =====================================================================
+\sep{3}
+\begin{minipage}[t]{0.66\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 5.} On chauffe à puissance constante \qty{100}{g} de glace prise à \dC{-10} et on relève sa température.\par\vspace{.4mm}
+\textbf{Chaleur latente.} À pression constante, un corps pur change d’état à température constante (\dC{0} pour la fusion de la glace, $\tfus$). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m\cdot L$, $L$ étant la chaleur latente.\par\vspace{.4mm}
+\textbf{Doc 6.} Calorimètre : $\mu = \qty{80}{J.\degreeCelsius^{-1}}$, $m_1 = \qty{300}{g}$ d’eau à $\theta_1 = \dC{25,0}$. On y introduit un glaçon de masse $m_2 = \qty{40}{g}$ à $\tfus = \dC{0,0}$. Après fusion complète : $\theta_e = \dC{13,3}$. $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.\par\vspace{.5mm}
+\begin{enumerate}
+  \item \kw{Exploiter.} Doc 5 : décrire les trois parties de la courbe. La glace reçoit-elle de l’énergie pendant le palier ?
+  \item \kw{Définir.} Définir la chaleur latente $L$ ; écrire $Q$ lors d’un changement d’état et préciser l’unité de $L$.
+  \item \kw{Décrire.} Doc 6 : décrire les deux étapes subies par le glaçon ; exprimer la chaleur totale $Q_g$ qu’il reçoit.
+  \item \kw{Exprimer.} Exprimer la chaleur $Q_{ce}$ cédée par le calorimètre et l’eau.
+  \item \kw{Calculer.} Calculer la chaleur latente de fusion de la glace $L_f$.
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\vspace{0pt}\centering
+\doc{\linewidth}{5}{Glace chauffée}{doc5_courbe}\par\vspace{1mm}
+\doc{0.7\linewidth}{6}{Glaçon dans le calorimètre}{doc6_glacon}
+\end{minipage}
+
+% =====================================================================
+\sep{4}
+\begin{minipage}[t]{0.66\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 7.} Un thermomètre au réservoir noirci est placé sous une cloche où l’on a fait le vide. Une lampe infrarouge, à l’extérieur, est dirigée vers le réservoir : la température augmente rapidement.\par\vspace{.4mm}
+\textbf{Doc 8.} Une plaque noire mate et une plaque blanche brillante, identiques, sont à la même distance d’une lampe :\par\vspace{.4mm}
+{\centering\mesures[0.6cm]{6}{%
+$t$ (\unit{min}) & 0 & 2 & 4 & 6 & 8 & 10\\ \hline
+$\theta_{\text{noire}}$ (\unit{\degreeCelsius}) & 20,0 & 28,5 & 34,6 & 39,0 & 42,1 & 44,3\\ \hline
+$\theta_{\text{blanche}}$ (\unit{\degreeCelsius}) & 20,0 & 22,6 & 24,4 & 25,7 & 26,6 & 27,3\\ \hline}\par}\vspace{.5mm}
+\begin{enumerate}
+  \item \kw{Expliquer.} Doc 7 : comment le thermomètre placé dans le vide reçoit-il de l’énergie ? Nommer ce mode de transfert.
+  \item \kw{Comparer.} Doc 8 : comparer l’échauffement des deux plaques. Quel est le rôle de la couleur et de l’aspect de la surface ?
+  \item \kw{Distinguer.} Citer des exemples de rayonnement dans la vie courante. En quoi se distingue-t-il de la conduction et de la convection ?
+\end{enumerate}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\vspace{0pt}\centering
+\doc{\linewidth}{7}{Thermomètre sous vide}{doc7_cloche}\par\vspace{1mm}
+\doc{\linewidth}{8}{Plaque noire et plaque blanche}{doc8_plaques}
+\end{minipage}
+\end{document}

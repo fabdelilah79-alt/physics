@@ -1,0 +1,455 @@
+% =====================================================================
+%  FICHE PÉDAGOGIQUE — préambule commun (charte graphique du manuel)
+%  Compilation : xelatex (deux passes). Format A4 paysage.
+%  Le fichier de contenu définit, avant \begin{document} :
+%   \Matiere, \Partie, \NumChap, \TitreChap, \TitreCourt, \Niveau, \Duree, \Banniere, \BanniereDecalage
+% =====================================================================
+\documentclass[10pt]{article}
+\usepackage[a4paper,landscape,top=1.55cm,bottom=1.55cm,left=1.35cm,right=1.35cm,headheight=14pt,headsep=4.5mm,footskip=9mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\titlefont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, BoldFont=*-Bold]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,tikz,array,xltabular,multirow}
+\usetikzlibrary{calc,fadings}
+\usepackage[most]{tcolorbox}
+\graphicspath{{images/}}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=5}
+\usepackage{fancyhdr}
+\setlength{\parindent}{0pt}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+% ---------- Couleurs de la charte ----------
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6} \definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300} \definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}  \definecolor{cSoft}{HTML}{F4F7FB}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+\newcommand{\ch}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\arc}[1]{\overparen{#1}}
+% puce de liste dans les cellules : \pt{texte}
+\newcommand{\pt}[1]{\par\noindent\hangindent=3.4mm\hangafter=1\makebox[3.4mm][l]{\textcolor{cOrange}{\scriptsize$\blacktriangleright$}}#1}
+% sous-puce
+\newcommand{\spt}[1]{\par\noindent\hangindent=6.6mm\hangafter=1\hspace*{3.4mm}\makebox[3.2mm][l]{\textcolor{cInk2}{\scriptsize$\bullet$}}#1}
+% intertitre dans une cellule
+\newcommand{\ct}[2][cInk]{\par\smallskip{\sffamily\bfseries\small\color{#1}#2}\par\nopagebreak\vspace{.5mm}}
+% pastille de rubrique : \pastille{couleur}{icône}{texte}
+\NewDocumentCommand{\pastille}{m m m}{\tikz[baseline=(t.base)]{\node[fill=#1,text=white,rounded corners=2.6mm,inner xsep=2mm,inner ysep=1.1mm,font=\sffamily\bfseries\scriptsize,anchor=base west](t){\raisebox{-.9mm}{\includegraphics[height=3.6mm]{#2}}\hspace{1.2mm}#3};}}
+% étiquette « Diapo n » / « Livre » / « Fiche »
+\NewDocumentCommand{\diapo}{m}{\tikz[baseline=(b.base)]\node[fill=cInk,text=white,rounded corners=3pt,inner xsep=2.6pt,inner ysep=1.2pt,font=\sffamily\bfseries\tiny](b){Diapo #1};}
+\NewDocumentCommand{\support}{O{cInk2} m}{\tikz[baseline=(b.base)]\node[draw=#1,text=#1,rounded corners=3pt,inner xsep=2.6pt,inner ysep=1.2pt,line width=.5pt,font=\sffamily\bfseries\tiny](b){#2};}
+% type d'évaluation
+\NewDocumentCommand{\evtype}{m m}{\tikz[baseline=(b.base)]\node[fill=#1!14,text=#1,rounded corners=3pt,inner xsep=3pt,inner ysep=1.3pt,font=\sffamily\bfseries\tiny](b){\MakeUppercase{#2}};\par\vspace{.6mm}}
+\newcommand{\diag}{\evtype{cCyan}{Diagnostique}}
+\newcommand{\form}{\evtype{cBlue}{Formative}}
+\newcommand{\somm}{\evtype{cRed}{Sommative}}
+\newcommand{\regul}{\evtype{cGreen}{Remédiation}}
+% durée : \duree{min}{cumul}
+\newcommand{\duree}[2]{\centering{\titlefont\fontsize{15}{16}\selectfont\color{cInk}#1}\par\vspace{-.4mm}{\sffamily\tiny\color{cInk2}min}\par\vspace{1.4mm}{\sffamily\tiny\color{cGrey}\(\to\) #2}\par}
+
+% ---------- Titres des grandes parties ----------
+\newcommand{\bloc}[3]{% \bloc{numéro}{icône}{titre}
+  \par\vspace{4mm}\noindent
+  \tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=9mm,minimum height=9mm,inner sep=0pt,font=\titlefont\fontsize{16}{18}\selectfont](n){#1};%
+  \hspace{3mm}\raisebox{-1.8mm}{\includegraphics[height=8mm]{#2}}\hspace{2.5mm}{\titlefont\fontsize{16}{20}\selectfont\color{cInk}#3}\par\vspace{1.3mm}
+  {\color{cOrange}\rule{\linewidth}{1.2pt}}\par\vspace{3mm}}
+
+% ---------- Bandeau de la première page ----------
+\newcommand{\bandeau}{%
+  \thispagestyle{premiere}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}
+      \clip ([yshift=0cm]current page.north west) rectangle ([yshift=-5.1cm]current page.north east);
+      \node[anchor=north west,inner sep=0] at ([yshift=\BanniereDecalage]current page.north west) {\includegraphics[width=\paperwidth]{\Banniere}};
+      \fill[cInk,path fading=east,opacity=.78] (current page.north west) rectangle ([xshift=19cm,yshift=-5.1cm]current page.north west);
+    \end{scope}
+    \fill[white] ([yshift=-5.1cm]current page.north west) .. controls ([xshift=10cm,yshift=-4.3cm]current page.north west) and ([xshift=-12cm,yshift=-5.6cm]current page.north east) .. ([yshift=-4.6cm]current page.north east) -- ([yshift=-5.3cm]current page.north east) -- ([yshift=-5.3cm]current page.north west) -- cycle;
+    \node[anchor=north west,text width=19.5cm,align=left,inner sep=0] at ([xshift=1.45cm,yshift=-1.0cm]current page.north west) {%
+      {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12}FICHE PÉDAGOGIQUE\enspace·\enspace\MakeUppercase{\Matiere}\enspace·\enspace\MakeUppercase{\Partie}}\par\vspace{3.2mm}
+      \tikz\node[fill=cOrange,text=white,rounded corners=3.2mm,inner xsep=3.4mm,inner ysep=1.3mm,font=\sffamily\bfseries\normalsize]{Chapitre \NumChap};\par\vspace{2.6mm}
+      {\titlefont\fontsize{21}{26}\selectfont\color{white}\TitreChap\par}};
+  \end{tikzpicture}%
+  \vspace*{3.25cm}\par}
+
+% carte d'information : \infocarte{icône}{couleur}{libellé}{valeur}
+\newcommand{\infocarte}[4]{%
+  \begin{tcolorbox}[enhanced,width=\linewidth,colback=#2!7!white,colframe=#2!7!white,arc=3mm,boxrule=0pt,left=14mm,right=3mm,top=2mm,bottom=2mm,
+    borderline west={2pt}{0pt}{#2},
+    overlay={\node at ([xshift=7.2mm]frame.west) {\includegraphics[width=8.4mm]{#1}};}]
+  {\sffamily\bfseries\scriptsize\color{#2}\MakeUppercase{#3}}\par\vspace{.4mm}
+  {\sffamily\small\color{cInk}\RaggedRight #4\par}
+  \end{tcolorbox}}
+
+% ---------- Tableau 1 : libellé de ligne ----------
+\newcommand{\lib}[3]{% \lib{icône}{couleur}{libellé}
+  \cellcolor{#2!10}\begin{minipage}[t]{\linewidth}\vspace{.6mm}\centering
+  \includegraphics[height=10mm]{#1}\par\vspace{1.4mm}
+  {\sffamily\bfseries\small\color{#2}#3}\par\vspace{1mm}\end{minipage}}
+
+% ---------- Tableau 2 : bandeau de partie ----------
+\newcommand{\partie}[3]{% \partie{couleur}{titre}{durée totale}
+  \multicolumn{5}{@{}l@{}}{\cellcolor{#1}\rule{0pt}{6.2mm}\hspace{2.5mm}{\sffamily\bfseries\small\color{white}#2}\hfill{\sffamily\bfseries\scriptsize\color{white}#3}\hspace{2.5mm}}\\[-.2mm]}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{FICHE PÉDAGOGIQUE}}\enspace·\enspace\Matiere\enspace·\enspace Chapitre \NumChap}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}\TitreCourt}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7mm,inner sep=0pt]{\thepage};}
+\fancyfoot[R]{\sffamily\scriptsize\color{cGrey}Durée : \Duree\enspace·\enspace \Niveau}
+\fancypagestyle{premiere}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7mm,inner sep=0pt]{\thepage};}}
+
+% ---------- Tableaux ----------
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\setlength{\arrayrulewidth}{.6pt}
+\arrayrulecolor{white}
+\keepXColumns
+% ---------- Macros des deux tableaux (fiche pédagogique) ----------
+\newcommand{\cellpad}[1]{\vspace{1.4mm}#1\par\vspace{1.6mm}}
+\newcommand{\sep}{!{\color{white}\vrule width 1.8pt}}
+\newcolumntype{I}{!{\color{white}\vrule width 1.8pt}}
+% Tableau 1 : \ligne{icône}{couleur}{libellé}{contenu}
+\newcommand{\ligne}[4]{\lib{#1}{#2}{#3} & \cellcolor{cSoft}\cellpad{#4}\\ \hline}
+% Tableau 2 : \etape{couleur}{axes}{enseignant}{apprenant}{évaluation}{minutes}{cumul}
+\newcommand{\etape}[7]{%
+  \cellcolor{#1!9}\cellpad{#2} & \cellcolor{cSoft}\cellpad{#3} & \cellcolor{cSoft}\cellpad{#4} &
+  \cellcolor{cSoft}\cellpad{\footnotesize #5} & \cellcolor{#1!9}\cellpad{\duree{#6}{#7}}\\ \hline}
+% axes : \axe{couleur}{icône}{rubrique}{titre}{supports}
+\newcommand{\axe}[5]{\pastille{#1}{#2}{#3}\par\vspace{1.4mm}{\sffamily\bfseries\footnotesize\color{cInk}#4}\par\vspace{1.4mm}#5}
+% bandeau de partie dans le tableau 2
+\renewcommand{\partie}[3]{\multicolumn{5}{@{}l@{}}{\begin{tikzpicture}
+  \node[fill=#1,rounded corners=2mm,minimum width=\linewidth,minimum height=7.2mm,inner sep=0](b){};
+  \node[anchor=west,text=white,font=\sffamily\bfseries\small] at ([xshift=3.5mm]b.west){#2};
+  \node[anchor=east,text=white,font=\sffamily\bfseries\scriptsize] at ([xshift=-3.5mm]b.east){#3};
+  \end{tikzpicture}}\\*[.8mm]}
+% en-tête du tableau 2
+\newcommand{\tete}[2]{\cellcolor{cInk}\rule{0pt}{7mm}\raisebox{-1.3mm}{\includegraphics[height=5mm]{#1}}\hspace{1.6mm}{\sffamily\bfseries\small\color{white}#2}}
+\newcommand{\enteteDeroulement}{\tete{fi_chemin}{Axes du cours} & \tete{fi_prof}{Activités de l’enseignant} & \tete{fi_toque}{Activités de l’apprenant} & \tete{fi_evaluation}{Évaluation} & \cellcolor{cInk}\centering\raisebox{-1.3mm}{\includegraphics[height=5mm]{fi_horloge}}\\ \hline}
+% frise du temps : \frise[durée totale en minutes]{ {couleur/minutes/libellé}, ... } (120 min par défaut)
+\newcommand{\frise}[2][120]{%
+  \makebox[\linewidth][l]{\begin{tikzpicture}
+    \pgfmathsetmacro{\unit}{\linewidth/#1}
+    \foreach \c/\m/\t [remember=\x as \xx (initially 0)] in {#2}{%
+      \pgfmathsetmacro{\x}{\xx+\m}
+      \fill[\c,rounded corners=1.2mm] ({\xx*\unit pt+.6pt},0) rectangle ({\x*\unit pt-.6pt},8mm);
+      \node[text=white,font=\sffamily\bfseries\scriptsize,align=center] at ({(\xx+\x)/2*\unit pt},4mm) {\t};
+      \node[font=\sffamily\tiny,text=cInk2,anchor=north] at ({\x*\unit pt},-.6mm) {\pgfmathprintnumber{\x}};
+    }
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north] at (0,-.6mm) {0};
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north east] at (\linewidth,-3.4mm) {minutes};
+  \end{tikzpicture}}}
+% titre de séance au-dessus d'une frise : \seance{numéro}{durée}{contenu}
+\newcommand{\seance}[3]{\par\vspace{1.5mm}\noindent{\sffamily\bfseries\small\color{cInk}Séance #1\enspace·\enspace #2}\enspace{\sffamily\footnotesize\color{cInk2}#3}\par\vspace{1mm}}
+% encadré final : \encadre{icône}{couleur}{titre}{contenu}
+\newcommand{\encadre}[4]{%
+  \begin{tcolorbox}[enhanced,colback=#2!6!white,colframe=#2!6!white,arc=3mm,boxrule=0pt,left=15mm,right=4mm,top=2.5mm,bottom=2.5mm,
+    borderline west={2pt}{0pt}{#2},height fill=false,
+    overlay={\node[anchor=north west] at ([xshift=2.5mm,yshift=-2.5mm]frame.north west) {\includegraphics[width=9.5mm]{#1}};}]
+  {\sffamily\bfseries\color{#2}#3}\par\vspace{1.5mm}\small #4
+  \end{tcolorbox}}
+\newcommand{\lignevide}{\par\vspace{2.6mm}\noindent{\color{cInk2!55}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 5 : L’énergie thermique, le transfert thermique (4 h, deux séances)
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{5}
+\newcommand{\TitreChap}{L’énergie thermique :\\ le transfert thermique}
+\newcommand{\TitreCourt}{L’énergie thermique : le transfert thermique}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{4 h}
+\newcommand{\Banniere}{opener_phys5.jpg}
+\newcommand{\BanniereDecalage}{1.3cm}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\cu}{\unit{J.kg^{-1}.\degreeCelsius^{-1}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{4 heures — deux séances\\ 2 h + 2 h}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1 · § 4\\ L’énergie thermique}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séquence}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Travail mécanique et énergie :} \textbf{interpréter les transferts d’énergie} et les phénomènes de \textbf{conservation et de dissipation} dans diverses situations de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} la \textbf{chaleur}, forme de \textbf{transfert d’énergie} ; quantité de chaleur, chaleur massique, capacité thermique ; \textbf{équilibre thermique} et \textbf{équation calorimétrique} ; chaleur latente de changement d’état ; le \textbf{rayonnement}, autre forme de transfert d’énergie. Situations-problèmes : chauffe-eau, calorimètre, fusion de la glace, four solaire, bouteille isolante.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} expériences de chauffage (une grandeur varie à la fois) ; mesures au calorimètre ; comparaison avec les valeurs admises et discussion des écarts.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} bilans calorimétriques écrits avec rigueur (signes, unités) ; lecture d’une courbe d’échauffement.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations (chauffage, calorimètre, courbe de la glace, rayonnement) ; thermomètres numériques.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en cinq étapes pour résoudre un problème de calorimétrie (« finale moins initiale », vérification de $\theta_e$).}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} économies d’énergie (chauffe-eau, isolation, bouteille isolante) ; énergie solaire (chauffe-eau solaires, fours solaires) ; climat côtier ; sécurité avec l’eau bouillante.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séquence, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — savoir que la \textbf{chaleur} est une forme de transfert d’énergie, du corps chaud vers le corps froid ;}
+\pt{\textbf{O2} — connaître et utiliser l’expression $Q = m\cdot c\cdot\Delta\theta$, son unité et la convention de signe ;}
+\pt{\textbf{O3} — définir la \textbf{chaleur massique} d’un corps et la \textbf{capacité thermique} d’un calorimètre, avec leurs unités ;}
+\pt{\textbf{O4} — reconnaître l’\textbf{équilibre thermique} et appliquer l’\textbf{équation calorimétrique} $\sum Q_i = 0$ ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — connaître la \textbf{chaleur latente} de changement d’état et son unité ; utiliser $Q = \pm m\cdot L$ ;}
+\pt{\textbf{O6} — \textbf{déterminer expérimentalement} la capacité thermique d’un calorimètre, la chaleur massique d’un métal et la chaleur latente de fusion de la glace ;}
+\pt{\textbf{O7} — reconnaître le \textbf{rayonnement} comme une forme de transfert d’énergie et le distinguer de la conduction et de la convection.}
+\end{minipage}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} savoir que la chaleur est une forme de transfert d’énergie ; connaître l’expression de la quantité de chaleur $Q = m\cdot c\cdot\Delta\theta$ et son unité ; reconnaître l’équilibre thermique et appliquer la relation qui l’exprime ; connaître la chaleur massique d’un métal et son unité ; connaître la chaleur latente de changement d’état et son unité ; déterminer la capacité thermique, la chaleur massique et la chaleur latente ; reconnaître le rayonnement comme une forme de transfert d’énergie.}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du collège, du tronc commun et du chapitre 4}
+\pt{température en degrés Celsius et en kelvins ($T = \theta + 273{,}15$) ; mesure d’une température ;}
+\pt{états de la matière et changements d’état (fusion, solidification, vaporisation, liquéfaction) ;}
+\pt{masse volumique $\rho = m/V$ ; énergie et puissance $E = P\cdot\Delta t$ ;}
+\pt{dissipation de l’énergie mécanique en chaleur : $\Delta\Em = -Q$ (chapitre 4).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{proportionnalité ; résolution d’une équation du premier degré ;}
+\pt{lecture d’une courbe $\theta = f(t)$ (paliers) ;}
+\pt{conversions (\unit{g} $\to$ \unit{kg}, \unit{L} $\to$ \unit{kg}, \unit{min} $\to$ \unit{s}, \unit{kJ}, \unit{MJ}) ; écriture scientifique et chiffres significatifs.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{deux réchauds ou plaques électriques identiques, béchers, thermomètres numériques, chronomètre, balance ; eau, huile végétale ;}
+\pt{calorimètre de Berthelot avec agitateur et thermomètre ; eau tiède ; cylindre d’aluminium, bain-marie (eau bouillante), pince ;}
+\pt{glace fondante et glaçons, papier absorbant ;}
+\pt{cloche à vide, platine et pompe ; thermomètre à réservoir noirci ; lampe infrarouge ; plaques métalliques peintes en noir mat et en blanc brillant ; bouteille isolante.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (38 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis 3 et 4, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, § 4 « L’énergie thermique : le transfert thermique » (propre aux filières sciences expérimentales et sciences et technologies) : chaleur massique d’un corps pur ; quantité de chaleur $Q = m\cdot c\cdot\Delta\theta$ et son signe conventionnel ; équilibre thermique, équation calorimétrique ; chaleur latente de changement d’état d’un corps pur ; une autre forme de transfert d’énergie : le rayonnement.}
+\pt{Activités proposées : expériences simples pour mettre en évidence les grandeurs dont dépend la quantité de chaleur ; étude expérimentale quantitative du transfert thermique entre deux corps pour déterminer la capacité thermique d’un calorimètre, la chaleur massique d’un métal et la chaleur latente de changement d’état d’un solide ; expériences, exemples de l’environnement de l’apprenant, documents ou logiciels pour montrer que le rayonnement est une autre forme de transfert d’énergie.}
+\pt{Orientations : montrer par des expériences simples que la quantité de chaleur dépend de la masse, de la nature de la substance et de la variation de température, puis donner son expression ; définir la chaleur massique d’un corps pur, la capacité thermique d’un calorimètre et la chaleur latente de changement d’état d’un solide ; indiquer que le bilan calorimétrique ne dépend que des états initial et final. Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{7cm}
+\bloc{2}{fi_chemin}{Déroulement de la séquence (deux séances)}
+
+\seance{1}{2 h}{quantité de chaleur et chaleur massique ; équilibre thermique et calorimétrie}
+\frise[120]{cCyan/10/Mise en route, cTeal/53/Partie 1 · Chaleur massique, cBlue/52/Partie 2 · Calorimétrie, cGreen/5/Bilan}
+\seance{2}{2 h}{chaleur latente ; rayonnement ; évaluation}
+\frise[120]{cCyan/8/Rappels, cPurple/52/Partie 3 · Changement d’état, cAmber/38/Partie 4 · Rayonnement, cOrange/22/Évaluation et bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% =====================================================================
+\partie{cInk}{Séance 1 · Chaleur massique et calorimétrie (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, plan et prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; projette la diapositive de titre et annonce le plan des deux séances.}
+ \pt{Questions flash : « \dC{25} en kelvins ? », « masse de \qty{2}{L} d’eau ? », « énergie fournie par un appareil de \qty{100}{W} en \qty{1}{min} ? », « nom du passage de l’état solide à l’état liquide ? ».}}
+{\pt{Répond oralement : \qty{298}{K} ; \qty{2}{kg} ; \qty{6000}{J} ; la fusion.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} conversions ; $E = P\cdot\Delta t$ ; vocabulaire des changements d’état.\par\vspace{.8mm}
+ \regul Rappel au tableau des changements d’état et de $\rho = m/V$.}
+{10}{0 h 10}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Quantité de chaleur et chaleur massique}{53 min · objectifs O1 à O3}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Grande casserole et petite tasse}{\diapo{2}}}
+{\pt{Projette l’animation (diapo 2) : deux masses d’eau chauffées sur des réchauds identiques.}
+ \pt{Pose le problème : de quoi dépend la chaleur reçue par un corps qui s’échauffe ?}}
+{\pt{Propose : « la masse », « l’écart de température », « la matière ».}}
+{\diag Hypothèses des apprenants.}
+{5}{0 h 15}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{De quoi dépend la chaleur reçue ? (docs 1 à 3)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Réalise devant la classe le chauffage de \qty{100}{g} et \qty{200}{g} d’eau sur deux réchauds identiques (doc 1, diapo 3), puis compare l’eau et l’huile (doc 3, diapo 4).}
+ \pt{Fait remarquer que l’énergie reçue est proportionnelle à la durée de chauffage ; fait traiter les questions 1 à 4 en binômes ; corrige au clic (diapos 5 et 6).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Établit $Q \propto m$ et $Q \propto \Delta\theta$ ; constate que l’huile s’échauffe deux fois plus que l’eau ; écrit $Q = m\cdot c\cdot(\theta_f - \theta_i)$, en joules ; définit $c$, $C = m\cdot c$ et le signe de $Q$.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} raisonnement de proportionnalité ; unités de $c$.\par\vspace{.8mm}
+ \regul Erreur fréquente : calculer $\theta_i - \theta_f$ (rappeler « finale moins initiale »).}
+{30}{0 h 45}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{$Q = m\cdot c\cdot\Delta\theta$ ; capacité thermique}{\diapo{7--8} \support{Cahier}}}
+{\pt{Fait formuler la définition de la chaleur et l’expression de $Q$ ; projette les diapos 7 et 8 (tableau des chaleurs massiques) et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « quel corps du tableau s’échauffe le plus vite pour la même énergie ? » $\to$ le plomb.}
+{10}{0 h 55}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Un chauffe-eau électrique}{\diapo{9} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 9) ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $m = \qty{100}{kg}$, $C \approx \qty{4,19e5}{J.\degreeCelsius^{-1}}$, $Q \approx \qty{2,09e7}{J}$ ; justifie $Q > 0$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} $m = \rho\cdot V$ ; écriture scientifique.}
+{8}{1 h 03}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Équilibre thermique et calorimétrie}{52 min · objectifs O4 et O6}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Un métal chaud dans l’eau froide}{\diapo{10}}}
+{\pt{Projette l’animation (diapo 10) : les températures du métal et de l’eau tendent vers une même valeur.}
+ \pt{Pose le problème : comment mesurer la capacité thermique d’un récipient et la chaleur massique d’un métal ?}}
+{\pt{Propose : « utiliser un récipient isolé », « mesurer la température finale ».}}
+{\diag Idée d’équilibre thermique.}
+{4}{1 h 07}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Mesurer avec un calorimètre (doc 4)}{\diapo{11--14} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Présente le calorimètre (diapo 11) ; réalise le protocole 1 (eau froide + eau tiède), puis le protocole 2 (cylindre d’aluminium sorti de l’eau bouillante, avec une pince) ; fait relever les températures d’équilibre.}
+ \pt{Fait traiter les questions 1 à 4 ; corrige au clic (diapos 13 et 14).}}
+{\pt{Écrit $Q_1 = (\mu + m_1\cdot c_e)(\theta_e - \theta_1)$ et $Q_2 = m_2\cdot c_e\cdot(\theta_e - \theta_2)$ ; trouve $\mu \approx \qty{109}{J.\degreeCelsius^{-1}}$.}
+ \pt{Trouve $c_{\mathrm{Al}} \approx \qty{892}{J.kg^{-1}.\degreeCelsius^{-1}}$ et le compare à 897.}}
+{\form Observation des binômes ; correction collective.\par
+ \textit{Indicateurs :} le calorimètre est compté dans le bilan ; signes de $Q_1$ et $Q_2$.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier $\mu$, ou écrire $Q_{\text{reçue}} = Q_{\text{cédée}}$ sans valeurs absolues.}
+{30}{1 h 37}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir et méthode}{$\sum Q_i = 0$ ; méthode en cinq étapes}{\diapo{15--16} \support{Cahier}}}
+{\pt{Fait énoncer l’équation calorimétrique ; projette les diapos 15 et 16 ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » et la méthode dans son cahier.}}
+{\form Question flash : « $\theta_e$ peut-elle dépasser la plus haute température initiale ? » $\to$ non.}
+{10}{1 h 47}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Un échantillon de cuivre}{\diapo{17} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 17) ; travail individuel en suivant la méthode ; correction au clic.}}
+{\pt{Écrit les deux chaleurs en fonction de $\theta_e$ ; trouve $\theta_e \approx \dC{20,2}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} vérification $\dC{16,0} < \theta_e < \dC{95,0}$.}
+{8}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 1}{Synthèse et travail à faire}{\diapo{15--16}}}
+{\pt{Fait résumer oralement la séance ; donne le travail à faire (exercice 1, énoncé projeté, diapo 32).}}
+{\pt{Résume : $Q = m\cdot c\cdot\Delta\theta$, $\sum Q_i = 0$ ; recopie l’énoncé de l’exercice 1.}}
+{\form Synthèse orale.}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 2 · Changement d’état, rayonnement et évaluation (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction de l’exercice 1}{\diapo{32--33}}}
+{\pt{Corrige l’exercice 1 au clic (diapo 33) ; questions flash sur $Q = m\cdot c\cdot\Delta\theta$ et $\sum Q_i = 0$.}}
+{\pt{Vérifie : $\mu \approx \qty{105}{J.\degreeCelsius^{-1}}$ ; $c_{\mathrm{Pb}} \approx \qty{135}{J.kg^{-1}.\degreeCelsius^{-1}}$.}}
+{\diag Vérification du travail personnel.\par\vspace{.8mm}
+ \regul Reprendre la méthode si besoin.}
+{8}{0 h 08}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Chaleur latente de changement d’état}{52 min · objectifs O5 et O6}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{La glace qui fond}{\diapo{18}}}
+{\pt{Projette la courbe animée (diapo 18) : la température reste à \dC{0} pendant la fusion.}
+ \pt{Pose le problème : comment calculer l’énergie reçue si $\Delta\theta = 0$ ?}}
+{\pt{Constate le palier ; propose : « l’énergie sert à faire fondre la glace ».}}
+{\diag Représentations sur le palier.}
+{4}{0 h 12}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{L’énergie d’un changement d’état (docs 5 et 6)}{\diapo{19--22} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Exploite la courbe (doc 5, diapo 19) ; introduit $Q = m\cdot L$.}
+ \pt{Réalise la mesure de $L_f$ : glaçon de glace fondante, essuyé, introduit dans le calorimètre (doc 6, diapo 20) ; fait traiter les questions 1 à 5 ; corrige au clic (diapos 21 et 22).}}
+{\pt{Décrit les trois parties de la courbe ; définit $L$ (\unit{J.kg^{-1}}) ; écrit $Q_g = m_2\cdot L_f + m_2\cdot c_e\cdot(\theta_e - 0)$ et $Q_{ce} = (\mu + m_1\cdot c_e)(\theta_e - \theta_1)$.}
+ \pt{Calcule $L_f \approx \qty{3,35e5}{J.kg^{-1}}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} deux étapes pour le glaçon ; signe de $Q = \pm m\cdot L$.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier l’échauffement de l’eau de fusion.}
+{30}{0 h 42}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{$Q = \pm m\cdot L$}{\diapo{23} \support{Cahier}}}
+{\pt{Projette la diapo 23 (courbe légendée, tableau des chaleurs latentes) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « signe de $Q$ pour la solidification de l’eau ? » $\to$ négatif.}
+{8}{0 h 50}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{De la glace à l’eau tiède}{\diapo{24} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 24) ; travail individuel ; correction au clic.}}
+{\pt{Identifie les trois étapes ; calcule $Q_1 \approx \qty{1,57e4}{J}$, $Q_2 = \qty{1,67e5}{J}$, $Q_3 \approx \qty{4,19e4}{J}$, $Q_{\mathrm{tot}} \approx \qty{2,25e5}{J}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} bonne chaleur massique pour chaque étape ($c_g$ ou $c_e$).}
+{10}{1 h 00}
+% ---------------------------------------------------------------------
+\partie{cAmber}{Partie 4 · Une autre forme de transfert d’énergie : le rayonnement}{38 min · objectif O7}
+\etape{cAmber}{\axe{cAmber}{ic_situation}{Situation de départ}{La chaleur du Soleil}{\diapo{25}}}
+{\pt{Projette l’animation (diapo 25) : l’énergie du Soleil traverse le vide spatial.}
+ \pt{Pose le problème : comment l’énergie se propage-t-elle sans matière ?}}
+{\pt{Propose : « par la lumière », « par des rayons ».}}
+{\diag Représentations initiales.}
+{4}{1 h 04}
+\etape{cAmber}{\axe{cTeal}{ic_activite}{Activité 4}{Un transfert d’énergie sans matière (docs 7 et 8)}{\diapo{26--28} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Réalise l’expérience de la cloche à vide (ou la projette, diapo 26) ; éclaire les deux plaques et fait relever les températures (diapo 27).}
+ \pt{Fait traiter les questions 1 à 3 ; corrige au clic (diapo 28).}}
+{\pt{Nomme le rayonnement ; compare : $+\dC{24,3}$ (noire) contre $+\dC{7,3}$ (blanche) ; distingue conduction, convection et rayonnement.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} le rayonnement se propage dans le vide.}
+{20}{1 h 24}
+\etape{cAmber}{\axe{cRed}{ic_retenir}{À retenir}{Le rayonnement ; les trois modes de transfert}{\diapo{29} \support{Cahier}}}
+{\pt{Projette la diapo 29 (conduction, convection, rayonnement animés) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « pourquoi les absorbeurs des chauffe-eau solaires sont-ils noirs ? »}
+{8}{1 h 32}
+\etape{cAmber}{\axe{cPurple}{ic_application}{Application}{La bouteille isolante}{\diapo{30} \support{Cahier}}}
+{\pt{Montre une bouteille isolante ; projette l’énoncé (diapo 30) ; réponses dans le cahier ; correction au clic.}}
+{\pt{Explique : le vide supprime conduction et convection ; les parois argentées réfléchissent le rayonnement.}}
+{\somm Réponses rédigées.\par
+ \textit{Indicateur :} un rôle pour chaque élément.}
+{6}{1 h 38}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Évaluation et bilan}{22 min · objectifs O2 à O6}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ?}{\diapo{31}}}
+{\pt{Projette le vrai/faux interactif (diapo 31) ; fait voter à main levée, puis justifier.}}
+{\pt{Répond à main levée et corrige les affirmations fausses dans le cahier : a) F, b) V, c) F, d) V, e) V, f) F.}}
+{\form Vote à main levée.\par
+ \textit{Indicateur :} au moins 5 bonnes réponses sur 6.\par\vspace{.8mm}
+ \regul Reprendre les affirmations les plus échouées.}
+{6}{1 h 44}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 2}{Un morceau de glace dans un calorimètre}{\diapo{34--35} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 34) ; travail individuel dans le cahier ; corrige au clic (diapo 35).}}
+{\pt{Calcule $Q_n = \qty{21294}{J}$ et $|Q_d| = \qty{53220}{J}$ ; conclut que toute la glace fond ; trouve $\theta_e \approx \dC{15,8}$.}}
+{\somm Exercice individuel (évaluation de fin de chapitre).\par
+ \textit{Indicateurs :} vérification préalable de la fusion complète ; trois termes pour la glace ; résultat avec unité.}
+{12}{1 h 56}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{L’essentiel}{Synthèse du chapitre}{\diapo{38}}}
+{\pt{Projette « L’essentiel du chapitre » (diapo 38) ; donne le travail à la maison (encadré ci-dessous).}}
+{\pt{Relit la synthèse ; note le travail à faire.}}
+{\somm Bilan de l’évaluation.\par
+ \textit{Exploitation :} repérer les notions à reprendre.}
+{4}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Après la séance 1} — exercice 1 (énoncé projeté, diapo 32, à recopier et à résoudre dans le cahier) : objectifs O4 et O6.}
+\pt{\textbf{Après la séance 2} — exercice 3 (four solaire, énoncé projeté, diapo 36, à recopier et à résoudre dans le cahier) : objectifs O2, O5 et O7.}
+\pt{Soutien : refaire l’application du chauffe-eau pour \qty{50}{L} chauffés de \dC{20} à \dC{60}. Approfondissement : dans l’exercice 2, calculer la masse maximale de glace à \dC{-10} que l’on peut faire fondre entièrement.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séquence (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séquence :}\lignevide}
+\end{minipage}
+
+\end{document}

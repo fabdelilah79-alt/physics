@@ -1,0 +1,503 @@
+% =====================================================================
+%  Corps du chapitre 5 de physique : L’énergie thermique — le transfert thermique
+% =====================================================================
+\newcommand{\cu}{\unit{J.kg^{-1}.\degreeCelsius^{-1}}}
+\newcommand{\muu}{\unit{J.\degreeCelsius^{-1}}}
+\newcommand{\tfus}{\theta_{\mathrm{fus}}}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+\begin{document}
+% =====================================================================
+
+% ---------------------- PAGE D'OUVERTURE ----------------------
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at (current page.north west) {\includegraphics[width=\paperwidth]{opener.jpg}};
+  \node[anchor=north west,text width=11.2cm,align=left,inner sep=0] at ([xshift=1.9cm,yshift=-2.1cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12} PHYSIQUE\enspace·\enspace PARTIE 1 — TRAVAIL MÉCANIQUE ET ÉNERGIE}\par\vspace{5mm}
+    \tikz\node[fill=cOrange,text=white,rounded corners=4mm,inner xsep=4mm,inner ysep=1.6mm,font=\sffamily\bfseries\large]{Chapitre 5};\par\vspace{5mm}
+    {\titlefont\bfseries\fontsize{26}{31}\selectfont\color{white}L’énergie thermique :\\ le transfert\\ thermique\par}};
+\end{tikzpicture}
+\vspace*{8.25cm}
+
+{\large\itshape Un verre de thé qui refroidit, un glaçon qui fond, un chauffe-eau solaire sur un toit : de l’énergie passe d’un corps à un autre sous forme de chaleur. Comment la mesurer, et comment la chaleur du Soleil nous parvient-elle à travers le vide ?\par}
+\vspace{2.5mm}
+
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cBlue!5,colframe=cBlue!5,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cBlue}Objectifs du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+Je vais apprendre à :
+\begin{itemize}
+  \item calculer une quantité de chaleur $Q = m\cdot c\cdot\Delta\theta$ ;
+  \item exploiter l’équation calorimétrique ;
+  \item calculer la chaleur d’un changement d’état : $Q = m\cdot L$ ;
+  \item reconnaître le rayonnement comme un transfert d’énergie.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cGreen!6,colframe=cGreen!6,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cGreen}Je dois déjà savoir},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+\begin{itemize}
+  \item températures en \unit{\degreeCelsius} et en K : $T = \theta + 273{,}15$ ;
+  \item utiliser $\rho = m/V$ et $E = P\cdot\Delta t$ ;
+  \item nommer les changements d’état ;
+  \item frottements et chaleur : $\Delta\Em = -Q$ (chapitre 4).
+\end{itemize}
+\end{tcolorbox}
+\vspace{1mm}
+\begin{tcolorbox}[enhanced,colback=cOrange!7,colframe=cOrange!7,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cOrange}Plan du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\sffamily]
+\textcolor{cOrange}{\textbf{1}}\enspace Quantité de chaleur et chaleur massique\par
+\textcolor{cOrange}{\textbf{2}}\enspace Équilibre thermique et calorimétrie\par
+\textcolor{cOrange}{\textbf{3}}\enspace Chaleur latente de changement d’état\par
+\textcolor{cOrange}{\textbf{4}}\enspace Le rayonnement\par
+\raisebox{-0.8mm}{\includegraphics[height=3.6mm]{ic_exercices}}\enspace Exercices d’application et de synthèse
+\end{tcolorbox}
+\end{minipage}
+
+\begin{encart}{cCyan}{savoir}{Le saviez-vous ?}
+L’eau a une chaleur massique très élevée : les océans se réchauffent et se refroidissent lentement. C’est pourquoi les villes côtières, comme Agadir ou Essaouira, connaissent des écarts de température plus faibles que les villes de l’intérieur.
+\end{encart}
+
+\newpage
+% =====================================================================
+\section{Quantité de chaleur et chaleur massique}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 1\enspace·\enspace De quoi dépend la chaleur reçue par un corps ?}
+\begin{situation}
+\textbf{Situation de départ.} Sur un même réchaud, porter à ébullition une grande casserole d’eau demande bien plus de temps que chauffer une petite tasse. Et un objet en métal s’échauffe beaucoup plus vite que la même masse d’eau. La chaleur est un mode de transfert d’énergie. \textbf{De quelles grandeurs dépend la quantité de chaleur reçue par un corps dont la température varie ?}
+\end{situation}
+
+On utilise des réchauds électriques identiques : ils fournissent la même énergie thermique par minute, de sorte que \textbf{l’énergie reçue est proportionnelle à la durée de chauffage}. Les liquides sont pris à la température initiale $\theta_i = \dC{20,0}$.\par\medskip
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 1. Influence de la masse.} On chauffe \qty{100}{g} puis \qty{200}{g} d’eau. Pour élever leur température de $\Delta\theta = \dC{15}$, il faut \qty{3,0}{min} pour \qty{100}{g} d’eau et \qty{6,0}{min} pour \qty{200}{g} d’eau.\par\medskip
+\textbf{Doc 2. Influence de la variation de température.} On chauffe \qty{200}{g} d’eau et on note la durée nécessaire pour différentes élévations de température $\Delta\theta = \theta_f - \theta_i$ :\par\smallskip
+\centerline{\mesures[1.15cm]{3}{%
+$\Delta\theta$ (\unit{\degreeCelsius}) & 10 & 20 & 30\\ \hline
+Durée (\unit{min}) & 4,0 & 8,0 & 12,0\\ \hline}}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc1_chauffage}\par\vspace{1mm}
+{\sffamily\small\docbadge{1}\enspace\color{cInk2}Deux masses d’eau sur des réchauds identiques}
+\end{minipage}
+
+\medskip
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc3_eau_huile}\par\vspace{1mm}
+{\sffamily\small\docbadge{3}\enspace\color{cInk2}Eau et huile chauffées pendant la même durée}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 3. Influence de la nature du corps.} On chauffe pendant la même durée de \qty{4,0}{min} (donc avec la même énergie) \qty{200}{g} d’eau et \qty{200}{g} d’huile végétale :\par\smallskip
+\centerline{\mesures[1.5cm]{2}{%
+Liquide & eau & huile\\ \hline
+$\Delta\theta$ (\unit{\degreeCelsius}) & 10,0 & 20,9\\ \hline}}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Établir.} Exploiter les docs 1 et 2 : comment la quantité de chaleur $Q$ reçue par l’eau varie-t-elle avec sa masse $m$, puis avec la variation de sa température $\Delta\theta = \theta_f - \theta_i$ ?
+  \item \kw{Interpréter.} Exploiter le doc 3 : pour la même masse et la même énergie reçue, pourquoi l’huile s’échauffe-t-elle davantage que l’eau ? Quelle grandeur faut-il introduire ?
+  \item \kw{Écrire.} Écrire l’expression de la quantité de chaleur $Q$ échangée par un corps pur de masse $m$ dont la température passe de $\theta_i$ à $\theta_f$, sans changement d’état. Préciser les unités.
+  \item \kw{Définir.} Définir la chaleur massique $c$ d’un corps pur et la capacité thermique $C$ d’un corps. Que signifie le signe de $Q$ ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Doc 1 : pour la même élévation de température, il faut une durée double, donc une énergie double, pour une masse double : $Q$ est proportionnelle à $m$. Doc 2 : pour une même masse, la durée (donc $Q$) double et triple quand $\Delta\theta$ double et triple : $Q$ est proportionnelle à $\Delta\theta$.}
+  \item \rep{Pour une même masse et une même énergie, l’élévation de température dépend de la nature du corps : elle est environ deux fois plus grande pour l’huile. Le coefficient de proportionnalité entre $Q$ et $m\cdot\Delta\theta$ dépend donc de la substance : c’est sa chaleur massique $c$.}
+  \item \rep{$Q = m\cdot c\cdot\Delta\theta = m\cdot c\cdot(\theta_f - \theta_i)$, avec $Q$ en joules (J), $m$ en kilogrammes (kg), $\Delta\theta$ en degrés Celsius (ou en kelvins, l’écart est le même) et $c$ en \cu{} (ou \unit{J.kg^{-1}.K^{-1}}).}
+  \item \rep{La chaleur massique $c$ est l’énergie qu’il faut fournir à \qty{1}{kg} du corps pour élever sa température de \dC{1} sans changement d’état. La capacité thermique $C = m\cdot c$ (en \muu) est l’énergie qui élève de \dC{1} la température du corps : $Q = C\cdot\Delta\theta$. Si $\theta_f > \theta_i$, $Q > 0$ : le corps reçoit de la chaleur ; si $\theta_f < \theta_i$, $Q < 0$ : il en cède.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.56\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}La chaleur, un mode de transfert d’énergie}\par\smallskip
+La chaleur (ou \trou{transfert thermique}) est un transfert d’énergie à l’échelle microscopique ; il se fait spontanément du corps \trou{chaud} vers le corps \trou{froid}.\par\medskip
+\sfb{\color{cRed}Quantité de chaleur}\par\smallskip
+Un corps pur de masse $m$ et de chaleur massique $c$, dont la température passe de $\theta_i$ à $\theta_f$ sans changement d’état, échange la quantité de chaleur :
+\begin{center}\formule{\trou{$Q = m\cdot c\cdot\Delta\theta = m\cdot c\cdot(\theta_f - \theta_i)$}}\end{center}
+$Q$ en \trou{joules (J)}, $m$ en \trou{kg}, $c$ en \trou{\cu}, $\Delta\theta$ en \trou{\unit{\degreeCelsius}} (ou en K).
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\linewidth}\vspace{0pt}\centering
+\includegraphics[width=\linewidth]{fig_transfert}\par\medskip
+{\sffamily\footnotesize\bfseries\color{cRed}Chaleurs massiques (\cu)}\par\smallskip
+{\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}\arrayrulecolor{cRed!35}\small
+\begin{tabular}{|l|r||l|r|}\hline
+eau & 4\,185 & aluminium & 897\\ \hline
+glace & 2\,090 & fer & 450\\ \hline
+huile & $\approx 2\,000$ & cuivre & 385\\ \hline
+\multicolumn{2}{|l||}{} & plomb & 129\\ \hline
+\end{tabular}}
+\end{minipage}\par\medskip
+\sfb{\color{cRed}Capacité thermique et signe de $Q$}\par\smallskip
+La capacité thermique d’un corps, ou d’un calorimètre et de ses accessoires, est l’énergie qui élève sa température de \dC{1} : $C = m\cdot c$, notée $\mu$ pour un calorimètre, en \trou{\muu}, et \trou{$Q = \mu\cdot(\theta_f - \theta_i)$}.\par\smallskip
+$Q > 0$ : le système \trou{reçoit} de la chaleur ($\theta_f > \theta_i$) ; $Q < 0$ : le système \trou{cède} de la chaleur ($\theta_f < \theta_i$).
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un chauffe-eau électrique}
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+Un chauffe-eau électrique contient $V = \qty{100}{L}$ d’eau à la température $\theta_i = \dC{15}$. Le thermostat est réglé pour porter l’eau à $\theta_f = \dC{65}$. On donne la masse volumique de l’eau $\rho = \qty{1,0}{kg.L^{-1}}$ et sa chaleur massique $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.
+\begin{appq}
+  \item Calculer la masse $m$ d’eau contenue dans le chauffe-eau et sa capacité thermique $C$.
+  \item Calculer la quantité de chaleur $Q$ reçue par l’eau au cours du chauffage et justifier son signe.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=0.85\linewidth]{app1_chauffe_eau}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Équilibre thermique et calorimétrie}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 2\enspace·\enspace Mesurer avec un calorimètre}
+\begin{situation}
+\textbf{Situation de départ.} Quand on plonge un morceau de métal brûlant dans de l’eau froide, le métal se refroidit, l’eau et le récipient se réchauffent, jusqu’à une température finale commune. \textbf{Comment exploiter ce phénomène pour mesurer la capacité thermique d’un récipient, puis la chaleur massique d’un métal ?}
+\end{situation}
+
+\begin{minipage}[c]{0.53\linewidth}\RaggedRight
+\textbf{Doc 4. Le calorimètre.} Un calorimètre est une enceinte thermiquement isolée : il n’échange pratiquement pas de chaleur avec l’extérieur. Les corps placés à l’intérieur échangent de la chaleur entre eux jusqu’à l’\textbf{équilibre thermique}. Le bilan des échanges ne dépend que de l’état initial et de l’état final.\par\medskip
+\textbf{Protocole 1 : capacité thermique $\mu$ du calorimètre.} Le calorimètre contient $m_1 = \qty{200}{g}$ d’eau froide, en équilibre à $\theta_1 = \dC{18,0}$. On ajoute rapidement $m_2 = \qty{200}{g}$ d’eau tiède à $\theta_2 = \dC{42,5}$. Après agitation, la température d’équilibre est $\theta_e = \dC{29,5}$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.44\linewidth}\centering
+\includegraphics[width=\linewidth]{doc4_calorimetre}\par\vspace{1mm}
+{\sffamily\small\docbadge{4}\enspace\color{cInk2}Calorimètre de Berthelot (coupe)}
+\end{minipage}\par\medskip
+\textbf{Protocole 2 : chaleur massique d’un métal.} Un cylindre d’aluminium de masse $m_m = \qty{150}{g}$ est maintenu dans l’eau bouillante à $\theta_m = \dC{100,0}$, puis introduit rapidement dans le même calorimètre, qui contient $m_e = \qty{250}{g}$ d’eau à $\theta_0 = \dC{20,0}$. La température d’équilibre est $\theta'_e = \dC{28,3}$. On donne $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Définir.} Quand dit-on que des corps en contact sont en équilibre thermique ? Énoncer l’équation calorimétrique dans une enceinte isolée. De quels états dépend le bilan ?
+  \item \kw{Exprimer.} Protocole 1 : exprimer la chaleur $Q_1$ reçue par le calorimètre et l’eau froide, puis la chaleur $Q_2$ cédée par l’eau tiède.
+  \item \kw{Calculer.} Appliquer l’équation calorimétrique au protocole 1 pour exprimer, puis calculer, la capacité thermique $\mu$ du calorimètre.
+  \item \kw{Déterminer.} Protocole 2 : faire le bilan des chaleurs échangées par le calorimètre, l’eau et l’aluminium, puis calculer la chaleur massique $c_m$ de l’aluminium. La comparer à la valeur du tableau.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Des corps sont en équilibre thermique quand leurs températures sont égales et restent constantes. Dans une enceinte isolée, la somme des quantités de chaleur échangées par toutes les parties du système entre l’état initial et l’état final est nulle : $\sum Q_i = 0$. Ce bilan ne dépend que de l’état initial et de l’état final.}
+  \item \rep{$Q_1 = (\mu + m_1\cdot c_e)(\theta_e - \theta_1) > 0$ ; $Q_2 = m_2\cdot c_e\cdot(\theta_e - \theta_2) < 0$.}
+  \item \rep{$Q_1 + Q_2 = 0$, d’où $\mu = \dfrac{m_2\cdot c_e\cdot(\theta_2 - \theta_e)}{\theta_e - \theta_1} - m_1\cdot c_e = 0{,}200\times4185\times\left(\dfrac{13{,}0}{11{,}5} - 1\right) \approx \qty{109}{J.\degreeCelsius^{-1}}$.}
+  \item \rep{Le calorimètre et l’eau reçoivent $Q_r = (\mu + m_e\cdot c_e)(\theta'_e - \theta_0)$ ; l’aluminium cède $Q_c = m_m\cdot c_m\cdot(\theta'_e - \theta_m)$. $Q_r + Q_c = 0$ donne $c_m = \dfrac{(\mu + m_e\cdot c_e)(\theta'_e - \theta_0)}{m_m\cdot(\theta_m - \theta'_e)} = \dfrac{(109 + 0{,}250\times4185)\times8{,}3}{0{,}150\times71{,}7} \approx \qty{892}{J.kg^{-1}.\degreeCelsius^{-1}}$, très proche de la valeur du tableau (897).}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Équilibre thermique}\par\smallskip
+Des corps de températures différentes, mis en contact dans une enceinte isolée, échangent de la chaleur jusqu’à atteindre une même \trou{température d’équilibre} $\theta_e$.\par\medskip
+\sfb{\color{cRed}Équation calorimétrique}\par\smallskip
+Dans un système \trou{thermiquement isolé}, la somme algébrique des quantités de chaleur échangées par toutes ses parties, entre l’état initial et l’état d’équilibre, est \trou{nulle} :
+\begin{center}\formule{\trou{$\sum Q_i = Q_1 + Q_2 + \dots + Q_n = 0$}}\end{center}
+Le bilan calorimétrique ne dépend que de l’\trou{état initial} et de l’\trou{état final} du système.
+\end{rub}
+
+\begin{encart}{cOrange}{methode}{Méthode : résoudre un problème de calorimétrie}
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=5mm, itemsep=0pt, topsep=1pt]
+  \item Faire la liste des \textbf{corps} du système (sans oublier le calorimètre) avec leur \textbf{température initiale}.
+  \item Pour chaque corps, écrire $Q = m\cdot c\cdot(\theta_e - \theta_i)$, ou $Q = \mu\cdot(\theta_e - \theta_i)$ : toujours « \textbf{finale moins initiale} ».
+  \item Ajouter, s’il y a lieu, la chaleur d’un \textbf{changement d’état} ($\pm m\cdot L$).
+  \item Écrire l’\textbf{équation calorimétrique} $\sum Q_i = 0$ et résoudre.
+  \item \textbf{Vérifier} que la température d’équilibre est comprise entre les températures initiales extrêmes.
+\end{enumerate}
+\end{encart}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un échantillon de cuivre}
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+Un calorimètre de capacité thermique $\mu = \qty{120}{J.\degreeCelsius^{-1}}$ contient $m_1 = \qty{300}{g}$ d’eau à $\theta_1 = \dC{16,0}$. On y plonge un échantillon de cuivre de masse $m_2 = \qty{200}{g}$ chauffé à $\theta_2 = \dC{95,0}$. On donne $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$ et $c_{\mathrm{Cu}} = \qty{385}{J.kg^{-1}.\degreeCelsius^{-1}}$.
+\begin{appq}
+  \item Exprimer les quantités de chaleur échangées par chaque corps en fonction de la température d’équilibre $\theta_e$.
+  \item Appliquer l’équation calorimétrique pour calculer $\theta_e$.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=\linewidth]{app2_cuivre}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Chaleur latente de changement d’état}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 3\enspace·\enspace L’énergie d’un changement d’état}
+\begin{situation}
+\textbf{Situation de départ.} On chauffe de la glace sortie d’un congélateur à \dC{-10}. Sa température monte jusqu’à \dC{0}, puis reste constante pendant toute la fusion, alors que la glace continue de recevoir de la chaleur. La relation $Q = m\cdot c\cdot\Delta\theta$ donnerait $Q = 0$ ! \textbf{Comment calculer l’énergie reçue pendant un changement d’état ?}
+\end{situation}
+
+\begin{minipage}[c]{0.47\linewidth}\RaggedRight
+\textbf{Doc 5. Courbe d’échauffement de la glace.} On chauffe à puissance constante \qty{100}{g} de glace prise à \dC{-10} et on relève sa température au cours du temps.\par\medskip
+\textbf{Chaleur latente.} À pression constante, un corps pur change d’état à une température constante, caractéristique du corps : \dC{0} pour la fusion de la glace sous la pression atmosphérique normale ($\tfus$). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m\cdot L$, où $L$ est la \textbf{chaleur latente} de changement d’état.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}\centering
+\includegraphics[width=\linewidth]{doc5_courbe}\par\vspace{1mm}
+{\sffamily\small\docbadge{5}\enspace\color{cInk2}Température de la glace chauffée}
+\end{minipage}\par\medskip
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+\textbf{Doc 6. Mesure de la chaleur latente de fusion $L_f$ de la glace.} Un calorimètre de capacité thermique $\mu = \qty{80}{J.\degreeCelsius^{-1}}$ contient $m_1 = \qty{300}{g}$ d’eau en équilibre à $\theta_1 = \dC{25,0}$. On y introduit un glaçon de masse $m_2 = \qty{40}{g}$, pris à sa température de fusion $\tfus = \dC{0,0}$ (glace fondante). On agite jusqu’à la fusion complète du glaçon : la température d’équilibre est $\theta_e = \dC{13,3}$. On donne $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=0.9\linewidth]{doc6_glacon}\par\vspace{1mm}
+{\sffamily\small\docbadge{6}\enspace\color{cInk2}Un glaçon dans le calorimètre}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Exploiter.} Doc 5 : décrire les trois parties de la courbe. Comment évolue la température pendant la fusion ? La glace reçoit-elle de l’énergie pendant ce palier ?
+  \item \kw{Définir.} Définir la chaleur latente de changement d’état $L$ d’un corps pur ; écrire la chaleur $Q$ échangée lors d’un changement d’état et préciser l’unité de $L$.
+  \item \kw{Décrire.} Doc 6 : décrire les deux étapes subies par le glaçon entre son introduction (solide à \dC{0,0}) et l’état final (liquide à $\theta_e$). Exprimer la chaleur totale $Q_g$ qu’il reçoit.
+  \item \kw{Exprimer.} Exprimer la chaleur $Q_{ce}$ cédée par le calorimètre et la masse $m_1$ d’eau.
+  \item \kw{Calculer.} Appliquer l’équation calorimétrique pour exprimer, puis calculer, la chaleur latente de fusion de la glace $L_f$.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{La température de la glace monte de \dC{-10} à \dC{0} ; elle reste ensuite constante à \dC{0} pendant la fusion (palier), puis l’eau liquide s’échauffe. Pendant le palier, la glace reçoit toujours de l’énergie : cette énergie sert à changer son état, pas à élever sa température.}
+  \item \rep{La chaleur latente $L$ est la quantité de chaleur qu’il faut échanger avec \qty{1}{kg} d’un corps pur pour qu’il change complètement d’état, à température et pression constantes. $Q = m\cdot L$ ; $L$ s’exprime en \unit{J.kg^{-1}}. Pour une fusion ou une vaporisation, $Q = m\cdot L > 0$ ; pour une solidification ou une liquéfaction, $Q = -m\cdot L < 0$.}
+  \item \rep{Le glaçon fond à \dC{0,0} : $Q_{\mathrm{fus}} = m_2\cdot L_f$ ; puis l’eau de fusion s’échauffe de \dC{0,0} à $\theta_e$ : $Q'_2 = m_2\cdot c_e\cdot(\theta_e - \tfus)$. Donc $Q_g = m_2\cdot L_f + m_2\cdot c_e\cdot(\theta_e - \tfus)$.}
+  \item \rep{$Q_{ce} = (\mu + m_1\cdot c_e)(\theta_e - \theta_1) < 0$.}
+  \item \rep{$Q_g + Q_{ce} = 0$, d’où $L_f = \dfrac{(\mu + m_1\cdot c_e)(\theta_1 - \theta_e)}{m_2} - c_e\cdot(\theta_e - \tfus) = \dfrac{1335{,}5\times11{,}7}{0{,}040} - 4185\times13{,}3 \approx \qty{3,35e5}{J.kg^{-1}}$, en accord avec la valeur admise \qty{3,34e5}{J.kg^{-1}}.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.55\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Changement d’état d’un corps pur}\par\smallskip
+À pression constante, un corps pur change d’état à \trou{température constante} (palier). L’énergie reçue ou cédée sert au \trou{changement d’état}.\par\medskip
+\sfb{\color{cRed}Chaleur latente}\par\smallskip
+Une masse $m$ d’un corps pur qui change complètement d’état échange la quantité de chaleur :
+\begin{center}\formule{\trou{$Q = m\cdot L$}}\end{center}
+$L$ : chaleur latente de changement d’état, en \trou{\unit{J.kg^{-1}}}.\par\smallskip
+Fusion : \trou{$Q = +m\cdot L_f > 0$} ; solidification : \trou{$Q = -m\cdot L_f < 0$}.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.42\linewidth}\vspace{0pt}\centering
+\ifeleve\includegraphics[width=\linewidth]{doc5_courbe}\else\includegraphics[width=\linewidth]{fig_courbe}\fi\par\smallskip
+{\renewcommand{\arraystretch}{1.3}\setlength{\tabcolsep}{4pt}\arrayrulecolor{cRed!35}\footnotesize
+\begin{tabular}{|l|c|c|}\hline
+\rowcolor{cRed!8}\sfb{Changement d’état} & \sfb{$\theta$ (\unit{\degreeCelsius})} & \sfb{$L$ (\unit{J.kg^{-1}})}\\ \hline
+fusion de la glace & 0 & \num{3,34e5}\\ \hline
+vaporisation de l’eau & 100 & \num{2,26e6}\\ \hline
+fusion de l’étain & 232 & \num{5,90e4}\\ \hline
+\end{tabular}}
+\end{minipage}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace De la glace à l’eau tiède}
+On sort d’un congélateur un bloc de glace de masse $m = \qty{500}{g}$, à $\theta_1 = \dC{-15,0}$, et on le chauffe sous la pression atmosphérique normale jusqu’à obtenir de l’eau liquide à $\theta_2 = \dC{20,0}$. On donne : $\tfus = \dC{0,0}$ ; $c_g = \qty{2090}{J.kg^{-1}.\degreeCelsius^{-1}}$ (glace) ; $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$ (eau liquide) ; $L_f = \qty{3,34e5}{J.kg^{-1}}$.\par\smallskip
+{\centering\includegraphics[width=0.66\linewidth]{app3_etapes}\par}
+\begin{appq}
+  \item Identifier les trois étapes successives qui permettent de passer de l’état initial à l’état final.
+  \item Calculer la quantité de chaleur mise en jeu dans chaque étape, puis la quantité de chaleur totale $Q_{\mathrm{tot}}$ reçue.
+\end{appq}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section[Une autre forme de transfert d’énergie : le rayonnement]{Une autre forme de transfert d’énergie :\\ le rayonnement}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 4\enspace·\enspace Un transfert d’énergie sans matière}
+\begin{situation}
+\textbf{Situation de départ.} La Terre reçoit en permanence de l’énergie du Soleil, alors que l’espace qui les sépare est presque vide de matière. Et quand on approche la main d’un radiateur infrarouge, sans le toucher, on ressent tout de suite la chaleur. \textbf{Comment l’énergie thermique peut-elle se propager sans support matériel ?}
+\end{situation}
+
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 7. Thermomètre sous vide.} On place sous une cloche en verre un thermomètre dont le réservoir est noirci, puis on fait le vide sous la cloche : il n’y a plus d’air autour du thermomètre. Une lampe infrarouge, placée à l’extérieur, est dirigée vers le réservoir. Dès l’allumage de la lampe, la température indiquée par le thermomètre augmente rapidement.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc7_cloche}\par\vspace{1mm}
+{\sffamily\small\docbadge{7}\enspace\color{cInk2}Thermomètre sous une cloche à vide}
+\end{minipage}\par\medskip
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc8_plaques}\par\vspace{1mm}
+{\sffamily\small\docbadge{8}\enspace\color{cInk2}Plaque noire et plaque blanche}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 8. Plaque noire et plaque blanche.} Deux plaques métalliques identiques, l’une peinte en noir mat, l’autre en blanc brillant, sont placées à la même distance d’une lampe. Un thermomètre est fixé sur chaque plaque :\par\smallskip
+\centerline{\small\mesures[0.6cm]{6}{%
+$t$ (\unit{min}) & 0 & 2 & 4 & 6 & 8 & 10\\ \hline
+$\theta_{\text{noire}}$ (\unit{\degreeCelsius}) & 20,0 & 28,5 & 34,6 & 39,0 & 42,1 & 44,3\\ \hline
+$\theta_{\text{blanche}}$ (\unit{\degreeCelsius}) & 20,0 & 22,6 & 24,4 & 25,7 & 26,6 & 27,3\\ \hline}}
+\end{minipage}\par\medskip
+\textbf{Dans la vie courante.} Le même phénomène explique le chauffage de la Terre par le Soleil, le fonctionnement des chauffe-eau solaires, l’effet de serre ou les caméras thermiques, qui détectent l’infrarouge émis par tout corps chaud.
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Expliquer.} Doc 7 : comment le thermomètre placé dans le vide peut-il recevoir de l’énergie ? Nommer ce mode de transfert.
+  \item \kw{Comparer.} Doc 8 : comparer l’échauffement des deux plaques exposées au même rayonnement. Quel est le rôle de la couleur et de l’aspect de la surface ?
+  \item \kw{Distinguer.} Citer des exemples de transfert d’énergie par rayonnement dans la vie courante. En quoi le rayonnement se distingue-t-il de la conduction et de la convection ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Le vide empêche les transferts qui ont besoin de matière. Le réservoir reçoit l’énergie transportée par les ondes électromagnétiques (infrarouge et lumière visible) émises par la lampe, et l’absorbe : c’est le transfert par rayonnement.}
+  \item \rep{En 10 minutes, la plaque noire mate s’échauffe de \dC{24,3}, la plaque blanche brillante de \dC{7,3} seulement. Une surface sombre et mate absorbe la plus grande partie du rayonnement reçu ; une surface blanche ou brillante en réfléchit la plus grande partie.}
+  \item \rep{Chauffage de la Terre par le Soleil à travers le vide, chauffe-eau solaires (absorbeurs noirs), lampes et fours infrarouges, caméras thermiques. La conduction se fait de proche en proche dans la matière, sans déplacement de matière ; la convection s’accompagne d’un déplacement de matière dans un liquide ou un gaz ; le rayonnement est transporté par des ondes électromagnétiques et se propage même dans le vide.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Le rayonnement}\par\smallskip
+Le rayonnement est un mode de transfert d’énergie assuré par des \trou{ondes électromagnétiques} (infrarouge, lumière visible). Contrairement à la conduction et à la convection, il ne nécessite \trou{aucun support matériel} : il se propage même dans le \trou{vide}.\par\smallskip
+Tout corps émet un rayonnement d’autant plus intense que sa \trou{température} est élevée, et absorbe une partie du rayonnement qu’il reçoit ; les surfaces \trou{sombres et mates} sont les meilleurs absorbeurs.\par\medskip
+{\centering\includegraphics[width=0.94\linewidth]{fig_modes}\par}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace La bouteille isolante}
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+Une bouteille isolante (bouteille « thermos ») conserve un liquide chaud, ou froid, pendant plusieurs heures en limitant les transferts thermiques avec l’extérieur. Elle est formée d’une double paroi de verre entre lesquelles on a fait le vide ; les faces de ces parois sont argentées, réfléchissantes comme un miroir.
+\begin{appq}
+  \item Quel est l’intérêt du vide entre les deux parois ?
+  \item Quel est le rôle des parois argentées vis-à-vis du rayonnement ?
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=0.9\linewidth]{app4_thermos}
+\end{minipage}
+\end{rub}
+
+% =====================================================================
+%  EXERCICES
+% =====================================================================
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcolorbox}[enhanced, colback=cInk, colframe=cInk, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0mm, after skip=5mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_exercices}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Exercices d’application et de synthèse}
+\end{tcolorbox}
+\begin{rub}[unbreakable, before skip=0mm, after skip=0mm]{cOrange}{questions}{Je vérifie mes connaissances\enspace·\enspace Vrai ou faux ?}
+Pour chaque affirmation, dire si elle est vraie ou fausse, puis corriger les affirmations fausses.
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\alph*)}, leftmargin=6mm, itemsep=1pt]
+  \item La chaleur passe spontanément d’un corps froid vers un corps chaud.
+  \item Pour une même énergie reçue, \qty{1}{kg} d’eau s’échauffe moins que \qty{1}{kg} de cuivre.
+  \item Une quantité de chaleur $Q < 0$ signifie que le corps reçoit de l’énergie.
+  \item Pendant la fusion de la glace sous pression constante, la température reste égale à \dC{0}.
+  \item L’équation calorimétrique $\sum Q_i = 0$ suppose que le système est thermiquement isolé.
+  \item Le rayonnement ne peut pas se propager dans le vide.
+\end{enumerate}
+\end{rub}
+\end{minipage}\par\medskip
+
+% ---------------- Exercice 1 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 1\enspace·\enspace Capacité thermique d’un calorimètre et chaleur massique du plomb}
+On réalise deux expériences successives avec le même calorimètre ; $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.
+\begin{itemize}
+  \item \textbf{Expérience 1.} Le calorimètre contient $m_1 = \qty{150}{g}$ d’eau à $\theta_1 = \dC{17,5}$. On y verse $m_2 = \qty{150}{g}$ d’eau chaude à $\theta_2 = \dC{50,0}$. La température d’équilibre est $\theta_{e1} = \dC{32,5}$.
+  \item \textbf{Expérience 2.} Le calorimètre contient maintenant $m_1 + m_2 = \qty{300}{g}$ d’eau à $\theta_{e1} = \dC{32,5}$. On y plonge un bloc de plomb de masse $m_{\mathrm{Pb}} = \qty{400}{g}$ sortant d’une étuve à $\theta_3 = \dC{98,0}$. La nouvelle température d’équilibre est $\theta_{e2} = \dC{35,0}$.
+\end{itemize}
+\begin{exq}
+  \item Appliquer l’équation calorimétrique à l’expérience 1 pour calculer la capacité thermique $\mu$ du calorimètre et de ses accessoires.
+  \item Exprimer les quantités de chaleur échangées au cours de l’expérience 2 en fonction de la chaleur massique $c_{\mathrm{Pb}}$ du plomb.
+  \item Calculer $c_{\mathrm{Pb}}$ et la comparer à la valeur du tableau.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 2 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 2\enspace·\enspace Un morceau de glace dans un calorimètre}
+Un calorimètre de capacité thermique $\mu = \qty{100}{J.\degreeCelsius^{-1}}$ contient $m_1 = \qty{400}{g}$ d’eau à $\theta_1 = \dC{30,0}$. On y introduit un morceau de glace de masse $m_2 = \qty{60}{g}$ sorti d’un congélateur à $\theta_2 = \dC{-10,0}$. On donne : $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$ ; $c_g = \qty{2090}{J.kg^{-1}.\degreeCelsius^{-1}}$ ; $\tfus = \dC{0,0}$ ; $L_f = \qty{3,34e5}{J.kg^{-1}}$.
+\begin{exq}
+  \item Calculer la chaleur $Q_n$ que doit recevoir la glace pour passer de \dC{-10,0} à l’état d’eau liquide à \dC{0,0}, puis la chaleur maximale $|Q_d|$ que peuvent céder le calorimètre et l’eau en se refroidissant de \dC{30,0} à \dC{0,0}. Vérifier que toute la glace fond.
+  \item Exprimer, en fonction de la température d’équilibre $\theta_e$ ($\theta_e > \dC{0}$), la chaleur $Q_g$ reçue par l’eau initialement sous forme de glace et la chaleur $Q_{ce}$ cédée par le calorimètre et l’eau.
+  \item Calculer la température d’équilibre $\theta_e$.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 3 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 3\enspace·\enspace Un four solaire}
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+Un four solaire parabolique concentre le rayonnement du Soleil sur un creuset isolé contenant $m = \qty{500}{g}$ d’étain solide à $\theta_i = \dC{22,0}$. La puissance du rayonnement absorbée par l’étain est constante : $P = \qty{250}{W}$. Pour l’étain : $\tfus = \dC{232,0}$ ; $c_s = \qty{228}{J.kg^{-1}.\degreeCelsius^{-1}}$ (solide) ; $L_f = \qty{5,90e4}{J.kg^{-1}}$.
+\begin{exq}
+  \item Calculer la chaleur $Q_1$ nécessaire pour porter l’étain solide de \dC{22,0} à sa température de fusion.
+  \item Calculer la chaleur $Q_2$ nécessaire pour faire fondre tout l’étain.
+  \item En déduire la chaleur totale $Q_{\mathrm{tot}}$ absorbée, puis la durée $\Delta t$ de l’opération (en secondes, puis en minutes et secondes), sachant que $Q_{\mathrm{tot}} = P\cdot\Delta t$.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=\linewidth]{ex3_four}
+\end{minipage}
+\end{rub}
+
+\ifeleve\needspace{7cm}\else\needspace{8cm}\fi
+% =====================================================================
+%  CORRIGÉS
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cGreen, colframe=cGreen, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=4mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_corrige}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}\titrecorriges}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small\RaggedRight
+\setlength{\columnsep}{7mm}
+\newcommand{\corr}[1]{\par\ifeleve\needspace{7\baselineskip}\medskip\else\smallskip\fi{\sffamily\bfseries\color{cGreen}#1}\par\nopagebreak\smallskip}
+
+\corr{Application 1 · Le chauffe-eau}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$m = \rho\cdot V = 1{,}0\times100 = \qty{100}{kg}$ ;\\ $C = m\cdot c_e = 100\times4185 = \qty{4,19e5}{J.\degreeCelsius^{-1}}$.}
+  \item \rep{$Q = m\cdot c_e\cdot(\theta_f - \theta_i) = 100\times4185\times(65 - 15)$\\ $Q \approx \qty{2,09e7}{J}$ (environ \qty{20,9}{MJ}).\\ $Q > 0$ : l’eau reçoit de la chaleur, sa température s’élève.}
+\end{enumerate}
+
+\corr{Application 2 · Le cuivre}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{Calorimètre et eau : $Q_1 = (\mu + m_1\cdot c_e)(\theta_e - \theta_1)$ ;\\ cuivre : $Q_2 = m_2\cdot c_{\mathrm{Cu}}\cdot(\theta_e - \theta_2)$.}
+  \item \rep{$Q_1 + Q_2 = 0$, avec $\mu + m_1\cdot c_e = \qty{1375,5}{J.\degreeCelsius^{-1}}$ et $m_2\cdot c_{\mathrm{Cu}} = \qty{77}{J.\degreeCelsius^{-1}}$ :\\ $\theta_e = \dfrac{1375{,}5\times16{,}0 + 77\times95{,}0}{1375{,}5 + 77} \approx \dC{20,2}$.}
+\end{enumerate}
+
+\corr{Application 3 · La glace}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{Échauffement de la glace de \dC{-15,0} à \dC{0,0} ; fusion à \dC{0,0} ; échauffement de l’eau liquide de \dC{0,0} à \dC{20,0}.}
+  \item \rep{$Q_1 = 0{,}500\times2090\times15{,}0 \approx \qty{1,57e4}{J}$ ;\\ $Q_2 = 0{,}500\times\num{3,34e5} = \qty{1,67e5}{J}$ ;\\ $Q_3 = 0{,}500\times4185\times20{,}0 \approx \qty{4,19e4}{J}$ ;\\ $Q_{\mathrm{tot}} = Q_1 + Q_2 + Q_3 \approx \qty{2,25e5}{J}$.}
+\end{enumerate}
+
+\corr{Application 4 · La bouteille isolante}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{Le vide supprime l’air entre les parois : il empêche les transferts par conduction et par convection.}
+  \item \rep{Le vide n’arrête pas le rayonnement ; les parois argentées le réfléchissent comme un miroir, vers l’intérieur si le liquide est chaud, vers l’extérieur s’il est froid.}
+\end{enumerate}
+
+\corr{Vrai ou faux ?}
+\begin{enumerate}[label={\sffamily\bfseries\alph*)},leftmargin=5mm,itemsep=0pt]
+  \item \rep{Faux : du corps chaud vers le corps froid.}
+  \item \rep{Vrai : $c_{\mathrm{eau}} = 4185 > c_{\mathrm{Cu}} = 385$ (\cu).}
+  \item \rep{Faux : le corps cède de l’énergie.}
+  \item \rep{Vrai : un corps pur change d’état à température constante.}
+  \item \rep{Vrai : sinon une partie de la chaleur est échangée avec l’extérieur.}
+  \item \rep{Faux : il se propage même dans le vide.}
+\end{enumerate}
+
+\corr{Exercice 1 · Le plomb}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$(\mu + m_1\cdot c_e)(\theta_{e1} - \theta_1) + m_2\cdot c_e\cdot(\theta_{e1} - \theta_2) = 0$\\ $\mu = 0{,}150\times4185\times\left(\dfrac{17{,}5}{15{,}0} - 1\right) \approx \qty{105}{J.\degreeCelsius^{-1}}$.}
+  \item \rep{Calorimètre et eau ($M_e = \qty{0,300}{kg}$) : $Q_r = (\mu + M_e\cdot c_e)(\theta_{e2} - \theta_{e1})$ ;\\ plomb : $Q_{\mathrm{Pb}} = m_{\mathrm{Pb}}\cdot c_{\mathrm{Pb}}\cdot(\theta_{e2} - \theta_3)$.}
+  \item \rep{$Q_r + Q_{\mathrm{Pb}} = 0$ : $c_{\mathrm{Pb}} = \dfrac{(104{,}6 + 1255{,}5)\times2{,}5}{0{,}400\times63{,}0} \approx \qty{135}{J.kg^{-1}.\degreeCelsius^{-1}}$, voisine de la valeur du tableau (129).}
+\end{enumerate}
+
+\corr{Exercice 2 · La glace}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$Q_n = 0{,}060\times2090\times10{,}0 + 0{,}060\times\num{3,34e5} = 1254 + 20\,040 = \qty{21294}{J}$ ;\\ $|Q_d| = (100 + 0{,}400\times4185)\times30{,}0 = 1774\times30{,}0 = \qty{53220}{J}$.\\ $|Q_d| > Q_n$ : toute la glace fond et $\theta_e > \dC{0}$.}
+  \item \rep{$Q_g = 21\,294 + m_2\cdot c_e\cdot(\theta_e - \tfus)$ ;\\ $Q_{ce} = (\mu + m_1\cdot c_e)(\theta_e - \theta_1)$.}
+  \item \rep{$Q_g + Q_{ce} = 0$, avec $m_2\cdot c_e = \qty{251,1}{J.\degreeCelsius^{-1}}$ :\\ $\theta_e = \dfrac{53\,220 - 21\,294}{1774 + 251{,}1} \approx \dC{15,8}$.}
+\end{enumerate}
+
+\corr{Exercice 3 · Le four solaire}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$Q_1 = 0{,}500\times228\times(232{,}0 - 22{,}0) = \qty{23940}{J}$.}
+  \item \rep{$Q_2 = m\cdot L_f = 0{,}500\times\num{5,90e4} = \qty{29500}{J}$.}
+  \item \rep{$Q_{\mathrm{tot}} = 23\,940 + 29\,500 = \qty{53440}{J}$ ;\\ $\Delta t = \dfrac{Q_{\mathrm{tot}}}{P} = \dfrac{53\,440}{250} \approx \qty{214}{s}$, soit environ 3 min 34 s.}
+\end{enumerate}
+\end{multicols}
+
+\end{document}

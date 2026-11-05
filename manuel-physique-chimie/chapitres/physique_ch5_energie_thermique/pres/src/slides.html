@@ -1,0 +1,413 @@
+<section class="slide s-title" data-kind="titre" data-group="Début" data-menu="Titre du chapitre">
+  <div class="fig-full fig bare" data-scene="titre"></div>
+  <div class="title-block">
+    <div class="eyebrow">PHYSIQUE · TRAVAIL MÉCANIQUE ET ÉNERGIE</div>
+    <div class="chapter">Chapitre 5</div>
+    <h1>L’énergie thermique : le transfert thermique</h1>
+    <div class="plan">
+      <span><b>1</b>Quantité de chaleur et chaleur massique</span>
+      <span><b>2</b>Équilibre thermique et calorimétrie</span>
+      <span><b>3</b>Chaleur latente de changement d’état</span>
+      <span><b>4</b>Le rayonnement</span>
+    </div>
+    <div class="hint">Appuyez sur → (ou cliquez sur la flèche en bas à droite) pour avancer · F : plein écran</div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 1 — De quoi dépend la chaleur reçue ?" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.9fr;--c2:1.1fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Sur un même réchaud, porter à ébullition une <b>grande casserole</b> d’eau demande bien plus de temps qu’une <b>petite tasse</b>. Et un objet en <b>métal</b> s’échauffe beaucoup plus vite que la même masse d’eau. La chaleur est un mode de transfert d’énergie.</p>
+        <ul class="problems"><li>De quelles grandeurs dépend la quantité de chaleur reçue par un corps dont la température varie ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="chauffage" data-opts='{"exp":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Influence de la masse et de Δθ" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="Activité 1 · docs 1 et 2">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0">Réchauds électriques <b>identiques</b> : même énergie par minute, donc <b>énergie reçue proportionnelle à la durée</b> de chauffage. Liquides pris à $θ_i = 20,0~\u{°C}$.<br><b>Doc 1.</b> Pour élever la température de $Δθ = 15~\u{°C}$ : $3,0~\u{min}$ pour $100~\u{g}$ d’eau, $6,0~\u{min}$ pour $200~\u{g}$ d’eau.<br><b>Doc 2.</b> $200~\u{g}$ d’eau : durée de chauffage selon $Δθ = θ_f − θ_i$.</p></div>
+      <table class="mtab "><tr><th>$Δθ$ (°C)</th><td>10</td><td>20</td><td>30</td></tr><tr><th>Durée (min)</th><td>4,0</td><td>8,0</td><td>12,0</td></tr></table>
+    </div>
+    <div class="fig" data-scene="chauffage" data-opts='{"exp":1}'><div class="cap"><span class="doc">Doc 1</span>Deux masses d’eau sur des réchauds identiques</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Influence de la nature du corps" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="Activité 1 · doc 3">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Doc 3.</b> On chauffe pendant la <b>même durée</b> de $4,0~\u{min}$ (donc avec la même énergie) $200~\u{g}$ d’eau et $200~\u{g}$ d’huile végétale.</p></div>
+      <table class="mtab "><tr><th>Liquide</th><td>eau</td><td>huile</td></tr><tr><th>$Δθ$ (°C)</th><td>10,0</td><td>20,9</td></tr></table>
+    </div>
+    <div class="fig" data-scene="chauffage" data-opts='{"exp":3}'><div class="cap"><span class="doc">Doc 3</span>Eau et huile, même durée de chauffage</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — Masse, Δθ et nature du corps" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Établir.</span> Docs 1 et 2 : comment $Q$ varie-t-elle avec la masse $m$, puis avec $Δθ = θ_f − θ_i$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Masse double ⇒ durée double ⇒ énergie double : $Q$ est <b>proportionnelle à $m$</b>.<br>$Δθ$ double, triple ⇒ durée double, triple : $Q$ est <b>proportionnelle à $Δθ$</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Interpréter.</span> Doc 3 : pourquoi l’huile s’échauffe-t-elle davantage que l’eau ? Quelle grandeur introduire ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Pour même masse et même énergie, $Δθ$ dépend de la <b>nature du corps</b> (environ 2 fois plus pour l’huile). Le coefficient de proportionnalité est la <b>chaleur massique</b> $c$ du corps.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="chauffage" data-opts='{"exp":3}'><div class="cap"><span class="doc">Doc 3</span>Même énergie, Δθ différents</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — Expression de Q" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="Questions 3 et 4">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Écrire.</span> Écrire l’expression de $Q$ pour un corps pur de masse $m$ dont la température passe de $θ_i$ à $θ_f$ (sans changement d’état). Unités ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q = m·c·Δθ = m·c·(θ_f − θ_i)$ : $Q$ en J, $m$ en kg, $Δθ$ en °C (ou K, même écart), $c$ en $\u{J·kg^{−1}·°C^{−1}}$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Définir.</span> Définir la chaleur massique $c$ et la capacité thermique $C$. Que signifie le signe de $Q$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$c$ : énergie qui élève de $1~\u{°C}$ la température de $1~\u{kg}$ du corps. $C = m·c$ (en $\u{J·°C^{−1}}$) : $Q = C·Δθ$.<br>$θ_f > θ_i$ : $Q > 0$, le corps <b>reçoit</b> ; $θ_f < θ_i$ : $Q < 0$, il <b>cède</b>.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="transfert"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="La chaleur et la quantité de chaleur" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="À retenir · Q = m·c·Δθ">
+  <div class="sbody">
+    <div class="stack center" style="flex:1">
+      <div style="display:grid;grid-template-columns:1.35fr .65fr;gap:22px;align-items:center">
+      <div class="stack"><div class="def"><h3>La chaleur, un mode de transfert d’énergie</h3><p style="margin:0">La chaleur (ou <b>transfert thermique</b>) est un transfert d’énergie à l’échelle microscopique ; il se fait spontanément du corps <b>chaud</b> vers le corps <b>froid</b>.</p></div>
+      <div class="def"><h3>Quantité de chaleur</h3><p style="margin:0 0 8px">Un corps pur de masse $m$ et de chaleur massique $c$, dont la température passe de $θ_i$ à $θ_f$ sans changement d’état, échange la quantité de chaleur :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$Q = m·c·Δθ = m·c·(θ_f − θ_i)$</span></div>
+        <p style="margin:8px 0 0">$Q$ en <b>joules (J)</b>, $m$ en <b>kg</b>, $c$ en <b>$\u{J·kg^{−1}·°C^{−1}}$</b>, $Δθ$ en <b>°C</b> (ou en K).</p></div></div>
+      <div class="fig" data-scene="transfert" style="height:250px"></div></div>
+      <table class="mtab"><tr><th>Corps</th><th>eau</th><th>glace</th><th>huile</th><th>aluminium</th><th>fer</th><th>cuivre</th><th>plomb</th></tr><tr><th>$c$ (J·kg<sup>−1</sup>·°C<sup>−1</sup>)</th><td>4185</td><td>2090</td><td>≈ 2000</td><td>897</td><td>450</td><td>385</td><td>129</td></tr></table>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Capacité thermique et signe de Q" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="À retenir · capacité thermique">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="def"><h3>Capacité thermique et signe de $Q$</h3><p style="margin:0 0 8px">La capacité thermique d’un corps, ou d’un calorimètre et de ses accessoires, est l’énergie qui élève sa température de $1~\u{°C}$ : $C = m·c$, notée $μ$ pour un calorimètre, en <b>$\u{J·°C^{−1}}$</b>, et</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$Q = μ·(θ_f − θ_i)$</span></div>
+        <p style="margin:8px 0 0">$Q > 0$ : le système <b>reçoit</b> de la chaleur ($θ_f > θ_i$) ; $Q < 0$ : le système <b>cède</b> de la chaleur ($θ_f < θ_i$).</p></div>
+    </div>
+    <div class="fig" data-scene="transfert"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Un chauffe-eau électrique" data-part="Partie 1" data-group="Partie 1 · Chaleur massique" data-menu="Application · chauffe-eau">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Chauffe-eau : $V = 100~\u{L}$ d’eau à $θ_i = 15~\u{°C}$, chauffée jusqu’à $θ_f = 65~\u{°C}$ ; $ρ = 1,0~\u{kg·L^{−1}}$ ; $c_e = 4185~\u{J·kg^{−1}·°C^{−1}}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer la masse $m$ d’eau et sa capacité thermique $C$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$m = ρ·V = 100~\u{kg}$ ; $C = m·c_e = 100×4185 ≈ 4,19×10^5~\u{J·°C^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer la chaleur $Q$ reçue par l’eau ; justifier son signe.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q = m·c_e·(θ_f − θ_i) = 100×4185×(65 − 15) ≈ 2,09×10^7~\u{J}$ (≈ 20,9 MJ)<br>$Q > 0$ : l’eau reçoit de la chaleur, sa température s’élève.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="chauffeEau"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 2 — Mélanger des corps chauds et froids" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.85fr;--c2:1.15fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Quand on plonge un morceau de <b>métal brûlant</b> dans de l’<b>eau froide</b>, le métal se refroidit, l’eau et le récipient se réchauffent, jusqu’à une <b>température finale commune</b>.</p>
+        <ul class="problems"><li>Comment exploiter ce phénomène pour mesurer la capacité thermique d’un récipient, puis la chaleur massique d’un métal ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="equilibre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Le calorimètre — protocole 1" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Activité 2 · doc 4">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 4.</b> Un <b>calorimètre</b> est une enceinte thermiquement isolée : les corps qu’il contient échangent de la chaleur entre eux jusqu’à l’<b>équilibre thermique</b>. Le bilan ne dépend que de l’état initial et de l’état final.<br><b>Protocole 1 ($μ$ du calorimètre).</b> $m_1 = 200~\u{g}$ d’eau froide à $θ_1 = 18,0~\u{°C}$ ; on ajoute $m_2 = 200~\u{g}$ d’eau tiède à $θ_2 = 42,5~\u{°C}$ ; équilibre : $θ_e = 29,5~\u{°C}$.</p></div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"labels":1,"mode":"eau","th0":18,"th1":29.5}'><div class="cap"><span class="doc">Doc 4</span>Calorimètre de Berthelot (coupe)</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Protocole 2 — chaleur massique de l’aluminium" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Activité 2 · protocole 2">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Protocole 2.</b> Un cylindre d’aluminium ($m_m = 150~\u{g}$) est maintenu dans l’eau bouillante à $θ_m = 100,0~\u{°C}$, puis introduit dans le <b>même calorimètre</b>, qui contient $m_e = 250~\u{g}$ d’eau à $θ_0 = 20,0~\u{°C}$. Équilibre : $θ'_e = 28,3~\u{°C}$. $c_e = 4185~\u{J·kg^{−1}·°C^{−1}}$.</p></div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"metal","th0":20,"th1":28.3}'><div class="cap"><span class="doc">Doc 4</span>Le bloc d’aluminium dans le calorimètre</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — Équation calorimétrique" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Définir.</span> Quand des corps sont-ils en équilibre thermique ? Énoncer l’équation calorimétrique. De quels états dépend le bilan ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Quand leurs températures sont <b>égales et constantes</b>. Dans une enceinte isolée : $ΣQ_i = 0$. Le bilan ne dépend que de l’<b>état initial</b> et de l’<b>état final</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Exprimer.</span> Protocole 1 : exprimer $Q_1$ reçue par le calorimètre et l’eau froide, et $Q_2$ cédée par l’eau tiède.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_1 = (μ + m_1·c_e)(θ_e − θ_1) > 0$ ; $Q_2 = m_2·c_e·(θ_e − θ_2) < 0$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"eau","th0":18,"th1":29.5}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — μ et c de l’aluminium" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Questions 3 et 4">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Calculer.</span> Calculer la capacité thermique $μ$ du calorimètre.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_1 + Q_2 = 0$ ⇒ $μ = \frac{m_2·c_e·(θ_2 − θ_e)}{θ_e − θ_1} − m_1·c_e = 0,200×4185×(\frac{13,0}{11,5} − 1) ≈ 109~\u{J·°C^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Déterminer.</span> Protocole 2 : bilan des chaleurs ; calculer $c_m$ de l’aluminium et la comparer au tableau.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_r = (μ + m_e·c_e)(θ'_e − θ_0)$ ; $Q_c = m_m·c_m·(θ'_e − θ_m)$ ; $Q_r + Q_c = 0$<br>$c_m = \frac{(109 + 0,250×4185)×8,3}{0,150×71,7} ≈ 892~\u{J·kg^{−1}·°C^{−1}}$, très proche de 897.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"metal","th0":20,"th1":28.3}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Équilibre thermique et équation calorimétrique" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="À retenir · ΣQ = 0">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="def"><h3>Équilibre thermique</h3><p style="margin:0">Des corps de températures différentes, mis en contact dans une enceinte isolée, échangent de la chaleur jusqu’à atteindre une même <b>température d’équilibre</b> $θ_e$.</p></div>
+      <div class="def"><h3>Équation calorimétrique</h3><p style="margin:0 0 8px">Dans un système <b>thermiquement isolé</b>, la somme algébrique des quantités de chaleur échangées par toutes ses parties, entre l’état initial et l’état d’équilibre, est <b>nulle</b> :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$ΣQ_i = Q_1 + Q_2 + … + Q_n = 0$</span></div>
+        <p style="margin:8px 0 0">Le bilan calorimétrique ne dépend que de l’<b>état initial</b> et de l’<b>état final</b> du système.</p></div>
+    </div>
+    <div class="fig" data-scene="equilibre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="methode" data-chip="Méthode" data-title="Résoudre un problème de calorimétrie" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Méthode">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="method"><h3>Méthode : résoudre un problème de calorimétrie</h3>
+      <ol class="steps"><li>Faire la liste des <b>corps</b> du système (sans oublier le calorimètre) avec leur <b>température initiale</b>.</li><li>Pour chaque corps, écrire $Q = m·c·(θ_e − θ_i)$, ou $Q = μ·(θ_e − θ_i)$ : toujours « <b>finale moins initiale</b> ».</li><li>Ajouter, s’il y a lieu, la chaleur d’un <b>changement d’état</b> ($±m·L$).</li><li>Écrire l’<b>équation calorimétrique</b> $ΣQ_i = 0$ et résoudre.</li><li><b>Vérifier</b> que la température d’équilibre est comprise entre les températures initiales extrêmes.</li></ol></div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"metal","metal":"#c8794a","th0":16,"th1":20.2}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Un échantillon de cuivre" data-part="Partie 2" data-group="Partie 2 · Calorimétrie" data-menu="Application · cuivre">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Calorimètre : $μ = 120~\u{J·°C^{−1}}$, $m_1 = 300~\u{g}$ d’eau à $θ_1 = 16,0~\u{°C}$. On y plonge $m_2 = 200~\u{g}$ de cuivre à $θ_2 = 95,0~\u{°C}$. $c_e = 4185$ et $c_{\u{Cu}} = 385~\u{J·kg^{−1}·°C^{−1}}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Exprimer les chaleurs échangées en fonction de $θ_e$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_1 = (μ + m_1·c_e)(θ_e − θ_1)$ ; $Q_2 = m_2·c_{\u{Cu}}·(θ_e − θ_2)$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer la température d’équilibre $θ_e$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_1 + Q_2 = 0$ ; $μ + m_1·c_e = 1375,5$ ; $m_2·c_{\u{Cu}} = 77$<br>$θ_e = \frac{1375,5×16,0 + 77×95,0}{1375,5 + 77} ≈ 20,2~\u{°C}$</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"metal","metal":"#c8794a","th0":16,"th1":20.2}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 3 — La glace qui fond" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.9fr;--c2:1.1fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>On chauffe de la glace sortie d’un congélateur à $−10~\u{°C}$ : sa température monte jusqu’à $0~\u{°C}$, puis <b>reste constante</b> pendant toute la fusion, alors que la glace continue de recevoir de la chaleur. La relation $Q = m·c·Δθ$ donnerait $Q = 0$ !</p>
+        <ul class="problems"><li>Comment calculer l’énergie reçue pendant un changement d’état ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="courbeGlace"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 3" data-title="Courbe d’échauffement et chaleur latente" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="Activité 3 · doc 5">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 5.</b> On chauffe à puissance constante $100~\u{g}$ de glace prise à $−10~\u{°C}$ et on relève sa température.<br><b>Chaleur latente.</b> À pression constante, un corps pur change d’état à température constante ($θ_{\u{fus}} = 0~\u{°C}$ pour la glace sous la pression atmosphérique normale). La chaleur échangée est proportionnelle à la masse $m$ qui change d’état : $Q = m·L$, où $L$ est la <b>chaleur latente</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="courbeGlace"><div class="cap"><span class="doc">Doc 5</span>Température de la glace chauffée</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 3" data-title="Mesurer la chaleur latente de fusion de la glace" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="Activité 3 · doc 6">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Doc 6.</b> Calorimètre : $μ = 80~\u{J·°C^{−1}}$, $m_1 = 300~\u{g}$ d’eau à $θ_1 = 25,0~\u{°C}$. On y introduit un glaçon de masse $m_2 = 40~\u{g}$ pris à $θ_{\u{fus}} = 0,0~\u{°C}$ (glace fondante). Après fusion complète : $θ_e = 13,3~\u{°C}$. $c_e = 4185~\u{J·kg^{−1}·°C^{−1}}$.</p></div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"glace","th0":25,"th1":13.3}'><div class="cap"><span class="doc">Doc 6</span>Un glaçon dans le calorimètre</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Le palier et la chaleur latente" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Exploiter.</span> Doc 5 : décrire les trois parties de la courbe. La glace reçoit-elle de l’énergie pendant le palier ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">La glace s’échauffe de $−10$ à $0~\u{°C}$ ; la température reste à $0~\u{°C}$ pendant la <b>fusion</b> (palier) ; puis l’eau liquide s’échauffe. Pendant le palier, la glace reçoit de l’énergie, qui sert à <b>changer son état</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Définir.</span> Définir la chaleur latente $L$ ; écrire $Q$ lors d’un changement d’état ; unité de $L$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Chaleur à échanger avec $1~\u{kg}$ d’un corps pur pour qu’il change complètement d’état (température et pression constantes). $Q = m·L$, $L$ en $\u{J·kg^{−1}}$. Fusion, vaporisation : $Q > 0$ ; solidification, liquéfaction : $Q = −m·L < 0$.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="courbeGlace" data-opts='{"labels":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Calcul de L<sub>f</sub>" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="Questions 3 à 5">
+  <div class="sbody cols" style="--c1:1.4fr;--c2:.6fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Décrire.</span> Doc 6 : les deux étapes subies par le glaçon ; exprimer la chaleur totale $Q_g$ qu’il reçoit.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Fusion à $0~\u{°C}$ : $m_2·L_f$ ; échauffement de l’eau de fusion de $0~\u{°C}$ à $θ_e$ : $m_2·c_e·(θ_e − θ_{\u{fus}})$<br>$Q_g = m_2·L_f + m_2·c_e·(θ_e − θ_{\u{fus}})$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Exprimer.</span> Exprimer la chaleur $Q_{ce}$ cédée par le calorimètre et l’eau.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_{ce} = (μ + m_1·c_e)(θ_e − θ_1) < 0$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">5</span><div class="qt"><span class="kw">Calculer.</span> Calculer la chaleur latente de fusion de la glace $L_f$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_g + Q_{ce} = 0$ ⇒ $L_f = \frac{(μ + m_1·c_e)(θ_1 − θ_e)}{m_2} − c_e·(θ_e − θ_{\u{fus}}) = \frac{1335,5×11,7}{0,040} − 4185×13,3 ≈ 3,35×10^5~\u{J·kg^{−1}}$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"glace","th0":25,"th1":13.3}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Chaleur latente de changement d’état" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="À retenir · Q = m·L">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack center">
+      <div class="def"><h3>Changement d’état d’un corps pur</h3><p style="margin:0">À pression constante, un corps pur change d’état à <b>température constante</b> (palier). L’énergie reçue ou cédée sert au <b>changement d’état</b>.</p></div>
+      <div class="def"><h3>Chaleur latente</h3><p style="margin:0 0 8px">Une masse $m$ d’un corps pur qui change complètement d’état échange la quantité de chaleur :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$Q = m·L$</span></div>
+        <p style="margin:8px 0 0">$L$ : chaleur latente de changement d’état, en <b>$\u{J·kg^{−1}}$</b>.<br>Fusion : <b>$Q = +m·L_f > 0$</b> ; solidification : <b>$Q = −m·L_f < 0$</b>.</p></div>
+    </div>
+    <div class="stack center"><div class="fig" style="height:330px;flex:none" data-scene="courbeGlace" data-opts='{"labels":1}'></div><table class="mtab"><tr><th>Changement d’état</th><th>$θ$ (°C)</th><th>$L$ (J·kg<sup>−1</sup>)</th></tr><tr><th>fusion de la glace</th><td>0</td><td>3,34×10<sup>5</sup></td></tr><tr><th>vaporisation de l’eau</th><td>100</td><td>2,26×10<sup>6</sup></td></tr><tr><th>fusion de l’étain</th><td>232</td><td>5,90×10<sup>4</sup></td></tr></table></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="De la glace à l’eau tiède" data-part="Partie 3" data-group="Partie 3 · Changement d’état" data-menu="Application · glace">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0">Bloc de glace : $m = 500~\u{g}$ à $θ_1 = −15,0~\u{°C}$, chauffé jusqu’à de l’eau liquide à $θ_2 = 20,0~\u{°C}$. $θ_{\u{fus}} = 0,0~\u{°C}$ ; $c_g = 2090$ et $c_e = 4185~\u{J·kg^{−1}·°C^{−1}}$ ; $L_f = 3,34×10^5~\u{J·kg^{−1}}$.</p></div>
+    <div class="fig" data-scene="etapesGlace" style="height:190px;flex:none"></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Identifier les trois étapes successives.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Échauffement de la glace ($−15 → 0~\u{°C}$) ; fusion à $0~\u{°C}$ ; échauffement de l’eau liquide ($0 → 20~\u{°C}$).</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer la chaleur de chaque étape, puis $Q_{\u{tot}}$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_1 = 0,500×2090×15,0 ≈ 1,57×10^4~\u{J}$ ; $Q_2 = 0,500×3,34×10^5 = 1,67×10^5~\u{J}$ ; $Q_3 = 0,500×4185×20,0 ≈ 4,19×10^4~\u{J}$ ; $Q_{\u{tot}} ≈ 2,25×10^5~\u{J}$</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 4 — La chaleur du Soleil" data-part="Partie 4" data-group="Partie 4 · Rayonnement" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.9fr;--c2:1.1fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>La Terre reçoit en permanence de l’énergie du <b>Soleil</b>, alors que l’espace qui les sépare est presque <b>vide de matière</b>. Et près d’un radiateur infrarouge, sans le toucher, on ressent tout de suite la chaleur.</p>
+        <ul class="problems"><li>Comment l’énergie thermique peut-elle se propager sans support matériel ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="soleilTerre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 4" data-title="Un thermomètre sous vide" data-part="Partie 4" data-group="Partie 4 · Rayonnement" data-menu="Activité 4 · doc 7">
+  <div class="sbody cols" style="--c1:.9fr;--c2:1.1fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Doc 7.</b> Un thermomètre au réservoir <b>noirci</b> est placé sous une cloche en verre où l’on a fait le <b>vide</b> : plus d’air autour de lui. Une lampe infrarouge, à l’extérieur, est dirigée vers le réservoir. Dès l’allumage, la température indiquée augmente rapidement.</p></div>
+    </div>
+    <div class="fig" data-scene="cloche"><div class="cap"><span class="doc">Doc 7</span>Thermomètre sous une cloche à vide</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 4" data-title="Plaque noire et plaque blanche" data-part="Partie 4" data-group="Partie 4 · Rayonnement" data-menu="Activité 4 · doc 8">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0"><b>Doc 8.</b> Deux plaques métalliques identiques, l’une peinte en <b>noir mat</b>, l’autre en <b>blanc brillant</b>, sont placées à la <b>même distance</b> d’une lampe. Un thermomètre est fixé sur chaque plaque.</p></div>
+    <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="plaques"><div class="cap"><span class="doc">Doc 8</span>Plaque noire et plaque blanche</div></div>
+      <div style="display:grid;place-items:center"><table class="mtab "><tr><th>$t$ (min)</th><td>0</td><td>2</td><td>4</td><td>6</td><td>8</td><td>10</td></tr><tr><th>$θ$ noire (°C)</th><td>20,0</td><td>28,5</td><td>34,6</td><td>39,0</td><td>42,1</td><td>44,3</td></tr><tr><th>$θ$ blanche (°C)</th><td>20,0</td><td>22,6</td><td>24,4</td><td>25,7</td><td>26,6</td><td>27,3</td></tr></table></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 4 — Le rayonnement" data-part="Partie 4" data-group="Partie 4 · Rayonnement" data-menu="Questions 1 à 3">
+  <div class="sbody cols" style="--c1:1.4fr;--c2:.6fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Expliquer.</span> Doc 7 : comment le thermomètre placé dans le vide reçoit-il de l’énergie ? Nommer ce mode de transfert.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Le vide empêche les transferts qui ont besoin de matière. Le réservoir absorbe l’énergie transportée par les <b>ondes électromagnétiques</b> (infrarouge, lumière) émises par la lampe : c’est le <b>rayonnement</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Comparer.</span> Doc 8 : comparer l’échauffement des deux plaques. Rôle de la couleur et de l’aspect de la surface ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">En 10 min : $+24,3~\u{°C}$ (noire) contre $+7,3~\u{°C}$ (blanche). Une surface <b>sombre et mate absorbe</b> la plus grande partie du rayonnement ; une surface blanche ou brillante en <b>réfléchit</b> la plus grande partie.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Distinguer.</span> Exemples de rayonnement dans la vie courante. En quoi diffère-t-il de la conduction et de la convection ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Soleil → Terre, chauffe-eau solaires, fours infrarouges, caméras thermiques. Conduction : de proche en proche, sans déplacement de matière ; convection : avec déplacement de matière (liquide, gaz) ; rayonnement : ondes électromagnétiques, <b>même dans le vide</b>.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="plaques"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Le rayonnement" data-part="Partie 4" data-group="Partie 4 · Rayonnement" data-menu="À retenir · rayonnement">
+  <div class="sbody">
+    <div class="stack center" style="flex:1">
+      <div class="def"><h3>Le rayonnement</h3><p style="margin:0">Le rayonnement est un mode de transfert d’énergie assuré par des <b>ondes électromagnétiques</b> (infrarouge, lumière visible). Contrairement à la conduction et à la convection, il ne nécessite <b>aucun support matériel</b> : il se propage même dans le <b>vide</b>.<br>Tout corps émet un rayonnement d’autant plus intense que sa <b>température</b> est élevée, et absorbe une partie du rayonnement qu’il reçoit ; les surfaces <b>sombres et mates</b> sont les meilleurs absorbeurs.</p></div>
+      <div class="fig" data-scene="modes" style="height:330px;flex:none;width:100%"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="La bouteille isolante" data-part="Partie 4" data-group="Partie 4 · Rayonnement" data-menu="Application · bouteille isolante">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Bouteille isolante (« thermos ») : double paroi de verre avec le <b>vide</b> entre les deux parois ; faces des parois <b>argentées</b>, réfléchissantes comme un miroir.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Quel est l’intérêt du vide entre les deux parois ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Il supprime l’air : il empêche les transferts par <b>conduction</b> et par <b>convection</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Quel est le rôle des parois argentées vis-à-vis du rayonnement ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Le vide n’arrête pas le rayonnement ; les parois argentées le <b>réfléchissent</b>, vers l’intérieur si le liquide est chaud, vers l’extérieur s’il est froid.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="thermos" data-opts='{"final":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="quiz" data-chip="Vrai ou faux ?" data-title="Je vérifie mes connaissances" data-part="Exercices" data-group="Exercices et bilan" data-menu="Vrai ou faux ?">
+  <div class="sbody">
+    <div class="vflist">
+      <div class="vf" data-answer="faux"><span class="qn">a</span><div>La chaleur passe spontanément d’un corps froid vers un corps chaud.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : du corps chaud vers le corps froid.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">b</span><div>Pour une même énergie reçue, 1 kg d’eau s’échauffe moins que 1 kg de cuivre.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $c_{\u{eau}} = 4185 > c_{\u{Cu}} = 385$.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">c</span><div>Une quantité de chaleur $Q < 0$ signifie que le corps reçoit de l’énergie.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : le corps cède de l’énergie.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">d</span><div>Pendant la fusion de la glace sous pression constante, la température reste égale à 0 °C.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : un corps pur change d’état à température constante.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">e</span><div>L’équation calorimétrique $ΣQ_i = 0$ suppose que le système est thermiquement isolé.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : sinon une partie de la chaleur est échangée avec l’extérieur.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">f</span><div>Le rayonnement ne peut pas se propager dans le vide.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : il se propage même dans le vide.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 1" data-title="Calorimètre et chaleur massique du plomb" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · énoncé">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0"><b>Expérience 1.</b> Calorimètre avec $m_1 = 150~\u{g}$ d’eau à $θ_1 = 17,5~\u{°C}$ ; on verse $m_2 = 150~\u{g}$ d’eau à $θ_2 = 50,0~\u{°C}$ ; équilibre : $θ_{e1} = 32,5~\u{°C}$.<br><b>Expérience 2.</b> Le calorimètre contient $300~\u{g}$ d’eau à $32,5~\u{°C}$ ; on y plonge $m_{\u{Pb}} = 400~\u{g}$ de plomb à $θ_3 = 98,0~\u{°C}$ ; équilibre : $θ_{e2} = 35,0~\u{°C}$. $c_e = 4185~\u{J·kg^{−1}·°C^{−1}}$.</p></div>
+      <ol class="exlist small"><li>Calculer la capacité thermique $μ$ du calorimètre (expérience 1).</li><li>Exprimer les chaleurs échangées dans l’expérience 2 en fonction de $c_{\u{Pb}}$.</li><li>Calculer $c_{\u{Pb}}$ et la comparer au tableau.</li></ol>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"metal","metal":"#7c8896","th0":32.5,"th1":35}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 1 — Calorimètre et plomb" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · correction">
+  <div class="sbody">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Capacité thermique</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$(μ + m_1·c_e)(θ_{e1} − θ_1) + m_2·c_e·(θ_{e1} − θ_2) = 0$ ⇒ $μ = 0,150×4185×(\frac{17,5}{15,0} − 1) ≈ 105~\u{J·°C^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Expérience 2</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_r = (μ + M_e·c_e)(θ_{e2} − θ_{e1})$ avec $M_e = 0,300~\u{kg}$ ; $Q_{\u{Pb}} = m_{\u{Pb}}·c_{\u{Pb}}·(θ_{e2} − θ_3)$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Chaleur massique du plomb</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_r + Q_{\u{Pb}} = 0$ ⇒ $c_{\u{Pb}} = \frac{(104,6 + 1255,5)×2,5}{0,400×63,0} ≈ 135~\u{J·kg^{−1}·°C^{−1}}$, voisine de 129.</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 2" data-title="Un morceau de glace dans un calorimètre" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · énoncé">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Calorimètre : $μ = 100~\u{J·°C^{−1}}$, $m_1 = 400~\u{g}$ d’eau à $θ_1 = 30,0~\u{°C}$. On y introduit $m_2 = 60~\u{g}$ de glace à $θ_2 = −10,0~\u{°C}$. $c_e = 4185$ ; $c_g = 2090~\u{J·kg^{−1}·°C^{−1}}$ ; $θ_{\u{fus}} = 0,0~\u{°C}$ ; $L_f = 3,34×10^5~\u{J·kg^{−1}}$.</p></div>
+      <ol class="exlist small"><li>Calculer $Q_n$ (glace de −10 °C à eau à 0 °C) et $|Q_d|$ (calorimètre et eau de 30 °C à 0 °C). Toute la glace fond-elle ?</li><li>Exprimer $Q_g$ et $Q_{ce}$ en fonction de $θ_e$ ($θ_e > 0~\u{°C}$).</li><li>Calculer $θ_e$.</li></ol>
+    </div>
+    <div class="fig" data-scene="calorimetre" data-opts='{"mode":"glace","th0":30,"th1":15.8}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 2 — Un morceau de glace" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · correction">
+  <div class="sbody">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">La glace fond-elle ?</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_n = 0,060×2090×10,0 + 0,060×3,34×10^5 = 1254 + 20040 = 21294~\u{J}$ ; $|Q_d| = (100 + 0,400×4185)×30,0 = 53220~\u{J}$<br>$|Q_d| > Q_n$ : toute la glace fond, $θ_e > 0~\u{°C}$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Expressions</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_g = 21294 + m_2·c_e·(θ_e − θ_{\u{fus}})$ ; $Q_{ce} = (μ + m_1·c_e)(θ_e − θ_1)$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Température d’équilibre</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_g + Q_{ce} = 0$ ⇒ $θ_e = \frac{53220 − 21294}{1774 + 251,1} ≈ 15,8~\u{°C}$</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 3" data-title="Un four solaire" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · énoncé">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Four solaire : creuset isolé contenant $m = 500~\u{g}$ d’étain solide à $θ_i = 22,0~\u{°C}$ ; puissance absorbée $P = 250~\u{W}$. Étain : $θ_{\u{fus}} = 232,0~\u{°C}$ ; $c_s = 228~\u{J·kg^{−1}·°C^{−1}}$ ; $L_f = 5,90×10^4~\u{J·kg^{−1}}$.</p></div>
+      <ol class="exlist small"><li>Chaleur $Q_1$ pour porter l’étain solide à sa température de fusion.</li><li>Chaleur $Q_2$ pour faire fondre tout l’étain.</li><li>$Q_{\u{tot}}$, puis la durée $Δt$ sachant que $Q_{\u{tot}} = P·Δt$.</li></ol>
+    </div>
+    <div class="fig" data-scene="fourSolaire"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 3 — Un four solaire" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · correction">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Échauffement</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_1 = 0,500×228×(232,0 − 22,0) = 23940~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Fusion</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_2 = m·L_f = 0,500×5,90×10^4 = 29500~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Durée</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q_{\u{tot}} = 53440~\u{J}$ ; $Δt = \frac{Q_{\u{tot}}}{P} = \frac{53440}{250} ≈ 214~\u{s}$, soit environ 3 min 34 s</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="fourSolaire"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="bilan" data-chip="L’essentiel" data-title="Ce qu’il faut retenir du chapitre" data-part="Bilan" data-group="Exercices et bilan" data-menu="L’essentiel du chapitre">
+  <div class="sbody">
+    <div class="bilan">
+      <div class="bil"><h3>La chaleur</h3><p>transfert d’énergie, spontanément du corps chaud vers le corps froid</p></div>
+      <div class="bil"><h3>Quantité de chaleur</h3><span class="eq-wrap">$Q = m·c·(θ_f − θ_i)$</span><p>$c$ en $\u{J·kg^{−1}·°C^{−1}}$ ; $Q > 0$ reçue, $Q < 0$ cédée</p></div>
+      <div class="bil"><h3>Capacité thermique</h3><span class="eq-wrap">$Q = μ·(θ_f − θ_i)$</span><p>$C = m·c$ ; $μ$ en $\u{J·°C^{−1}}$</p></div>
+      <div class="bil"><h3>Calorimétrie</h3><span class="eq-wrap">$ΣQ_i = 0$</span><p>système isolé ; seuls comptent les états initial et final</p></div>
+      <div class="bil"><h3>Changement d’état</h3><span class="eq-wrap">$Q = ±m·L$</span><p>à température constante ; $L$ en $\u{J·kg^{−1}}$</p></div>
+      <div class="bil"><h3>Rayonnement</h3><p>ondes électromagnétiques, même dans le vide ; surfaces sombres = bons absorbeurs</p></div>
+    </div>
+  </div>
+</section>
