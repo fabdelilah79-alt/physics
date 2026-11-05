@@ -1,0 +1,415 @@
+<section class="slide s-title" data-kind="titre" data-group="Début" data-menu="Titre du chapitre">
+  <div class="fig-full fig bare" data-scene="titre"></div>
+  <div class="title-block">
+    <div class="eyebrow">PHYSIQUE · TRAVAIL MÉCANIQUE ET ÉNERGIE</div>
+    <div class="chapter">Chapitre 3</div>
+    <h1>Travail et énergie cinétique</h1>
+    <div class="plan">
+      <span><b>1</b>Énergie cinétique d’un solide en translation</span>
+      <span><b>2</b>Énergie cinétique d’un solide en rotation</span>
+      <span><b>3</b>Théorème de l’énergie cinétique : étude expérimentale</span>
+      <span><b>4</b>Généralisation et méthode</span>
+    </div>
+    <div class="hint">Appuyez sur → (ou cliquez sur la flèche en bas à droite) pour avancer · F : plein écran</div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 1 — L’énergie d’un corps en mouvement" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.9fr;--c2:1.1fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Lors d’un choc, un <b>camion lourd lancé à vive allure</b> provoque des dégâts bien plus importants qu’une <b>petite voiture qui roule lentement</b>. Un corps en mouvement possède donc une énergie liée à son mouvement.</p>
+        <ul class="problems"><li>De quelles grandeurs dépend cette énergie ?</li><li>Comment la calculer pour un solide en translation ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="camionVoiture"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Trois solides en mouvement" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="Activité 1 · doc 1">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0"><b>Doc 1.</b> On repère deux points A et B d’un solide en mouvement : la cabine d’un <b>ascenseur</b>, une cabine de <b>téléphérique</b> et une nacelle de <b>grande roue</b>. On suit le vecteur $\vec{AB}$ au cours du mouvement.</p></div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="translations"><div class="cap"><span class="doc">Doc 1</span>On suit le vecteur AB</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Chute d’objets et empreintes dans la pâte" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="Activité 1 · docs 2 et 3">
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center"><div class="card small"><p style="margin:0"><b>Doc 2.</b> Tube de Newton : une plume, du liège et une bille tombent d’abord avec de l’air, puis après avoir fait le <b>vide</b>.<br><b>Doc 3.</b> Des billes lâchées sans vitesse initiale s’enfoncent dans de la pâte à modeler. Série 1 : même bille, trois hauteurs $h$ ($V$ : vitesse juste avant l’impact). Série 2 : trois masses ($58$, $230$ et $530~\u{g}$), même hauteur.</p></div><table class="mtab "><tr><th>$h$ (m)</th><td>2,5</td><td>1,3</td><td>0,5</td></tr><tr><th>$V$ (m·s<sup>−1</sup>)</th><td>7,0</td><td>5,0</td><td>3,1</td></tr></table></div>
+    <div style="display:grid;grid-template-columns:.55fr 1.45fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="tubeNewton"><div class="cap"><span class="doc">Doc 2</span>Tube de Newton</div></div>
+      <div class="fig" data-scene="pate"><div class="cap"><span class="doc">Doc 3</span>Empreintes dans la pâte (coupe)</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — La translation et la chute libre" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Observer.</span> Comment évolue le vecteur $\vec{AB}$ pour chaque solide du doc 1 ? Définir la translation et ses trois types.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\vec{AB}$ garde la <b>même direction</b>, le <b>même sens</b> et la <b>même longueur</b>. Translation <b>rectiligne</b> (ascenseur), <b>curviligne</b> (téléphérique), <b>circulaire</b> (nacelle).</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Définir.</span> Qu’est-ce qu’une chute libre ? Quel est l’intérêt du tube de Newton ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Un corps en chute libre n’est soumis qu’à son <b>poids</b>. Le vide supprime l’action de l’air : la plume, le liège et la bille tombent <b>ensemble</b>.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="tubeNewton"><div class="cap"><span class="doc">Doc 2</span>Avec air, puis dans le vide</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — De quoi dépend l’énergie de la bille ?" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="Questions 3 à 5">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Exploiter.</span> Série 1 : comment varie $V$ quand $h$ augmente ? Comment varie la déformation avec $V$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V$ augmente avec $h$ (de $3,1$ à $7,0~\u{m·s^{−1}}$) ; l’empreinte est d’autant plus <b>profonde</b> que $V$ est grande.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Comparer.</span> Série 2 : comment la déformation varie-t-elle avec la masse $m$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Pour une même hauteur, l’empreinte est d’autant plus profonde que la <b>masse</b> est grande.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">5</span><div class="qt"><span class="kw">Conclure.</span> De quelles grandeurs dépend l’énergie acquise par la bille ? Donner l’expression de l’énergie cinétique.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">De $m$ et de $V$ : $E_{\u{C}} = \frac{1}{2}m·V^2$, en joules ($\u{J}$).</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="pate"><div class="cap"><span class="doc">Doc 3</span>Empreintes dans la pâte</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Énergie cinétique d’un solide en translation" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="À retenir · translation">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="def"><h3>Mouvement de translation</h3><p style="margin:0">Tout vecteur $\vec{AB}$ lié au solide garde la même direction, le même sens et la même longueur. Translation rectiligne, curviligne ou circulaire.</p></div>
+      <div class="def"><h3>Énergie cinétique</h3><p style="margin:0 0 10px">Solide de masse $m$ en translation à la vitesse $V$ :</p>
+        <div class="big-eq"><span class="boxeq">$E_{\u{C}} = \frac{1}{2}m·V^2$</span><span class="unitnote">$E_{\u{C}}$ en $\u{J}$ ; $m$ en $\u{kg}$ ; $V$ en $\u{m·s^{−1}}$</span></div>
+        <p style="margin:10px 0 0">Grandeur <b>positive</b>, proportionnelle au <b>carré de la vitesse</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="figEc"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Une voiture qui accélère" data-part="Partie 1" data-group="Partie 1 · Translation" data-menu="Application · voiture">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack">
+      <div class="card "><p style="margin:0">Voiture de masse $m = 1,2~\u{t}$ ; $V_1 = 54~\u{km·h^{−1}}$, puis $V_2 = 108~\u{km·h^{−1}}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Convertir dans les unités SI.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$m = 1200~\u{kg}$ ; $V_1 = \frac{54}{3,6} = 15~\u{m·s^{−1}}$ ; $V_2 = 30~\u{m·s^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer $E_{\u{C}1}$ et $E_{\u{C}2}$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{C}1} = \frac{1}{2}×1200×15^2 = 1,35×10^5~\u{J}$ ; $E_{\u{C}2} = \frac{1}{2}×1200×30^2 = 5,40×10^5~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt">Quel est l’effet du doublement de la vitesse ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\frac{E_{\u{C}2}}{E_{\u{C}1}} = 4$ : quand la vitesse double, l’énergie cinétique est <b>multipliée par 4</b>.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="voitureApp"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 2 — L’énergie d’un solide qui tourne" data-part="Partie 2" data-group="Partie 2 · Rotation" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:1fr;--c2:.85fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Une <b>éolienne</b>, le rotor d’une turbine ou un <b>volant d’inertie</b> tournent autour d’un axe fixe : leur centre d’inertie reste immobile. Ils stockent pourtant beaucoup d’énergie. Or les points d’un solide qui tourne n’ont pas tous la même vitesse.</p>
+        <ul class="problems"><li>Comment calculer l’énergie cinétique d’un solide en rotation ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="eolienne"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Un solide en rotation : des points à des vitesses différentes" data-part="Partie 2" data-group="Partie 2 · Rotation" data-menu="Activité 2 · doc 4">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Doc 4.</b> Un solide indéformable tourne autour d’un axe fixe $(Δ)$ à la vitesse angulaire $ω$. On le décompose en petits éléments $M_i$, de masses $m_i$, situés à la distance $r_i$ de l’axe.</p></div>
+      <div class="card "><p style="margin:0">Chaque élément décrit un cercle à la vitesse $V_i = r_i·ω$. L’énergie cinétique du solide est la <b>somme</b> des énergies cinétiques de ses éléments.</p></div>
+    </div>
+    <div class="fig" data-scene="pointsRot"><div class="cap"><span class="doc">Doc 4</span>Points d’un solide en rotation</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="La répartition de la matière autour de l’axe" data-part="Partie 2" data-group="Partie 2 · Rotation" data-menu="Activité 2 · doc 5">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0"><b>Doc 5.</b> Des solides homogènes de <b>même masse</b> tournent autour d’un axe $(Δ)$. À vitesse angulaire égale, leur énergie cinétique dépend de leur forme et de la position de l’axe, c’est-à-dire de la <b>répartition de la matière</b> autour de l’axe.</p></div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="solides"><div class="cap"><span class="doc">Doc 5</span>Solides homogènes et axe de rotation</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — Le moment d’inertie" data-part="Partie 2" data-group="Partie 2 · Rotation" data-menu="Questions 1 à 4">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Exprimer.</span> Exprimer $E_{\u{C}i}$ d’un élément en fonction de $m_i$, $r_i$ et $ω$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{C}i} = \frac{1}{2}m_i·V_i^2 = \frac{1}{2}m_i·r_i^2·ω^2$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Établir.</span> Établir l’expression de $E_{\u{C}} = Σ E_{\u{C}i}$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Même $ω$ pour tous les éléments : $E_{\u{C}} = \frac{1}{2}(Σ m_i·r_i^2)·ω^2$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Identifier.</span> $J_Δ = Σ m_i·r_i^2$ est le <b>moment d’inertie</b>. De quoi dépend-il ? Unité ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">De la <b>masse</b>, des dimensions et de la <b>répartition de la matière</b> autour de l’axe. Unité : $\u{kg·m^2}$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Formuler.</span> Écrire l’énergie cinétique d’un solide en rotation.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{C}} = \frac{1}{2}J_Δ·ω^2$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="pointsRot"><div class="cap"><span class="doc">Doc 4</span>$V_i = r_i·ω$</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Énergie cinétique d’un solide en rotation" data-part="Partie 2" data-group="Partie 2 · Rotation" data-menu="À retenir · rotation">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="def"><h3>Solide en rotation autour d’un axe fixe $(Δ)$</h3>
+        <div class="big-eq"><span class="boxeq">$E_{\u{C}} = \frac{1}{2}J_Δ·ω^2$</span><span class="unitnote">$ω$ en $\u{rad·s^{−1}}$ ; $J_Δ$ en $\u{kg·m^2}$</span></div>
+        <p style="margin:10px 0 0">$J_Δ = Σ m_i·r_i^2$ : <b>moment d’inertie</b> par rapport à $(Δ)$ ; il dépend de la masse et de sa répartition autour de l’axe.</p></div>
+      <div class="rappel"><b>Rappel.</b> $ω = 2π·f = \frac{2π·N}{60}$ ($N$ en tr/min) ; $V = r·ω$.</div>
+    </div>
+    <div class="stack center"><div class="def"><h3>Moments d’inertie (solides homogènes de masse $m$, axe de symétrie)</h3><table class="mtab jtab"><tr><th>Disque ou cylindre plein (rayon $r$)</th><td>$\frac{1}{2}m·r^2$</td></tr><tr><th>Anneau (cerceau) de rayon $r$</th><td>$m·r^2$</td></tr><tr><th>Sphère pleine de rayon $r$</th><td>$\frac{2}{5}m·r^2$</td></tr><tr><th>Tige de longueur $l$, axe au milieu</th><td>$\frac{1}{12}m·l^2$</td></tr><tr><th>Tige de longueur $l$, axe à une extrémité</th><td>$\frac{1}{3}m·l^2$</td></tr></table></div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Un disque qui tourne" data-part="Partie 2" data-group="Partie 2 · Rotation" data-menu="Application · disque">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack">
+      <div class="card "><p style="margin:0">Disque homogène : $m = 4,0~\u{kg}$, $r = 20~\u{cm}$ ; il tourne autour de son axe à $N = 600~\u{tr/min}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer $J_Δ$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$J_Δ = \frac{1}{2}m·r^2 = \frac{1}{2}×4,0×0,20^2 = 0,080~\u{kg·m^2}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer $ω$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ω = \frac{2π×600}{60} = 20π ≈ 62,8~\u{rad·s^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt">Calculer l’énergie cinétique.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{C}} = \frac{1}{2}×0,080×(20π)^2 ≈ 158~\u{J}$</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="disqueApp"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 3 — Travail et variation de l’énergie cinétique" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Quand un solide <b>tombe</b> ou <b>glisse</b> sur un plan incliné, sa vitesse augmente : son énergie cinétique augmente. Dans le même temps, les forces qui s’exercent sur lui <b>travaillent</b>.</p>
+        <ul class="problems"><li>Quelle relation existe-t-il entre la variation de l’énergie cinétique et le travail des forces ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="skieur" data-opts='{"plain":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 3" data-title="Chute libre d’une bille" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Activité 3 · doc 6">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 6.</b> Une bille d’acier ($m = 24~\u{g}$, diamètre $d = 1,8~\u{cm}$) retenue par un électroaimant tombe sans vitesse initiale. Une cellule photoélectrique reliée à un chronomètre mesure la durée $Δt$ d’occultation du faisceau en $A_1$ … $A_7$, à la distance $h$ sous le départ. $g = 10~\u{N·kg^{−1}}$.</p></div>
+      <table class="mtab wide"><tr><th>Point</th><td>$A_1$</td><td>$A_2$</td><td>$A_3$</td><td>$A_4$</td><td>$A_5$</td><td>$A_6$</td><td>$A_7$</td></tr><tr><th>$h$ (m)</th><td>0,20</td><td>0,40</td><td>0,60</td><td>0,80</td><td>1,00</td><td>1,20</td><td>1,40</td></tr><tr><th>$Δt$ (ms)</th><td>8,70</td><td>6,38</td><td>5,18</td><td>4,48</td><td>4,05</td><td>3,70</td><td>3,48</td></tr></table>
+    </div>
+    <div class="fig" data-scene="chuteLibre"><div class="cap"><span class="doc">Doc 6</span>Chute libre et cellule photoélectrique</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 3" data-title="Mobile autoporteur sur une table inclinée" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Activité 3 · docs 7 et 8">
+  <div class="sbody">
+    <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:stretch;height:330px;flex:none"><div class="card small"><p style="margin:0"><b>Doc 7.</b> Un mobile autoporteur ($m = 732~\u{g}$) est lâché sans vitesse initiale sur une table à coussin d’air inclinée de $α = 10°$ ; frottements négligeables. On enregistre les positions $M_0, M_1, …, M_7$ de son centre d’inertie toutes les $τ = 60~\u{ms}$.<br>On note $d_i = M_{i−1}M_{i+1}$ et $D_i = M_1M_i$.</p></div><div class="fig" data-scene="tableAir"><div class="cap"><span class="doc">Doc 7</span>Table à coussin d’air inclinée</div></div></div>
+    <div style="display:grid;grid-template-columns:1.55fr .45fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="enregistrement"><div class="cap"><span class="doc">Doc 8</span>Enregistrement à l’échelle 1</div></div>
+      <div style="display:grid;place-items:center"><table class="mtab "><tr><th>Point</th><td>$M_1$</td><td>$M_2$</td><td>$M_3$</td><td>$M_4$</td><td>$M_5$</td><td>$M_6$</td></tr><tr><th>$d_i$ (cm)</th><td>1,2</td><td>2,4</td><td>3,6</td><td>4,7</td><td>5,9</td><td>7,2</td></tr><tr><th>$D_i$ (cm)</th><td>0</td><td>0,9</td><td>2,4</td><td>4,5</td><td>7,1</td><td>10,4</td></tr></table></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Exploiter la chute libre" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Question 1">
+  <div class="sbody cols" style="--c1:1.55fr;--c2:.45fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Calculer.</span> Calculer en chaque point $V_i = \frac{d}{Δt}$, $E_{\u{C}i}$ et $W_{A_1→A_i}(\vec{P}) = m·g·(h_i − h_1)$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">En $A_1$ : $V_1 = \frac{0,018}{8,70×10^{−3}} ≈ 2,07~\u{m·s^{−1}}$ ; $E_{\u{C}1} = \frac{1}{2}×0,024×2,07^2 ≈ 0,051~\u{J}$<table class="mtab wide"><tr><th>Point</th><td>$A_1$</td><td>$A_2$</td><td>$A_3$</td><td>$A_4$</td><td>$A_5$</td><td>$A_6$</td><td>$A_7$</td></tr><tr><th>$V_i$ (m·s<sup>−1</sup>)</th><td>2,07</td><td>2,82</td><td>3,47</td><td>4,02</td><td>4,44</td><td>4,86</td><td>5,17</td></tr><tr><th>$E_{\u{C}}$ (J)</th><td>0,051</td><td>0,096</td><td>0,145</td><td>0,194</td><td>0,237</td><td>0,284</td><td>0,321</td></tr><tr><th>$W(\vec{P})$ (J)</th><td>0</td><td>0,048</td><td>0,096</td><td>0,144</td><td>0,192</td><td>0,240</td><td>0,288</td></tr></table></div></div></div></div>
+    </div>
+    <div class="fig" data-scene="chuteLibre"><div class="cap"><span class="doc">Doc 6</span>Mesure de Δt</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — La courbe Ec = f(W)" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Question 2">
+  <div class="sbody cols" style="--c1:1.05fr;--c2:.95fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Analyser.</span> Tracer $E_{\u{C}} = f(W(\vec{P}))$. Interpréter l’ordonnée à l’origine et le coefficient directeur. Conclure.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Droite $E_{\u{C}} = a·W(\vec{P}) + b$ : $b = E_{\u{C}1} ≈ 0,051~\u{J}$ ; $a ≈ 0,95 ≈ 1$.<br>Donc $ΔE_{\u{C}} = E_{\u{C}i} − E_{\u{C}1} = W_{A_1→A_i}(\vec{P})$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="graphChute"><div class="cap">Ec en fonction de W(P)</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Le mobile sur le plan incliné" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Questions 3 et 4">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Inventorier.</span> Faire le bilan des forces sur le mobile. Exprimer la somme de leurs travaux entre $M_1$ et $M_i$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Poids $\vec{P}$ et réaction $\vec{R}$, perpendiculaire au plan : $W(\vec{R}) = 0$.<br>$Σ W = W(\vec{P}) = m·g·D_i·\u{sin}α$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Calculer.</span> Exprimer $V_i$ en fonction de $d_i$ et $τ$ ; calculer $E_{\u{C}i}$ et $W(\vec{P})$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_i = \frac{d_i}{2τ}$ ; en $M_1$ : $V_1 = \frac{1,2×10^{−2}}{0,120} = 0,10~\u{m·s^{−1}}$<table class="mtab wide"><tr><th>Point</th><td>$M_1$</td><td>$M_2$</td><td>$M_3$</td><td>$M_4$</td><td>$M_5$</td><td>$M_6$</td></tr><tr><th>$V_i$ (m·s<sup>−1</sup>)</th><td>0,100</td><td>0,200</td><td>0,300</td><td>0,392</td><td>0,492</td><td>0,600</td></tr><tr><th>$E_{\u{C}}$ (10<sup>−3</sup> J)</th><td>3,66</td><td>14,6</td><td>32,9</td><td>56,1</td><td>88,5</td><td>132</td></tr><tr><th>$W(\vec{P})$ (10<sup>−3</sup> J)</th><td>0</td><td>11,4</td><td>30,5</td><td>57,2</td><td>90,2</td><td>132</td></tr></table></div></div></div></div>
+    </div>
+    <div class="fig" data-scene="tableAir" data-opts='{"forces":1}'><div class="cap">Forces sur le mobile</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Généraliser" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Question 5">
+  <div class="sbody cols" style="--c1:1.05fr;--c2:.95fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">5</span><div class="qt"><span class="kw">Généraliser.</span> La courbe $E_{\u{C}} = f(W(\vec{P}))$ du mobile est une droite. Écrire son équation et conclure.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$a ≈ 0,96 ≈ 1$ ; $b ≈ 3×10^{−3}~\u{J}$, voisin de $E_{\u{C}1} ≈ 3,7×10^{−3}~\u{J}$, donc $E_{\u{C}} − E_{\u{C}1} = W(\vec{P})$.<br>Comme $W(\vec{R}) = 0$ : $ΔE_{\u{C}} = Σ W_{M_1→M_i}(\vec{F}_{\u{ext}})$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="graphTable"><div class="cap">Mobile autoporteur</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Théorème de l’énergie cinétique (translation)" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="À retenir · théorème">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack center">
+      <div class="def"><h3>Théorème de l’énergie cinétique</h3><p style="margin:0 0 10px">Dans un <b>référentiel galiléen</b>, la variation de l’énergie cinétique d’un solide en translation entre deux positions A et B est égale à la <b>somme des travaux des forces extérieures</b> appliquées entre A et B :</p>
+        <div class="big-eq"><span class="boxeq">$ΔE_{\u{C}} = \frac{1}{2}m·V_B^2 − \frac{1}{2}m·V_A^2 = Σ W_{A→B}(\vec{F}_{\u{ext}})$</span></div></div>
+      <div class="card small"><p style="margin:0">Travail <b>moteur</b> ($Σ W > 0$) : $E_{\u{C}}$ augmente. Travail <b>résistant</b> ($Σ W < 0$) : $E_{\u{C}}$ diminue. Le référentiel terrestre est considéré comme galiléen.</p></div>
+    </div>
+    <div class="fig" data-scene="tableAir" data-opts='{"forces":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="La descente d’un skieur" data-part="Partie 3" data-group="Partie 3 · Théorème (expérience)" data-menu="Application · skieur">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack">
+      <div class="card "><p style="margin:0">Skieur et équipement : $m = 80~\u{kg}$ ; départ sans vitesse en A ; piste rectiligne inclinée de $α = 20°$ ; $AB = 50~\u{m}$ ; frottements négligeables ; $g = 9,8~\u{N·kg^{−1}}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Bilan des forces et travail de chacune entre A et B.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Poids $\vec{P}$ : $W(\vec{P}) = m·g·AB·\u{sin}α = 80×9,8×50×\u{sin}20° ≈ 1,34×10^4~\u{J}$<br>Réaction $\vec{R}$ perpendiculaire à la piste : $W(\vec{R}) = 0$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer la vitesse $V_B$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\frac{1}{2}m·V_B^2 − 0 = W(\vec{P})$ ⇒ $V_B = \sqrt{2g·AB·\u{sin}α} ≈ 18,3~\u{m·s^{−1}}$</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="skieur"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 4 — Du solide en translation au solide en rotation" data-part="Partie 4" data-group="Partie 4 · Généralisation" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:1fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Le théorème a été vérifié pour un solide en translation. Une <b>poulie</b> qui soulève une charge, un <b>treuil</b> ou une <b>meule</b> qu’on freine sont des solides en <b>rotation</b> autour d’un axe fixe.</p>
+        <ul class="problems"><li>Le théorème s’applique-t-il encore ?</li><li>Comment l’utiliser avec méthode ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="treuilCorps"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 4" data-title="Un volant entraîné par un moteur" data-part="Partie 4" data-group="Partie 4 · Généralisation" data-menu="Activité 4 · doc 9">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Doc 9.</b> Un volant de moment d’inertie $J_Δ$ tourne autour d’un axe fixe $(Δ)$, dans un référentiel galiléen. Sous l’action de forces extérieures, sa vitesse angulaire passe de $ω_1$ (instant $t_1$) à $ω_2$ (instant $t_2$).</p></div>
+      <div class="card small"><p style="margin:0">Chaque élément de matière subit une variation d’énergie cinétique égale au travail des forces qui s’exercent sur lui. En additionnant ces relations pour tous les éléments, on obtient une relation pour le solide entier, <b>valable même si les forces ou leurs moments ne sont pas constants</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="volant"><div class="cap"><span class="doc">Doc 9</span>Volant entraîné par un moteur</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 4 — Généraliser le théorème" data-part="Partie 4" data-group="Partie 4 · Généralisation" data-menu="Questions 1 à 3">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Écrire.</span> Écrire le théorème pour le volant dont la vitesse angulaire passe de $ω_1$ à $ω_2$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔE_{\u{C}} = \frac{1}{2}J_Δ·ω_2^2 − \frac{1}{2}J_Δ·ω_1^2 = Σ W_{1→2}(\vec{F}_{\u{ext}})$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Énoncer.</span> Énoncer le théorème pour un solide en translation ou en rotation. Reste-t-il valable si les forces varient ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">La variation de l’énergie cinétique entre deux instants est égale à la somme des travaux des forces extérieures. <b>Oui</b> : il reste valable même si les forces ou leurs moments ne sont pas constants.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Ordonner.</span> Quelles étapes suivre pour appliquer ce théorème ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Système ; référentiel galiléen ; état initial et état final ; bilan des forces ; travail de chaque force ; écrire le théorème et résoudre.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="volant"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Théorème de l’énergie cinétique" data-part="Partie 4" data-group="Partie 4 · Généralisation" data-menu="À retenir · généralisation">
+  <div class="sbody">
+    <div class="stack center" style="flex:1"><div class="def"><h3>Énoncé général (référentiel galiléen, solide indéformable)</h3><p style="margin:0 0 10px">La variation de l’énergie cinétique entre deux instants $t_1$ et $t_2$ est égale à la somme des travaux de toutes les forces extérieures appliquées au solide :</p>
+      <div class="big-eq"><span class="boxeq">$ΔE_{\u{C}} = E_{\u{C}2} − E_{\u{C}1} = Σ W_{1→2}(\vec{F}_{\u{ext}})$</span></div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div class="def"><h3>Translation</h3><span class="eq-wrap">$\frac{1}{2}m·V_2^2 − \frac{1}{2}m·V_1^2 = Σ W_{1→2}(\vec{F}_{\u{ext}})$</span></div>
+      <div class="def"><h3>Rotation autour d’un axe fixe</h3><span class="eq-wrap">$\frac{1}{2}J_Δ·ω_2^2 − \frac{1}{2}J_Δ·ω_1^2 = Σ W_{1→2}(\vec{F}_{\u{ext}})$</span></div>
+    </div>
+    <div class="card small"><p style="margin:0">Le théorème reste valable même si les forces ou leurs moments <b>ne sont pas constants</b>.</p></div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="methode" data-chip="Méthode" data-title="Appliquer le théorème de l’énergie cinétique" data-part="Partie 4" data-group="Partie 4 · Généralisation" data-menu="Méthode">
+  <div class="sbody">
+    <div class="method"><h3>Six étapes</h3>
+      <ol class="steps"><li>Définir le <b>système</b> étudié.</li><li>Choisir le <b>référentiel</b> (terrestre, supposé galiléen).</li><li>Préciser l’<b>état initial</b> et l’<b>état final</b> (positions, vitesses).</li><li>Faire le <b>bilan des forces</b> extérieures.</li><li>Calculer le <b>travail</b> de chaque force (force perpendiculaire au déplacement, ou qui coupe l’axe : $W = 0$).</li><li>Écrire le <b>théorème</b> avec l’expression de $E_{\u{C}}$ adaptée et résoudre.</li></ol></div>
+    <div style="display:grid;grid-template-columns:1.2fr .8fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="skieur" data-opts='{"plain":1}'></div>
+      <div class="fig" data-scene="poulieApp" data-opts='{"plain":1}'></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Une poulie mise en rotation" data-part="Partie 4" data-group="Partie 4 · Généralisation" data-menu="Application · poulie">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Poulie homogène (disque) : $M = 2,0~\u{kg}$, $r = 10~\u{cm}$, sans frottement autour de son axe fixe. Au repos, elle reçoit un couple moteur de moment constant $ℳ_Δ$ = $0,50~\u{N·m}$ pendant 10 tours.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer $J_Δ$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$J_Δ = \frac{1}{2}M·r^2 = \frac{1}{2}×2,0×0,10^2 = 1,0×10^{−2}~\u{kg·m^2}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Bilan des actions et somme des travaux pour 10 tours.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Poids et réaction de l’axe : droites d’action qui coupent l’axe, $W = 0$. Couple : $W = ℳ_Δ·Δθ = 0,50×20π ≈ 31,4~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt">Calculer $ω_2$ au bout de 10 tours.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\frac{1}{2}J_Δ·ω_2^2 − 0 = 31,4$ ⇒ $ω_2 = \sqrt{\frac{2×31,4}{0,010}} ≈ 79,3~\u{rad·s^{−1}}$</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="poulieApp"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="quiz" data-chip="Vrai ou faux ?" data-title="Je vérifie mes connaissances" data-part="Exercices" data-group="Exercices et bilan" data-menu="Vrai ou faux ?">
+  <div class="sbody">
+    <div class="vflist">
+      <div class="vf" data-answer="faux"><span class="qn">a</span><div>Si la vitesse d’un solide en translation double, son énergie cinétique double.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : $E_{\u{C}}$ est proportionnelle à $V^2$ ; elle est multipliée par 4.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">b</span><div>L’énergie cinétique est une grandeur toujours positive ou nulle.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $m > 0$ et $V^2 ≥ 0$ (ou $J_Δ > 0$ et $ω^2 ≥ 0$).</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">c</span><div>Le moment d’inertie d’un solide ne dépend que de sa masse.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : il dépend aussi de la répartition de la matière autour de l’axe.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">d</span><div>Dans $E_{\u{C}} = \frac{1}{2}J_Δ·ω^2$, la vitesse angulaire s’exprime en tours par minute.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : $ω$ s’exprime en $\u{rad·s^{−1}}$.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">e</span><div>Si la somme des travaux des forces extérieures est nulle, la vitesse finale est égale à la vitesse initiale.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $ΔE_{\u{C}} = 0$.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">f</span><div>Le théorème de l’énergie cinétique ne s’applique que si les forces sont constantes.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : il reste valable si les forces ou leurs moments varient.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 1" data-title="Un solide sur une piste" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · énoncé">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0">Solide (S) de masse $m = 500~\u{g}$, lâché sans vitesse en A. Partie AB inclinée de $α = 30°$, $AB = 2,0~\u{m}$, sans frottement ; partie horizontale rugueuse à partir de B : frottements équivalents à une force $\vec{f}$ opposée au mouvement, $f = 1,2~\u{N}$ ; $BC = 2,5~\u{m}$ ; $g = 10~\u{N·kg^{−1}}$.</p></div>
+    <div style="display:grid;grid-template-columns:1.35fr .65fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="piste"></div>
+      <ol class="exlist small"><li>Travail du poids entre A et B.</li><li>Énergie cinétique et vitesse en B.</li><li>Bilan des forces entre B et C ; travail de chacune.</li><li>Vitesse $V_C$ en C.</li><li>(S) s’arrête en D : calculer BD.</li></ol>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 1 — Un solide sur une piste" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · correction">
+  <div class="sbody">
+    <div class="fig" data-scene="piste" data-opts='{"final":1}' style="height:215px;flex:none"></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">De A à B</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W(\vec{P}) = m·g·AB·\u{sin}α = 0,50×10×2,0×0,5 = 5,0~\u{J}$ ; $W(\vec{R}) = 0$ ⇒ $E_{\u{C}B} = 5,0~\u{J}$, $V_B = \sqrt{\frac{2E_{\u{C}B}}{m}} = \sqrt{20} ≈ 4,47~\u{m·s^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">De B à C</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W(\vec{P}) = W(\vec{R}_N) = 0$ ; $W(\vec{f}) = −f·BC = −3,0~\u{J}$ ⇒ $E_{\u{C}C} = 2,0~\u{J}$, $V_C = \sqrt{8} ≈ 2,83~\u{m·s^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Arrêt en D</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$0 − E_{\u{C}B} = −f·BD$ ⇒ $BD = \frac{5,0}{1,2} ≈ 4,17~\u{m}$</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 2" data-title="Le freinage d’un cylindre" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · énoncé">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Cylindre homogène : $M = 10~\u{kg}$, $R = 20~\u{cm}$ ; il tourne à $N_0 = 300~\u{tr/min}$ autour de son axe fixe $(Δ)$. On coupe le moteur et on applique une force de frottement tangentielle constante $f = 5,0~\u{N}$ jusqu’à l’arrêt. Frottements sur l’axe négligeables.</p></div>
+      <ol class="exlist small"><li>Calculer $J_Δ$ et $ω_0$.</li><li>Calculer l’énergie cinétique au début du freinage.</li><li>Moment de $\vec{f}$ par rapport à $(Δ)$ et son travail pour une rotation $Δθ$.</li><li>Calculer $Δθ$ et le nombre de tours avant l’arrêt.</li></ol>
+    </div>
+    <div class="fig" data-scene="frein"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 2 — Le freinage d’un cylindre" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · correction">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Inertie et vitesse</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$J_Δ = \frac{1}{2}M·R^2 = 0,20~\u{kg·m^2}$ ; $ω_0 = \frac{2π×300}{60} = 10π ≈ 31,4~\u{rad·s^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Énergie initiale</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{C}0} = \frac{1}{2}×0,20×(10π)^2 ≈ 98,7~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Travail du frottement</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ℳ_Δ(\vec{f}) = −f·R = −1,0~\u{N·m}$ ; $W(\vec{f}) = −1,0·Δθ$ (poids et réaction de l’axe : $W = 0$)</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Arrêt</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$0 − E_{\u{C}0} = −1,0·Δθ$ ⇒ $Δθ ≈ 98,7~\u{rad}$, soit $n = \frac{Δθ}{2π} ≈ 15,7$ tours</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="frein" data-opts='{"final":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 3" data-title="Un treuil et une charge" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · énoncé">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Treuil : cylindre homogène (C), $M = 4,0~\u{kg}$, $r = 10~\u{cm}$, sans frottement autour de $(Δ)$. Un fil inextensible enroulé sans glisser porte un corps (S) de masse $m = 1,0~\u{kg}$. Lâché sans vitesse, (S) descend de $h = 1,5~\u{m}$ ; $g = 10~\u{N·kg^{−1}}$.</p></div>
+      <ol class="exlist small"><li>Calculer $J_Δ$.</li><li>Relations entre $V$ et $ω$, puis entre $h$ et $Δθ$.</li><li>Théorème appliqué à (S), puis à (C), avec la tension $T$ du fil.</li><li>Calculer $V$ après la descente, puis $T$.</li></ol>
+    </div>
+    <div class="fig" data-scene="treuilCorps"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 3 — Un treuil et une charge" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · correction">
+  <div class="sbody cols" style="--c1:1.4fr;--c2:.6fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Inertie et relations</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$J_Δ = \frac{1}{2}M·r^2 = 2,0×10^{−2}~\u{kg·m^2}$ ; $V = r·ω$ ; $h = r·Δθ$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Théorème pour (S) et (C)</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">(S) : $\frac{1}{2}m·V^2 = m·g·h − T·h$ (1) ; (C) : $\frac{1}{2}J_Δ·ω^2 = T·r·Δθ = T·h$ (2)</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Vitesse et tension</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">(1) + (2) : $\frac{1}{2}(m + \frac{M}{2})V^2 = m·g·h$ ⇒ $V = \sqrt{10} ≈ 3,16~\u{m·s^{−1}}$ ; $T = \frac{M·V^2}{4h} ≈ 6,67~\u{N}$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="treuilCorps" data-opts='{"final":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="bilan" data-chip="L’essentiel" data-title="Ce qu’il faut retenir du chapitre" data-part="Bilan" data-group="Exercices et bilan" data-menu="L’essentiel du chapitre">
+  <div class="sbody">
+    <div class="bilan">
+      <div class="bil"><h3>Translation</h3><p>Tout vecteur $\vec{AB}$ du solide reste constant : rectiligne, curviligne ou circulaire.</p></div>
+      <div class="bil"><h3>Énergie cinétique (translation)</h3><span class="eq-wrap">$E_{\u{C}} = \frac{1}{2}m·V^2$</span><p>en joules ; $V$ en $\u{m·s^{−1}}$</p></div>
+      <div class="bil"><h3>Énergie cinétique (rotation)</h3><span class="eq-wrap">$E_{\u{C}} = \frac{1}{2}J_Δ·ω^2$</span><p>$ω$ en $\u{rad·s^{−1}}$</p></div>
+      <div class="bil"><h3>Moment d’inertie</h3><span class="eq-wrap">$J_Δ = Σ m_i·r_i^2$</span><p>disque : $\frac{1}{2}m·r^2$ ; anneau : $m·r^2$</p></div>
+      <div class="bil"><h3>Théorème de l’énergie cinétique</h3><span class="eq-wrap">$ΔE_{\u{C}} = Σ W(\vec{F}_{\u{ext}})$</span><p>référentiel galiléen ; forces constantes ou non</p></div>
+      <div class="bil"><h3>Méthode</h3><p>Système, référentiel, états initial et final, bilan des forces, travaux, théorème.</p></div>
+    </div>
+  </div>
+</section>

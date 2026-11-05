@@ -1,0 +1,222 @@
+% =====================================================================
+%  Préambule commun (modèle) : les données du chapitre sont dans chapitre.tex
+%  Chapitre de manuel de Physique-Chimie (1re année du baccalauréat)
+%  Préambule commun au livre du professeur et au livre de l'élève :
+%  \def\versioneleve{1} en première ligne active la version élève (à compléter).
+%  Compilation : ./build_livre.sh (XeLaTeX, deux passes)
+%  Les figures viennent des scènes animées de la présentation
+%  (figures_html/book.html + render_book.py) et sont exportées dans images/.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\input{chapitre.tex}% \MatiereLivre, \DomaineLivre, \NumChapLivre, \TitreCourtLivre
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.2cm,left=1.9cm,right=2.1cm,headsep=6mm,footskip=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\titlefont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, BoldFont=*-Bold]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.misc}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{eso-pic}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{needspace}
+\usepackage{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+\usepackage{microtype}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=4}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt plus 1pt}
+\linespread{1.07}
+\emergencystretch=3em
+\tolerance=2500
+
+% ---------- Couleurs (identiques à la charte des figures) ----------
+\definecolor{cInk}{HTML}{1B2A41}
+\definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8}
+\definecolor{cSky}{HTML}{8EC5FF}
+\definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}
+\definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6}
+\definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300}
+\definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\arc}[1]{\overparen{#1}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Mom}{\mathcal{M}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}   % mot-clé des questions
+\newcommand{\hl}[1]{{\bfseries\color{cRed}#1}}             % mise en évidence
+\newcommand{\imp}[1]{\textbf{#1}}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+
+% Pastille « Doc n »
+\newcommand{\docbadge}[2][cBlue]{\tikz[baseline=(b.base)]\node[fill=#1,text=white,rounded corners=6pt,inner xsep=5pt,inner ysep=2.2pt,font=\sffamily\bfseries\footnotesize](b){Doc #2};}
+% Document illustré : [largeur]{n}{légende}{image}
+\newcommand{\docimg}[4][0.485\linewidth]{%
+  \begin{minipage}[t]{#1}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{1.4mm}
+    {\sffamily\small\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+% Figure numérotée simple
+\newcommand{\figcap}[1]{\par\vspace{1mm}{\centering\sffamily\small\color{cInk2}#1\par}}
+
+% Formule encadrée
+\newtcbox{\formule}[1][cRed]{on line, enhanced, colback=white, colframe=#1, boxrule=1pt, arc=2.5mm,
+  left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm, boxsep=0pt}
+
+% ---------- Rubriques (boîtes) ----------
+% \begin{rub}[options]{couleur}{icône}{titre}
+\newtcolorbox{rub}[4][]{%
+  enhanced, breakable,
+  colback=#2!4!white, colframe=#2!75!white, boxrule=0.9pt, arc=3mm,
+  left=4.5mm, right=4.5mm, top=6.5mm, bottom=3.5mm,
+  before skip=6mm, after skip=4mm,
+  title={\raisebox{-2.35mm}{\includegraphics[height=7.6mm]{ic_#3}}\hspace{2.2mm}#4},
+  fonttitle=\sffamily\bfseries\fontsize{11.5}{13}\selectfont\color{white},
+  attach boxed title to top left={xshift=5mm,yshift=-4.4mm},
+  boxed title style={enhanced, colback=#2, colframe=#2, arc=4.3mm, boxrule=0pt,
+     left=0.4mm, right=4.5mm, top=0.5mm, bottom=0.5mm},
+  #1}
+
+% Encadré secondaire (méthode, rappel, le saviez-vous) — non sécable
+\newtcolorbox{encart}[4][]{%
+  enhanced, colback=#2!6!white, colframe=#2!6!white, boxrule=0pt, arc=2.5mm,
+  left=13mm, right=3mm, top=2mm, bottom=2mm, before skip=3mm, after skip=3mm,
+  borderline west={1.6pt}{0pt}{#2},
+  overlay={\node[anchor=north west] at ([xshift=2mm,yshift=-2mm]frame.north west)
+     {\includegraphics[width=8.5mm]{ic_#3}};},
+  fontupper=\small,
+  title={#4}, detach title, coltitle=#2, before upper={{\sffamily\bfseries\color{#2}\tcbtitle}\par\smallskip},
+  #1}
+
+% Situation de départ (bulle)
+\newtcolorbox{situation}{%
+  enhanced, colback=cAmber!9!white, colframe=cAmber!9!white, boxrule=0pt, arc=3mm,
+  left=16mm, right=4mm, top=2.5mm, bottom=2.5mm, before skip=2mm, after skip=3mm,
+  overlay={\node at ([xshift=8mm]frame.west) {\includegraphics[width=10mm]{ic_situation}};
+           \draw[cAmber, line width=1.4pt, rounded corners=3mm] (frame.south west) rectangle (frame.north east);}}
+
+% Sous-titre à l'intérieur d'une rubrique
+\newcommand{\soustitre}[2][cTeal]{\par\medskip{\sffamily\bfseries\color{#1}\MakeUppercase{#2}}\par\smallskip}
+
+% Listes
+% pastille numérotée (commande robuste : enumitem développe l'étiquette)
+\DeclareRobustCommand{\pastille}[2]{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=5.2mm,font=\sffamily\bfseries\footnotesize](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=3pt, topsep=3pt}
+\newlist{reps}{enumerate}{1}
+\setlist[reps]{label={\pastille{cGreen}{\arabic*}},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=4pt, topsep=3pt}
+\newlist{appq}{enumerate}{1}
+\setlist[appq]{label={\sffamily\bfseries\color{cPurple}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\newlist{exq}{enumerate}{1}
+\setlist[exq]{label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\setlist[itemize,1]{label={\color{cOrange}\small$\blacktriangleright$}, leftmargin=6mm, itemsep=2pt, topsep=2pt}
+\setlist[itemize,2]{label={\color{cInk2}\small$\bullet$}, leftmargin=5mm, itemsep=1pt, topsep=1pt}
+
+% ---------- Titres de sections ----------
+\titleformat{\section}[block]
+  {\sffamily\bfseries\fontsize{18}{22}\selectfont\color{cInk}\RaggedRight}
+  {\tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=10.5mm,minimum height=10.5mm,inner sep=0pt,font=\sffamily\bfseries\fontsize{18}{22}\selectfont](n){\thesection};}
+  {4mm}{}[\vspace{1.2mm}{\color{cOrange}\titlerule[1.3pt]}]
+\titlespacing*{\section}{0pt}{8mm}{4mm}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{\MatiereLivre}}\enspace·\enspace \DomaineLivre}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre \NumChapLivre\enspace·\enspace \TitreCourtLivre}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7.5mm,inner sep=0pt]{\thepage};}
+% onglet latéral
+\AddToShipoutPictureBG{%
+  \ifnum\value{page}>1
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[cOrange,rounded corners=2.5mm] ([xshift=-6.5mm,yshift=-3.2cm]current page.north east) rectangle ([xshift=3mm,yshift=-7.2cm]current page.north east);
+    \node[rotate=-90,text=white,font=\sffamily\bfseries\footnotesize] at ([xshift=-3.3mm,yshift=-5.2cm]current page.north east) {CHAPITRE \NumChapLivre};
+  \end{tikzpicture}\fi}
+
+
+% ---------- Encadré « Rappel » ----------
+\newenvironment{rappel}{\begin{encart}{cGrey}{rappel}{Rappel}}{\end{encart}}
+
+% ---------- Tableaux de mesures : \mesures[largeur]{nb colonnes}{lignes} ----------
+\newcommand{\mesures}[3][1.25cm]{{\renewcommand{\arraystretch}{1.35}\setlength{\arrayrulewidth}{.6pt}\arrayrulecolor{cTeal!55}\setlength{\tabcolsep}{4pt}%
+  \begin{tabular}{|>{\sffamily\footnotesize\bfseries\color{cTeal}}l|*{#2}{>{\centering\arraybackslash}p{#1}|}}\hline #3\end{tabular}}}
+
+% =====================================================================
+%  Version élève (livre à compléter) : \def\versioneleve{1} avant \documentclass
+% =====================================================================
+\newif\ifeleve
+\ifdefined\versioneleve\elevetrue\fi
+\newlength{\interligne}\setlength{\interligne}{7mm}
+\newsavebox{\repbox}
+\newlength{\replen}
+\newcount\repn \newcount\lgn
+\newcommand{\pointilles}{{\color{cInk2!60}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}
+% \lignes{n} : n lignes pointillées (la première continue la ligne en cours)
+\newcommand{\lignes}[1]{\leavevmode\vrule width0pt height\dimexpr\interligne-1mm\relax depth0pt\pointilles
+  \lgn=1 \loop\ifnum\lgn<#1 \par\nointerlineskip\noindent\vrule width0pt height\interligne depth0pt\pointilles\advance\lgn by 1 \repeat}
+% \rep{réponse} : réponse rédigée (professeur) ou lignes pointillées en nombre adapté (élève)
+\newcommand{\rep}[1]{%
+  \ifeleve
+    \sbox{\repbox}{\parbox{\linewidth}{#1}}%
+    \replen=\dimexpr\ht\repbox+\dp\repbox\relax
+    \repn=\numexpr\replen/\baselineskip+1\relax
+    \ifnum\repn<2 \repn=2\fi
+    \edef\nblignes{\the\repn}\lignes{\nblignes}%
+  \else #1\fi}
+% \trou{mot ou formule} : mot clé des « À retenir » (professeur) ou espace pointillé (élève)
+\newlength{\troumax}
+\newcommand{\trou}[1]{%
+  \ifeleve
+    \sbox{\repbox}{#1}%
+    \replen=\dimexpr\wd\repbox*3/2+6mm\relax
+    \troumax=\linewidth \ifdim\hsize<\troumax \troumax=\hsize\fi
+    \advance\troumax by -14mm\relax
+    \ifdim\replen>\troumax \replen=\troumax\fi
+    \makebox[\replen][l]{\vphantom{\usebox{\repbox}}\pointilles}%
+  \else #1\fi}
+% \troul{fin de phrase} : fin de phrase à compléter sur une ou plusieurs lignes
+\newcommand{\troul}[1]{%
+  \ifeleve
+    \sbox{\repbox}{#1}%
+    \repn=\numexpr\dimexpr\wd\repbox*3/2\relax/\linewidth+1\relax
+    \edef\nblignes{\the\repn}\unskip\ \lignes{\nblignes}%
+  \else #1\fi}
+% \cel{valeur} : case de tableau (vide en version élève, hauteur conservée)
+\newcommand{\cel}[1]{\ifeleve\vphantom{#1}\else #1\fi}
+\newcommand{\titrereponses}{\ifeleve Mes réponses\else Réponses\fi}
+\newcommand{\titrecorriges}{\ifeleve Mes réponses aux exercices\else Éléments de correction\fi}
+\ifeleve
+  \fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre \NumChapLivre\enspace·\enspace\textcolor{cTeal}{\textbf{Livre de l’élève}}}
+\fi

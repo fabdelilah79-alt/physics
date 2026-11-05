@@ -1,0 +1,262 @@
+% =====================================================================
+%  Fiche pédagogique — Chapitre 5 (chimie) : Mesure des quantités de matière en solution par conductimétrie
+% =====================================================================
+\usepackage[version=4]{mhchem}
+\newcommand{\Matiere}{Chimie}
+\newcommand{\Partie}{Partie 1 — Mesure des quantités de matière}
+\newcommand{\NumChap}{5}
+\newcommand{\TitreChap}{Mesure des quantités de matière\\ en solution par conductimétrie}
+\newcommand{\TitreCourt}{La conductimétrie}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{2 h}
+\newcommand{\Banniere}{opener_ch5.jpg}
+\newcommand{\BanniereDecalage}{4.2cm}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{2 heures — une séance\\ Cours-activités}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Chimie · Partie 1 · § 3\\ Mesure de la conductance (conductimétrie)}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séance}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Déterminer des quantités de matière dans une solution électrolytique}, par le calcul et expérimentalement, au moyen de \textbf{mesures physiques} et de mesures chimiques {\color{cInk2}(compétence spécifique de la chimie, 1\textsuperscript{re} année du baccalauréat ; les deux autres compétences de l’année portent sur l’évolution d’un système chimique et la synthèse d’un composé organique)}.
+\pt{\textbf{Contribution de ce chapitre :} la mesure physique est ici la \textbf{conductance} : comprendre la conduction par les ions, mesurer $G$, connaître ses grandeurs d’influence, doser une solution par une \textbf{courbe d’étalonnage} $G = f(C)$ et calculer une conductivité avec la \textbf{loi de Kohlrausch}.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} situations-problèmes (eau pure ou salée, sérum physiologique à contrôler) ; faire varier un seul paramètre à la fois ($S$, $L$, $\theta$, $C$, nature des ions) ; tracer une droite d’étalonnage et en tirer une concentration par interpolation.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} schéma normalisé du montage ; tableaux de mesures et graphes ($U = f(I)$, $G = f(C)$) ; écriture des formules d’ions et des unités ($\unit{S}$, $\unit{S.m^{-1}}$, $\unit{S.m^2.mol^{-1}}$).}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations (migration des ions, cellule dont on fait varier $S$ et $L$), tracé de la droite d’étalonnage au tableur ou à la calculatrice (régression linéaire).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en cinq étapes du dosage par étalonnage ; dilution ($C_0\cdot V_0 = C\cdot V$) ; conversions en unités SI (\unit{cm^2} $\to$ \unit{m^2}, \unit{mmol.L^{-1}} $\to$ \unit{mol.m^{-3}}).}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} contrôle qualité d’un sérum physiologique (santé), pureté de l’eau et dessalement de l’eau de mer ; sécurité : dichromate de potassium toxique (gants, lunettes, petites quantités, récupération des déchets), solutions acides et basiques.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séance, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — savoir que la présence d’\textbf{ions} est nécessaire pour qu’une solution conduise le courant et décrire le \textbf{double déplacement} des ions ;}
+\pt{\textbf{O2} — mesurer la \textbf{conductance} $G$ d’une portion de solution (GBF, ampèremètre, voltmètre) et utiliser $G = \dfrac{1}{R} = \dfrac{I}{U}$ ;}
+\pt{\textbf{O3} — connaître les \textbf{grandeurs d’influence} de la conductance : $S$, $L$, état de surface des électrodes, température, nature et concentration de la solution ;}
+\pt{\textbf{O4} — préparer des solutions étalons à partir d’une solution mère, tracer la \textbf{courbe d’étalonnage} $G = f(C)$ et l’exploiter pour déterminer une concentration inconnue ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — relier la conductance mesurée et la \textbf{conductivité} : $G = \sigma\cdot\dfrac{S}{L}$ ; relier $\sigma$ et $C$ ;}
+\pt{\textbf{O6} — utiliser la \textbf{loi de Kohlrausch} $\sigma = \sum_i \lambda_i\cdot[X_i]$ en unités SI et un tableau de conductivités molaires ioniques ;}
+\pt{\textbf{O7} — interpréter des mesures de conductance de solutions de même concentration ayant un \textbf{ion commun} ; comparer $\lambda(\ce{H+})$ et $\lambda(\ce{HO-})$ aux autres ions.}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} savoir que la présence d’ions est nécessaire au caractère conducteur d’une solution ; relation entre résistance et conductance ; facteurs influençant la conductance ($C$, $L$, $S$) ; relation entre conductance mesurée et conductivité ; préparer des solutions de concentrations différentes à partir d’une solution mère et tracer la courbe d’étalonnage ; l’exploiter pour déterminer une concentration inconnue ; utiliser la relation entre la conductivité d’une solution diluée, les conductivités molaires ioniques et les concentrations ; interpréter les mesures de conductance de solutions de même concentration ayant un ion commun.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et du chapitre 3}
+\pt{solutions électrolytiques : ions en solution, équation de dissolution ;}
+\pt{concentration du soluté apporté $C$ et concentrations effectives $[X]$ des ions ;}
+\pt{dilution : $C_0\cdot V_0 = C\cdot V$, verrerie jaugée ;}
+\pt{électricité : loi d’Ohm $U = R\cdot I$, sens conventionnel du courant, utilisation d’un multimètre.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{proportionnalité, coefficient directeur d’une droite, lecture graphique ;}
+\pt{conversions : \unit{cm^2} $\to$ \unit{m^2} ; \unit{mL} $\to$ \unit{L} ; \unit{mol.L^{-1}} $\to$ \unit{mol.m^{-3}} ;}
+\pt{écriture scientifique et chiffres significatifs.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{tube en U sur support, solutions de sulfate de cuivre et de dichromate de potassium, acide sulfurique dilué, deux électrodes de graphite, générateur de tension continue 12 V ;}
+\pt{GBF, ampèremètre, voltmètre, cellule à deux plaques planes et parallèles (surface et écartement réglables), fils, béchers, solution de chlorure de sodium ;}
+\pt{conductimètre et sa cellule, thermomètre, plaque chauffante ;}
+\pt{solution mère de chlorure de sodium à \qty{1,0e-2}{mol.L^{-1}}, pipettes jaugées, fioles jaugées de \qty{50,0}{mL} et \qty{500,0}{mL}, sérum physiologique ;}
+\pt{solutions de \ce{NaCl}, \ce{KCl}, \ce{NaOH}, \ce{KOH}, \ce{HCl} (et \ce{NH4Cl}) à \qty{5,0}{mmol.L^{-1}} ; gants et lunettes.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (36 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis 3 et 4, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices, papier millimétré.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — chimie, § 3 « Détermination des quantités de matière en solution par une mesure physique : la mesure de la conductance » : 3.1 conductance $G$ d’une solution aqueuse ionique (méthode de mesure, grandeurs d’influence, courbe d’étalonnage $G = f(C)$) ; 3.2 conductivité $\sigma$ ($G = \sigma\cdot S/L$, relation entre $\sigma$ et $C$) ; 3.3 conductivité molaire ionique $\lambda_i$ et relation avec la conductivité (tables, comparaison de $\lambda(\ce{H+_{(aq)}})$ et $\lambda(\ce{HO-_{(aq)}})$ aux autres ions, limites de la méthode d’étalonnage).}
+\pt{Activités proposées : migration des ions avec un générateur de tension continue ; mesure de la résistance et de la conductance d’une portion de solution (GBF, ampèremètre, voltmètre, électrodes planes et parallèles) ; étude des facteurs $C$, $L$, $S$ ; courbe d’étalonnage avec des solutions de \ce{NaCl} et dosage d’une solution inconnue ; comparaison des conductances de solutions de \ce{NaOH}, \ce{KOH}, \ce{HCl}, \ce{NH4Cl}, \ce{NaCl}, \ce{KCl} ; échelle relative des $\lambda$ ; $G(\ce{KOH})$ obtenue à partir de $G(\ce{KCl})$, $G(\ce{NaCl})$ et $G(\ce{NaOH})$.}
+\pt{Orientations : étalons de concentration au plus de l’ordre de \qty{1e-2}{mol.L^{-1}} et lecture par interpolation ; situations-problèmes ; toutes les mesures dans les mêmes conditions (température, état de surface et écartement des électrodes : grandeurs d’influence) ; $\lambda$ introduite expérimentalement à partir d’électrolytes forts ; $\sigma = \sum_i\lambda_i[X_i]$ écrite pour des ions monochargés, en unités SI ($\lambda_i$ assimilées aux valeurs des tables) ; \textbf{ne pas évoquer la mobilité des ions}, seulement constater que \ce{H3O+} et \ce{HO-} ont une conductivité molaire ionique plus grande. Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{5cm}
+\bloc{2}{fi_chemin}{Déroulement de la séance}
+
+\noindent\frise{cCyan/5/Accueil, cTeal/26/P1 · Conductance, cBlue/22/P2 · Influences, cPurple/26/P3 · Étalonnage, cOrange/33/P4 · Kohlrausch, cGreen/8/Bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% ---------------------------------------------------------------------
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, lancement du tube en U et rappels}{\diapo{1} \support{Fiche}}}
+{\pt{Dès l’entrée en classe, \textbf{met sous tension le tube en U} (la migration des colorations demande une vingtaine de minutes ; il sera observé pendant l’activité 1).}
+ \pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; projette la diapositive de titre et annonce le plan.}
+ \pt{Questions flash : « Quels porteurs de charges dans un métal ? », « Énoncer la loi d’Ohm », « $[\ce{Cl-}]$ dans une solution de \ce{CaCl2} à $C$ ? », « 20 mL d’une solution à $C_0$ diluée dans 100 mL : concentration ? ».}}
+{\pt{Répond oralement : les électrons libres ; $U = R\cdot I$ ; $[\ce{Cl-}] = 2C$ ; $C = C_0/5$.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} loi d’Ohm, concentrations effectives et dilution maîtrisées.\par\vspace{.8mm}
+ \regul Rappel au tableau de $C_0\cdot V_0 = C\cdot V$.}
+{5}{0 h 05}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · La conductance d’une solution}{26 min · objectifs O1 et O2}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Eau distillée ou eau salée ?}{\diapo{2}}}
+{\pt{Réalise le test (ou projette la diapo 2) : une lampe en série avec deux électrodes ne s’allume que dans l’eau salée.}
+ \pt{Pose le problème : quelle est la nature du courant dans une solution, et comment mesurer l’aptitude à le conduire ?}}
+{\pt{Observe la lampe ; propose « le sel apporte des charges », « ce sont les ions ».}}
+{\diag Hypothèses formulées.}
+{3}{0 h 08}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Des ions qui se déplacent (docs 1 à 3)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Fait observer le tube en U lancé en début de séance (et l’animation, diapo 3) : bleu vers la cathode, jaune-orangé vers l’anode.}
+ \pt{Réalise l’expérience 2 (diapo 4) : GBF, ampèremètre en série, voltmètre en dérivation ; fait relever quelques couples $(I, U)$ et explique le choix d’une tension alternative.}
+ \pt{Fait traiter les questions 1 à 4 en binômes ; corrige au clic (diapos 5 et 6).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Identifie les ions comme porteurs de charges ; attribue le bleu à \ce{Cu^{2+}} et le jaune-orangé à \ce{Cr2O7^{2-}}.}
+ \pt{Explique le double déplacement : cations dans le sens du courant, anions en sens inverse.}
+ \pt{Trouve $U = R\cdot I$ ; $R \approx \qty{125}{\ohm}$ ; $G \approx \qty{8,0}{mS}$.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} sens de déplacement justifié par le signe des charges ; calcul de $G$ avec unités.\par\vspace{.8mm}
+ \regul Erreur fréquente : « les électrons traversent la solution ». Sécurité : dichromate de potassium (gants, lunettes, déchets récupérés).}
+{14}{0 h 22}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Nature du courant ; conductance}{\diapo{7} \support{Cahier}}}
+{\pt{Fait formuler les définitions ; projette la diapo 7 (schéma normalisé du montage) et laisse le temps de recopier l’« À retenir ».}}
+{\pt{Recopie l’« À retenir » et le schéma du montage dans son cahier.}}
+{\form Question flash : « unité de $G$ ? » $\to$ le siemens (S).}
+{5}{0 h 27}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Une solution de chlorure de potassium}{\diapo{8} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $R = U/I \approx \qty{167}{\ohm}$ et $G = I/U = \qty{6,00}{mS}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} conversion \unit{mA} $\to$ \unit{A}.}
+{4}{0 h 31}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Les grandeurs qui influencent la conductance}{22 min · objectif O3}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{La valeur affichée change…}{\diapo{9}}}
+{\pt{Projette la diapo 9 (cellule animée : on enfonce les plaques, puis on les écarte) ; fait formuler des hypothèses.}}
+{\pt{Propose les paramètres : taille des plaques, écartement, température, concentration.}}
+{\diag Liste des paramètres proposés.}
+{2}{0 h 33}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Qu’est-ce qui modifie la conductance ? (doc 4)}{\diapo{10--13} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Montre au conductimètre l’effet de $S$ (on enfonce la cellule), de $L$ (on écarte les plaques) et de la température (solution tiédie) ; une seule grandeur varie à la fois.}
+ \pt{Fait exploiter les séries de mesures (diapos 10 et 11) ; questions 1 à 5 en binômes ; corrige au clic (diapos 12 et 13).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Calcule $G/S \approx \qty{137}{\micro\siemens.cm^{-2}}$ et $G\cdot L \approx \qty{137}{\micro\siemens.cm}$ : proportionnalité et proportionnalité inverse.}
+ \pt{Conclut : $G$ augmente avec $\theta$, dépend de la nature des ions, $G/C = \qty{0,32}{mS.L.mmol^{-1}}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} rapports constants calculés ; précaution « même cellule, même température ».\par\vspace{.8mm}
+ \regul Rappeler : « une seule grandeur varie à la fois ».}
+{12}{0 h 45}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{Les grandeurs d’influence}{\diapo{14} \support{Cahier}}}
+{\pt{Fait classer les grandeurs : liées à la cellule / liées à la solution ; projette la diapo 14 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question orale : « que devient $G$ si $L$ double ? » $\to$ $G/2$.}
+{5}{0 h 50}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{On modifie la cellule}{\diapo{15} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel ; correction au clic.}}
+{\pt{Trouve $G' = 2\times2\times G = 4G$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} les deux effets combinés.}
+{3}{0 h 53}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Doser une solution par étalonnage}{26 min · objectif O4}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Le sérum physiologique est-il conforme ?}{\diapo{16}}}
+{\pt{Montre un flacon de sérum physiologique (\qty{9,0}{g.L^{-1}} attendus) ; pose le problème de sa concentration (situation-problème).}}
+{\pt{Propose de comparer sa conductance à celle de solutions connues.}}
+{\diag Idée d’une comparaison à des étalons.}
+{2}{0 h 55}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Étalonnage et dosage du sérum (docs 5 et 6)}{\diapo{17--19} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Prépare devant la classe un étalon (pipette jaugée de \qty{10,0}{mL}, fiole de \qty{50,0}{mL}) ; mesure les conductances des étalons au conductimètre (diapo 17).}
+ \pt{Dilue le sérum au centième (\qty{5,0}{mL} dans \qty{500,0}{mL}) et mesure $G_d$.}
+ \pt{Fait tracer la droite $G = f(C)$ et traiter les questions 1 à 5 ; corrige au clic (diapos 18 et 19, lecture graphique animée).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; trace la courbe d’étalonnage et rédige ses réponses dans le cahier.}
+ \pt{Calcule $V_0 = \qty{10,0}{mL}$ ; $k \approx \qty{0,81}{mS.L.mmol^{-1}}$ ; $F = 100$.}
+ \pt{Lit $C_d \approx \qty{1,54}{mmol.L^{-1}}$, calcule $C \approx \qty{0,154}{mol.L^{-1}}$ et $C_m \approx \qty{9,0}{g.L^{-1}}$ : le sérum est conforme.}}
+{\form Vérification des tracés et des lectures.\par
+ \textit{Indicateurs :} droite passant par l’origine ; facteur de dilution appliqué ; conclusion argumentée.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier de multiplier $C_d$ par le facteur de dilution.}
+{15}{1 h 10}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir et méthode}{Courbe d’étalonnage ; conditions et limites}{\diapo{20--21} \support{Cahier}}}
+{\pt{Projette la diapo 20 et fait énoncer les conditions (même cellule, même température, solutions diluées d’un seul soluté, interpolation) ; présente la méthode en cinq étapes (diapo 21).}}
+{\pt{Recopie l’« À retenir » et la méthode dans son cahier.}}
+{\form Question orale : « peut-on doser une eau minérale avec une droite d’étalonnage de \ce{NaCl} ? » $\to$ non, plusieurs solutés.}
+{6}{1 h 16}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Une solution de chlorure de potassium}{\diapo{22} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel ; correction au clic.}}
+{\pt{Calcule $C = G/k = \qty{4,5}{mmol.L^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} relation $G = k\cdot C$ correctement inversée.}
+{3}{1 h 19}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Partie 4 · Conductivité d’une solution et loi de Kohlrausch}{33 min · objectifs O5, O6 et O7}
+\etape{cOrange}{\axe{cAmber}{ic_situation}{Situation de départ}{Une grandeur propre à la solution}{\diapo{23}}}
+{\pt{Projette la diapo 23 (conductances de cinq solutions de même concentration) ; pose le problème : une grandeur indépendante de la cellule, calculable à partir des ions.}}
+{\pt{Remarque que \ce{HCl} conduit beaucoup mieux que \ce{NaCl}.}}
+{\diag Mobilisation de « même concentration, ions différents ».}
+{2}{1 h 21}
+\etape{cOrange}{\axe{cTeal}{ic_activite}{Activité 4}{Chaque ion apporte sa contribution (docs 7 et 8)}{\diapo{24--26} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Mesure devant la classe la conductance de solutions de \ce{NaCl}, \ce{KCl}, \ce{NaOH}, \ce{KOH} et \ce{HCl} à \qty{5,0}{mmol.L^{-1}} avec la même cellule (doc 7, diapo 24).}
+ \pt{Introduit $G = \sigma\cdot S/L$ et la constante de cellule ; fait traiter les questions 1 à 5 ; corrige au clic (diapos 25 et 26).}
+ \pt{Conformément aux orientations, ne parle pas de mobilité des ions : constate seulement que $\lambda(\ce{H+})$ et $\lambda(\ce{HO-})$ sont plus grandes.}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Trouve l’unité \unit{S.m^{-1}} ; calcule $K = \qty{1,0e-2}{m}$ et $\sigma(\ce{NaCl}) = \qty{6,3e-2}{S.m^{-1}}$.}
+ \pt{Classe les ions ; vérifie $0{,}75 + 1{,}25 - 0{,}63 = \qty{1,37}{mS} = G(\ce{KOH})$ : contributions additives.}
+ \pt{Propose $\sigma = \lambda_{Y^+}[Y^+] + \lambda_{X^-}[X^-]$ et la vérifie avec $[X] = \qty{5,0}{mol.m^{-3}}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} raisonnement « ion commun » ; concentrations converties en \unit{mol.m^{-3}}.\par\vspace{.8mm}
+ \regul Erreur fréquente : garder $C$ en \unit{mol.L^{-1}} dans la loi de Kohlrausch (résultat 1000 fois trop petit).}
+{18}{1 h 39}
+\etape{cOrange}{\axe{cRed}{ic_retenir}{À retenir}{Conductivité ; loi de Kohlrausch ; unités SI}{\diapo{27} \support{Cahier}}}
+{\pt{Projette la diapo 27 ; insiste sur les unités SI et les conversions ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « \qty{2,0}{mmol.L^{-1}} en \unit{mol.m^{-3}} ? » $\to$ 2,0.}
+{7}{1 h 46}
+\etape{cOrange}{\axe{cPurple}{ic_application}{Application}{Conductivité d’une solution de chlorure de sodium}{\diapo{28} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Convertit $C = \qty{2,0}{mol.m^{-3}}$ ; calcule $\sigma \approx \qty{2,5e-2}{S.m^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversion ; somme des deux contributions ; unité.}
+{6}{1 h 52}
+% ---------------------------------------------------------------------
+\partie{cGreen}{Bilan et évaluation de la séance}{8 min}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ? — L’essentiel du chapitre}{\diapo{29} \diapo{36}}}
+{\pt{Lance le « Vrai ou faux ? » (diapo 29) : réponses à main levée, puis correction au clic.}
+ \pt{Projette « L’essentiel du chapitre » (diapo 36).}
+ \pt{Donne le travail à la maison : exercices 1 à 3 (énoncés projetés, diapos 30, 32 et 34, à recopier et à résoudre dans le cahier).}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}
+ \pt{Note le travail à faire.}}
+{\somm Taux de bonnes réponses au vrai-faux (objectif : au moins 5 sur 6).\par
+ \textit{Exploitation :} repérer les notions à reprendre en début de séance suivante.}
+{8}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Exercice 1} — Loi de Kohlrausch pour une solution de chlorure de calcium : objectifs O6 et O7.}
+\pt{\textbf{Exercice 2} — Constante de cellule et concentration inconnue : objectifs O3, O5 et O6.}
+\pt{\textbf{Exercice 3} — Conductivité d’un mélange : objectif O6.}
+\pt{Correction projetée au début de la séance suivante (diapos 31, 33 et 35).}
+\pt{Soutien : refaire l’application 4 pour une solution de chlorure de potassium à \qty{4,0e-3}{mol.L^{-1}} ($\lambda(\ce{K+}) = \qty{7,35e-3}{S.m^2.mol^{-1}}$). Approfondissement : lire l’étiquette d’une eau minérale et estimer sa conductivité avec la loi de Kohlrausch (ions monochargés seulement), puis comparer avec la valeur indiquée.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séance (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séance :}\lignevide}
+\end{minipage}
+
+\end{document}

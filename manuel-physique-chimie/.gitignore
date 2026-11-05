@@ -1,0 +1,9 @@
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.xdv
+__pycache__/
+dist/
+captures/

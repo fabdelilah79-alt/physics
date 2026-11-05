@@ -1,0 +1,258 @@
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 2 : Travail et puissance d’une force
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{2}
+\newcommand{\TitreChap}{Travail et puissance\\ d’une force}
+\newcommand{\TitreCourt}{Travail et puissance d’une force}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{2 h}
+\newcommand{\Banniere}{opener_phys2.jpg}
+\newcommand{\BanniereDecalage}{4.6cm}
+\providecommand{\vect}[1]{\overrightarrow{#1}}
+\providecommand{\Mom}{\mathcal{M}}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{2 heures — une séance\\ Cours-activités}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1 · § 2\\ Travail et puissance d’une force}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séance}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Interpréter les transferts d’énergie} et les phénomènes de conservation et de dissipation de l’énergie dans des situations variées de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la partie « Travail mécanique et énergie », physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} le \textbf{travail} d’une force est le mode de transfert d’énergie que les chapitres suivants relient à l’énergie cinétique et à l’énergie potentielle ; la \textbf{puissance} mesure la rapidité de ce transfert. Le chapitre fournit les outils de calcul (force constante en translation, poids, force ou couple de moment constant en rotation, puissance moyenne et instantanée) et montre un premier transfert dissipatif : le travail résistant des frottements, qui échauffe les freins ou la meule.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} situations-problèmes (pousser une voiture, toboggan, porte à ouvrir, grues) ; passer d’un cas simple (chemin rectiligne) au cas général (chemin découpé en petits segments, petites rotations $\delta\theta$) ; vérifier qu’un résultat ne dépend pas du chemin suivi.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} représenter les forces et le déplacement par des vecteurs ; écrire un produit scalaire ; vocabulaire précis : travail moteur, nul, résistant ; moment, couple ; unités J, W, N·m, rad.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} présentation animée (forces qui travaillent, bille sur deux chemins avec affichage du travail, grues chronométrées, compte-tours et tachymètre).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} choisir la bonne expression du travail selon le mouvement et la force (méthode en trois cas) ; conversions (tours $\to$ rad, \unit{km.h^{-1}} $\to$ \unit{m.s^{-1}}, tr/min $\to$ \unit{rad.s^{-1}}) ; vérifier le signe et l’unité d’un résultat.}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} machines de la vie courante (grue, treuil, voiture, meule) ; puissance d’un moteur en kW ; échauffement des freins et sécurité routière ; histoire des sciences (James Prescott Joule).}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séance, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — \textbf{reconnaître} l’effet d’une force dont le point d’application se déplace (mise en mouvement, rotation, échauffement, déformation) ;}
+\pt{\textbf{O2} — \textbf{exprimer et calculer} le travail d’une force constante en translation rectiligne ou curviligne : $W_{A\to B}(\vect F) = \vect F\cdot\vect{AB} = F\cdot AB\cdot\cos\alpha$ ; connaître le \textbf{joule} ;}
+\pt{\textbf{O3} — \textbf{distinguer} travail moteur, nul et résistant selon l’angle $\alpha$ ; calculer le travail d’un \textbf{ensemble de forces} constantes appliquées à un solide en translation ;}
+\pt{\textbf{O4} — \textbf{établir et exploiter} le travail du poids $W_{A\to B}(\vect P) = m\cdot g\cdot(z_A - z_B)$ et savoir qu’il \textbf{ne dépend pas du chemin suivi} ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — \textbf{exploiter} le travail d’une force de moment constant $W = \Mom_\Delta(\vect F)\cdot\Delta\theta$ et d’un couple de moment constant $W = \Mom_C\cdot\Delta\theta$ ($\Delta\theta$ en radians) ;}
+\pt{\textbf{O6} — \textbf{définir et calculer} la puissance moyenne $P_m = \dfrac{W}{\Delta t}$ et connaître le \textbf{watt} ;}
+\pt{\textbf{O7} — \textbf{exploiter} la puissance instantanée en translation $P = \vect F\cdot\vect V$ et en rotation $P = \Mom_\Delta\cdot\omega$.}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} reconnaître l’effet de quelques actions mécaniques sur un solide soumis à des forces dont les points d’application se déplacent ; connaître l’expression du travail d’une force constante lors d’une translation rectiligne et curviligne, et son unité ; connaître le travail moteur et le travail résistant ; connaître et exploiter l’expression du travail du poids dans le champ de pesanteur uniforme ; savoir que le travail du poids est indépendant du chemin suivi ; connaître et exploiter le travail d’une force de moment constant et d’un couple de moment constant ; connaître et exploiter la puissance moyenne et la puissance instantanée d’une force ou d’un ensemble de forces (translation et rotation) ; connaître l’unité de puissance.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et du chapitre 1}
+\pt{force : caractéristiques et représentation par un vecteur ; poids $P = m\cdot g$ ;}
+\pt{moment d’une force par rapport à un axe fixe $\Mom_\Delta(\vect F) = \pm F\cdot d$ ; couple de deux forces ;}
+\pt{mouvement de translation et mouvement de rotation ; abscisse angulaire $\theta$ en radians ; vitesse $V$ et vitesse angulaire $\omega$ ; $V = R\cdot\omega$ (chapitre 1).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils mathématiques}
+\pt{produit scalaire de deux vecteurs : $\vect u\cdot\vect v = u\cdot v\cdot\cos\alpha$ et expression avec les coordonnées ;}
+\pt{cosinus et sinus d’un angle dans un triangle rectangle ; projection d’un vecteur ;}
+\pt{conversions : 1 tour $= 2\pi$ rad ; \unit{km.h^{-1}} $\to$ \unit{m.s^{-1}} ; écriture scientifique.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours (simples)}
+\pt{boîte ou chariot tiré sur la table par un dynamomètre, sous différents angles (rapporteur) ;}
+\pt{gouttière rectiligne et gouttière courbe partant de la même hauteur, bille, règle verticale ;}
+\pt{poulie à gorge (ou roue de vélo) mobile autour d’un axe fixe, fil enroulé, masse marquée, dynamomètre ; volant (ou clé en croix) pour le couple ;}
+\pt{petit moteur-treuil sur alimentation réglable soulevant une masse marquée, chronomètre (deux vitesses de levage).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (38 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (une page, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, partie « Travail mécanique et énergie », § 2 « Travail et puissance d’une force » : notion de travail et unité ; travail d’une force constante lors d’un déplacement en translation rectiligne et curviligne ; travail du poids dans le champ de pesanteur uniforme, travail moteur et travail résistant ; travail d’un ensemble de forces constantes appliquées à un solide en translation rectiligne ; travail d’une force de moment constant (rotation autour d’un axe fixe) et d’un couple de moment constant ; puissance d’une force ou d’un ensemble de forces et son unité, puissance moyenne et puissance instantanée.}
+\pt{Activité proposée : s’appuyer sur des documents, des logiciels ou des expériences simples pour mettre en évidence l’effet des actions mécaniques sur un solide (forces dont les points d’application se déplacent par rapport à un référentiel) — ici : doc 1, animations et expériences de cours.}
+\pt{Orientations : se limiter au travail d’une force constante ou d’un ensemble de forces constantes en translation rectiligne et curviligne, et au \textbf{moment constant} dans le cas de la rotation (une force de moment variable, comme le poids d’une barre qui tourne, se traite par le travail du poids). Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{5cm}
+\bloc{2}{fi_chemin}{Déroulement de la séance}
+
+\noindent\frise{cCyan/6/Accueil, cTeal/34/P1 · Force constante, cBlue/22/P2 · Poids, cPurple/28/P3 · Rotation, cOrange/23/P4 · Puissance, cGreen/7/Bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% ---------------------------------------------------------------------
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil et rappels}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (une page), que chacun colle dans son cahier ; projette la diapositive de titre (grue animée) et annonce le plan.}
+ \pt{Questions flash : « Poids d’un corps de \qty{2,0}{kg} ($g = \qty{10}{N.kg^{-1}}$) ? », « Moment d’une force de \qty{10}{N} de bras de levier \qty{0,30}{m} ? », « $\vect u\cdot\vect v$ si $u = 2$, $v = 3$ et $\alpha = 60^\circ$ ? », « 1 tour en radians ? ».}}
+{\pt{Répond oralement : $P = \qty{20}{N}$ ; $\Mom = \qty{3,0}{N.m}$ ; $\vect u\cdot\vect v = 3$ ; $2\pi$ rad.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} poids, moment et produit scalaire maîtrisés.\par\vspace{.8mm}
+ \regul Rappel au tableau de $\vect u\cdot\vect v = u\cdot v\cdot\cos\alpha$ et de $\Mom_\Delta = \pm F\cdot d$.}
+{6}{0 h 06}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Travail d’une force constante en translation}{34 min · objectifs O1, O2 et O3}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Comment mesurer l’effet d’une force ?}{\diapo{2}}}
+{\pt{Projette la diapo 2 (une personne pousse une voiture en panne) ; pose le problème : comment mesurer l’effet d’une force au cours d’un déplacement ?}}
+{\pt{Propose : « cela dépend de la force », « de la distance parcourue », « de la direction dans laquelle on pousse ».}}
+{\diag Hypothèses formulées et notées au tableau.}
+{3}{0 h 09}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Quand une force travaille-t-elle ? (docs 1 à 3)}{\diapo{3--7} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Projette les quatre situations du doc 1 (diapo 3) et fait décrire l’effet de chaque force.}
+ \pt{Tire une boîte sur la table avec un dynamomètre sous trois angles (aigu, droit, obtus) : fait constater que la force verticale ne fait pas avancer la boîte (diapo 4, docs 2 et 3).}
+ \pt{Fait traiter les questions 1 à 5 en binômes ; guide le découpage du chemin courbe en petits segments ; corrige au clic (diapos 5 à 7).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Identifie les effets : mise en mouvement, rotation, ralentissement et échauffement, déformation.}
+ \pt{Écrit $W_{A\to B}(\vect F) = \vect F\cdot\vect{AB} = F\cdot AB\cdot\cos\alpha$ ; montre que $\sum\vect{\delta l_i} = \vect{AB}$.}
+ \pt{Classe : $\alpha < 90^\circ$ moteur, $\alpha = 90^\circ$ nul, $\alpha > 90^\circ$ résistant.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} rôle du déplacement du point d’application ; signe de $\cos\alpha$ relié au type de travail.\par\vspace{.8mm}
+ \regul Erreur fréquente : « une force qui ne fait pas bouger l’objet travaille » (porter un sac immobile).}
+{18}{0 h 27}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Travail d’une force constante ; signe du travail}{\diapo{8--9} \support{Cahier}}}
+{\pt{Fait formuler la définition et l’unité (le joule) ; projette les diapos 8 et 9 (formule, travail indépendant du chemin, travail moteur, nul, résistant, ensemble de forces) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » et le schéma ($\vect F$, $\vect{AB}$, $\alpha$, $F\cdot\cos\alpha$) dans son cahier.}}
+{\form Question flash : « travail d’une force perpendiculaire au déplacement ? » $\to$ nul.}
+{7}{0 h 34}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Une caisse tirée sur le sol}{\diapo{10} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $W(\vect F) = 15\times2{,}0\times\cos30^\circ \approx \qty{26}{J}$ (moteur) et $W(\vect f) = \qty{-10}{J}$ (résistant).}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} bon angle ($\alpha = 30^\circ$ puis $180^\circ$) ; signe et unité.}
+{6}{0 h 40}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Travail du poids d’un corps}{22 min · objectifs O3 et O4}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Le chemin compte-t-il ?}{\diapo{11}}}
+{\pt{Projette la diapo 11 (toboggan) ; pose le problème : le travail du poids dépend-il de la forme de la pente ?}}
+{\pt{Propose des réponses (« plus la pente est longue, plus le travail est grand »…).}}
+{\diag Conceptions initiales relevées.}
+{2}{0 h 42}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Une bille sur deux chemins (doc 4)}{\diapo{12--14} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Lâche une bille dans une gouttière rectiligne puis dans une gouttière courbe partant de la même hauteur ; fait repérer $z_A$ et $z_B$ sur une règle verticale.}
+ \pt{Fait traiter les questions 1 à 4 (produit scalaire avec les coordonnées) ; corrige au clic (diapos 13 et 14 : l’animation affiche le travail du poids au cours de la descente).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Écrit $\vect P(0 ; 0 ; -m\cdot g)$ et obtient $W_{A\to B}(\vect P) = m\cdot g\cdot(z_A - z_B)$.}
+ \pt{Calcule $W = 0{,}050\times9{,}8\times0{,}50 \approx \qty{0,25}{J}$, le même par l’autre chemin.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} axe $Oz$ orienté vers le haut ; signe de $(z_A - z_B)$ interprété.\par\vspace{.8mm}
+ \regul Erreur fréquente : utiliser la longueur du chemin au lieu de la différence d’altitude.}
+{11}{0 h 53}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{Travail du poids}{\diapo{15} \support{Cahier}}}
+{\pt{Projette la diapo 15 ; insiste sur l’indépendance vis-à-vis du chemin suivi et sur le signe (descente, montée) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question orale : « travail du poids d’un ballon qui monte de \qty{2}{m} puis redescend à son point de départ ? » $\to$ nul.}
+{5}{0 h 58}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Sur le toboggan}{\diapo{16} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel ; correction au clic.}}
+{\pt{Écrit $h = l\cdot\sin\alpha$ et calcule $W(\vect P) \approx \qty{8,5e2}{J}$ (moteur).}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} $h$ exprimée avec le sinus.}
+{4}{1 h 02}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Travail en rotation : force de moment constant et couple}{28 min · objectif O5}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Faire tourner un solide}{\diapo{17}}}
+{\pt{Projette la diapo 17 (volant animé) ; pose le problème : comment calculer le travail quand le point d’application décrit un arc de cercle ?}}
+{\pt{Remarque que la direction du déplacement change constamment.}}
+{\diag Mobilisation du chapitre 1 (arc, angle en radians).}
+{2}{1 h 04}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Poulie et couple de forces (docs 5 et 6)}{\diapo{18--20} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Montre une poulie mobile autour d’un axe fixe, entraînée par un fil tendu par une masse marquée (ou mesuré au dynamomètre) ; fait identifier la force tangente et son moment $F\cdot r$.}
+ \pt{Fait traiter les questions 1 à 4 ; guide le passage de $\delta W = \Mom_\Delta\cdot\delta\theta$ à $W = \Mom_\Delta\cdot\Delta\theta$ ; corrige au clic (diapos 19 et 20).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Écrit $\delta W = F\cdot r\cdot\delta\theta = \Mom_\Delta(\vect F)\cdot\delta\theta$, puis $W = \Mom_\Delta(\vect F)\cdot\Delta\theta$ ; l’étend au couple.}
+ \pt{Calcule $\Mom = \qty{6,0}{N.m}$ et $W = 6{,}0\times2\pi \approx \qty{38}{J}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} $\Delta\theta$ converti en radians ; moment constant mis en facteur.\par\vspace{.8mm}
+ \regul Erreur fréquente : garder l’angle en degrés ou en tours.}
+{12}{1 h 16}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{Travail en rotation}{\diapo{21} \support{Cahier}}}
+{\pt{Projette la diapo 21 ; insiste sur l’unité de $\Delta\theta$ et sur le signe (sens de rotation) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « $W$ d’un couple de \qty{2}{N.m} pour un demi-tour ? » $\to$ $2\pi \approx \qty{6,3}{J}$.}
+{5}{1 h 21}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application et méthode}{Une barre qui tourne ; choisir la bonne expression}{\diapo{22--24} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapos 22 et 23) ; fait remarquer que le bras de levier du poids varie : on calcule par les altitudes.}
+ \pt{Fait le point avec la méthode en trois cas (diapo 24).}}
+{\pt{Exprime $\Delta z = \frac{L}{2}(\cos45^\circ + 1)$ et calcule $W \approx \qty{0,85}{J}$.}
+ \pt{Recopie la méthode dans son cahier.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} justification du choix de $W = m\cdot g\cdot(z_1 - z_2)$.}
+{9}{1 h 30}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Partie 4 · Puissance d’une force}{23 min · objectifs O6 et O7}
+\etape{cOrange}{\axe{cAmber}{ic_situation}{Situation de départ}{Deux grues, une même charge}{\diapo{25}}}
+{\pt{Projette la diapo 25 (deux grues chronométrées) ; pose le problème : même travail, mais laquelle est la plus performante ?}}
+{\pt{Répond : la plus rapide ; propose de diviser le travail par la durée.}}
+{\diag Idée de « rapidité du transfert ».}
+{2}{1 h 32}
+\etape{cOrange}{\axe{cTeal}{ic_activite}{Activité 4}{Puissance moyenne et instantanée (doc 7)}{\diapo{26--28} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Fait soulever une masse marquée par un petit moteur-treuil à deux vitesses ; chronomètre la montée (même hauteur, durées différentes).}
+ \pt{Fait traiter les questions 1 et 2 (puissance moyenne), puis guide l’établissement de $P = \vect F\cdot\vect V$ et de $P = \Mom_\Delta\cdot\omega$ ; corrige au clic (diapos 27 et 28).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Calcule $W = \qty{6,0e4}{J}$ pour les deux grues, $P_A = \qty{6,0}{kW}$ et $P_B = \qty{2,0}{kW}$.}
+ \pt{Établit $P = \vect F\cdot\dfrac{\vect{\delta l}}{\delta t} = \vect F\cdot\vect V$ et $P = \Mom_\Delta\cdot\omega$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} distinction travail / puissance ; unité watt.\par\vspace{.8mm}
+ \regul Erreur fréquente : confondre le watt (puissance) et le joule (travail, énergie).}
+{12}{1 h 44}
+\etape{cOrange}{\axe{cRed}{ic_retenir}{À retenir}{Puissance moyenne ; puissance instantanée}{\diapo{29} \support{Cahier}}}
+{\pt{Projette la diapo 29 ; fait citer des puissances de la vie courante (lampe, voiture en kW) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « \qty{1}{kW} pendant \qty{1}{s} : quel travail ? » $\to$ \qty{1000}{J}.}
+{5}{1 h 49}
+\etape{cOrange}{\axe{cPurple}{ic_application}{Application}{La puissance d’une voiture}{\diapo{30} \support{Cahier}}}
+{\pt{Projette l’énoncé ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Convertit $V = \qty{25}{m.s^{-1}}$ ; calcule $P = \qty{3,75e4}{W} = \qty{37,5}{kW}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversion de la vitesse ; résultat en kW.}
+{4}{1 h 53}
+% ---------------------------------------------------------------------
+\partie{cGreen}{Bilan et évaluation de la séance}{7 min}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ? — L’essentiel du chapitre}{\diapo{31} \diapo{38}}}
+{\pt{Lance le « Vrai ou faux ? » (diapo 31) : réponses à main levée, puis correction au clic.}
+ \pt{Projette « L’essentiel du chapitre » (diapo 38).}
+ \pt{Donne le travail à la maison : exercices 1 à 3 (énoncés projetés, diapos 32, 34 et 36, à recopier et à résoudre dans le cahier).}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}
+ \pt{Note le travail à faire.}}
+{\somm Taux de bonnes réponses au vrai-faux (objectif : au moins 5 sur 6).\par
+ \textit{Exploitation :} repérer les notions à reprendre en début de séance suivante.}
+{7}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Exercice 1} — Solide tiré sur un plan incliné (travail du poids, de la tension, des frottements et de la réaction ; travail total) : objectifs O2, O3 et O4.}
+\pt{\textbf{Exercice 2} — Un treuil (couple moteur, hauteur de levage, puissance moyenne) : objectifs O5 et O6.}
+\pt{\textbf{Exercice 3} — Une meule (vitesse angulaire, puissance d’un couple résistant, travail du moteur) : objectifs O5 et O7.}
+\pt{Correction projetée au début de la séance suivante (diapos 33, 35 et 37).}
+\pt{Soutien : refaire l’application 1 avec une corde inclinée de $60^\circ$ et comparer. Approfondissement : un cycliste monte une côte de \qty{5}{\percent} à vitesse constante ; estimer la puissance qu’il fournit contre le poids (masse et vitesse à choisir de façon réaliste).}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séance (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séance :}\lignevide}
+\end{minipage}
+
+\end{document}

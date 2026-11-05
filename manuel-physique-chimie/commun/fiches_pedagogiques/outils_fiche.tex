@@ -1,0 +1,44 @@
+% ---------- Macros des deux tableaux (fiche pédagogique) ----------
+\newcommand{\cellpad}[1]{\vspace{1.4mm}#1\par\vspace{1.6mm}}
+\newcommand{\sep}{!{\color{white}\vrule width 1.8pt}}
+\newcolumntype{I}{!{\color{white}\vrule width 1.8pt}}
+% Tableau 1 : \ligne{icône}{couleur}{libellé}{contenu}
+\newcommand{\ligne}[4]{\lib{#1}{#2}{#3} & \cellcolor{cSoft}\cellpad{#4}\\ \hline}
+% Tableau 2 : \etape{couleur}{axes}{enseignant}{apprenant}{évaluation}{minutes}{cumul}
+\newcommand{\etape}[7]{%
+  \cellcolor{#1!9}\cellpad{#2} & \cellcolor{cSoft}\cellpad{#3} & \cellcolor{cSoft}\cellpad{#4} &
+  \cellcolor{cSoft}\cellpad{\footnotesize #5} & \cellcolor{#1!9}\cellpad{\duree{#6}{#7}}\\ \hline}
+% axes : \axe{couleur}{icône}{rubrique}{titre}{supports}
+\newcommand{\axe}[5]{\pastille{#1}{#2}{#3}\par\vspace{1.4mm}{\sffamily\bfseries\footnotesize\color{cInk}#4}\par\vspace{1.4mm}#5}
+% bandeau de partie dans le tableau 2
+\renewcommand{\partie}[3]{\multicolumn{5}{@{}l@{}}{\begin{tikzpicture}
+  \node[fill=#1,rounded corners=2mm,minimum width=\linewidth,minimum height=7.2mm,inner sep=0](b){};
+  \node[anchor=west,text=white,font=\sffamily\bfseries\small] at ([xshift=3.5mm]b.west){#2};
+  \node[anchor=east,text=white,font=\sffamily\bfseries\scriptsize] at ([xshift=-3.5mm]b.east){#3};
+  \end{tikzpicture}}\\*[.8mm]}
+% en-tête du tableau 2
+\newcommand{\tete}[2]{\cellcolor{cInk}\rule{0pt}{7mm}\raisebox{-1.3mm}{\includegraphics[height=5mm]{#1}}\hspace{1.6mm}{\sffamily\bfseries\small\color{white}#2}}
+\newcommand{\enteteDeroulement}{\tete{fi_chemin}{Axes du cours} & \tete{fi_prof}{Activités de l’enseignant} & \tete{fi_toque}{Activités de l’apprenant} & \tete{fi_evaluation}{Évaluation} & \cellcolor{cInk}\centering\raisebox{-1.3mm}{\includegraphics[height=5mm]{fi_horloge}}\\ \hline}
+% frise du temps : \frise[durée totale en minutes]{ {couleur/minutes/libellé}, ... } (120 min par défaut)
+\newcommand{\frise}[2][120]{%
+  \makebox[\linewidth][l]{\begin{tikzpicture}
+    \pgfmathsetmacro{\unit}{\linewidth/#1}
+    \foreach \c/\m/\t [remember=\x as \xx (initially 0)] in {#2}{%
+      \pgfmathsetmacro{\x}{\xx+\m}
+      \fill[\c,rounded corners=1.2mm] ({\xx*\unit pt+.6pt},0) rectangle ({\x*\unit pt-.6pt},8mm);
+      \node[text=white,font=\sffamily\bfseries\scriptsize,align=center] at ({(\xx+\x)/2*\unit pt},4mm) {\t};
+      \node[font=\sffamily\tiny,text=cInk2,anchor=north] at ({\x*\unit pt},-.6mm) {\pgfmathprintnumber{\x}};
+    }
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north] at (0,-.6mm) {0};
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north east] at (\linewidth,-3.4mm) {minutes};
+  \end{tikzpicture}}}
+% titre de séance au-dessus d'une frise : \seance{numéro}{durée}{contenu}
+\newcommand{\seance}[3]{\par\vspace{1.5mm}\noindent{\sffamily\bfseries\small\color{cInk}Séance #1\enspace·\enspace #2}\enspace{\sffamily\footnotesize\color{cInk2}#3}\par\vspace{1mm}}
+% encadré final : \encadre{icône}{couleur}{titre}{contenu}
+\newcommand{\encadre}[4]{%
+  \begin{tcolorbox}[enhanced,colback=#2!6!white,colframe=#2!6!white,arc=3mm,boxrule=0pt,left=15mm,right=4mm,top=2.5mm,bottom=2.5mm,
+    borderline west={2pt}{0pt}{#2},height fill=false,
+    overlay={\node[anchor=north west] at ([xshift=2.5mm,yshift=-2.5mm]frame.north west) {\includegraphics[width=9.5mm]{#1}};}]
+  {\sffamily\bfseries\color{#2}#3}\par\vspace{1.5mm}\small #4
+  \end{tcolorbox}}
+\newcommand{\lignevide}{\par\vspace{2.6mm}\noindent{\color{cInk2!55}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}

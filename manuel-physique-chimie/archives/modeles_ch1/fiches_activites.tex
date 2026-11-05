@@ -1,0 +1,204 @@
+% =====================================================================
+%  Fiches d'activités à imprimer (une activité par page A4)
+%  Chapitre 1 : Mouvement de rotation d'un solide autour d'un axe fixe
+%  Compilation : xelatex fiches_activites.tex (deux passes)
+%  Imprimer à 100 % (taille réelle) : le Doc 6 est à l'échelle 1/2.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,top=1.1cm,bottom=1.1cm,left=1.35cm,right=1.35cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage{xcolor,graphicx,tikz}
+\graphicspath{{images/}}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem,array,booktabs,colortbl}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 8em}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=4}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\linespread{1.05}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cTeal}{HTML}{0E8F8A} \definecolor{cAmber}{HTML}{F4A300}
+\definecolor{cLine}{HTML}{C9D6E6}
+\color{cInk}
+
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\arc}[1]{\overparen{#1}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}
+\NewDocumentCommand{\docbadge}{m}{\tikz[baseline=(b.base)]\node[fill=cBlue,text=white,rounded corners=5pt,inner xsep=4pt,inner ysep=1.8pt,font=\sffamily\bfseries\scriptsize](b){Doc #1};}
+% document : {largeur}{n}{légende}{image}
+\newcommand{\doc}[4]{%
+  \begin{minipage}[t]{#1}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{.8mm}
+    {\sffamily\scriptsize\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+\NewDocumentCommand{\pastille}{m m}{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=4.8mm,font=\sffamily\bfseries\scriptsize](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}}, leftmargin=7.5mm, labelsep=2.2mm, itemsep=4pt, topsep=2pt}
+\setlist[itemize,1]{label={\color{cOrange}\scriptsize$\blacktriangleright$}, leftmargin=5mm, itemsep=1pt, topsep=1pt}
+
+% ---------- en-tête de fiche ----------
+\newcommand{\entete}[2]{% {numéro}{titre}
+  \begin{tikzpicture}
+    \fill[cTeal] (0,0) rectangle (\linewidth,1.55);
+    \node[anchor=west,text=white] at (.35,.78) {\includegraphics[height=10mm]{ic_activite}};
+    \node[anchor=north west,text=white,font=\sffamily\bfseries\scriptsize] at (1.55,1.42) {PHYSIQUE · CHAPITRE 1 — ROTATION D’UN SOLIDE AUTOUR D’UN AXE FIXE};
+    \node[anchor=south west,text=white,font=\sffamily\bfseries\Large] at (1.55,.12) {Activité #1\enspace·\enspace #2};
+  \end{tikzpicture}\par\vspace{2mm}
+  {\sffamily\small\color{cInk2}Nom et prénom :\ \dotfill\ \ Classe :\ \makebox[2.6cm]{\dotfill}\ \ Date :\ \makebox[2.6cm]{\dotfill}}\par\vspace{2.5mm}}
+% ---------- blocs ----------
+\newtcolorbox{situation}{enhanced, colback=cAmber!8!white, colframe=cAmber, boxrule=.9pt, arc=2.5mm,
+  left=12mm, right=3mm, top=1.6mm, bottom=1.6mm, before skip=0pt, after skip=2.5mm, fontupper=\small,
+  overlay={\node at ([xshift=6mm]frame.west) {\includegraphics[width=7.5mm]{ic_situation}};}}
+\newcommand{\bloc}[2][cTeal]{\par\vspace{1.2mm}{\sffamily\bfseries\small\color{#1}\MakeUppercase{#2}}\hspace{2mm}{\color{#1}\leaders\hrule height .6pt\hfill\kern0pt}\par\vspace{1mm}}
+\newtcolorbox{questions}{enhanced, colback=white, colframe=cBlue, boxrule=.9pt, arc=2.5mm,
+  left=3mm, right=3mm, top=6mm, bottom=2mm, before skip=2mm, after skip=0pt, fontupper=\small,
+  overlay={\node[anchor=west,fill=cBlue,text=white,rounded corners=3.5mm,inner xsep=3mm,inner ysep=1.2mm,font=\sffamily\bfseries\small]
+     at ([xshift=4mm,yshift=-.1mm]frame.north west) {Questions pour construire le savoir};
+     \node[anchor=east,font=\sffamily\scriptsize\itshape,text=cInk2] at ([xshift=-4mm,yshift=-3.6mm]frame.north east) {Je rédige mes réponses dans mon cahier, sous cette fiche.};}}
+\newtcolorbox{rappel}[1]{enhanced, colback=cInk2!6!white, colframe=cInk2!6!white, boxrule=0pt, arc=2mm,
+  left=3mm, right=2mm, top=1.5mm, bottom=1.5mm, fontupper=\scriptsize, borderline west={1.4pt}{0pt}{cInk2},
+  title={#1}, detach title, before upper={{\sffamily\bfseries\color{cInk2}\tcbtitle}\par\smallskip}}
+
+\begin{document}
+% =====================================================================
+%  ACTIVITÉ 1
+% =====================================================================
+\entete{1}{Notion de rotation et repérage d’un point}
+
+\begin{situation}
+\textbf{Situation de départ.} Portes qui s’ouvrent, manèges, téléphériques… Au quotidien, nous croisons de nombreux objets en mouvement. Pour les étudier, le physicien doit d’abord les classer. \textbf{Comment distinguer un mouvement de rotation d’un mouvement de translation ? Comment repérer, à chaque instant, la position d’un point d’un objet qui tourne ?}
+\end{situation}
+
+{\small Les documents 1 à 4 présentent quatre mouvements de la vie courante. Sur les documents 2 et 4, un segment noir relie le plancher au plafond d’une cabine ; sur le document 3, on suit deux points $M$ et $N$ du bras de la barrière. Le document 5 montre un point $G$ qui se déplace sur un cercle de centre $O$ et de rayon $R$ ; sa position est repérée par rapport à l’axe $(Ox)$, qui coupe la trajectoire au point $A$.\par}
+
+\bloc{Documents}
+\doc{0.32\linewidth}{1}{Manège à nacelles}{doc1_manege}\hfill
+\doc{0.32\linewidth}{2}{Téléphérique}{doc2_telepherique}\hfill
+\doc{0.32\linewidth}{3}{Barrière de péage}{doc3_barriere}
+
+\vspace{2mm}
+\doc{0.32\linewidth}{4}{Grande roue}{doc4_granderoue}\hfill
+\doc{0.32\linewidth}{5}{Repérage d’un point sur un cercle}{doc5_reperage}\hfill
+\begin{minipage}[t]{0.32\linewidth}\vspace{0pt}
+\begin{rappel}{Rappel mathématique : le radian}
+Un tour complet : $\ang{360} = 2\pi~\text{rad}$.\par
+Conversion : $\theta\,(\text{rad}) = \theta\,({}^{\circ})\times\dfrac{\pi}{180}$\par\smallskip
+Exemple : $\ang{90} = \dfrac{\pi}{2}~\text{rad} \approx 1{,}57~\text{rad}$.
+\end{rappel}
+\end{minipage}
+
+\begin{questions}
+\begin{enumerate}
+  \item \kw{Observer.} Observez la cabine du téléphérique (doc 2) et une cabine de la grande roue (doc 4). Comment le segment noir se déplace-t-il au cours du temps par rapport à sa direction initiale ? Quelle est la nature du mouvement de ces cabines ?
+  \item \kw{Comparer.} Observez le bras de la barrière (doc 3) ou un bras de la grande roue (doc 4). Les points $M$ et $N$ ont-ils la même trajectoire ? Que représente le point de fixation $O$ de la barrière (ou le centre de la roue) pour l’ensemble de ces trajectoires ?
+  \item \kw{Déduire.} Proposez une définition du mouvement de rotation d’un solide autour d’un axe fixe. Indiquez ensuite, parmi les objets des documents 1 à 4, ceux qui sont en rotation.
+  \item \kw{Repérer.} Sur le document 5, proposez deux méthodes pour repérer la position de $G$ à l’instant $t$ par rapport au point $A$ : l’une utilisant un angle, l’autre une longueur mesurée sur le cercle.
+  \item \kw{Généraliser.} Quelle relation lie la longueur $s$ d’un arc de cercle, le rayon $R$ du cercle et l’angle au centre $\theta$ exprimé en radians ?
+\end{enumerate}
+\end{questions}
+
+\newpage
+% =====================================================================
+%  ACTIVITÉ 2
+% =====================================================================
+\entete{2}{Vitesse linéaire et vitesse angulaire instantanées}
+
+\begin{situation}
+\textbf{Situation de départ.} Sur un disque en rotation, les points proches du bord semblent aller très vite, tandis que ceux proches du centre paraissent lents. Pourtant, le disque tourne \og d’un seul bloc\fg{}. \textbf{Comment évaluer la vitesse d’un point à un instant précis ? Comment traduire la \og vitesse de rotation\fg{} commune à tout le disque ?}
+\end{situation}
+
+\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}\RaggedRight
+\bloc{Énoncé}
+{\small On a enregistré le mouvement d’un solide en rotation autour d’un axe fixe, sur une table à coussin d’air. Le document 6 montre les positions successives de deux points $A$ et $B$ du solide.\par}
+\begin{itemize}\small
+  \item Intervalle de temps entre deux positions consécutives : $\tau = \qty{40}{ms}$.
+  \item $R_A = OA = \qty{6}{cm}$ ; $R_B = OB = \qty{12}{cm}$.
+  \item Le document est à l’\textbf{échelle 1/2} : $\qty{1}{cm}$ sur le document représente $\qty{2}{cm}$ en réalité (voir la barre d’échelle).
+\end{itemize}
+
+\bloc{Mes mesures sur le doc 6}
+{\small\renewcommand{\arraystretch}{1.55}
+\begin{tabular}{@{}>{\RaggedRight}p{2.7cm}|>{\centering\arraybackslash}p{1.75cm}|>{\centering\arraybackslash}p{1.75cm}@{}}
+ & {\sffamily\scriptsize sur le document} & {\sffamily\scriptsize en réalité}\\\hline
+Arc $\arc{A_0A_2}$ & & \\\hline
+Arc $\arc{B_0B_2}$ & & \\\hline
+ & {\sffamily\scriptsize en degrés} & {\sffamily\scriptsize en radians}\\\hline
+Angle $\Delta\theta$ & & \\
+\end{tabular}\par}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}\centering
+\includegraphics[width=9cm]{doc6_enregistrement}\par\vspace{.8mm}
+{\sffamily\scriptsize\docbadge{6}\enspace\color{cInk2}Enregistrement des positions de $A$ et $B$ (échelle 1/2)}
+\end{minipage}
+
+\begin{questions}
+\begin{enumerate}
+  \item \kw{Vitesse linéaire instantanée.} Pour calculer la vitesse $V_{A1}$ du point $A$ lors de son passage en $A_1$ (date $t_1$), on l’assimile à la vitesse moyenne entre la position précédente $A_0$ et la position suivante $A_2$. Exprimer $V_{A1}$ en fonction de la longueur de l’arc $\arc{A_0A_2}$ et de $\tau$.
+  \item \kw{Calcul linéaire.} Mesurer sur le document 6 les arcs $\arc{A_0A_2}$ et $\arc{B_0B_2}$ (on trouve environ $\qty{1,8}{cm}$ et $\qty{3,6}{cm}$), puis en déduire leurs longueurs réelles. Calculer les vitesses $V_{A1}$ et $V_{B1}$. Lequel des deux points est le plus rapide ?
+  \item \kw{Vitesse angulaire instantanée.} On définit la vitesse angulaire instantanée $\omega_1$ du solide à la date $t_1$ comme le quotient de l’angle balayé entre les positions 0 et 2 par la durée de ce balayage. Exprimer $\omega_1$ en fonction de $\Delta\theta = \theta_2 - \theta_0$ et de $\tau$.
+  \item \kw{Calcul angulaire.} Mesurer au rapporteur l’angle $\Delta\theta$ balayé entre les positions 0 et 2 (on trouve environ $\ang{34}$), le convertir en radians, puis calculer $\omega_{A1}$ et $\omega_{B1}$. Que remarquez-vous ?
+  \item \kw{Synthèse.} Calculer les produits $R_A\cdot\omega_{A1}$ et $R_B\cdot\omega_{B1}$, puis les comparer aux vitesses $V_{A1}$ et $V_{B1}$. En déduire la relation générale qui lie $V_i$, $R$ et $\omega_i$.
+\end{enumerate}
+\end{questions}
+
+\vfill
+{\sffamily\scriptsize\color{cInk2}\hfill Imprimer cette page à 100 \% (taille réelle) pour que les mesures sur le document 6 soient exactes.}
+
+\newpage
+% =====================================================================
+%  ACTIVITÉ 3
+% =====================================================================
+\entete{3}{Mouvement de rotation uniforme et équations horaires}
+
+\begin{situation}
+\textbf{Situation de départ.} Pour modéliser le mouvement d’un objet qui tourne (une aiguille de montre, un satellite, une éolienne…) et prévoir sa position future, on utilise des outils mathématiques appelés \textbf{équations horaires}. \textbf{Comment construire l’équation horaire d’un mouvement de rotation très régulier ?}
+\end{situation}
+
+\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}\RaggedRight
+\bloc{Énoncé}
+{\small Revenons à l’enregistrement de l’activité 2 : les positions successives sont régulièrement espacées, la vitesse angulaire $\omega$ reste donc constante tout au long du mouvement.\par\smallskip
+On considère un point $M$ du solide, situé à la distance $R$ de l’axe (document 7).\par}
+\begin{itemize}\small
+  \item Au déclenchement du chronomètre ($t = \qty{0}{s}$), $M$ est repéré par l’abscisse angulaire initiale $\theta_0$.
+  \item À une date $t$ quelconque, sa position est repérée par l’abscisse angulaire $\theta(t)$.
+\end{itemize}
+\vspace{2mm}
+\begin{rappel}{Outils utiles}
+Vitesse angulaire : $\omega = \dfrac{\Delta\theta}{\Delta t}$\qquad Abscisse curviligne : $s = R\cdot\theta$\qquad Vitesse linéaire : $V = R\cdot\omega$
+\end{rappel}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}\vspace{0pt}\centering
+\includegraphics[width=\linewidth]{doc7_pointM}\par\vspace{.8mm}
+{\sffamily\scriptsize\docbadge{7}\enspace\color{cInk2}Positions de $M$ à la date $t = 0$ et à la date $t$}
+\end{minipage}
+
+\begin{questions}
+\begin{enumerate}
+  \item \kw{Nommer le mouvement.} Sachant que la vitesse angulaire $\omega$ ne change pas au cours du temps, comment qualifieriez-vous ce mouvement de rotation ?
+  \item \kw{Équation horaire angulaire.} Depuis le départ, l’angle a varié de $\Delta\theta = \theta(t) - \theta_0$ pendant la durée $\Delta t = t - 0$. En utilisant la définition $\omega = \dfrac{\Delta\theta}{\Delta t}$, exprimer l’angle $\theta(t)$ en fonction de $\omega$, $t$ et $\theta_0$.
+  \item \kw{Équation horaire curviligne.} Multiplier chaque terme de l’équation obtenue à la question 2 par le rayon $R$. En utilisant les relations $s = R\cdot\theta$ et $V = R\cdot\omega$, en déduire l’équation horaire de l’abscisse curviligne $s(t)$.
+  \item \kw{Périodicité.} Le point $M$ repasse régulièrement par les mêmes positions. Comment appelle-t-on la durée nécessaire pour effectuer exactement un tour complet (angle de $2\pi$ radians) ? En utilisant la définition de $\omega$, exprimer cette durée $T$ en fonction de $\omega$.
+  \item \kw{Fréquence.} Si un tour dure $T$ secondes, combien de tours sont effectués en une seconde ? Comment s’appelle cette grandeur et quelle est son unité ?
+\end{enumerate}
+\end{questions}
+
+\end{document}

@@ -1,0 +1,12 @@
+html,body{margin:0;background:transparent}
+#host{display:inline-block;line-height:0}
+#host svg{display:block}
+.fig-svg text{font-family:'Poppins','TeX Gyre Pagella',sans-serif;}
+.fig-svg .lbl{font-size:18px;fill:#1b2a41;}
+.fig-svg .lbl-s{font-size:16px;fill:#51627a;}
+.fig-svg .lbl-b{font-weight:600;font-size:17px;fill:#1b2a41;}
+.fig-svg .m{font-family:'TeX Gyre Pagella',serif;font-style:italic;font-size:23px;fill:#1b2a41;}
+.fig-svg .mf{font-family:'TeX Gyre Pagella',serif;}
+.fig-svg .u{font-style:normal;font-size:15px;}
+.fig-svg .tag{font-weight:600;font-size:15px;fill:#fff;}
+.fig-svg .lcd{font-weight:600;font-size:24px;fill:#0f2342;letter-spacing:1px;}

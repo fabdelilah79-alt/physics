@@ -1,0 +1,268 @@
+% =====================================================================
+%  Fiche pédagogique — Chapitre 2 (chimie) : Grandeurs physiques liées aux quantités de matière
+% =====================================================================
+\newcommand{\Matiere}{Chimie}
+\newcommand{\Partie}{Partie 1 — Mesure des quantités de matière}
+\newcommand{\NumChap}{2}
+\newcommand{\TitreChap}{Grandeurs physiques liées aux quantités de matière}
+\newcommand{\TitreCourt}{Grandeurs physiques liées aux quantités de matière}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{2 h}
+\newcommand{\Banniere}{opener_ch2.jpg}
+\newcommand{\BanniereDecalage}{-2.2cm}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{2 heures — une séance\\ Cours-activités}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Chimie · Partie 1\\ Mesure des quantités de matière}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séance}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}\sep Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Déterminer des quantités de matière}, par le calcul ou expérimentalement, au moyen de \textbf{mesures physiques} et de mesures chimiques {\color{cInk2}(compétence spécifique de la chimie, 1\textsuperscript{re} année du baccalauréat ; énoncée dans le programme pour les solutions électrolytiques)}.
+\pt{\textbf{Contribution de ce chapitre :} déterminer une quantité de matière à partir de grandeurs physiques mesurables — la \textbf{masse} et le \textbf{volume} pour les solides et les liquides ; le \textbf{volume}, la \textbf{pression} et la \textbf{température} pour les gaz — et prélever au laboratoire une quantité de matière donnée.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\\ {\color{cTeal}\itshape Ici :} formuler une hypothèse sur la relation entre $P$ et $V$, l’éprouver par la mesure, exploiter un tableau et un graphique, conclure (loi de Boyle-Mariotte).}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\\ {\color{cTeal}\itshape Ici :} lire des documents (étiquettes, graphiques), rédiger un calcul avec ses unités, utiliser les symboles $n$, $M$, $\rho$, $d$, $P$, $V$, $T$, argumenter à l’oral.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\\ {\color{cTeal}\itshape Ici :} présentation animée (simulations moléculaires, seringue et manomètre), tracé de $P = f(1/V)$ au tableur.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\\ {\color{cTeal}\itshape Ici :} organiser un calcul (données $\to$ relation $\to$ conversions $\to$ application numérique $\to$ unité) ; travail en binômes ; fiche d’activités et livre à compléter.}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\\ {\color{cTeal}\itshape Ici :} règles de sécurité (pictogrammes de l’hexane, liquide volatil et inflammable), plongée sous-marine (la bulle qui remonte), gonflage des pneus, ballons à l’hélium.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séance, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — déterminer la quantité de matière d’un solide ou d’un liquide à partir de sa \textbf{masse} : $n = \dfrac{m}{M}$ ;}
+\pt{\textbf{O2} — déterminer la quantité de matière d’un liquide à partir de son \textbf{volume}, de sa masse volumique ou de sa densité : $n = \dfrac{\rho\cdot V}{M} = \dfrac{d\cdot\rho_{\text{eau}}\cdot V}{M}$ ;}
+\pt{\textbf{O3} — choisir le matériel adapté et \textbf{prélever} une quantité de matière donnée (balance, éprouvette, pipette), en exploitant les pictogrammes de sécurité ;}
+\pt{\textbf{O4} — établir expérimentalement la \textbf{loi de Boyle-Mariotte} $P\cdot V = \text{constante}$ et l’utiliser ($P_1V_1 = P_2V_2$) ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — convertir une température en kelvins : $T\,(\text{K}) = \theta\,(\unit{\degreeCelsius}) + 273{,}15$ ;}
+\pt{\textbf{O6} — connaître le modèle du \textbf{gaz parfait} et l’équation d’état $P\cdot V = n\cdot R\cdot T$, et l’utiliser pour déterminer $n$ à partir de $P$, $V$ et $T$ (unités SI) ;}
+\pt{\textbf{O7} — définir et calculer le \textbf{volume molaire} d’un gaz ($n = V/V_m$) et la \textbf{densité} d’un gaz par rapport à l’air ($d = M/29$).}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Objectifs du programme :} déterminer la quantité de matière d’un solide ou d’un liquide à partir de sa masse ou de son volume, et d’un gaz à l’aide de l’équation d’état des gaz parfaits ; connaître les techniques de prélèvement d’une quantité de matière à l’aide du matériel de laboratoire.}
+\end{minipage}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun (programme)}
+\pt{la \textbf{mole} et la constante d’Avogadro $N_A = \qty{6,02e23}{mol^{-1}}$ ;}
+\pt{la \textbf{masse molaire atomique} ;}
+\pt{la \textbf{masse molaire moléculaire} ;}
+\pt{le \textbf{volume molaire} et la \textbf{densité}.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{la masse volumique $\rho = m/V$ ;}
+\pt{les conversions d’unités : mL, L, m$^3$ ; hPa, Pa, bar ; $\unit{\degreeCelsius}$ ;}
+\pt{la proportionnalité et la fonction linéaire (mathématiques) ;}
+\pt{les règles de sécurité au laboratoire et les pictogrammes de danger.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{balance électronique (au 0,1 g), béchers, eau, morceau de plomb (ou de cuivre) ;}
+\pt{flacon d’hexane (ou d’éthanol) avec son étiquette et ses pictogrammes ; éprouvettes graduées de 25 mL et 50 mL ; pipette graduée et propipette ;}
+\pt{seringue de 60 mL reliée à un manomètre (ou capteur de pression et interface ExAO) ; thermomètre ;}
+\pt{sécurité : lunettes, gants, aucune flamme à proximité.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (30 diapositives) ;}
+\pt{\textbf{livre de l’élève} (version à compléter) et livre du professeur ;}
+\pt{\textbf{fiche d’activités} imprimée (une page, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices, papier millimétré.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : compétences transversales (§ 2.1), compétences spécifiques (§ 2), programme de la 1\textsuperscript{re} année du baccalauréat — chimie, partie 1, « Les grandeurs physiques liées aux quantités de matière : masse, volume et pression ».}
+\pt{Activités préconisées par le programme : investir les acquis des élèves sur l’utilisation du matériel de laboratoire et les précautions d’emploi des produits ; établir expérimentalement la relation $P\cdot V = \text{Cte}$ et utiliser des logiciels pour l’illustrer.}
+\pt{Supports du chapitre 2 : livre (versions professeur et élève), présentation animée, fiche d’activités. Manuels scolaires agréés de physique-chimie de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\bloc{2}{fi_chemin}{Déroulement de la séance}
+
+\noindent\frise{cCyan/8/Mise en route, cTeal/38/Partie 1 · Solides et liquides, cBlue/32/Partie 2 · Boyle-Mariotte, cPurple/36/Partie 3 · Gaz parfait, cGreen/6/Bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}\sep >{\small\RaggedRight\arraybackslash}X\sep >{\small\RaggedRight\arraybackslash}X\sep L{4.6cm}\sep C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% ---------------------------------------------------------------------
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil et rappel des prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Accueille les apprenants, distribue la fiche d’activités (à coller dans le cahier) et le livre de l’élève.}
+ \pt{Projette la diapositive de titre et annonce le plan en trois parties et les objectifs.}
+ \pt{Pose des questions flash : « Qu’est-ce qu’une mole ? », « Que vaut $N_A$ ? », « Calculer $M(\ch{CO_2})$ », « Que vaut la masse volumique de l’eau ? ».}
+ \pt{Note au tableau les réponses justes ; corrige les confusions masse / masse molaire, mole / molécule.}}
+{\pt{Colle la fiche d’activités, prépare cahier et calculatrice.}
+ \pt{Répond oralement ou sur l’ardoise aux questions de rappel.}
+ \pt{Calcule $M(\ch{CO_2}) = 12 + 2\times16 = \qty{44}{g.mol^{-1}}$.}}
+{\diag Questions flash à main levée ou sur ardoise.\par
+ \textit{Indicateurs :} définition correcte de la mole ; calcul juste d’une masse molaire moléculaire.\par\vspace{.8mm}
+ \regul Rappel au tableau de la méthode de calcul de $M$.}
+{8}{0 h 08}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Solides et liquides : masse, volume et quantité de matière}{38 min · objectifs O1 à O3}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Comment « compter » des entités par une mesure ?}{\diapo{2}}}
+{\pt{Projette la diapo 2 et lance l’animation du compteur de molécules.}
+ \pt{Fait lire la situation-problème : à une entité par seconde, compter une mole prendrait environ $\num{1,9e16}$ années.}
+ \pt{Pose la question : « Quelles grandeurs mesurables permettent de déterminer $n$ ? » ; recueille les hypothèses sans les valider.}}
+{\pt{Lit et reformule la situation.}
+ \pt{Prend conscience de l’impossibilité du comptage direct.}
+ \pt{Propose des hypothèses : peser l’échantillon, mesurer son volume…}}
+{\diag Pertinence des hypothèses ; mobilisation de la masse molaire.}
+{4}{0 h 12}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Du mesurable à la quantité de matière (docs 1 à 3)}{\diapo{3--5} \support{Livre · Act. 1} \support{Fiche}}}
+{\pt{Réalise devant la classe (ou fait réaliser par deux apprenants) la pesée de 100,0 g d’eau puis de 100,0 g de plomb ; montre le flacon d’hexane, ses pictogrammes et l’éprouvette de 50 mL.}
+ \pt{Rappelle les consignes de sécurité : liquide volatil et inflammable, flacon refermé, pas de flamme, lunettes.}
+ \pt{Organise le travail en binômes sur les questions 1 à 4 ; circule et aide les binômes en difficulté (choix de la relation, unités).}
+ \pt{Fait corriger au tableau et révèle les réponses au clic (diapos 4 et 5) ; fait comparer $n(\text{eau}) \approx \qty{5,56}{mol}$ et $n(\ch{Pb}) \approx \qty{0,483}{mol}$.}
+ \pt{Guide la réflexion : pourquoi mesurer un volume plutôt qu’une masse pour un liquide volatil ?}}
+{\pt{Observe les pesées et relève les données ($M$, $\rho$).}
+ \pt{Calcule $M(\ch{H_2O}) = \qty{18}{g.mol^{-1}}$ et $M(\ch{C_6H_{14}}) = \qty{86}{g.mol^{-1}}$.}
+ \pt{Calcule $n = m/M$ pour l’eau et le plomb, compare et conclut : même masse $\neq$ même quantité de matière.}
+ \pt{Calcule $m = n\cdot M = \qty{8,6}{g}$, puis $V = m/\rho \approx \qty{13}{mL}$ d’hexane ; établit $n = \rho\cdot V/M$.}
+ \pt{Exprime $d = \rho/\rho_{\text{eau}}$, puis $n = d\cdot\rho_{\text{eau}}\cdot V/M$.}
+ \pt{Présente et justifie une réponse au tableau.}}
+{\form Observation des binômes ; correction collective.\par
+ \textit{Indicateurs :} relation $n = m/M$ bien utilisée ; unités cohérentes (g, $\unit{g.mol^{-1}}$, mL, $\unit{g.mL^{-1}}$) ; résultat arrondi de façon adaptée.\par\vspace{.8mm}
+ \regul Erreur fréquente : calculer $M/m$. Revenir aux unités : $\unit{g}/\unit{g.mol^{-1}} = \unit{mol}$.}
+{22}{0 h 34}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{$n = m/M$ ; $n = \rho V/M$ ; densité ; méthode de prélèvement}{\diapo{6--7} \support{Livre}}}
+{\pt{Fait formuler la synthèse par les apprenants, puis projette les diapos 6 et 7 (schéma volume $\to$ masse $\to$ quantité de matière).}
+ \pt{Insiste sur la méthode : un solide, on pèse $m = n\cdot M$ ; un liquide, on mesure $V = \dfrac{n\cdot M}{d\cdot\rho_{\text{eau}}}$.}
+ \pt{Demande de compléter les trous de l’« À retenir » dans le livre de l’élève.}}
+{\pt{Participe à la formulation de la synthèse.}
+ \pt{Complète les formules et les mots manquants dans le livre.}
+ \pt{Note la méthode de prélèvement d’un solide et d’un liquide.}}
+{\form Vérification rapide des « À retenir » complétés (tour de classe).\par
+ \textit{Indicateur :} formules et unités exactes.}
+{6}{0 h 40}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{La bouteille d’éthanol}{\diapo{8} \support{Livre}}}
+{\pt{Projette l’énoncé (diapo 8) et laisse 3 min de travail individuel.}
+ \pt{Désigne un apprenant pour la correction ; révèle les réponses au clic.}}
+{\pt{Calcule $M(\ch{C_2H_6O}) = \qty{46}{g.mol^{-1}}$.}
+ \pt{Calcule $n = \dfrac{d\cdot\rho_{\text{eau}}\cdot V}{M} = \dfrac{0{,}79\times1\times500}{46} \approx \qty{8,6}{mol}$.}
+ \pt{Corrige ses erreurs.}}
+{\somm Application individuelle courte.\par
+ \textit{Indicateurs :} relation adaptée au liquide ; résultat $\approx \qty{8,6}{mol}$. Le taux de réussite sert à réguler la suite.}
+{6}{0 h 46}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Les gaz : la loi de Boyle-Mariotte}{32 min · objectif O4}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Que devient la pression d’un gaz que l’on comprime ?}{\diapo{9}}}
+{\pt{Projette la diapo 9 (gaz comprimé par un piston : les chocs des molécules sur les parois deviennent plus fréquents).}
+ \pt{Fait comprimer par un apprenant une seringue bouchée : « Que ressens-tu ? ».}
+ \pt{Pose le problème : quelle relation lie $P$ et $V$ à température constante ?}}
+{\pt{Ressent la résistance du gaz : les gaz sont compressibles.}
+ \pt{Propose : « quand $V$ diminue, $P$ augmente » ; émet l’hypothèse d’une proportionnalité inverse.}}
+{\diag Hypothèses émises ; interprétation microscopique de la pression.}
+{3}{0 h 49}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Pression et volume d’un gaz : seringue et manomètre}{\diapo{10--12} \support{Livre · Act. 2} \support{Fiche}}}
+{\pt{Réalise l’expérience : air emprisonné dans une seringue reliée à un manomètre (ou capteur ExAO) ; comprime \textbf{lentement} pour garder la température constante (doc 4, animation diapo 10).}
+ \pt{Fait relever six couples $(V, P)$ et compléter le tableau (lignes $P\times V$ et $1/V$).}
+ \pt{Fait tracer $P = f(1/V)$ sur papier millimétré ou au tableur.}
+ \pt{Conduit la mise en commun (diapos 11 et 12) : $P\times V \approx \qty{6,08e4}{hPa.mL}$ ; la courbe est une droite passant par l’origine.}
+ \pt{Fait énoncer la loi de Boyle-Mariotte (\textsc{xvii}\textsuperscript{e} siècle) par les apprenants.}}
+{\pt{Relève les mesures et complète le tableau : $P\times V \approx 60\,780$ ; $60\,750$ ; $60\,800$…}
+ \pt{Constate que $P\times V$ reste constant (écarts inférieurs à 0,1 \%).}
+ \pt{Calcule $1/V$, trace $P = f(1/V)$ : droite passant par l’origine, donc $P = k/V$.}
+ \pt{Énonce la loi avec ses propres mots.}}
+{\form Correction collective du tableau et du graphique.\par
+ \textit{Indicateurs :} tableau juste ; graphique soigné (axes, unités, échelle, droite moyenne) ; énoncé citant « température constante » et « quantité de gaz donnée ».\par\vspace{.8mm}
+ \regul Rappel : une fonction linéaire est représentée par une droite passant par l’origine.}
+{20}{1 h 09}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{$P\cdot V = \text{constante}$ ; $P_1V_1 = P_2V_2$ ; unités de pression}{\diapo{13} \support{Livre}}}
+{\pt{Projette la diapo 13 : hyperbole $P = f(V)$ et droite $P = f(1/V)$.}
+ \pt{Précise les conditions de validité et les unités : $\qty{1}{hPa} = \qty{e2}{Pa}$ ; $\qty{1}{bar} = \qty{e5}{Pa}$.}}
+{\pt{Complète l’« À retenir » du livre.}
+ \pt{Note les conversions d’unités de pression.}}
+{\form Questions orales : « Si $V$ double, que devient $P$ ? » ; convertir 1013 hPa en Pa.}
+{4}{1 h 13}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{La bulle qui remonte}{\diapo{14} \support{Livre}}}
+{\pt{Projette l’énoncé et l’animation (la bulle grossit en remontant).}
+ \pt{Laisse 3 min de recherche individuelle, puis corrige au clic.}
+ \pt{Fait le lien avec la plongée : remonter lentement en expirant.}}
+{\pt{Justifie l’emploi de la loi (quantité d’air et température constantes).}
+ \pt{Calcule $V_2 = \dfrac{P_1V_1}{P_2} = \dfrac{3\times2}{1} = \qty{6}{mL}$ : le volume triple.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conditions d’application citées ; résultat de 6 mL avec son unité.}
+{5}{1 h 18}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Modèle du gaz parfait et température absolue}{36 min · objectifs O5 à O7}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Et si la température varie ?}{\diapo{15}}}
+{\pt{Projette la diapo 15 : gaz chauffé dans un récipient rigide, la pression augmente.}
+ \pt{Pose le problème : comment décrire un gaz lorsque $P$, $V$ et $T$ varient ensemble ?}}
+{\pt{Relie l’agitation des molécules à la température.}
+ \pt{Formule une hypothèse : la pression augmente avec la température.}}
+{\diag Observations et hypothèses formulées.}
+{3}{1 h 21}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Analyse de documents (docs 5 à 8)}{\diapo{16--19} \support{Livre · Act. 3} \support{Fiche}}}
+{\pt{Projette le doc 5 ($P$ en fonction de $\theta$ pour quatre volumes) et fait prolonger les droites : elles convergent vers $\qty{-273,15}{\degreeCelsius}$ (diapo 16).}
+ \pt{Présente le thermomètre à double échelle (doc 6) et le zéro absolu de Lord Kelvin ; fait lire les docs 7 (équation d’état) et 8 (volume molaire, densité).}
+ \pt{Fait traiter les questions 1 à 5 en binômes ; aide aux conversions en unités SI.}
+ \pt{Corrige au clic (diapos 18 et 19) ; exige la démonstration complète de $V_m \approx \qty{24}{L.mol^{-1}}$.}}
+{\pt{Lit les graphiques et repère le zéro absolu.}
+ \pt{Convertit : $T = 20 + 273{,}15 = \qty{293,15}{K}$.}
+ \pt{Écrit $P\cdot V = n\cdot R\cdot T$ avec les unités SI (Pa, m$^3$, mol, K).}
+ \pt{Définit $V_m = V/n$ et montre que $V_m = \dfrac{R\cdot T}{P} \approx \qty{2,41e-2}{m^3.mol^{-1}} \approx \qty{24}{L.mol^{-1}}$.}
+ \pt{Établit $d = M/29$.}}
+{\form Correction collective, passage au tableau.\par
+ \textit{Indicateurs :} conversions justes ($\unit{\degreeCelsius}\to\unit{K}$, L $\to$ m$^3$, hPa $\to$ Pa) ; calcul de $V_m$ exact ; expression de $d$.\par\vspace{.8mm}
+ \regul Tableau des conversions laissé au tableau pendant toute la partie.}
+{20}{1 h 41}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{$T = \theta + 273{,}15$ ; $PV = nRT$ ; $n = V/V_m$ ; $d = M/29$}{\diapo{20--21} \support{Livre}}}
+{\pt{Projette les diapos 20 et 21 ; fait reformuler chaque relation et ses unités.}
+ \pt{Souligne que tous les gaz ont le même volume molaire dans les mêmes conditions (24 L·mol$^{-1}$ à 20 °C sous 1,013 bar) et compare avec l’eau liquide (18 mL pour une mole).}}
+{\pt{Complète les trous des « À retenir ».}
+ \pt{Interprète $d > 1$ et $d < 1$ : le dioxyde de carbone s’accumule près du sol, l’hélium s’élève.}}
+{\form Interrogation orale : « Dans $PV = nRT$, quelles unités pour $V$ et $T$ ? ».}
+{6}{1 h 47}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Le dihydrogène recueilli sur l’eau}{\diapo{22} \support{Livre}}}
+{\pt{Projette l’énoncé (tube gradué animé) ; fait travailler individuellement.}
+ \pt{Observe trois ou quatre copies, puis corrige au clic.}}
+{\pt{Convertit : $V = \qty{2,30e-2}{L}$ ; $P = \qty{1,020e5}{Pa}$ ; $T = \qty{297,65}{K}$.}
+ \pt{Calcule $V_m = RT/P \approx \qty{24,3}{L.mol^{-1}}$, puis $n = V/V_m \approx \qty{9,5e-4}{mol}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} démarche complète (conversions $\to$ relation $\to$ application numérique $\to$ unité) ; $n \approx \qty{9,5e-4}{mol}$.}
+{7}{1 h 54}
+% ---------------------------------------------------------------------
+\partie{cGreen}{Bilan et évaluation de la séance}{6 min}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ? — L’essentiel du chapitre}{\diapo{23} \diapo{30}}}
+{\pt{Lance le « Vrai ou faux ? » (diapo 23) : réponses à main levée, puis correction au clic.}
+ \pt{Projette « L’essentiel du chapitre » (diapo 30) pour la synthèse finale.}
+ \pt{Donne le travail à la maison (exercices 1 à 3 du livre).}}
+{\pt{Répond aux six affirmations et corrige celles qui sont fausses.}
+ \pt{Note le travail à faire.}}
+{\somm Taux de bonnes réponses au vrai-faux (objectif : au moins 5 sur 6).\par
+ \textit{Exploitation :} repérer les notions à reprendre au début de la séance suivante.}
+{6}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Exercice 1} — Prélever un liquide (acide éthanoïque) : objectifs O1 à O3.}
+\pt{\textbf{Exercice 2} — La pompe à vélo : objectif O4.}
+\pt{\textbf{Exercice 3} — Le ballon d’hélium : objectifs O5 à O7.}
+\pt{Correction projetée au début de la séance suivante (diapos 24 à 29).}
+\pt{Soutien : refaire l’application 1 avec 0,10 mol d’éthanol. Approfondissement : « Le saviez-vous ? » sur les masses volumiques.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}
+\encadre{ic_application}{cPurple}{Bilan de la séance (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séance :}\lignevide}
+\end{minipage}
+
+\end{document}
