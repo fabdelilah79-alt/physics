@@ -232,7 +232,7 @@ S.append(slide("questions", "Questions", "Activité 3 — L’énergie mécaniqu
     "    " + fig("tableAir4", doc(5, "Mobile freiné"), '{"reduit":1}'))))
 
 S.append(slide("activite", "Activité 3", "Étude théorique : glissement avec frottement", *P3, "Activité 3 · doc 6", cols("1fr", "1fr",
-    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 6.</b> Un solide (S) de masse $m$ glisse de A (altitude $z_A$) vers B (altitude $z_B$) sur un plan incliné d’un angle $α$. Il est soumis à son poids $\vec{P}$ et à la réaction $\vec{R}$ du plan, qui se décompose en une composante normale $\vec{R}_N$ et une force de frottement $\vec{f}$, parallèle au plan, opposée au mouvement, d’intensité constante $f$ :<br><span style=\"display:block;text-align:center;margin-top:8px\">$\vec{R} = \vec{R}_N + \vec{f}$</span>") + "\n    </div>",
+    "    <div class=\"stack center\">\n      " + card(r"<b>Doc 6.</b> Un solide (S) de masse $m$ glisse de A (altitude $z_A$) vers B (altitude $z_B$) sur un plan incliné d’un angle $α$. Il est soumis à son poids $\vec{P}$ et à la réaction $\vec{R}$ du plan, qui se décompose en une composante normale $\vec{R}_N$ et une force de frottement $\vec{f}$, parallèle au plan, opposée au mouvement, d’intensité constante $f$ :<br><span style='display:block;text-align:center;margin:8px 0'>$\vec{R} = \vec{R}_N + \vec{f}$</span>Le poids est appliqué en $G$ ; $\vec{R}$, $\vec{R}_N$ et $\vec{f}$ (forces de contact) sont appliquées au milieu I de la surface de contact.") + "\n    </div>",
     "    " + fig("planFrott", doc(6, "Glissement avec frottement de A vers B")))))
 
 S.append(slide("questions", "Questions", "Activité 3 — Variation de l’énergie mécanique", *P3, "Questions 2 et 3", cols("1.2fr", ".8fr",

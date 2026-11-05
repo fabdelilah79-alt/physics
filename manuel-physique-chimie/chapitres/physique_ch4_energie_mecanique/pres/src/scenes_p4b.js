@@ -218,18 +218,23 @@ SCENES.planFrott = (host, o = {}) => {
   const vR = vec(f, F, 0, 0, 0, 0, C.red, 2.2); vR.setAttribute('stroke-dasharray', '7 4');
   const dsh = f.path('', {stroke: C.red, 'stroke-width': 1, 'stroke-dasharray': '3 3', parent: F});
   const lP = f.g({parent: F}), lN = f.g({parent: F}), lf = f.g({parent: F}), lR = f.g({parent: F});
-  vlab(f, lP, 0, 0, 'P', C.red, 21, 'start'); vlab(f, lN, 0, 0, 'R_N', C.red, 21, 'start'); vlab(f, lf, 0, 0, 'f', C.red, 21, 'end'); vlab(f, lR, 0, 0, 'R', C.red, 21, 'end');
+  vlab(f, lP, 0, 0, 'P', C.red, 21, 'start'); vlab(f, lN, 0, 0, 'R_N', C.red, 21, 'start');
+  const dG = f.g({parent: F}), dI = f.g({parent: F});
+  f.dot(0, 0, {r: 3.4, fill: '#ffffff', parent: dG}); f.dot(0, 0, {r: 3.6, fill: C.ink, parent: dI});
+  f.T(-20, 20, 'I', {cls: 'lbl-b', size: 15, fill: '#ffffff', parent: dI}); vlab(f, lf, 0, 0, 'f', C.red, 21, 'end'); vlab(f, lR, 0, 0, 'R', C.red, 21, 'end');
   const mv = f.g({parent: sc}); vec(f, mv, 0, 0, 56 * ca, 56 * sa, C.orange, 2.4); 
   f.frame();
   const put = s => {
     const x = A[0] + s * d[0], y = A[1] + s * d[1]; setT(S, x, y, al);
-    const G = [x + 15 * n[0], y + 15 * n[1]];
+    // P : appliqué au centre d'inertie G ; R, R_N et f (forces de contact) : appliqués au milieu I de la surface de contact
+    const G = [x + 15 * n[0], y + 15 * n[1]], I = [x, y];
     setVec(vP, G[0], G[1], G[0], G[1] + 96); setT(lP, G[0] + 8, G[1] + 90);
-    const N = [G[0] + 74 * n[0], G[1] + 74 * n[1]], Fv = [G[0] - 34 * d[0], G[1] - 34 * d[1]], R = [N[0] - 34 * d[0], N[1] - 34 * d[1]];
-    setVec(vN, G[0], G[1], N[0], N[1]); setT(lN, N[0] + 6, N[1] + 2);
-    setVec(vf, G[0] - 22 * d[0], G[1] - 22 * d[1], Fv[0] - 22 * d[0], Fv[1] - 22 * d[1]); setT(lf, Fv[0] - 22 * d[0] - 4, Fv[1] - 22 * d[1] + 4);
-    setVec(vR, G[0], G[1], R[0], R[1]); setT(lR, R[0] - 6, R[1] + 2);
-    f.set(dsh, {d: `M${f2(N[0])},${f2(N[1])} L${f2(R[0])},${f2(R[1])}`});
+    const N = [I[0] + 84 * n[0], I[1] + 84 * n[1]], Fv = [I[0] - 44 * d[0], I[1] - 44 * d[1]], R = [N[0] - 44 * d[0], N[1] - 44 * d[1]];
+    setVec(vN, I[0], I[1], N[0], N[1]); setT(lN, N[0] + 6, N[1] + 2);
+    setVec(vf, I[0], I[1], Fv[0], Fv[1]); setT(lf, Fv[0] - 4, Fv[1] + 20);
+    setVec(vR, I[0], I[1], R[0], R[1]); setT(lR, R[0] - 6, R[1] + 2);
+    f.set(dsh, {d: `M${f2(N[0])},${f2(N[1])} L${f2(R[0])},${f2(R[1])} L${f2(Fv[0])},${f2(Fv[1])}`});
+    setT(dI, I[0], I[1]); setT(dG, G[0], G[1]);
     setT(mv, x + 34 * n[0] + 40 * d[0], y + 34 * n[1] + 40 * d[1], 0);
   };
   return {update(t){
