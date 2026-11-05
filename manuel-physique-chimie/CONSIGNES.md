@@ -30,6 +30,7 @@
 - Quand une notion n'est pas connue des élèves (ex. produit scalaire), ajouter un document qui l'explique
   et nommer précisément les objets dans les questions (« produit scalaire de F et de AB »).
 - Respecter les orientations officielles (limites du programme, notations).
+- Présentation : les diapositives « À retenir » et « Méthode » reprennent **le texte complet du livre** (pas de résumé) ; répartir sur deux diapositives si nécessaire.
 
 ## Économie (consommation)
 - Une conversation par chapitre ; cloner ce dépôt au début au lieu de reconstruire les modèles.

@@ -85,9 +85,10 @@ T_CHUTE_R = mtab([("Point", [rf"$A_{i}$" for i in range(1, 8)]), (r"$V_i$ (m·s<
 T_TABLE_R = mtab([("Point", [rf"$M_{i}$" for i in range(1, 7)]), (r"$V_i$ (m·s<sup>−1</sup>)", ["0,100", "0,200", "0,300", "0,392", "0,492", "0,600"]),
                   (rf"${EC}$ (10<sup>−3</sup> J)", ["3,66", "14,6", "32,9", "56,1", "88,5", "132"]),
                   (r"$W(\vec{P})$ (10<sup>−3</sup> J)", ["0", "11,4", "30,5", "57,2", "90,2", "132"])], "wide")
-T_J = mtab([("Disque ou cylindre plein (rayon $r$)", [r"$\frac{1}{2}m·r^2$"]), ("Anneau (cerceau) de rayon $r$", [r"$m·r^2$"]),
-            ("Sphère pleine de rayon $r$", [r"$\frac{2}{5}m·r^2$"]), ("Tige de longueur $l$, axe au milieu", [r"$\frac{1}{12}m·l^2$"]),
-            ("Tige de longueur $l$, axe à une extrémité", [r"$\frac{1}{3}m·l^2$"])], "jtab")
+T_J = ('<table class="mtab jtab"><tr><th>Solide (axe de symétrie)</th><th style="text-align:center">$J_Δ$</th></tr>' + "".join(f"<tr><th>{a}</th><td>{b}</td></tr>" for a, b in [
+    ("Disque ou cylindre plein de rayon $r$", r"$\frac{1}{2}m·r^2$"), ("Anneau (cerceau) de rayon $r$", r"$m·r^2$"),
+    ("Sphère pleine de rayon $r$", r"$\frac{2}{5}m·r^2$"), ("Tige de longueur $l$, axe au milieu", r"$\frac{1}{12}m·l^2$"),
+    ("Tige de longueur $l$, axe à une extrémité", r"$\frac{1}{3}m·l^2$")]) + "</table>")
 
 # ================= TITRE =================
 S.append('''<section class="slide s-title" data-kind="titre" data-group="Début" data-menu="Titre du chapitre">
@@ -139,14 +140,13 @@ S.append(slide("questions", "Questions", "Activité 1 — De quoi dépend l’é
             rf"De $m$ et de $V$ : ${EC} = \frac{{1}}{{2}}m·V^2$, en joules ($\u{{J}}$).", "Conclure.")),
     "    " + fig("pate", doc(3, "Empreintes dans la pâte")))))
 
-S.append(slide("retenir", "À retenir", "Énergie cinétique d’un solide en translation", *P1, "À retenir · translation", cols("1.2fr", ".8fr",
-    rf'''    <div class="stack center">
-      <div class="def"><h3>Mouvement de translation</h3><p style="margin:0">Tout vecteur $\vec{{AB}}$ lié au solide garde la même direction, le même sens et la même longueur. Translation rectiligne, curviligne ou circulaire.</p></div>
-      <div class="def"><h3>Énergie cinétique</h3><p style="margin:0 0 10px">Solide de masse $m$ en translation à la vitesse $V$ :</p>
-        <div class="big-eq"><span class="boxeq">${EC} = \frac{{1}}{{2}}m·V^2$</span><span class="unitnote">${EC}$ en $\u{{J}}$ ; $m$ en $\u{{kg}}$ ; $V$ en $\u{{m·s^{{−1}}}}$</span></div>
-        <p style="margin:10px 0 0">Grandeur <b>positive</b>, proportionnelle au <b>carré de la vitesse</b>.</p></div>
-    </div>''', "    " + fig("figEc"))))
-
+S.append(slide("retenir", "À retenir", "Énergie cinétique d’un solide en translation", *P1, "À retenir · translation", cols("1.3fr", ".7fr",
+    r"""    <div class="stack center">
+      <div class="def"><h3>Mouvement de translation</h3><p style="margin:0">Un solide est en translation si tout vecteur $\vec{AB}$ joignant deux de ses points garde la <b>même direction</b>, le <b>même sens</b> et la <b>même longueur</b> au cours du mouvement. La translation peut être <b>rectiligne</b>, <b>curviligne</b> ou <b>circulaire</b>.</p></div>
+      <div class="def"><h3>Énergie cinétique d’un solide en translation</h3><p style="margin:0 0 8px">Un solide de masse $m$ en translation à la vitesse $V$ (dans un référentiel donné) possède l’énergie cinétique :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$EC = \frac{1}{2}m·V^2$</span></div>
+        <p style="margin:8px 0 0">$EC$ en joules (<b>J</b>), $m$ en <b>kilogrammes (kg)</b>, $V$ en <b>$\u{m·s^{−1}}$</b>. L’énergie cinétique est une grandeur <b>positive</b> ; elle est proportionnelle au <b>carré de la vitesse</b>.</p></div>
+    </div>""".replace("EC", EC), "    " + fig("figEc"))))
 S.append(slide("application", "Application", "Une voiture qui accélère", *P1, "Application · voiture", cols("1.15fr", ".85fr",
     "    <div class=\"stack\">\n      " + card(r"Voiture de masse $m = 1,2~\u{t}$ ; $V_1 = 54~\u{km·h^{−1}}$, puis $V_2 = 108~\u{km·h^{−1}}$.") + "\n" +
     qlist(q(1, "Convertir dans les unités SI.", r"$m = 1200~\u{kg}$ ; $V_1 = \frac{54}{3,6} = 15~\u{m·s^{−1}}$ ; $V_2 = 30~\u{m·s^{−1}}$"),
@@ -177,14 +177,14 @@ S.append(slide("questions", "Questions", "Activité 2 — Le moment d’inertie"
     "    " + fig("pointsRot", doc(4, "$V_i = r_i·ω$")))))
 
 S.append(slide("retenir", "À retenir", "Énergie cinétique d’un solide en rotation", *P2, "À retenir · rotation", cols("1fr", "1fr",
-    rf'''    <div class="stack center">
-      <div class="def"><h3>Solide en rotation autour d’un axe fixe $(Δ)$</h3>
-        <div class="big-eq"><span class="boxeq">${EC} = \frac{{1}}{{2}}J_Δ·ω^2$</span><span class="unitnote">$ω$ en $\u{{rad·s^{{−1}}}}$ ; $J_Δ$ en $\u{{kg·m^2}}$</span></div>
-        <p style="margin:10px 0 0">$J_Δ = Σ m_i·r_i^2$ : <b>moment d’inertie</b> par rapport à $(Δ)$ ; il dépend de la masse et de sa répartition autour de l’axe.</p></div>
-      <div class="rappel"><b>Rappel.</b> $ω = 2π·f = \frac{{2π·N}}{{60}}$ ($N$ en tr/min) ; $V = r·ω$.</div>
-    </div>''',
-    '    <div class="stack center"><div class="def"><h3>Moments d’inertie (solides homogènes de masse $m$, axe de symétrie)</h3>' + T_J + "</div></div>")))
-
+    r"""    <div class="stack center">
+      <div class="def"><h3>Énergie cinétique d’un solide en rotation</h3><p style="margin:0 0 8px">Pour un solide en rotation autour d’un axe fixe $(Δ)$ à la vitesse angulaire $ω$ :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$EC = \frac{1}{2}J_Δ·ω^2$</span></div>
+        <p style="margin:8px 0 0">$EC$ en joules, $ω$ en <b>$\u{rad·s^{−1}}$</b>, $J_Δ$ : <b>moment d’inertie</b> du solide par rapport à l’axe $(Δ)$, en <b>$\u{kg·m^2}$</b>.</p>
+        <p style="margin:8px 0 0">$J_Δ = Σ m_i·r_i^2$ dépend de la <b>masse</b> du solide et de la <b>répartition de la matière autour de l’axe</b>.</p></div>
+      <div class="rappel"><b>Rappel.</b> Vitesse angulaire et fréquence de rotation : $ω = 2π·f = \frac{2π·N}{60}$ ($N$ en tours par minute) ; vitesse d’un point situé à la distance $r$ de l’axe : $V = r·ω$.</div>
+    </div>""".replace("EC", EC),
+    '    <div class="stack center"><div class="def"><h3>Moments d’inertie de solides homogènes de masse $m$</h3>' + T_J + "</div></div>")))
 S.append(slide("application", "Application", "Un disque qui tourne", *P2, "Application · disque", cols("1.2fr", ".8fr",
     "    <div class=\"stack\">\n      " + card(r"Disque homogène : $m = 4,0~\u{kg}$, $r = 20~\u{cm}$ ; il tourne autour de son axe à $N = 600~\u{tr/min}$.") + "\n" +
     qlist(q(1, r"Calculer $J_Δ$.", r"$J_Δ = \frac{1}{2}m·r^2 = \frac{1}{2}×4,0×0,20^2 = 0,080~\u{kg·m^2}$"),
@@ -229,13 +229,13 @@ S.append(slide("questions", "Questions", "Activité 3 — Généraliser", *P3, "
             rf"$a ≈ 0,96 ≈ 1$ ; $b ≈ 3×10^{{−3}}~\u{{J}}$, voisin de $E_{{\u{{C}}1}} ≈ 3,7×10^{{−3}}~\u{{J}}$, donc ${EC} − E_{{\u{{C}}1}} = W(\vec{{P}})$.<br>Comme $W(\vec{{R}}) = 0$ : $ΔE_{{\u{{C}}}} = Σ W_{{M_1→M_i}}(\vec{{F}}_{{\u{{ext}}}})$", "Généraliser.")),
     "    " + fig("graphTable", "Mobile autoporteur"))))
 
-S.append(slide("retenir", "À retenir", "Théorème de l’énergie cinétique (translation)", *P3, "À retenir · théorème", cols("1.3fr", ".7fr",
-    rf'''    <div class="stack center">
-      <div class="def"><h3>Théorème de l’énergie cinétique</h3><p style="margin:0 0 10px">Dans un <b>référentiel galiléen</b>, la variation de l’énergie cinétique d’un solide en translation entre deux positions A et B est égale à la <b>somme des travaux des forces extérieures</b> appliquées entre A et B :</p>
-        <div class="big-eq"><span class="boxeq">$ΔE_{{\u{{C}}}} = \frac{{1}}{{2}}m·V_B^2 − \frac{{1}}{{2}}m·V_A^2 = Σ W_{{A→B}}(\vec{{F}}_{{\u{{ext}}}})$</span></div></div>
-      <div class="card small"><p style="margin:0">Travail <b>moteur</b> ($Σ W > 0$) : ${EC}$ augmente. Travail <b>résistant</b> ($Σ W < 0$) : ${EC}$ diminue. Le référentiel terrestre est considéré comme galiléen.</p></div>
-    </div>''', "    " + fig("tableAir", None, '{"forces":1}'))))
-
+S.append(slide("retenir", "À retenir", "Théorème de l’énergie cinétique (solide en translation)", *P3, "À retenir · théorème", ("", "",
+    r"""    <div class="stack center" style="flex:1">
+      <div class="def"><h3>Théorème de l’énergie cinétique (solide en translation)</h3><p style="margin:0 0 10px">Dans un <b>référentiel galiléen</b>, la variation de l’énergie cinétique d’un solide en translation entre deux positions A et B est égale à la <b>somme des travaux des forces extérieures qui lui sont appliquées entre ces deux positions</b> :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$ΔEC = E_{\u{C}B} − E_{\u{C}A} = \frac{1}{2}m·V_B^2 − \frac{1}{2}m·V_A^2 = Σ W_{A→B}(\vec{F}_{\u{ext}})$</span></div>
+        <p style="margin:10px 0 0">Si la somme des travaux est positive (travail moteur), l’énergie cinétique <b>augmente</b> ; si elle est négative (travail résistant), l’énergie cinétique <b>diminue</b>. Le référentiel terrestre est considéré comme galiléen.</p></div>
+      <div class="fig" data-scene="tableAir" data-opts='{"forces":1}' style="height:250px;flex:none;width:100%"></div>""".replace("EC", EC) + """
+    </div>""")))
 S.append(slide("application", "Application", "La descente d’un skieur", *P3, "Application · skieur", cols("1.1fr", ".9fr",
     "    <div class=\"stack\">\n      " + card(r"Skieur et équipement : $m = 80~\u{kg}$ ; départ sans vitesse en A ; piste rectiligne inclinée de $α = 20°$ ; $AB = 50~\u{m}$ ; frottements négligeables ; $g = 9,8~\u{N·kg^{−1}}$.") + "\n" +
     qlist(q(1, "Bilan des forces et travail de chacune entre A et B.", r"Poids $\vec{P}$ : $W(\vec{P}) = m·g·AB·\u{sin}α = 80×9,8×50×\u{sin}20° ≈ 1,34×10^4~\u{J}$<br>Réaction $\vec{R}$ perpendiculaire à la piste : $W(\vec{R}) = 0$"),
@@ -260,19 +260,17 @@ S.append(slide("questions", "Questions", "Activité 4 — Généraliser le théo
     "    " + fig("volant"))))
 
 S.append(slide("retenir", "À retenir", "Théorème de l’énergie cinétique", *P4, "À retenir · généralisation", ("", "",
-    rf'''    <div class="stack center" style="flex:1"><div class="def"><h3>Énoncé général (référentiel galiléen, solide indéformable)</h3><p style="margin:0 0 10px">La variation de l’énergie cinétique entre deux instants $t_1$ et $t_2$ est égale à la somme des travaux de toutes les forces extérieures appliquées au solide :</p>
-      <div class="big-eq"><span class="boxeq">$ΔE_{{\u{{C}}}} = E_{{\u{{C}}2}} − E_{{\u{{C}}1}} = Σ W_{{1→2}}(\vec{{F}}_{{\u{{ext}}}})$</span></div></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
-      <div class="def"><h3>Translation</h3><span class="eq-wrap">$\frac{{1}}{{2}}m·V_2^2 − \frac{{1}}{{2}}m·V_1^2 = Σ W_{{1→2}}(\vec{{F}}_{{\u{{ext}}}})$</span></div>
-      <div class="def"><h3>Rotation autour d’un axe fixe</h3><span class="eq-wrap">$\frac{{1}}{{2}}J_Δ·ω_2^2 − \frac{{1}}{{2}}J_Δ·ω_1^2 = Σ W_{{1→2}}(\vec{{F}}_{{\u{{ext}}}})$</span></div>
-    </div>
-    <div class="card small"><p style="margin:0">Le théorème reste valable même si les forces ou leurs moments <b>ne sont pas constants</b>.</p></div></div>''')))
-
+    r"""    <div class="stack center" style="flex:1"><div class="def"><h3>Théorème de l’énergie cinétique</h3><p style="margin:0 0 10px">Dans un référentiel galiléen, la variation de l’énergie cinétique d’un solide indéformable (en translation ou en rotation autour d’un axe fixe) entre deux instants $t_1$ et $t_2$ est égale à la <b>somme des travaux de toutes les forces extérieures appliquées au solide entre ces deux instants</b> :</p>
+      <div class="big-eq" style="justify-content:center"><span class="boxeq">$ΔEC = E_{\u{C}2} − E_{\u{C}1} = Σ W_{1→2}(\vec{F}_{\u{ext}})$</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px">
+        <div><h3>Translation</h3><span class="eq-wrap">$\frac{1}{2}m·V_2^2 − \frac{1}{2}m·V_1^2 = Σ W_{1→2}(\vec{F}_{\u{ext}})$</span></div>
+        <div><h3>Rotation autour d’un axe fixe</h3><span class="eq-wrap">$\frac{1}{2}J_Δ·ω_2^2 − \frac{1}{2}J_Δ·ω_1^2 = Σ W_{1→2}(\vec{F}_{\u{ext}})$</span></div>
+      </div>
+      <p style="margin:14px 0 0">Le théorème reste valable même si les forces ou leurs moments ne sont <b>pas constants</b>.</p></div></div>""".replace("EC", EC))))
 S.append(slide("methode", "Méthode", "Appliquer le théorème de l’énergie cinétique", *P4, "Méthode", rows(
-    r'''    <div class="method"><h3>Six étapes</h3>
-      <ol class="steps"><li>Définir le <b>système</b> étudié.</li><li>Choisir le <b>référentiel</b> (terrestre, supposé galiléen).</li><li>Préciser l’<b>état initial</b> et l’<b>état final</b> (positions, vitesses).</li><li>Faire le <b>bilan des forces</b> extérieures.</li><li>Calculer le <b>travail</b> de chaque force (force perpendiculaire au déplacement, ou qui coupe l’axe : $W = 0$).</li><li>Écrire le <b>théorème</b> avec l’expression de $E_{\u{C}}$ adaptée et résoudre.</li></ol></div>''',
+    r"""    <div class="method"><h3>Méthode : appliquer le théorème de l’énergie cinétique</h3>
+      <ol class="steps"><li>Définir le <b>système</b> étudié.</li><li>Choisir le <b>référentiel</b> (le référentiel terrestre est supposé galiléen).</li><li>Préciser l’<b>état initial</b> et l’<b>état final</b> (positions, vitesses).</li><li>Faire le <b>bilan des forces</b> extérieures appliquées au système.</li><li>Calculer le <b>travail</b> de chaque force entre l’état initial et l’état final (une force perpendiculaire au déplacement, ou dont la droite d’action coupe l’axe de rotation, ne travaille pas).</li><li>Écrire le <b>théorème</b> avec l’expression de $E_{\u{C}}$ adaptée (translation ou rotation) et résoudre.</li></ol></div>""",
     [fig("skieur", None, '{"plain":1}'), fig("poulieApp", None, '{"plain":1}')], "1.2fr .8fr")))
-
 S.append(slide("application", "Application", "Une poulie mise en rotation", *P4, "Application · poulie", cols("1.15fr", ".85fr",
     "    <div class=\"stack\">\n      " + card(r"Poulie homogène (disque) : $M = 2,0~\u{kg}$, $r = 10~\u{cm}$, sans frottement autour de son axe fixe. Au repos, elle reçoit un couple moteur de moment constant $\mathcal{M}_Δ$ = $0,50~\u{N·m}$ pendant 10 tours.".replace(r"\mathcal{M}_Δ", "ℳ_Δ"), "small") + "\n" +
     qlist(q(1, r"Calculer $J_Δ$.", r"$J_Δ = \frac{1}{2}M·r^2 = \frac{1}{2}×2,0×0,10^2 = 1,0×10^{−2}~\u{kg·m^2}$"),
