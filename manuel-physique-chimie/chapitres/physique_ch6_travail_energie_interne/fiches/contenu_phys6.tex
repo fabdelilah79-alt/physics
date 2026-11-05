@@ -1,0 +1,275 @@
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 6 : Le travail et l’énergie interne (4 h, deux séances)
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{6}
+\newcommand{\TitreChap}{Le travail\\ et l’énergie interne}
+\newcommand{\TitreCourt}{Le travail et l’énergie interne}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{4 h}
+\newcommand{\Banniere}{opener_phys6.jpg}
+\newcommand{\BanniereDecalage}{1.3cm}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\cu}{\unit{J.kg^{-1}.\degreeCelsius^{-1}}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Etot}{E_{\mathrm{tot}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences mathématiques (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{4 heures — deux séances\\ 2 h + 2 h}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1 · § 4\\ Le travail et l’énergie interne}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séquence}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Travail mécanique et énergie :} \textbf{interpréter les transferts d’énergie} et les phénomènes de \textbf{conservation et de dissipation} dans diverses situations de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} effets du \textbf{travail reçu} par un système (échauffement, déformation, changement d’état) ; travail pour déformer un ressort ; \textbf{travail des forces pressantes} sur un gaz ; \textbf{énergie interne} ; \textbf{premier principe de la thermodynamique} $\Delta U = W + Q$, réinvesti dans des situations-problèmes (pompe, expérience de Joule, cycle d’un gaz, chauffage électrique).}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} observations (perçage, ressort, glace, allumette) ; établissement de $W = -P\cdot\Delta V$ ; vérification du premier principe sur l’expérience de Joule.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} convention de signe des échanges ; distinction des échelles macroscopique et microscopique ; graphes $F = f(x)$ et $P = f(V)$.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations (agitation moléculaire, piston, expérience de Joule, cycle).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en quatre étapes pour appliquer le premier principe (système, liste des échanges, signes, bilan).}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} histoire des sciences (Joule, Davy) ; moteurs thermiques ; échauffement des freins et des outils ; sécurité (pompe, allumettes).}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séquence, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — connaître quelques \textbf{effets du travail} reçu : élévation de température, déformation élastique, changement d’état physique ou chimique ;}
+\pt{\textbf{O2} — calculer le travail pour déformer un ressort ($\frac{1}{2}k\cdot x_2^2 - \frac{1}{2}k\cdot x_1^2$, méthode de l’aire) ;}
+\pt{\textbf{O3} — connaître et exploiter l’expression du travail des \textbf{forces pressantes} $W = -P\cdot\Delta V$ ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O4} — connaître le concept d’\textbf{énergie interne} et son expression $U = E_{\mathrm{C,mic}} + E_{\mathrm{p,mic}}$ ; écrire $\Etot = \Em + U$ ;}
+\pt{\textbf{O5} — connaître l’énoncé du \textbf{premier principe} $\Delta U = W + Q$ et la convention de signe ;}
+\pt{\textbf{O6} — \textbf{exploiter} le premier principe (adiabatique, isochore, cycle, système isolé).}
+\end{minipage}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} connaître quelques effets du travail ; connaître l’expression du travail de la force pressante et l’exploiter ; connaître le concept d’énergie interne ; connaître l’expression de l’énergie interne d’un système ; connaître l’énoncé du premier principe de la thermodynamique et l’exploiter.}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et des chapitres 2 à 4}
+\pt{travail d’une force constante $W = F\cdot AB\cdot\cos\alpha$ (chapitre 2) ;}
+\pt{énergie cinétique, énergie potentielle de pesanteur, énergie mécanique $\Em = \Ec + \Epp$ (chapitres 3 et 4) ;}
+\pt{pression $P = F/S$ ; énergie électrique $W_e = U\cdot I\cdot\Delta t$ ;}
+\pt{changements d’état ; transformation chimique.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{aire d’un triangle et d’un trapèze ; proportionnalité ;}
+\pt{conversions : \unit{cm} $\to$ \unit{m}, \unit{cm^2} $\to$ \unit{m^2}, \unit{L} $\to$ \unit{m^3}, \unit{bar} $\to$ \unit{Pa}, \unit{min} $\to$ \unit{s} ;}
+\pt{écriture scientifique ; calcul algébrique avec des signes.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{perceuse et plaque métallique (ou deux pièces métalliques à frotter), thermomètre numérique à sonde ;}
+\pt{ressort à spires non jointives, support, dynamomètre, règle graduée ;}
+\pt{glaçons à \dC{0}, allumettes et frottoir ;}
+\pt{pompe à vélo (sortie bouchée) ou seringue ; récipient isolé, agitateur, thermomètre (version simplifiée de l’expérience de Joule) ; résistance chauffante, générateur, ampèremètre, voltmètre.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (34 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis 3 et 4, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, § 4 « Le travail et l’énergie interne » (propre à la filière sciences mathématiques) : effets du travail (élévation de température, déformation élastique, changement d’état physique ou chimique) ; travail des forces appliquées à une quantité de gaz parfait ; concept d’énergie interne ; premier principe de la thermodynamique.}
+\pt{Activités proposées : mettre en évidence quelques effets du travail reçu (élévation de température, changements d’état physique et chimique) à partir d’expériences ou d’exemples de l’environnement de l’apprenant, de documents ou de logiciels (déformation élastique) ; mettre en évidence les différentes formes d’échange d’énergie d’un système mécaniquement isolé à partir d’expériences, d’exemples, de documents ou de logiciels.}
+\pt{Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat (sciences mathématiques).}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{7cm}
+\bloc{2}{fi_chemin}{Déroulement de la séquence (deux séances)}
+
+\seance{1}{2 h}{effets du travail reçu ; travail des forces pressantes}
+\frise[120]{cCyan/10/Mise en route, cTeal/53/Partie 1 · Effets du travail, cBlue/52/Partie 2 · Forces pressantes, cGreen/5/Bilan}
+\seance{2}{2 h}{énergie interne ; premier principe ; évaluation}
+\frise[120]{cCyan/8/Rappels, cPurple/39/Partie 3 · Énergie interne, cAmber/51/Partie 4 · Premier principe, cOrange/22/Évaluation et bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% =====================================================================
+\partie{cInk}{Séance 1 · Effets du travail et forces pressantes (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, plan et prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; projette la diapositive de titre et annonce le plan.}
+ \pt{Questions flash : « travail d’une force de \qty{10}{N} sur \qty{2}{m} dans son sens ? », « pression exercée par \qty{100}{N} sur \qty{0,01}{m^2} ? », « \qty{2}{L} en \unit{m^3} ? », « énergie mécanique d’un objet immobile au sol (référence) ? ».}}
+{\pt{Répond oralement : \qty{20}{J} ; \qty{1e4}{Pa} ; \qty{2e-3}{m^3} ; \qty{0}{J}.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} $W = F\cdot\ell$ ; $P = F/S$ ; conversions.\par\vspace{.8mm}
+ \regul Rappel au tableau de $W = F\cdot AB\cdot\cos\alpha$ et de $P = F/S$.}
+{10}{0 h 10}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Quelques effets du travail reçu}{53 min · objectifs O1 et O2}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Mains frottées, ressort, glace}{\diapo{2}}}
+{\pt{Fait frotter les mains ; projette les quatre expériences animées (diapo 2).}
+ \pt{Pose le problème : quels effets un travail reçu peut-il produire, en dehors d’une variation de vitesse ?}}
+{\pt{Propose : « ça chauffe », « ça se déforme », « ça fond ».}}
+{\diag Représentations initiales.}
+{5}{0 h 15}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Que produit un travail reçu ? (docs 1 et 2)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Réalise ou projette les expériences : perçage avec mesure de température, ressort étiré au dynamomètre, glaçons frottés, allumette (diapo 3).}
+ \pt{Présente le ressort et l’information sur l’aire (diapo 4) ; fait traiter les questions 1 à 4 en binômes ; corrige au clic (diapos 5 et 6).}}
+{\pt{Travaille sur la fiche collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Identifie l’échauffement, la déformation élastique, le changement d’état, la transformation chimique ; trace $F = k\cdot x$ et trouve $W = \frac{1}{2}k\cdot x^2$ par l’aire du triangle ; en déduit le travail entre $x_1$ et $x_2$ et celui de $\vect T$.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} aire du triangle ; différence de deux aires ; signe du travail de $\vect T$.\par\vspace{.8mm}
+ \regul Erreur fréquente : écrire $W = k\cdot x\cdot x$ (oubli du facteur $\frac{1}{2}$).}
+{30}{0 h 45}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Effets du travail ; travail pour déformer un ressort}{\diapo{7} \support{Cahier}}}
+{\pt{Projette la diapo 7 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « effet du travail reçu par un clou martelé ? » $\to$ échauffement, déformation.}
+{10}{0 h 55}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Étirer un ressort}{\diapo{8} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 8) ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $x_1 = \qty{0,03}{m}$, $x_2 = \qty{0,10}{m}$, $W(\vect F) = \qty{0,91}{J}$, $W(\vect T) = \qty{-0,91}{J}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} $x = \ell - \ell_0$ en mètres ; carrés.}
+{8}{1 h 03}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Travail des forces pressantes sur un gaz parfait}{52 min · objectif O3}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{La pompe bouchée}{\diapo{9}}}
+{\pt{Fait comprimer l’air d’une pompe ou d’une seringue bouchée ; projette l’animation (diapo 9).}
+ \pt{Pose le problème : comment exprimer le travail reçu par l’air ?}}
+{\pt{Constate l’échauffement ; propose : « le travail dépend de la force et du déplacement du piston ».}}
+{\diag Hypothèses des apprenants.}
+{4}{1 h 07}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Le travail reçu par un gaz (doc 3)}{\diapo{10--11} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Projette le piston animé (diapo 10) ; rappelle $P = F/S$ et la convention de signe.}
+ \pt{Fait traiter les questions 1 à 3 ; corrige au clic (diapo 11).}}
+{\pt{Écrit $F = P\cdot S$, $W = P\cdot S\cdot\ell = -P\cdot\Delta V$ ; discute le signe : compression $W > 0$, détente $W < 0$, isochore $W = 0$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} $S\cdot\ell = -\Delta V$ ; signe de $\Delta V$.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier le signe « $-$ » dans $W = -P\cdot\Delta V$.}
+{30}{1 h 37}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{$W = -P\cdot\Delta V$}{\diapo{12} \support{Cahier}}}
+{\pt{Projette la diapo 12 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « un gaz se détend : signe de $W$ ? » $\to$ négatif.}
+{10}{1 h 47}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Un gaz chauffé qui se détend}{\diapo{13} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 13) ; travail individuel ; correction au clic.}}
+{\pt{Convertit en \unit{m^3} ; calcule $W = \qty{-150}{J}$ ; conclut que le gaz cède du travail.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} conversion \unit{L} $\to$ \unit{m^3}.}
+{8}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 1}{Synthèse et travail à faire}{\diapo{7} \diapo{12}}}
+{\pt{Fait résumer oralement ; donne le travail à faire (exercice 1, questions 1 et 2, énoncé projeté, diapo 28).}}
+{\pt{Résume : effets du travail, $W = \frac{1}{2}k\cdot x^2$, $W = -P\cdot\Delta V$ ; recopie l’énoncé de l’exercice 1.}}
+{\form Synthèse orale.}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 2 · Énergie interne et premier principe (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction de l’exercice 1 (questions 1 et 2)}{\diapo{29}}}
+{\pt{Corrige les questions 1 et 2 de l’exercice 1 (diapo 29) ; questions flash sur $W = -P\cdot\Delta V$.}}
+{\pt{Vérifie : $F = \qty{1000}{N}$, $\ell = \qty{0,24}{m}$, $W = \qty{+240}{J}$.}}
+{\diag Vérification du travail personnel.}
+{8}{0 h 08}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · L’énergie interne}{39 min · objectif O4}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Une bouteille immobile}{\diapo{14}}}
+{\pt{Projette la bouteille et la loupe animée (diapo 14) : énergie mécanique nulle, molécules agitées.}
+ \pt{Pose le problème : quelle énergie possède la matière à l’échelle microscopique ?}}
+{\pt{Propose : « l’énergie de mouvement des molécules ».}}
+{\diag Représentations sur la matière.}
+{4}{0 h 12}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Une énergie cachée dans la matière (doc 4)}{\diapo{15--16} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Projette le doc 4 et l’information (diapo 15) ; fait traiter les questions 1 à 4 ; corrige au clic (diapo 16).}}
+{\pt{Distingue les échelles ; écrit $U = E_{\mathrm{C,mic}} + E_{\mathrm{p,mic}}$, $\Etot = \Ec + \Epp + U$, $\Delta\Etot = \Delta\Em + \Delta U$ ; au repos : $\Delta\Etot = \Delta U$.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} distinction macroscopique / microscopique.}
+{20}{0 h 32}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{Énergie interne ; énergie totale}{\diapo{17} \support{Cahier}}}
+{\pt{Projette la diapo 17 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « l’énergie interne d’un gaz augmente-t-elle quand il s’échauffe ? » $\to$ oui.}
+{8}{0 h 40}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Une bille qui s’immobilise}{\diapo{18} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 18) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $\Delta\Em = \qty{-10}{J}$ et $\Delta U = \qty{+10}{J}$ ; conclut à l’échauffement de la bille.}}
+{\somm Exercice individuel.}
+{7}{0 h 47}
+% ---------------------------------------------------------------------
+\partie{cAmber}{Partie 4 · Le premier principe de la thermodynamique}{51 min · objectifs O5 et O6}
+\etape{cAmber}{\axe{cAmber}{ic_situation}{Situation de départ}{Chauffer de l’eau sans flamme}{\diapo{19}}}
+{\pt{Projette l’expérience de Joule animée (diapo 19) ; rappelle qu’on peut aussi chauffer avec une résistance.}
+ \pt{Pose le problème : comment relier $\Delta U$ au travail et à la chaleur échangés ?}}
+{\pt{Propose : « l’énergie reçue s’ajoute à l’énergie interne ».}}
+{\diag Hypothèses des apprenants.}
+{4}{0 h 51}
+\etape{cAmber}{\axe{cTeal}{ic_activite}{Activité 4}{Travail, chaleur et énergie interne (docs 5 et 6)}{\diapo{20--23} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Projette l’expérience de Joule et l’information (diapo 20), puis le doc 6 (diapo 21) ; fait traiter les questions 1 à 5 ; corrige au clic (diapos 22 et 23).}}
+{\pt{Inventorie $W$ et $Q$ et leurs signes ; écrit $\Delta U = W + Q$ ; calcule $W = \qty{5880}{J}$ et $\Delta U \approx \qty{5900}{J}$ ; déduit : cycle $\Delta U = 0$, adiabatique $\Delta U = W$, isolé $\Delta U = 0$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} convention de signe ; $W = N\cdot M\cdot g\cdot h$.\par\vspace{.8mm}
+ \regul Erreur fréquente : confondre « adiabatique » ($Q = 0$) et « isochore » ($W = 0$).}
+{30}{1 h 21}
+\etape{cAmber}{\axe{cRed}{ic_retenir}{À retenir et méthode}{$\Delta U = W + Q$ ; méthode}{\diapo{24--25} \support{Cahier}}}
+{\pt{Projette les diapos 24 et 25 ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » et la méthode dans son cahier.}}
+{\form Question flash : « gaz qui reçoit \qty{100}{J} de travail et cède \qty{100}{J} de chaleur : $\Delta U$ ? » $\to$ 0.}
+{10}{1 h 31}
+\etape{cAmber}{\axe{cPurple}{ic_application}{Application}{Un gaz comprimé qui se refroidit}{\diapo{26} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 26) ; travail individuel en suivant la méthode ; correction au clic.}}
+{\pt{Donne $W = \qty{+450}{J}$, $Q = \qty{-180}{J}$ ; calcule $\Delta U = \qty{+270}{J}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} signes justifiés.}
+{7}{1 h 38}
+% ---------------------------------------------------------------------
+\partie{cOrange}{Évaluation et bilan}{22 min · objectifs O3 à O6}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ?}{\diapo{27}}}
+{\pt{Projette le vrai/faux interactif (diapo 27) ; fait voter à main levée, puis justifier.}}
+{\pt{Répond à main levée et corrige les affirmations fausses dans le cahier : a) F, b) V, c) F, d) V, e) V, f) F.}}
+{\form Vote à main levée.\par
+ \textit{Indicateur :} au moins 5 bonnes réponses sur 6.\par\vspace{.8mm}
+ \regul Reprendre les affirmations les plus échouées.}
+{6}{1 h 44}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 2}{Un cycle de trois transformations}{\diapo{30--31} \support{Cahier}}}
+{\pt{Projette l’énoncé et le cycle animé (diapo 30) ; travail individuel ; corrige au clic (diapo 31).}}
+{\pt{Trouve $\Delta U_{AB} = \qty{+350}{J}$, $Q_{BC} = \qty{-550}{J}$, $W_{CA} = \qty{-300}{J}$, $\Delta U_{CA} = \qty{+200}{J}$, $Q_{CA} = \qty{+500}{J}$.}}
+{\somm Exercice individuel (évaluation de fin de chapitre).\par
+ \textit{Indicateurs :} $W = 0$ pour l’isochore ; $\Delta U_{\text{cycle}} = 0$.}
+{12}{1 h 56}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{L’essentiel}{Synthèse du chapitre}{\diapo{34}}}
+{\pt{Projette « L’essentiel du chapitre » (diapo 34) ; donne le travail à la maison (encadré ci-dessous).}}
+{\pt{Relit la synthèse ; note le travail à faire.}}
+{\somm Bilan de l’évaluation.}
+{4}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Après la séance 1} — exercice 1, questions 1 et 2 (énoncé projeté, diapo 28, à recopier et à résoudre dans le cahier) : objectif O3.}
+\pt{\textbf{Après la séance 2} — exercice 1, question 3, et exercice 3 (énoncé projeté, diapo 32) : objectifs O2, O5 et O6.}
+\pt{Soutien : refaire l’application du ressort pour un allongement de 5 à \qty{15}{cm}. Approfondissement : dans l’exercice 2, calculer le travail total et la chaleur totale échangés sur le cycle, et vérifier que $W + Q = 0$.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séquence (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séquence :}\lignevide}
+\end{minipage}
+
+\end{document}

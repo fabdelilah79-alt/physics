@@ -1,0 +1,694 @@
+% =====================================================================
+%  Préambule commun (modèle) : les données du chapitre sont dans chapitre.tex
+%  Chapitre de manuel de Physique-Chimie (1re année du baccalauréat)
+%  Préambule commun au livre du professeur et au livre de l'élève :
+%  \def\versioneleve{1} en première ligne active la version élève (à compléter).
+%  Compilation : ./build_livre.sh (XeLaTeX, deux passes)
+%  Les figures viennent des scènes animées de la présentation
+%  (figures_html/book.html + render_book.py) et sont exportées dans images/.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\input{chapitre.tex}% \MatiereLivre, \DomaineLivre, \NumChapLivre, \TitreCourtLivre
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.2cm,left=1.9cm,right=2.1cm,headsep=6mm,footskip=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\titlefont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, BoldFont=*-Bold]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.misc}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{eso-pic}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{needspace}
+\usepackage{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+\usepackage{microtype}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=4}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt plus 1pt}
+\linespread{1.07}
+\emergencystretch=3em
+\tolerance=2500
+
+% ---------- Couleurs (identiques à la charte des figures) ----------
+\definecolor{cInk}{HTML}{1B2A41}
+\definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8}
+\definecolor{cSky}{HTML}{8EC5FF}
+\definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}
+\definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6}
+\definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300}
+\definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\arc}[1]{\overparen{#1}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Mom}{\mathcal{M}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}   % mot-clé des questions
+\newcommand{\hl}[1]{{\bfseries\color{cRed}#1}}             % mise en évidence
+\newcommand{\imp}[1]{\textbf{#1}}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+
+% Pastille « Doc n »
+\newcommand{\docbadge}[2][cBlue]{\tikz[baseline=(b.base)]\node[fill=#1,text=white,rounded corners=6pt,inner xsep=5pt,inner ysep=2.2pt,font=\sffamily\bfseries\footnotesize](b){Doc #2};}
+% Document illustré : [largeur]{n}{légende}{image}
+\newcommand{\docimg}[4][0.485\linewidth]{%
+  \begin{minipage}[t]{#1}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{1.4mm}
+    {\sffamily\small\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+% Figure numérotée simple
+\newcommand{\figcap}[1]{\par\vspace{1mm}{\centering\sffamily\small\color{cInk2}#1\par}}
+
+% Formule encadrée
+\newtcbox{\formule}[1][cRed]{on line, enhanced, colback=white, colframe=#1, boxrule=1pt, arc=2.5mm,
+  left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm, boxsep=0pt}
+
+% ---------- Rubriques (boîtes) ----------
+% \begin{rub}[options]{couleur}{icône}{titre}
+\newtcolorbox{rub}[4][]{%
+  enhanced, breakable,
+  colback=#2!4!white, colframe=#2!75!white, boxrule=0.9pt, arc=3mm,
+  left=4.5mm, right=4.5mm, top=6.5mm, bottom=3.5mm,
+  before skip=6mm, after skip=4mm,
+  title={\raisebox{-2.35mm}{\includegraphics[height=7.6mm]{ic_#3}}\hspace{2.2mm}#4},
+  fonttitle=\sffamily\bfseries\fontsize{11.5}{13}\selectfont\color{white},
+  attach boxed title to top left={xshift=5mm,yshift=-4.4mm},
+  boxed title style={enhanced, colback=#2, colframe=#2, arc=4.3mm, boxrule=0pt,
+     left=0.4mm, right=4.5mm, top=0.5mm, bottom=0.5mm},
+  #1}
+
+% Encadré secondaire (méthode, rappel, le saviez-vous) — non sécable
+\newtcolorbox{encart}[4][]{%
+  enhanced, colback=#2!6!white, colframe=#2!6!white, boxrule=0pt, arc=2.5mm,
+  left=13mm, right=3mm, top=2mm, bottom=2mm, before skip=3mm, after skip=3mm,
+  borderline west={1.6pt}{0pt}{#2},
+  overlay={\node[anchor=north west] at ([xshift=2mm,yshift=-2mm]frame.north west)
+     {\includegraphics[width=8.5mm]{ic_#3}};},
+  fontupper=\small,
+  title={#4}, detach title, coltitle=#2, before upper={{\sffamily\bfseries\color{#2}\tcbtitle}\par\smallskip},
+  #1}
+
+% Situation de départ (bulle)
+\newtcolorbox{situation}{%
+  enhanced, colback=cAmber!9!white, colframe=cAmber!9!white, boxrule=0pt, arc=3mm,
+  left=16mm, right=4mm, top=2.5mm, bottom=2.5mm, before skip=2mm, after skip=3mm,
+  overlay={\node at ([xshift=8mm]frame.west) {\includegraphics[width=10mm]{ic_situation}};
+           \draw[cAmber, line width=1.4pt, rounded corners=3mm] (frame.south west) rectangle (frame.north east);}}
+
+% Sous-titre à l'intérieur d'une rubrique
+\newcommand{\soustitre}[2][cTeal]{\par\medskip{\sffamily\bfseries\color{#1}\MakeUppercase{#2}}\par\smallskip}
+
+% Listes
+% pastille numérotée (commande robuste : enumitem développe l'étiquette)
+\DeclareRobustCommand{\pastille}[2]{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=5.2mm,font=\sffamily\bfseries\footnotesize](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=3pt, topsep=3pt}
+\newlist{reps}{enumerate}{1}
+\setlist[reps]{label={\pastille{cGreen}{\arabic*}},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=4pt, topsep=3pt}
+\newlist{appq}{enumerate}{1}
+\setlist[appq]{label={\sffamily\bfseries\color{cPurple}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\newlist{exq}{enumerate}{1}
+\setlist[exq]{label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\setlist[itemize,1]{label={\color{cOrange}\small$\blacktriangleright$}, leftmargin=6mm, itemsep=2pt, topsep=2pt}
+\setlist[itemize,2]{label={\color{cInk2}\small$\bullet$}, leftmargin=5mm, itemsep=1pt, topsep=1pt}
+
+% ---------- Titres de sections ----------
+\titleformat{\section}[block]
+  {\sffamily\bfseries\fontsize{18}{22}\selectfont\color{cInk}\RaggedRight}
+  {\tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=10.5mm,minimum height=10.5mm,inner sep=0pt,font=\sffamily\bfseries\fontsize{18}{22}\selectfont](n){\thesection};}
+  {4mm}{}[\vspace{1.2mm}{\color{cOrange}\titlerule[1.3pt]}]
+\titlespacing*{\section}{0pt}{8mm}{4mm}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{\MatiereLivre}}\enspace·\enspace \DomaineLivre}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre \NumChapLivre\enspace·\enspace \TitreCourtLivre}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7.5mm,inner sep=0pt]{\thepage};}
+% onglet latéral
+\AddToShipoutPictureBG{%
+  \ifnum\value{page}>1
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[cOrange,rounded corners=2.5mm] ([xshift=-6.5mm,yshift=-3.2cm]current page.north east) rectangle ([xshift=3mm,yshift=-7.2cm]current page.north east);
+    \node[rotate=-90,text=white,font=\sffamily\bfseries\footnotesize] at ([xshift=-3.3mm,yshift=-5.2cm]current page.north east) {CHAPITRE \NumChapLivre};
+  \end{tikzpicture}\fi}
+
+
+% ---------- Encadré « Rappel » ----------
+\newenvironment{rappel}{\begin{encart}{cGrey}{rappel}{Rappel}}{\end{encart}}
+
+% ---------- Tableaux de mesures : \mesures[largeur]{nb colonnes}{lignes} ----------
+\newcommand{\mesures}[3][1.25cm]{{\renewcommand{\arraystretch}{1.35}\setlength{\arrayrulewidth}{.6pt}\arrayrulecolor{cTeal!55}\setlength{\tabcolsep}{4pt}%
+  \begin{tabular}{|>{\sffamily\footnotesize\bfseries\color{cTeal}}l|*{#2}{>{\centering\arraybackslash}p{#1}|}}\hline #3\end{tabular}}}
+
+% =====================================================================
+%  Version élève (livre à compléter) : \def\versioneleve{1} avant \documentclass
+% =====================================================================
+\newif\ifeleve
+\ifdefined\versioneleve\elevetrue\fi
+\newlength{\interligne}\setlength{\interligne}{7mm}
+\newsavebox{\repbox}
+\newlength{\replen}
+\newcount\repn \newcount\lgn
+\newcommand{\pointilles}{{\color{cInk2!60}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}
+% \lignes{n} : n lignes pointillées (la première continue la ligne en cours)
+\newcommand{\lignes}[1]{\leavevmode\vrule width0pt height\dimexpr\interligne-1mm\relax depth0pt\pointilles
+  \lgn=1 \loop\ifnum\lgn<#1 \par\nointerlineskip\noindent\vrule width0pt height\interligne depth0pt\pointilles\advance\lgn by 1 \repeat}
+% \rep{réponse} : réponse rédigée (professeur) ou lignes pointillées en nombre adapté (élève)
+\newcommand{\rep}[1]{%
+  \ifeleve
+    \sbox{\repbox}{\parbox{\linewidth}{#1}}%
+    \replen=\dimexpr\ht\repbox+\dp\repbox\relax
+    \repn=\numexpr\replen/\baselineskip+1\relax
+    \ifnum\repn<2 \repn=2\fi
+    \edef\nblignes{\the\repn}\lignes{\nblignes}%
+  \else #1\fi}
+% \trou{mot ou formule} : mot clé des « À retenir » (professeur) ou espace pointillé (élève)
+\newlength{\troumax}
+\newcommand{\trou}[1]{%
+  \ifeleve
+    \sbox{\repbox}{#1}%
+    \replen=\dimexpr\wd\repbox*3/2+6mm\relax
+    \troumax=\linewidth \ifdim\hsize<\troumax \troumax=\hsize\fi
+    \advance\troumax by -14mm\relax
+    \ifdim\replen>\troumax \replen=\troumax\fi
+    \makebox[\replen][l]{\vphantom{\usebox{\repbox}}\pointilles}%
+  \else #1\fi}
+% \troul{fin de phrase} : fin de phrase à compléter sur une ou plusieurs lignes
+\newcommand{\troul}[1]{%
+  \ifeleve
+    \sbox{\repbox}{#1}%
+    \repn=\numexpr\dimexpr\wd\repbox*3/2\relax/\linewidth+1\relax
+    \edef\nblignes{\the\repn}\unskip\ \lignes{\nblignes}%
+  \else #1\fi}
+% \cel{valeur} : case de tableau (vide en version élève, hauteur conservée)
+\newcommand{\cel}[1]{\ifeleve\vphantom{#1}\else #1\fi}
+\newcommand{\titrereponses}{\ifeleve Mes réponses\else Réponses\fi}
+\newcommand{\titrecorriges}{\ifeleve Mes réponses aux exercices\else Éléments de correction\fi}
+\ifeleve
+  \fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre \NumChapLivre\enspace·\enspace\textcolor{cTeal}{\textbf{Livre de l’élève}}}
+\fi
+% =====================================================================
+%  Corps du chapitre 6 de physique : Le travail et l’énergie interne
+% =====================================================================
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+\newcommand{\Etot}{E_{\mathrm{tot}}}
+\newcommand{\Ecmic}{E_{\mathrm{C,mic}}}
+\newcommand{\Epmic}{E_{\mathrm{p,mic}}}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\info}[1]{\par\medskip\begin{tcolorbox}[enhanced,colback=white,colframe=cTeal!45,boxrule=.6pt,arc=2mm,left=3mm,right=3mm,top=1.5mm,bottom=1.5mm]#1\end{tcolorbox}}
+\begin{document}
+% =====================================================================
+
+% ---------------------- PAGE D'OUVERTURE ----------------------
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at (current page.north west) {\includegraphics[width=\paperwidth]{opener.jpg}};
+  \node[anchor=north west,text width=11.2cm,align=left,inner sep=0] at ([xshift=1.9cm,yshift=-2.1cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12} PHYSIQUE\enspace·\enspace PARTIE 1 — TRAVAIL MÉCANIQUE ET ÉNERGIE}\par\vspace{5mm}
+    \tikz\node[fill=cOrange,text=white,rounded corners=4mm,inner xsep=4mm,inner ysep=1.6mm,font=\sffamily\bfseries\large]{Chapitre 6};\par\vspace{5mm}
+    {\titlefont\bfseries\fontsize{26}{31}\selectfont\color{white}Le travail\\ et l’énergie\\ interne\par}};
+\end{tikzpicture}
+\vspace*{8.25cm}
+
+{\large\itshape Frotter ses mains les réchauffe, comprimer l’air d’une pompe échauffe le cylindre, un moteur transforme la chaleur d’un gaz en travail. Que devient le travail reçu par un système qui ne change ni de vitesse ni d’altitude ?\par}
+\vspace{2.5mm}
+
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cBlue!5,colframe=cBlue!5,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cBlue}Objectifs du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+Je vais apprendre à :
+\begin{itemize}
+  \item reconnaître quelques effets du travail reçu par un système ;
+  \item calculer le travail pour déformer un ressort et le travail des forces pressantes sur un gaz ;
+  \item définir l’énergie interne d’un système ;
+  \item appliquer le premier principe de la thermodynamique : $\Delta U = W + Q$.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cGreen!6,colframe=cGreen!6,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cGreen}Je dois déjà savoir},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+\begin{itemize}
+  \item le travail d’une force constante : $W = F\cdot AB\cdot\cos\alpha$ (chapitre 2) ;
+  \item la pression : $P = \dfrac{F}{S}$, en pascals ;
+  \item l’énergie mécanique $\Em = \Ec + \Epp$ (chapitres 3 et 4) ;
+  \item l’énergie électrique reçue : $W_e = U\cdot I\cdot\Delta t$.
+\end{itemize}
+\end{tcolorbox}
+\vspace{1mm}
+\begin{tcolorbox}[enhanced,colback=cOrange!7,colframe=cOrange!7,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cOrange}Plan du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\sffamily]
+\textcolor{cOrange}{\textbf{1}}\enspace Quelques effets du travail reçu\par
+\textcolor{cOrange}{\textbf{2}}\enspace Travail des forces pressantes\par
+\textcolor{cOrange}{\textbf{3}}\enspace L’énergie interne\par
+\textcolor{cOrange}{\textbf{4}}\enspace Le premier principe de la thermodynamique\par
+\raisebox{-0.8mm}{\includegraphics[height=3.6mm]{ic_exercices}}\enspace Exercices d’application et de synthèse
+\end{tcolorbox}
+\end{minipage}
+
+\begin{encart}{cCyan}{savoir}{Le saviez-vous ?}
+Vers 1845, le physicien anglais James Prescott Joule fit tourner des palettes dans de l’eau à l’aide de masses qui descendaient : l’eau s’échauffait. Il montra ainsi que travail et chaleur sont deux formes de transfert d’énergie. L’unité d’énergie, le joule, porte son nom.
+\end{encart}
+
+\newpage
+% =====================================================================
+\section{Quelques effets du travail reçu par un système}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 1\enspace·\enspace Que produit un travail reçu ?}
+\begin{situation}
+\textbf{Situation de départ.} Un solide qui reçoit un travail moteur sur un plan lisse prend de la vitesse. Mais frotter ses mains l’une contre l’autre les réchauffe, tirer sur un ressort l’allonge, frotter deux blocs de glace les fait fondre : le système reçoit un travail sans que sa vitesse ni son altitude ne changent. \textbf{Quels autres effets un travail reçu peut-il produire ?}
+\end{situation}
+
+\textbf{Doc 1. Quatre expériences.} (a) On perce une plaque d’acier avec un foret en rotation : un capteur indique une forte élévation de la température de la zone percée. (b) Un opérateur étire lentement un ressort ; quand il le lâche, le ressort reprend sa longueur initiale. (c) On frotte l’un contre l’autre deux blocs de glace à \dC{0} (expérience de Davy) : une partie de la glace devient liquide, sans que la température change. (d) On frotte une allumette sur son frottoir : elle s’enflamme, le phosphore brûle.\par\smallskip
+{\centering\includegraphics[width=\linewidth]{doc1_effets}\par\vspace{1mm}
+{\sffamily\small\docbadge{1}\enspace\color{cInk2}Quatre systèmes qui reçoivent un travail}\par}
+
+\medskip
+\textbf{Doc 2. Le ressort.} Un ressort à spires non jointives, de masse négligeable et de raideur $k$, est fixé à un support par une extrémité. L’opérateur exerce sur l’autre extrémité une force $\vect F$ parallèle à l’axe du ressort, de même sens que le déplacement, dont l’intensité est proportionnelle à l’allongement $x$ : $F = k\cdot x$. Le ressort exerce sur l’opérateur une force de rappel $\vect T = -\vect F$.
+\info{\textbf{Information : travail d’une force variable.} Quand une force parallèle au déplacement a une intensité qui varie au cours du déplacement, son travail est égal à l’\textbf{aire} comprise entre la courbe $F = f(x)$, l’axe des abscisses et les deux droites verticales qui limitent le déplacement.}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Identifier.} Doc 1 (a) : quel est l’effet du travail reçu par la plaque percée ?
+  \item \kw{Établir.} Doc 1 (b) et doc 2 : quel est l’effet du travail reçu par le ressort ? Tracer l’allure du graphe $F = f(x)$, puis, à l’aide de l’information, exprimer le travail $W_{0\to x}(\vect F)$ reçu par le ressort quand son allongement passe de 0 à $x$. En déduire le travail de $\vect F$, puis celui de $\vect T$, quand l’allongement passe de $x_1$ à $x_2$.
+  \item \kw{Préciser.} Doc 1 (c) et (d) : de quelle nature sont les transformations provoquées par le travail reçu ?
+  \item \kw{Classer.} Résumer les effets que peut produire un travail reçu par un système, en dehors d’une variation de vitesse.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Le travail reçu provoque une élévation de la température de la plaque.}
+  \item \ifeleve\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}\RaggedRight\rep{Le ressort subit une déformation élastique : il s’allonge, puis reprend sa forme. $F = k\cdot x$ est une droite qui passe par l’origine. Le travail est l’aire du triangle de base $x$ et de hauteur $k\cdot x$ : $W_{0\to x}(\vect F) = \frac{1}{2}\,k\cdot x^2$. Entre $x_1$ et $x_2$ : $W_{1\to2}(\vect F) = \frac{1}{2}\,k\cdot x_2^2 - \frac{1}{2}\,k\cdot x_1^2$ ; comme $\vect T = -\vect F$ : $W_{1\to2}(\vect T) = \frac{1}{2}\,k\cdot x_1^2 - \frac{1}{2}\,k\cdot x_2^2$.}\end{minipage}\hfill\begin{minipage}[t]{0.44\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_fx_eleve}\end{minipage}
+  \else\begin{minipage}[t]{0.55\linewidth}\vspace{0pt}\RaggedRight Le ressort subit une déformation élastique : il s’allonge, puis reprend sa forme. $F = k\cdot x$ est une droite qui passe par l’origine. Le travail est l’aire du triangle de base $x$ et de hauteur $k\cdot x$ : $W_{0\to x}(\vect F) = \frac{1}{2}\,k\cdot x^2$. Entre $x_1$ et $x_2$ (différence des aires de deux triangles) : $W_{1\to2}(\vect F) = \frac{1}{2}\,k\cdot x_2^2 - \frac{1}{2}\,k\cdot x_1^2$ ; comme $\vect T = -\vect F$ : $W_{1\to2}(\vect T) = \frac{1}{2}\,k\cdot x_1^2 - \frac{1}{2}\,k\cdot x_2^2$.\end{minipage}\hfill\begin{minipage}[t]{0.4\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_fx}\end{minipage}\fi
+  \item \rep{(c) La glace fond : c’est un changement d’état physique (solide $\to$ liquide). (d) L’allumette brûle : c’est une transformation chimique (combustion).}
+  \item \rep{Un travail reçu peut provoquer une élévation de température, une déformation élastique, un changement d’état physique ou une transformation chimique.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.56\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Effets du travail reçu par un système}\par\smallskip
+En dehors d’une variation de vitesse, le travail reçu par un système peut provoquer :
+\begin{itemize}
+  \item une \trou{élévation de température} (frottement, perçage, compression rapide d’un gaz) ;
+  \item une \trou{déformation élastique} (ressort, arc, lame) ;
+  \item un \trou{changement d’état physique} ou une \trou{transformation chimique} (fusion de la glace, allumette).
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.4\linewidth}\vspace{0pt}\centering
+\ifeleve\includegraphics[width=\linewidth]{fig_graphe_fx_eleve}\else\includegraphics[width=\linewidth]{fig_graphe_fx}\fi
+\end{minipage}\par\medskip
+\sfb{\color{cRed}Travail pour déformer un ressort}\par\smallskip
+Pour faire passer l’allongement (ou la compression) d’un ressort de raideur $k$ de $x_1$ à $x_2$, la force extérieure $\vect F$ effectue le travail :
+\begin{center}\formule{\trou{$W_{1\to2}(\vect F) = \dfrac{1}{2}\,k\cdot x_2^2 - \dfrac{1}{2}\,k\cdot x_1^2$}}\end{center}
+Le travail de la force de rappel $\vect T$ du ressort est l’\trou{opposé} : \trou{$W_{1\to2}(\vect T) = \dfrac{1}{2}\,k\cdot x_1^2 - \dfrac{1}{2}\,k\cdot x_2^2$}.
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Étirer un ressort}
+Un ressort à spires non jointives, de longueur à vide $\ell_0 = \qty{15}{cm}$ et de raideur $k = \qty{200}{N.m^{-1}}$, est horizontal. Un opérateur tire lentement sur son extrémité libre pour faire passer sa longueur de $\ell_1 = \qty{18}{cm}$ à $\ell_2 = \qty{25}{cm}$.\par\smallskip
+{\centering\includegraphics[width=0.7\linewidth]{app1_ressort}\par}
+\begin{appq}
+  \item Calculer les allongements initial $x_1$ et final $x_2$ du ressort, en mètres ($x = \ell - \ell_0$).
+  \item Calculer le travail $W_{1\to2}(\vect F)$ fourni par l’opérateur, puis le travail $W_{1\to2}(\vect T)$ de la force de rappel.
+\end{appq}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Travail des forces pressantes sur un gaz parfait}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 2\enspace·\enspace Le travail reçu par un gaz}
+\begin{situation}
+\textbf{Situation de départ.} On bouche avec le doigt la sortie d’une pompe à vélo et on enfonce rapidement le piston : le volume de l’air diminue et le cylindre s’échauffe. Par l’intermédiaire du piston, l’opérateur exerce sur l’air une force pressante qui travaille. \textbf{Comment exprimer ce travail en fonction de la pression et de la variation de volume du gaz ?}
+\end{situation}
+
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 3. Compression d’un gaz.} Un gaz parfait est enfermé dans un cylindre de section $S$, fermé par un piston mobile sans frottement sur un axe horizontal $Ox$. Le milieu extérieur exerce sur le piston une force pressante $\vect F$, perpendiculaire au piston et dirigée vers l’intérieur du cylindre. La pression $P$ reste constante (transformation \textbf{isobare}). Le piston passe de $x_1$ (volume $V_1$) à $x_2$ (volume $V_2 < V_1$) : il parcourt la distance $\ell$ dans le sens de $\vect F$. Le volume balayé est celui d’un cylindre de base $S$ et de hauteur $\ell$ :
+\[S\cdot\ell = V_1 - V_2 = -\Delta V \quad\text{avec}\quad \Delta V = V_2 - V_1\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc3_cylindre}\par\vspace{1mm}
+{\sffamily\small\docbadge{3}\enspace\color{cInk2}Gaz comprimé par un piston}
+\end{minipage}
+\info{\textbf{Information : convention de signe.} On compte \textbf{positivement} le travail \textbf{reçu} par le gaz et \textbf{négativement} le travail qu’il \textbf{cède} au milieu extérieur. Une transformation à volume constant est dite \textbf{isochore} ; une augmentation de volume est une \textbf{détente}.}
+\end{rub}
+
+\begin{rappel}
+Une force pressante d’intensité $F$ répartie uniformément sur une surface plane d’aire $S$ exerce la pression $P = \dfrac{F}{S}$ : $P$ en pascals (Pa), $F$ en newtons (N), $S$ en \unit{m^2}. $\qty{1}{bar} = \qty{1e5}{Pa}$ ; $\qty{1}{L} = \qty{1e-3}{m^3}$.
+\end{rappel}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Exprimer.} À l’aide du rappel, exprimer l’intensité $F$ de la force pressante en fonction de $P$ et de $S$.
+  \item \kw{Établir.} Exprimer le travail $W$ de $\vect F$ au cours de la compression en fonction de $P$, $S$ et $\ell$ (la force et le déplacement ont même direction et même sens). En utilisant le doc 3, en déduire $W$ en fonction de $P$ et de $\Delta V = V_2 - V_1$.
+  \item \kw{Discuter.} Quel est le signe de $W$ pour une compression ($V_2 < V_1$), une détente ($V_2 > V_1$) et une transformation isochore ($V_2 = V_1$) ? Interpréter chaque cas à l’aide de la convention de signe.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$F = P\cdot S$ ($F$ en N, $P$ en Pa, $S$ en \unit{m^2}).}
+  \item \rep{$\vect F$ et le déplacement ont même sens : $W = F\cdot\ell = P\cdot S\cdot\ell$. Or $S\cdot\ell = -\Delta V$, d’où $W = -P\cdot\Delta V = -P\cdot(V_2 - V_1)$.}
+  \item \rep{Compression : $\Delta V < 0$, $W > 0$ : le gaz reçoit du travail. Détente : $\Delta V > 0$, $W < 0$ : le gaz cède du travail en repoussant le piston. Isochore : $\Delta V = 0$, $W = 0$ : les forces pressantes ne travaillent pas.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Travail des forces pressantes}\par\smallskip
+Quand un gaz subit une transformation sous une pression extérieure \trou{constante} $P$, et que son volume passe de $V_i$ à $V_f$, le travail des forces pressantes reçu par le gaz est :
+\begin{center}\formule{\trou{$W = -P\cdot(V_f - V_i) = -P\cdot\Delta V$}}\end{center}
+$W$ en \trou{joules (J)}, $P$ en \trou{pascals (Pa)}, $V$ en \trou{\unit{m^3}}.\par\smallskip
+Compression ($\Delta V < 0$) : \trou{$W > 0$}, le gaz \trou{reçoit} du travail. Détente ($\Delta V > 0$) : \trou{$W < 0$}, le gaz \trou{cède} du travail. Isochore ($\Delta V = 0$) : \trou{$W = 0$}.
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un gaz chauffé qui se détend}
+\begin{minipage}[c]{0.55\linewidth}\RaggedRight
+Un cylindre fermé par un piston mobile contient $V_1 = \qty{2,5}{L}$ de gaz parfait sous la pression constante $P = \qty{1,0e5}{Pa}$. On chauffe le gaz à pression constante jusqu’à ce que son volume atteigne $V_2 = \qty{4,0}{L}$.
+\begin{appq}
+  \item Convertir $V_1$ et $V_2$ en mètres cubes.
+  \item Calculer le travail $W$ des forces pressantes. Le gaz a-t-il reçu ou cédé du travail ?
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.42\linewidth}\centering
+\includegraphics[width=\linewidth]{app2_detente}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{L’énergie interne d’un système}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 3\enspace·\enspace Une énergie cachée dans la matière}
+\begin{situation}
+\textbf{Situation de départ.} Une bouteille de gaz posée immobile sur le sol a une énergie cinétique nulle et, si le sol est la référence, une énergie potentielle de pesanteur nulle : son énergie mécanique est nulle. Pourtant, ses molécules s’agitent sans cesse et interagissent. \textbf{Quelle énergie la matière possède-t-elle à l’échelle microscopique ?}
+\end{situation}
+
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 4. La matière à l’échelle microscopique.} À l’échelle \textbf{macroscopique}, on observe le mouvement d’ensemble d’un système (vitesse $V$) et sa position (altitude $z$) : il possède l’énergie mécanique $\Em = \Ec + \Epp$. À l’échelle \textbf{microscopique}, ses particules (atomes, molécules, ions) sont animées d’un mouvement désordonné, l’\textbf{agitation thermique}, auquel est associée une énergie cinétique microscopique $\Ecmic$, d’autant plus grande que la température est élevée. Ces particules interagissent aussi entre elles ; à ces interactions est associée une énergie potentielle microscopique $\Epmic$, qui dépend de l’état physique et de la structure chimique du système.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc4_molecules}\par\vspace{1mm}
+{\sffamily\small\docbadge{4}\enspace\color{cInk2}Agitation et interactions des molécules}
+\end{minipage}
+\info{\textbf{Information : énergie interne.} La somme de l’énergie cinétique microscopique et de l’énergie potentielle microscopique de toutes les particules d’un système est son \textbf{énergie interne} $U$, exprimée en joules. Elle ne dépend que de l’état du système (température, volume, état physique…) : on dit que c’est une \textbf{fonction d’état}. L’énergie totale $\Etot$ d’un système est la somme de son énergie mécanique et de son énergie interne.}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Distinguer.} D’après le doc 4, qu’observe-t-on à l’échelle macroscopique et à l’échelle microscopique ? Quelles sont les deux formes d’énergie microscopique des particules ?
+  \item \kw{Écrire.} À l’aide de l’information, écrire l’expression de l’énergie interne $U$ d’un système. Quelle est son unité ?
+  \item \kw{Écrire.} Écrire l’expression de l’énergie totale $\Etot$ d’un système en fonction de $\Ec$, $\Epp$ et $U$.
+  \item \kw{Établir.} En déduire la relation entre $\Delta\Etot$, $\Delta\Em$ et $\Delta U$ lors d’une transformation. Que devient-elle si le système reste au repos à l’échelle macroscopique ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{À l’échelle macroscopique : le mouvement d’ensemble et la position du système (énergie mécanique). À l’échelle microscopique : l’énergie cinétique microscopique $\Ecmic$, due à l’agitation thermique (liée à la température), et l’énergie potentielle microscopique $\Epmic$, due aux interactions entre particules (liée à l’état physique et aux liaisons).}
+  \item \rep{$U = \Ecmic + \Epmic$, en joules (J).}
+  \item \rep{$\Etot = \Em + U = \Ec + \Epp + U$.}
+  \item \rep{$\Delta\Etot = \Delta\Em + \Delta U = \Delta\Ec + \Delta\Epp + \Delta U$. Si le système reste au repos ($\Delta\Ec = 0$ et $\Delta\Epp = 0$) : $\Delta\Etot = \Delta U$.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Énergie interne}\par\smallskip
+L’énergie interne $U$ d’un système est la somme de l’énergie \trou{cinétique microscopique} (agitation thermique) et de l’énergie \trou{potentielle microscopique} (interactions) de toutes ses particules :
+\begin{center}\formule{\trou{$U = \Ecmic + \Epmic$}}\quad en \trou{joules (J)}\end{center}
+$U$ est une \trou{fonction d’état} : elle ne dépend que de l’état du système.\par\medskip
+\sfb{\color{cRed}Énergie totale}\par\smallskip
+\begin{center}\formule{\trou{$\Etot = \Em + U = \Ec + \Epp + U$\quad et\quad $\Delta\Etot = \Delta\Em + \Delta U$}}\end{center}
+Pour un système au repos à l’échelle macroscopique ($\Delta\Em = 0$) : \trou{$\Delta\Etot = \Delta U$}.
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Une bille qui tombe et s’immobilise}
+\begin{minipage}[c]{0.66\linewidth}\RaggedRight
+Une bille métallique de masse $m = \qty{200}{g}$ tombe sans vitesse initiale d’une hauteur $h = \qty{5,0}{m}$ sur un sol rigide et thermiquement isolant, et s’immobilise juste après le choc. On suppose que toute l’énergie mécanique perdue est transférée à la bille sous forme d’énergie interne, si bien que l’énergie totale de la bille se conserve ($\Delta\Etot = 0$). On prend $g = \qty{10}{N.kg^{-1}}$ et le sol comme référence de l’énergie potentielle de pesanteur.
+\begin{appq}
+  \item Calculer la variation $\Delta\Em$ de l’énergie mécanique de la bille entre le lâcher et l’immobilisation.
+  \item En déduire la variation $\Delta U$ de son énergie interne. Quel effet observe-t-on sur la bille ?
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.28\linewidth}\centering
+\includegraphics[width=\linewidth]{app3_bille}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Le premier principe de la thermodynamique}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 4\enspace·\enspace Travail, chaleur et énergie interne}
+\begin{situation}
+\textbf{Situation de départ.} Pour élever la température de l’eau d’un récipient posé sur une table, on peut la chauffer sur un brûleur (chaleur $Q$), y faire passer un courant dans une résistance (travail électrique) ou l’agiter avec des palettes (travail mécanique). \textbf{Comment relier la variation de l’énergie interne d’un système au repos au travail et à la chaleur qu’il échange ?}
+\end{situation}
+
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc5_joule}\par\vspace{1mm}
+{\sffamily\small\docbadge{5}\enspace\color{cInk2}Expérience de Joule}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 5. L’expérience de Joule.} Dans un récipient thermiquement isolé ($Q = 0$), \qty{1,5}{kg} d’eau sont agités par des palettes entraînées par la chute lente, à vitesse constante, de deux masses de \qty{10}{kg} chacune. Les masses descendent de $h = \qty{1,5}{m}$ ; on recommence 20 fois. Le travail du poids des masses est intégralement transmis à l’eau par les palettes. La température de l’eau passe de \dC{18,00} à \dC{18,94} ; $g = \qty{9,8}{N.kg^{-1}}$.
+\end{minipage}
+\info{\textbf{Information.} Quand un corps de masse $m$ s’échauffe sans changer d’état, son énergie interne augmente de $\Delta U = m\cdot c\cdot\Delta\theta$, où $c$ est la chaleur massique du corps (eau : $c = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$).}
+
+\textbf{Doc 6. Les échanges d’énergie et le premier principe.} Un système fermé, au repos à l’échelle macroscopique ($\Delta\Em = 0$), passe d’un état initial (énergie interne $U_1$) à un état final ($U_2$). Il peut échanger de l’énergie avec le milieu extérieur sous deux formes :
+\begin{itemize}
+  \item le \textbf{travail} $W$ : travail des forces pressantes $-P\cdot\Delta V$, travail d’un agitateur, travail électrique $W_e = U\cdot I\cdot\Delta t$ ;
+  \item le \textbf{transfert thermique} (chaleur) $Q$ : par conduction, convection ou rayonnement.
+\end{itemize}
+Par convention, toute énergie \textbf{reçue} par le système est comptée positivement ($W > 0$, $Q > 0$) et toute énergie \textbf{cédée} négativement. Le \textbf{premier principe de la thermodynamique} affirme que la variation de l’énergie interne du système est égale à la somme du travail et de la chaleur échangés : $\Delta U = U_2 - U_1 = W + Q$.\par\smallskip
+Une transformation sans échange de chaleur ($Q = 0$) est dite \textbf{adiabatique}. Un système \textbf{isolé} n’échange ni travail ni chaleur ($W = 0$ et $Q = 0$). Un \textbf{cycle} est une suite de transformations qui ramène le système à son état initial.
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Inventorier.} D’après le doc 6, sous quelles formes un système au repos peut-il échanger de l’énergie avec l’extérieur ? Quelle est la convention de signe ?
+  \item \kw{Écrire.} Écrire la relation du premier principe de la thermodynamique pour un système au repos à l’échelle macroscopique.
+  \item \kw{Vérifier.} Doc 5 : calculer le travail $W$ reçu par l’eau, puis l’augmentation $\Delta U$ de son énergie interne à l’aide de l’information. Comparer, et montrer que le résultat est en accord avec le premier principe.
+  \item \kw{Déduire.} Sachant que $U$ est une fonction d’état (activité 3), de quoi dépend $\Delta U$ ? Que vaut $\Delta U$ au cours d’un cycle ? Que peut-on en déduire pour $W$ et $Q$ ?
+  \item \kw{Simplifier.} Écrire le premier principe pour une transformation adiabatique, puis pour un système isolé.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Sous forme de travail $W$ (forces pressantes, agitateur, travail électrique) et sous forme de chaleur $Q$ (conduction, convection, rayonnement). Énergie reçue : $W > 0$ ou $Q > 0$ ; énergie cédée : $W < 0$ ou $Q < 0$.}
+  \item \rep{$\Delta U = U_2 - U_1 = W + Q$.}
+  \item \rep{$W = 20\times M\cdot g\cdot h = 20\times20\times9{,}8\times1{,}5 = \qty{5880}{J}$ ; $\Delta U = m\cdot c\cdot\Delta\theta = 1{,}5\times4185\times0{,}94 \approx \qty{5900}{J}$. $\Delta U \approx W$ : comme $Q = 0$, c’est bien $\Delta U = W + Q$.}
+  \item \rep{$\Delta U$ ne dépend que de l’état initial et de l’état final, pas du chemin suivi. Au cours d’un cycle, l’état final est l’état initial : $\Delta U_{\text{cycle}} = 0$, donc $W + Q = 0$, soit $W = -Q$.}
+  \item \rep{Adiabatique ($Q = 0$) : $\Delta U = W$. Système isolé ($W = 0$, $Q = 0$) : $\Delta U = 0$, l’énergie interne se conserve.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.52\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Premier principe de la thermodynamique}\par\smallskip
+Pour un système fermé au repos à l’échelle macroscopique, qui passe d’un état initial à un état final, la variation de son énergie interne est égale à la \troul{somme du travail et de la chaleur échangés avec le milieu extérieur :}
+\begin{center}\formule{\trou{$\Delta U = U_f - U_i = W + Q$}}\end{center}
+Énergie reçue : \trou{positive} ; énergie cédée : \trou{négative}.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.44\linewidth}\vspace{0pt}\centering
+\includegraphics[width=\linewidth]{fig_bilan}
+\end{minipage}\par\medskip
+\sfb{\color{cRed}Propriétés}\par\smallskip
+\begin{itemize}
+  \item $\Delta U$ ne dépend que de l’\trou{état initial} et de l’\trou{état final} ($U$ est une fonction d’état).
+  \item Cycle : \trou{$\Delta U = 0$}, donc $W + Q = 0$. Transformation adiabatique : \trou{$\Delta U = W$}. Système isolé : \trou{$\Delta U = 0$}.
+  \item Si l’énergie mécanique varie : \trou{$\Delta\Etot = \Delta\Em + \Delta U = W + Q$}.
+\end{itemize}
+\end{rub}
+
+\begin{encart}{cOrange}{methode}{Méthode : appliquer le premier principe}
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=5mm, itemsep=0pt, topsep=1pt]
+  \item Définir le \textbf{système} et vérifier qu’il est au repos à l’échelle macroscopique.
+  \item Faire la liste des \textbf{échanges} : travaux (forces pressantes $-P\cdot\Delta V$, électrique $U\cdot I\cdot\Delta t$, mécanique) et chaleur.
+  \item Donner à chacun son \textbf{signe} : positif s’il est reçu, négatif s’il est cédé.
+  \item Écrire $\Delta U = W + Q$ (adiabatique : $Q = 0$ ; isochore : $W_{\text{pressantes}} = 0$ ; cycle : $\Delta U = 0$) et conclure.
+\end{enumerate}
+\end{encart}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un gaz comprimé qui se refroidit}
+Un gaz parfait enfermé dans un cylindre muni d’un piston est comprimé : les forces pressantes effectuent sur lui un travail de valeur absolue $|W| = \qty{450}{J}$. En même temps, le gaz cède au milieu extérieur, à travers les parois, une quantité de chaleur de valeur absolue $|Q| = \qty{180}{J}$.
+\begin{appq}
+  \item Donner le signe de $W$ et celui de $Q$, en justifiant à l’aide de la convention.
+  \item Appliquer le premier principe pour calculer $\Delta U$. L’énergie interne du gaz a-t-elle augmenté ou diminué ?
+\end{appq}
+\end{rub}
+
+% =====================================================================
+%  EXERCICES
+% =====================================================================
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcolorbox}[enhanced, colback=cInk, colframe=cInk, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0mm, after skip=5mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_exercices}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Exercices d’application et de synthèse}
+\end{tcolorbox}
+\begin{rub}[unbreakable, before skip=0mm, after skip=0mm]{cOrange}{questions}{Je vérifie mes connaissances\enspace·\enspace Vrai ou faux ?}
+Pour chaque affirmation, dire si elle est vraie ou fausse, puis corriger les affirmations fausses.
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\alph*)}, leftmargin=6mm, itemsep=1pt]
+  \item Un système qui reçoit un travail voit toujours sa vitesse augmenter.
+  \item Lors d’une compression, le travail des forces pressantes reçu par le gaz est positif.
+  \item L’énergie interne d’un système immobile est nulle.
+  \item Au cours d’une transformation isochore, le travail des forces pressantes est nul.
+  \item Au cours d’un cycle, la variation de l’énergie interne est nulle.
+  \item Au cours d’une transformation adiabatique, l’énergie interne ne varie pas.
+\end{enumerate}
+\end{rub}
+\end{minipage}\par\medskip
+
+% ---------------- Exercice 1 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 1\enspace·\enspace Compression isobare d’un gaz parfait}
+Un gaz parfait est enfermé dans un cylindre horizontal de section $S = \qty{50}{cm^2}$, fermé par un piston mobile sans frottement. Le gaz occupe le volume $V_1 = \qty{3,0}{L}$ sous la pression constante $P = \qty{2,0}{bar}$, à $\theta_1 = \dC{27}$. On le refroidit lentement, à pression constante, jusqu’à ce que son volume soit $V_2 = \qty{1,8}{L}$. Pendant cette transformation, le gaz cède au milieu extérieur une quantité de chaleur de valeur absolue $|Q| = \qty{600}{J}$.
+\begin{exq}
+  \item Calculer l’intensité $F$ de la force pressante exercée sur le piston et la distance $\ell$ parcourue par le piston.
+  \item Calculer le travail $W$ des forces pressantes et justifier son signe.
+  \item Appliquer le premier principe pour calculer la variation $\Delta U$ de l’énergie interne du gaz.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 2 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 2\enspace·\enspace Un cycle de trois transformations}
+\begin{minipage}[c]{0.6\linewidth}\RaggedRight
+Un gaz parfait enfermé dans un cylindre muni d’un piston décrit le cycle $A\to B\to C\to A$ :
+\begin{itemize}
+  \item $A\to B$ : compression adiabatique ($Q_{AB} = 0$) ; le gaz reçoit le travail $W_{AB} = \qty{+350}{J}$ ;
+  \item $B\to C$ : refroidissement isochore ($V_C = V_B$) ; $\Delta U_{BC} = \qty{-550}{J}$ ;
+  \item $C\to A$ : détente isobare sous $P = \qty{1,5e5}{Pa}$, de $V_C = \qty{2,0}{L}$ à $V_A = \qty{4,0}{L}$.
+\end{itemize}
+\begin{exq}
+  \item Déterminer $\Delta U_{AB}$.
+  \item Justifier que $W_{BC} = 0$, puis en déduire la chaleur $Q_{BC}$.
+  \item Calculer le travail $W_{CA}$ des forces pressantes.
+  \item Utiliser la propriété de $U$ sur le cycle pour calculer $\Delta U_{CA}$, puis la chaleur $Q_{CA}$.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.36\linewidth}\centering
+\includegraphics[width=\linewidth]{ex2_cycle}
+\end{minipage}
+\end{rub}
+
+% ---------------- Exercice 3 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 3\enspace·\enspace Travail électrique et travail mécanique}
+Un calorimètre thermiquement isolé contient de l’huile dans laquelle sont plongés une résistance chauffante et un dispositif à ressort. Le système étudié, \{calorimètre + huile + résistance + ressort\}, est au repos à l’échelle macroscopique ; sa capacité thermique totale est $C_{\mathrm{tot}} = \qty{800}{J.\degreeCelsius^{-1}}$ : son énergie interne varie de $\Delta U = C_{\mathrm{tot}}\cdot\Delta\theta$ quand sa température varie de $\Delta\theta$.
+\begin{exq}
+  \item Calculer le travail électrique $W_e$ reçu par le système quand la résistance est parcourue par un courant $I = \qty{2,5}{A}$ sous une tension $U_{AB} = \qty{24}{V}$ pendant $\Delta t = \qty{4}{min}$.
+  \item Un opérateur comprime dix fois de suite le ressort, de raideur $k = \qty{500}{N.m^{-1}}$, de $x_i = 0$ à $x_f = \qty{8,0}{cm}$ ; l’énergie de chaque détente est dissipée dans l’huile par frottement. Calculer le travail mécanique $W_m$ reçu par le système.
+  \item Appliquer le premier principe pour calculer $\Delta U$, puis l’élévation de température $\Delta\theta$ du système.
+\end{exq}
+\end{rub}
+
+\ifeleve\needspace{7cm}\else\needspace{8cm}\fi
+% =====================================================================
+%  CORRIGÉS
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cGreen, colframe=cGreen, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=4mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_corrige}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}\titrecorriges}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small\RaggedRight
+\setlength{\columnsep}{7mm}
+\newcommand{\corr}[1]{\par\ifeleve\needspace{7\baselineskip}\medskip\else\smallskip\fi{\sffamily\bfseries\color{cGreen}#1}\par\nopagebreak\smallskip}
+
+\corr{Application 1 · Le ressort}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$x_1 = 18 - 15 = \qty{3}{cm} = \qty{0,03}{m}$ ; $x_2 = 25 - 15 = \qty{10}{cm} = \qty{0,10}{m}$.}
+  \item \rep{$W_{1\to2}(\vect F) = \frac{1}{2}\times200\times(0{,}10^2 - 0{,}03^2) = \qty{0,91}{J}$ ;\\ $W_{1\to2}(\vect T) = \qty{-0,91}{J}$.}
+\end{enumerate}
+
+\corr{Application 2 · La détente}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$V_1 = \qty{2,5e-3}{m^3}$ ; $V_2 = \qty{4,0e-3}{m^3}$.}
+  \item \rep{$W = -P\cdot(V_2 - V_1) = -1{,}0\times10^5\times1{,}5\times10^{-3} = \qty{-150}{J}$.\\ $W < 0$ : détente, le gaz cède \qty{150}{J} de travail en repoussant le piston.}
+\end{enumerate}
+
+\corr{Application 3 · La bille}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$V_A = V_B = 0$ : $\Delta\Em = \Delta\Epp = m\cdot g\cdot(z_B - z_A) = -0{,}200\times10\times5{,}0 = \qty{-10}{J}$.}
+  \item \rep{$\Delta\Etot = \Delta\Em + \Delta U = 0$, d’où $\Delta U = \qty{+10}{J}$ : la température de la bille s’élève.}
+\end{enumerate}
+
+\corr{Application 4 · Le gaz comprimé}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{Compression : le gaz reçoit du travail, $W = \qty{+450}{J}$ ; il cède de la chaleur, $Q = \qty{-180}{J}$.}
+  \item \rep{$\Delta U = W + Q = 450 - 180 = \qty{+270}{J}$ : l’énergie interne a augmenté.}
+\end{enumerate}
+
+\corr{Vrai ou faux ?}
+\begin{enumerate}[label={\sffamily\bfseries\alph*)},leftmargin=5mm,itemsep=0pt]
+  \item \rep{Faux : il peut aussi s’échauffer, se déformer, changer d’état ou se transformer chimiquement.}
+  \item \rep{Vrai : $\Delta V < 0$, donc $W = -P\cdot\Delta V > 0$.}
+  \item \rep{Faux : ses particules ont une énergie microscopique ; c’est son énergie mécanique qui est nulle.}
+  \item \rep{Vrai : $\Delta V = 0$.}
+  \item \rep{Vrai : l’état final est l’état initial.}
+  \item \rep{Faux : $\Delta U = W$, qui n’est pas nul en général.}
+\end{enumerate}
+
+\corr{Exercice 1 · La compression isobare}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$F = P\cdot S = 2{,}0\times10^5\times5{,}0\times10^{-3} = \qty{1000}{N}$ ;\\ $\ell = \dfrac{|\Delta V|}{S} = \dfrac{1{,}2\times10^{-3}}{5{,}0\times10^{-3}} = \qty{0,24}{m}$.}
+  \item \rep{$W = -P\cdot(V_2 - V_1) = -2{,}0\times10^5\times(-1{,}2\times10^{-3}) = \qty{+240}{J}$ : compression, le gaz reçoit du travail.}
+  \item \rep{$Q = \qty{-600}{J}$ ; $\Delta U = W + Q = 240 - 600 = \qty{-360}{J}$.}
+\end{enumerate}
+
+\corr{Exercice 2 · Le cycle}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Delta U_{AB} = W_{AB} + Q_{AB} = \qty{+350}{J}$.}
+  \item \rep{$\Delta V_{BC} = 0$, donc $W_{BC} = 0$ ; $Q_{BC} = \Delta U_{BC} = \qty{-550}{J}$.}
+  \item \rep{$W_{CA} = -1{,}5\times10^5\times(4{,}0 - 2{,}0)\times10^{-3} = \qty{-300}{J}$.}
+  \item \rep{$\Delta U_{AB} + \Delta U_{BC} + \Delta U_{CA} = 0$, d’où $\Delta U_{CA} = -(350 - 550) = \qty{+200}{J}$ ;\\ $Q_{CA} = \Delta U_{CA} - W_{CA} = 200 + 300 = \qty{+500}{J}$.}
+\end{enumerate}
+
+\corr{Exercice 3 · Travail électrique et mécanique}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$W_e = U_{AB}\cdot I\cdot\Delta t = 24\times2{,}5\times240 = \qty{14400}{J}$.}
+  \item \rep{$W_m = 10\times\frac{1}{2}\,k\cdot x_f^2 = 10\times\frac{1}{2}\times500\times0{,}080^2 = \qty{16}{J}$.}
+  \item \rep{$Q = 0$ : $\Delta U = W_e + W_m = \qty{14416}{J}$ ;\\ $\Delta\theta = \dfrac{\Delta U}{C_{\mathrm{tot}}} = \dfrac{14\,416}{800} \approx \dC{18,0}$.}
+\end{enumerate}
+\end{multicols}
+
+\end{document}

@@ -310,3 +310,21 @@ function steam(f, parent, x, y, n = 3, o = {}){
   const P = [...Array(n)].map((_, i) => f.path(`M${f2(x + (i - (n - 1) / 2) * (o.gap || 14))},${f2(y)} q-7,-12 0,-24 t0,-24`, {stroke: '#ffffff', 'stroke-width': 4, 'stroke-linecap': 'round', fill: 'none', filter: realDefs(f).blur2, parent: g}));
   return {g, update(t){ P.forEach((p, i) => { const k = ((t * .6 + i / n) % 1); p.setAttribute('transform', `translate(0,${f2(-k * 18)})`); p.setAttribute('opacity', f2(Math.sin(Math.PI * k))); }); }};
 }
+
+/* ---------- Ressort hélicoïdal (ajouté au chapitre 6 de physique) ---------- */
+// ressort horizontal d'extrémités x1 et x2 à la hauteur y ; n spires, rayon r ; renvoie set(x1, x2)
+function spring(f, parent, x1, y, x2, o = {}){
+  const g = f.g({parent}), n = o.n || 12, r = o.r || 12, col = o.col || '#5d6978';
+  const back = f.path('', {stroke: shade(col, .35), 'stroke-width': o.w || 2.4, fill: 'none', parent: g});
+  const front = f.path('', {stroke: f.lg(uid('sp'), [[0, tint(col, .5)], [.5, col], [1, shade(col, .3)]], 0, 0, 0, 1), 'stroke-width': (o.w || 2.4) + .6, fill: 'none', 'stroke-linecap': 'round', parent: g});
+  const set = (a, b) => {
+    const L = b - a, e = Math.min(14, L * .08), p = (L - 2 * e) / n; let db = '', df = `M${f2(a)},${f2(y)} L${f2(a + e)},${f2(y)}`;
+    for (let k = 0; k < n; k++){ const x0 = a + e + k * p;
+      df += ` Q${f2(x0 + p * .25)},${f2(y - 1.6 * r)} ${f2(x0 + p * .5)},${f2(y - r * .05)}`;
+      db += `M${f2(x0 + p * .5)},${f2(y - r * .05)} Q${f2(x0 + p * .75)},${f2(y + 1.6 * r)} ${f2(x0 + p)},${f2(y)} `; }
+    df += ` M${f2(b - e)},${f2(y)} L${f2(b)},${f2(y)}`;
+    back.setAttribute('d', db); front.setAttribute('d', df);
+  };
+  set(x1, x2);
+  return {g, set};
+}

@@ -1,0 +1,130 @@
+% =====================================================================
+%  Fiche d’activités : les 4 activités du chapitre 6 (physique) — deux pages A4
+%  Le travail et l’énergie interne (activités 1 et 2 page 1, activités 3 et 4 page 2)
+%  (sans situation de départ, sans zone de nom, sans bandeau de titre)
+%  À coller dans le cahier. Compilation : xelatex fiche_unique.tex (deux passes)
+% =====================================================================
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,top=.75cm,bottom=.6cm,left=.8cm,right=.8cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,tikz,array}
+\usepackage[most]{tcolorbox}
+\graphicspath{{images/}}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 8em}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=5}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cTeal}{HTML}{0E8F8A} \definecolor{cSoft}{HTML}{F4F7FB}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\color{cInk}
+
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}
+\NewDocumentCommand{\docbadge}{m}{\tikz[baseline=(b.base)]\node[fill=cBlue,text=white,rounded corners=4pt,inner xsep=3pt,inner ysep=1.4pt,font=\sffamily\bfseries\tiny](b){Doc #1};}
+% document : {largeur}{n}{légende}{image}
+\newcommand{\doc}[4]{%
+  \begin{minipage}[t]{#1}\vspace{0pt}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{.5mm}
+    {\sffamily\scriptsize\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+\NewDocumentCommand{\pastille}{m m}{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=3.9mm,font=\sffamily\bfseries\tiny](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}}, leftmargin=6mm, labelsep=1.8mm, itemsep=2pt, topsep=2pt, parsep=0pt}
+% séparateur discret entre les activités
+\newcommand{\sep}[1]{\par\vspace{2.5mm}%
+  \noindent\tikz[baseline=(t.base)]\node[fill=cTeal,text=white,rounded corners=3pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\bfseries\scriptsize](t){Activité #1};%
+  \hspace{2mm}{\color{cTeal!70}\leaders\hrule height .7pt\hfill\kern0pt}\par\vspace{1mm}}
+
+% ---------- tableau de mesures compact ----------
+\newcommand{\mesures}[3][0.8cm]{{\renewcommand{\arraystretch}{1.2}\setlength{\arrayrulewidth}{.5pt}\arrayrulecolor{cTeal!55}\setlength{\tabcolsep}{3pt}%
+  \begin{tabular}{|>{\sffamily\scriptsize\bfseries\color{cTeal}}l|*{#2}{>{\centering\arraybackslash}p{#1}|}}\hline #3\end{tabular}}}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+\newcommand{\Etot}{E_{\mathrm{tot}}}
+\newcommand{\Ecmic}{E_{\mathrm{C,mic}}}
+\newcommand{\Epmic}{E_{\mathrm{p,mic}}}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\info}[1]{\par\vspace{.5mm}{\setlength{\fboxsep}{2pt}\colorbox{cSoft}{\parbox{\dimexpr\linewidth-4pt}{\RaggedRight #1}}}\par\vspace{.5mm}}
+\begin{document}
+\small\RaggedRight
+\setlength{\parskip}{0pt}
+% =====================================================================
+\sep{1}
+\textbf{Doc 1.} (a) On perce une plaque d’acier : la température de la zone percée s’élève fortement. (b) Un opérateur étire lentement un ressort ; lâché, il reprend sa longueur initiale. (c) On frotte deux blocs de glace à \dC{0} : une partie de la glace devient liquide, à température constante. (d) On frotte une allumette sur son frottoir : elle s’enflamme, le phosphore brûle.\par\vspace{.6mm}
+{\centering\doc{0.92\linewidth}{1}{Quatre systèmes qui reçoivent un travail}{doc1_effets}\par}\vspace{.6mm}
+\textbf{Doc 2.} Un ressort de raideur $k$ est fixé à une extrémité. L’opérateur exerce sur l’autre une force $\vect F$ parallèle à l’axe, de même sens que le déplacement, d’intensité $F = k\cdot x$ ($x$ : allongement). Le ressort exerce sur l’opérateur la force de rappel $\vect T = -\vect F$.
+\info{\textbf{Information.} Quand une force parallèle au déplacement a une intensité variable, son travail est égal à l’\textbf{aire} comprise entre la courbe $F = f(x)$, l’axe des abscisses et les deux verticales qui limitent le déplacement.}
+\begin{enumerate}
+  \item \kw{Identifier.} Doc 1 (a) : quel est l’effet du travail reçu par la plaque percée ?
+  \item \kw{Établir.} Doc 1 (b) et doc 2 : effet du travail reçu par le ressort ? Tracer l’allure de $F = f(x)$ ; à l’aide de l’information, exprimer $W_{0\to x}(\vect F)$, puis le travail de $\vect F$ et celui de $\vect T$ quand l’allongement passe de $x_1$ à $x_2$.
+  \item \kw{Préciser.} Doc 1 (c) et (d) : de quelle nature sont les transformations provoquées par le travail reçu ?
+  \item \kw{Classer.} Résumer les effets que peut produire un travail reçu, en dehors d’une variation de vitesse.
+\end{enumerate}
+
+% =====================================================================
+\sep{2}
+\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 3.} Un gaz parfait est enfermé dans un cylindre de section $S$ fermé par un piston mobile sans frottement. La force pressante $\vect F$ est dirigée vers l’intérieur ; la pression $P$ reste constante (\textbf{isobare}). Le piston passe de $x_1$ (volume $V_1$) à $x_2$ (volume $V_2 < V_1$) : il parcourt $\ell$ dans le sens de $\vect F$. Volume balayé : $S\cdot\ell = V_1 - V_2 = -\Delta V$, avec $\Delta V = V_2 - V_1$.\par\vspace{.4mm}
+{\color{cInk2}\textbf{Rappel.} $P = \dfrac{F}{S}$ ($P$ en Pa, $F$ en N, $S$ en \unit{m^2}).}
+\info{\textbf{Convention.} Le travail \textbf{reçu} par le gaz est compté positivement, le travail \textbf{cédé} négativement. Volume constant : transformation \textbf{isochore} ; augmentation de volume : \textbf{détente}.}
+\end{minipage}\hfill
+\doc{0.37\linewidth}{3}{Gaz comprimé par un piston}{doc3_cylindre}
+\begin{enumerate}
+  \item \kw{Exprimer.} À l’aide du rappel, exprimer l’intensité $F$ de la force pressante en fonction de $P$ et de $S$.
+  \item \kw{Établir.} Exprimer le travail $W$ de $\vect F$ en fonction de $P$, $S$ et $\ell$ (force et déplacement de même sens), puis, avec le doc 3, en fonction de $P$ et de $\Delta V$.
+  \item \kw{Discuter.} Signe de $W$ pour une compression, une détente et une transformation isochore ? Interpréter avec la convention.
+\end{enumerate}
+
+\newpage
+% =====================================================================
+\sep{3}
+\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 4.} À l’échelle \textbf{macroscopique} : mouvement d’ensemble (vitesse $V$) et position (altitude $z$) d’un système, énergie mécanique $\Em = \Ec + \Epp$. À l’échelle \textbf{microscopique} : les particules sont animées d’une \textbf{agitation thermique} (énergie cinétique microscopique $\Ecmic$, d’autant plus grande que la température est élevée) et interagissent entre elles (énergie potentielle microscopique $\Epmic$, liée à l’état physique et à la structure chimique).
+\info{\textbf{Information.} La somme des énergies cinétique et potentielle microscopiques de toutes les particules est l’\textbf{énergie interne} $U$ (en J). Elle ne dépend que de l’état du système : c’est une \textbf{fonction d’état}. L’énergie totale $\Etot$ est la somme de l’énergie mécanique et de l’énergie interne.}
+\end{minipage}\hfill
+\doc{0.37\linewidth}{4}{Agitation et interactions des molécules}{doc4_molecules}
+\begin{enumerate}
+  \item \kw{Distinguer.} D’après le doc 4, qu’observe-t-on aux échelles macroscopique et microscopique ? Quelles sont les deux formes d’énergie microscopique ?
+  \item \kw{Écrire.} À l’aide de l’information, écrire l’expression de l’énergie interne $U$. Unité ?
+  \item \kw{Écrire.} Écrire l’expression de l’énergie totale $\Etot$ en fonction de $\Ec$, $\Epp$ et $U$.
+  \item \kw{Établir.} En déduire la relation entre $\Delta\Etot$, $\Delta\Em$ et $\Delta U$. Que devient-elle pour un système au repos ?
+\end{enumerate}
+
+% =====================================================================
+\sep{4}
+\begin{minipage}[t]{0.6\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 5. Expérience de Joule.} Récipient isolé ($Q = 0$) contenant \qty{1,5}{kg} d’eau, agitée par des palettes entraînées par la chute lente, à vitesse constante, de deux masses de \qty{10}{kg}. Les masses descendent de $h = \qty{1,5}{m}$ ; on recommence 20 fois. Le travail du poids des masses est intégralement transmis à l’eau. La température passe de \dC{18,00} à \dC{18,94} ; $g = \qty{9,8}{N.kg^{-1}}$.
+\info{\textbf{Information.} Un corps de masse $m$ qui s’échauffe sans changer d’état voit son énergie interne augmenter de $\Delta U = m\cdot c\cdot\Delta\theta$ (eau : $c = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$).}
+\end{minipage}\hfill
+\doc{0.37\linewidth}{5}{Expérience de Joule}{doc5_joule}\par\vspace{.5mm}
+\textbf{Doc 6.} Un système fermé au repos ($\Delta\Em = 0$) passe d’un état initial ($U_1$) à un état final ($U_2$). Il échange avec l’extérieur du \textbf{travail} $W$ (forces pressantes $-P\cdot\Delta V$, agitateur, travail électrique $U\cdot I\cdot\Delta t$) et de la \textbf{chaleur} $Q$ (conduction, convection, rayonnement). Énergie \textbf{reçue} : comptée positivement ; énergie \textbf{cédée} : négativement. \textbf{Premier principe de la thermodynamique} : $\Delta U = U_2 - U_1 = W + Q$. \textbf{Adiabatique} : $Q = 0$. Système \textbf{isolé} : $W = 0$ et $Q = 0$. \textbf{Cycle} : suite de transformations qui ramène le système à son état initial.
+\begin{enumerate}
+  \item \kw{Inventorier.} D’après le doc 6, sous quelles formes un système au repos échange-t-il de l’énergie ? Convention de signe ?
+  \item \kw{Écrire.} Écrire la relation du premier principe pour un système au repos à l’échelle macroscopique.
+  \item \kw{Vérifier.} Doc 5 : calculer le travail $W$ reçu par l’eau, puis $\Delta U$ à l’aide de l’information. Comparer avec le premier principe.
+  \item \kw{Déduire.} $U$ étant une fonction d’état, de quoi dépend $\Delta U$ ? Que vaut $\Delta U$ sur un cycle ? Conséquence pour $W$ et $Q$ ?
+  \item \kw{Simplifier.} Écrire le premier principe pour une transformation adiabatique, puis pour un système isolé.
+\end{enumerate}
+\end{document}

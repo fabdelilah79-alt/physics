@@ -1,0 +1,384 @@
+<section class="slide s-title" data-kind="titre" data-group="Début" data-menu="Titre du chapitre">
+  <div class="fig-full fig bare" data-scene="titre"></div>
+  <div class="title-block">
+    <div class="eyebrow">PHYSIQUE · TRAVAIL MÉCANIQUE ET ÉNERGIE</div>
+    <div class="chapter">Chapitre 6</div>
+    <h1>Le travail et l’énergie interne</h1>
+    <div class="plan">
+      <span><b>1</b>Quelques effets du travail reçu</span>
+      <span><b>2</b>Travail des forces pressantes</span>
+      <span><b>3</b>L’énergie interne</span>
+      <span><b>4</b>Le premier principe de la thermodynamique</span>
+    </div>
+    <div class="hint">Appuyez sur → (ou cliquez sur la flèche en bas à droite) pour avancer · F : plein écran</div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 1 — Que produit un travail reçu ?" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="Situation de départ">
+  <div class="sbody">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Un solide qui reçoit un travail moteur sur un plan lisse prend de la vitesse. Mais <b>frotter ses mains</b> les réchauffe, <b>tirer sur un ressort</b> l’allonge, <b>frotter deux blocs de glace</b> les fait fondre : le système reçoit un travail sans que sa vitesse ni son altitude ne changent.</p>
+        <ul class="problems"><li>Quels autres effets un travail reçu peut-il produire ?</li></ul>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="effets"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Quatre expériences" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="Activité 1 · doc 1">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0"><b>Doc 1.</b> (a) On perce une plaque d’acier : la température de la zone percée s’élève fortement. (b) Un opérateur étire un ressort ; lâché, le ressort reprend sa longueur. (c) On frotte deux blocs de glace à $0~\u{°C}$ : une partie de la glace devient liquide, à température constante. (d) On frotte une allumette : elle s’enflamme, le phosphore brûle.</p></div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="effets"><div class="cap"><span class="doc">Doc 1</span>Quatre systèmes qui reçoivent un travail</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Le ressort et le travail d’une force variable" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="Activité 1 · doc 2">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 2.</b> Ressort de raideur $k$, fixé à une extrémité. L’opérateur exerce sur l’autre extrémité une force $\vec{F}$ parallèle à l’axe, de même sens que le déplacement, d’intensité proportionnelle à l’allongement $x$ : $F = k·x$. Le ressort exerce sur l’opérateur la force de rappel $\vec{T} = −\vec{F}$.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information.</b> <b>Travail d’une force variable.</b> Quand une force parallèle au déplacement a une intensité variable, son travail est égal à l’<b>aire</b> comprise entre la courbe $F = f(x)$, l’axe des abscisses et les deux verticales qui limitent le déplacement.</p></div>
+    </div>
+    <div class="fig" data-scene="ressortApp"><div class="cap"><span class="doc">Doc 2</span>Un ressort étiré</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — Échauffement et déformation" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Identifier.</span> Doc 1 (a) : quel est l’effet du travail reçu par la plaque percée ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Une <b>élévation de la température</b> de la plaque.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Établir.</span> Doc 1 (b) et doc 2 : effet du travail reçu par le ressort ? Tracer $F = f(x)$ ; à l’aide de l’information, exprimer $W_{0→x}(\vec{F})$, puis le travail de $\vec{F}$ et de $\vec{T}$ entre $x_1$ et $x_2$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box"><b>Déformation élastique</b>. $F = k·x$ : droite passant par l’origine ; aire du triangle : $W_{0→x}(\vec{F}) = \frac{1}{2}k·x^2$<br>$W_{1→2}(\vec{F}) = \frac{1}{2}k·x_2^2 − \frac{1}{2}k·x_1^2$ ; $\vec{T} = −\vec{F}$ ⇒ $W_{1→2}(\vec{T}) = \frac{1}{2}k·x_1^2 − \frac{1}{2}k·x_2^2$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="graphFx"><div class="cap">Le travail est l’aire du triangle</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — Changements d’état et bilan" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="Questions 3 et 4">
+  <div class="sbody">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Préciser.</span> Doc 1 (c) et (d) : nature des transformations provoquées par le travail reçu ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">(c) La glace fond : <b>changement d’état physique</b>. (d) L’allumette brûle : <b>transformation chimique</b> (combustion).</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Classer.</span> Résumer les effets d’un travail reçu, en dehors d’une variation de vitesse.</div></div><div class="ans"><div class="ans-in"><div class="ans-box"><b>Élévation de température</b>, <b>déformation élastique</b>, <b>changement d’état physique</b> ou <b>transformation chimique</b>.</div></div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="effets"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Effets du travail ; travail pour déformer un ressort" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="À retenir · effets et ressort">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack center">
+      <div class="def"><h3>Effets du travail reçu par un système</h3><p style="margin:0">En dehors d’une variation de vitesse, le travail reçu par un système peut provoquer : une <b>élévation de température</b> (frottement, perçage, compression rapide d’un gaz) ; une <b>déformation élastique</b> (ressort, arc, lame) ; un <b>changement d’état physique</b> ou une <b>transformation chimique</b> (fusion de la glace, allumette).</p></div>
+      <div class="def"><h3>Travail pour déformer un ressort</h3><p style="margin:0 0 8px">Pour faire passer l’allongement (ou la compression) d’un ressort de raideur $k$ de $x_1$ à $x_2$, la force extérieure $\vec{F}$ effectue le travail :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$W_{1→2}(\vec{F}) = \frac{1}{2}k·x_2^2 − \frac{1}{2}k·x_1^2$</span></div>
+        <p style="margin:8px 0 0">Le travail de la force de rappel $\vec{T}$ du ressort est l’<b>opposé</b> : $W_{1→2}(\vec{T}) = \frac{1}{2}k·x_1^2 − \frac{1}{2}k·x_2^2$.</p></div>
+    </div>
+    <div class="fig" data-scene="graphFx"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Étirer un ressort" data-part="Partie 1" data-group="Partie 1 · Effets du travail" data-menu="Application · ressort">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0">Ressort : $ℓ_0 = 15~\u{cm}$, $k = 200~\u{N·m^{−1}}$ ; un opérateur fait passer sa longueur de $ℓ_1 = 18~\u{cm}$ à $ℓ_2 = 25~\u{cm}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer $x_1$ et $x_2$ en mètres ($x = ℓ − ℓ_0$).</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$x_1 = 0,03~\u{m}$ ; $x_2 = 0,10~\u{m}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer $W_{1→2}(\vec{F})$, puis $W_{1→2}(\vec{T})$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W_{1→2}(\vec{F}) = \frac{1}{2}×200×(0,10^2 − 0,03^2) = 0,91~\u{J}$ ; $W_{1→2}(\vec{T}) = −0,91~\u{J}$</div></div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="ressortApp"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 2 — La pompe bouchée" data-part="Partie 2" data-group="Partie 2 · Forces pressantes" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.95fr;--c2:1.05fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>On bouche la sortie d’une pompe à vélo et on enfonce rapidement le piston : le volume de l’air diminue et le cylindre <b>s’échauffe</b>. Par le piston, l’opérateur exerce sur l’air une <b>force pressante</b> qui travaille.</p>
+        <ul class="problems"><li>Comment exprimer ce travail en fonction de la pression et de la variation de volume du gaz ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="pompe"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Compression d’un gaz à pression constante" data-part="Partie 2" data-group="Partie 2 · Forces pressantes" data-menu="Activité 2 · doc 3">
+  <div class="sbody cols" style="--c1:1.05fr;--c2:.95fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 3.</b> Gaz parfait dans un cylindre de section $S$ fermé par un piston mobile sans frottement. La force pressante $\vec{F}$ est dirigée vers l’intérieur ; la pression $P$ reste constante (<b>isobare</b>). Le piston passe de $x_1$ ($V_1$) à $x_2$ ($V_2 < V_1$) : il parcourt $ℓ$ dans le sens de $\vec{F}$. Volume balayé : $S·ℓ = V_1 − V_2 = −ΔV$, avec $ΔV = V_2 − V_1$.</p></div>
+      <div class="rappel small"><b>Rappel.</b> $P = \frac{F}{S}$ : $P$ en Pa, $F$ en N, $S$ en $\u{m^2}$ ; $1~\u{bar} = 10^5~\u{Pa}$ ; $1~\u{L} = 10^{−3}~\u{m^3}$.</div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information.</b> <b>Convention de signe.</b> Le travail <b>reçu</b> par le gaz est compté positivement, le travail <b>cédé</b> négativement. Volume constant : transformation <b>isochore</b> ; augmentation de volume : <b>détente</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="cylindre"><div class="cap"><span class="doc">Doc 3</span>Gaz comprimé par un piston</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — Le travail des forces pressantes" data-part="Partie 2" data-group="Partie 2 · Forces pressantes" data-menu="Questions 1 à 3">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Exprimer.</span> À l’aide du rappel, exprimer $F$ en fonction de $P$ et de $S$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$F = P·S$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Établir.</span> Exprimer $W$ en fonction de $P$, $S$ et $ℓ$, puis, avec le doc 3, en fonction de $P$ et $ΔV$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Même sens : $W = F·ℓ = P·S·ℓ$ ; or $S·ℓ = −ΔV$ ⇒ $W = −P·ΔV = −P·(V_2 − V_1)$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Discuter.</span> Signe de $W$ pour une compression, une détente, une transformation isochore ? Interpréter avec la convention.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Compression : $ΔV < 0$, $W > 0$, le gaz <b>reçoit</b> du travail. Détente : $ΔV > 0$, $W < 0$, le gaz <b>cède</b> du travail. Isochore : $W = 0$.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="cylindre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Travail des forces pressantes" data-part="Partie 2" data-group="Partie 2 · Forces pressantes" data-menu="À retenir · W = −P·ΔV">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="def"><h3>Travail des forces pressantes</h3><p style="margin:0 0 8px">Quand un gaz subit une transformation sous une pression extérieure <b>constante</b> $P$, et que son volume passe de $V_i$ à $V_f$, le travail des forces pressantes reçu par le gaz est :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$W = −P·(V_f − V_i) = −P·ΔV$</span></div>
+        <p style="margin:8px 0 0">$W$ en <b>joules (J)</b>, $P$ en <b>pascals (Pa)</b>, $V$ en <b>$\u{m^3}$</b>.<br>Compression ($ΔV < 0$) : <b>$W > 0$</b>, le gaz <b>reçoit</b> du travail. Détente ($ΔV > 0$) : <b>$W < 0$</b>, le gaz <b>cède</b> du travail. Isochore ($ΔV = 0$) : <b>$W = 0$</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="cylindre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Un gaz chauffé qui se détend" data-part="Partie 2" data-group="Partie 2 · Forces pressantes" data-menu="Application · détente">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">$V_1 = 2,5~\u{L}$ de gaz parfait sous $P = 1,0×10^5~\u{Pa}$ (constante) ; chauffé jusqu’à $V_2 = 4,0~\u{L}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Convertir $V_1$ et $V_2$ en $\u{m^3}$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_1 = 2,5×10^{−3}~\u{m^3}$ ; $V_2 = 4,0×10^{−3}~\u{m^3}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer $W$. Le gaz a-t-il reçu ou cédé du travail ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W = −1,0×10^5×1,5×10^{−3} = −150~\u{J}$ : détente, le gaz <b>cède</b> $150~\u{J}$.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="cylindre" data-opts='{"detente":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 3 — Une énergie cachée dans la matière" data-part="Partie 3" data-group="Partie 3 · Énergie interne" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.95fr;--c2:1.05fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Une bouteille de gaz <b>immobile</b> sur le sol : $E_{\u{C}} = 0$ et, sol pris comme référence, $E_{\u{pp}} = 0$ : son énergie mécanique est nulle. Pourtant, ses molécules <b>s’agitent sans cesse</b> et interagissent.</p>
+        <ul class="problems"><li>Quelle énergie la matière possède-t-elle à l’échelle microscopique ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="molecules"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 3" data-title="La matière à l’échelle microscopique" data-part="Partie 3" data-group="Partie 3 · Énergie interne" data-menu="Activité 3 · doc 4">
+  <div class="sbody cols" style="--c1:1.05fr;--c2:.95fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 4.</b> À l’échelle <b>macroscopique</b> : mouvement d’ensemble (vitesse $V$) et position (altitude $z$), énergie mécanique $E_{\u{m}} = E_{\u{C}} + E_{\u{pp}}$. À l’échelle <b>microscopique</b> : <b>agitation thermique</b> des particules, énergie cinétique microscopique $E_{\u{C,mic}}$, d’autant plus grande que la température est élevée ; <b>interactions</b> entre particules, énergie potentielle microscopique $E_{\u{p,mic}}$, liée à l’état physique et à la structure chimique.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information.</b> La somme des énergies cinétique et potentielle microscopiques de toutes les particules est l’<b>énergie interne</b> $U$ (en J). Elle ne dépend que de l’état du système : c’est une <b>fonction d’état</b>. L’énergie totale $E_{\u{tot}}$ est la somme de l’énergie mécanique et de l’énergie interne.</p></div>
+    </div>
+    <div class="fig" data-scene="molecules"><div class="cap"><span class="doc">Doc 4</span>Agitation et interactions des molécules</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — L’énergie interne" data-part="Partie 3" data-group="Partie 3 · Énergie interne" data-menu="Questions 1 à 4">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Distinguer.</span> Doc 4 : qu’observe-t-on aux échelles macroscopique et microscopique ? Les deux formes d’énergie microscopique ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Macroscopique : mouvement et position d’ensemble ($E_{\u{m}}$). Microscopique : $E_{\u{C,mic}}$ (agitation thermique, liée à la température) et $E_{\u{p,mic}}$ (interactions, liée à l’état physique et aux liaisons).</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Écrire.</span> Expression de l’énergie interne $U$ ; unité ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$U = E_{\u{C,mic}} + E_{\u{p,mic}}$, en joules</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Écrire.</span> Expression de $E_{\u{tot}}$ en fonction de $E_{\u{C}}$, $E_{\u{pp}}$ et $U$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{tot}} = E_{\u{m}} + U = E_{\u{C}} + E_{\u{pp}} + U$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Établir.</span> Relation entre $ΔE_{\u{tot}}$, $ΔE_{\u{m}}$ et $ΔU$ ; cas d’un système au repos ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔE_{\u{tot}} = ΔE_{\u{m}} + ΔU$ ; au repos ($ΔE_{\u{C}} = ΔE_{\u{pp}} = 0$) : $ΔE_{\u{tot}} = ΔU$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="molecules"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Énergie interne et énergie totale" data-part="Partie 3" data-group="Partie 3 · Énergie interne" data-menu="À retenir · énergie interne">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="def"><h3>Énergie interne</h3><p style="margin:0 0 8px">L’énergie interne $U$ d’un système est la somme de l’énergie <b>cinétique microscopique</b> (agitation thermique) et de l’énergie <b>potentielle microscopique</b> (interactions) de toutes ses particules :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$U = E_{\u{C,mic}} + E_{\u{p,mic}}$</span></div>
+        <p style="margin:8px 0 0">en <b>joules (J)</b>. $U$ est une <b>fonction d’état</b> : elle ne dépend que de l’état du système.</p></div>
+      <div class="def"><h3>Énergie totale</h3>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$E_{\u{tot}} = E_{\u{m}} + U = E_{\u{C}} + E_{\u{pp}} + U$  et  $ΔE_{\u{tot}} = ΔE_{\u{m}} + ΔU$</span></div>
+        <p style="margin:8px 0 0">Pour un système au repos à l’échelle macroscopique ($ΔE_{\u{m}} = 0$) : <b>$ΔE_{\u{tot}} = ΔU$</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="molecules"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Une bille qui tombe et s’immobilise" data-part="Partie 3" data-group="Partie 3 · Énergie interne" data-menu="Application · bille">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Bille : $m = 200~\u{g}$, lâchée sans vitesse de $h = 5,0~\u{m}$ ; elle s’immobilise sur un sol isolant. Toute l’énergie mécanique perdue devient énergie interne de la bille : $ΔE_{\u{tot}} = 0$. $g = 10~\u{N·kg^{−1}}$ ; référence : le sol.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer $ΔE_{\u{m}}$ entre le lâcher et l’immobilisation.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_A = V_B = 0$ : $ΔE_{\u{m}} = m·g·(z_B − z_A) = −0,200×10×5,0 = −10~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">En déduire $ΔU$. Effet observé ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔE_{\u{m}} + ΔU = 0$ ⇒ $ΔU = +10~\u{J}$ : la température de la bille <b>s’élève</b>.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="billeChute"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 4 — Chauffer de l’eau sans flamme" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.9fr;--c2:1.1fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Pour élever la température de l’eau d’un récipient posé sur une table, on peut la <b>chauffer</b> (chaleur $Q$), y faire passer un <b>courant</b> dans une résistance (travail électrique) ou l’<b>agiter</b> avec des palettes (travail mécanique).</p>
+        <ul class="problems"><li>Comment relier la variation de l’énergie interne d’un système au repos au travail et à la chaleur qu’il échange ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="joule"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 4" data-title="L’expérience de Joule" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Activité 4 · doc 5">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 5.</b> Récipient isolé ($Q = 0$) contenant $1,5~\u{kg}$ d’eau, agitée par des palettes entraînées par la chute lente, à vitesse constante, de deux masses de $10~\u{kg}$. Les masses descendent de $h = 1,5~\u{m}$ ; on recommence 20 fois. Le travail du poids des masses est intégralement transmis à l’eau. La température passe de $18,00~\u{°C}$ à $18,94~\u{°C}$ ; $g = 9,8~\u{N·kg^{−1}}$.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information.</b> Un corps de masse $m$ qui s’échauffe sans changer d’état voit son énergie interne augmenter de $ΔU = m·c·Δθ$ ($c$ : chaleur massique ; eau : $4185~\u{J·kg^{−1}·°C^{−1}}$).</p></div>
+    </div>
+    <div class="fig" data-scene="joule"><div class="cap"><span class="doc">Doc 5</span>Expérience de Joule</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 4" data-title="Les échanges d’énergie et le premier principe" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Activité 4 · doc 6">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 6.</b> Système fermé au repos ($ΔE_{\u{m}} = 0$), d’un état initial ($U_1$) à un état final ($U_2$). Échanges avec l’extérieur : le <b>travail</b> $W$ (forces pressantes $−P·ΔV$, agitateur, travail électrique $W_e = U·I·Δt$) et la <b>chaleur</b> $Q$ (conduction, convection, rayonnement). Énergie <b>reçue</b> comptée positivement, énergie <b>cédée</b> négativement.<br>Le <b>premier principe de la thermodynamique</b> : $ΔU = U_2 − U_1 = W + Q$.<br><b>Adiabatique</b> : $Q = 0$. Système <b>isolé</b> : $W = 0$ et $Q = 0$. <b>Cycle</b> : retour à l’état initial.</p></div>
+    </div>
+    <div class="fig" data-scene="bilanUWQ"><div class="cap"><span class="doc">Doc 6</span>Convention de signe</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 4 — Le premier principe" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Questions 1 à 3">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Inventorier.</span> Doc 6 : sous quelles formes un système au repos échange-t-il de l’énergie ? Convention de signe ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Travail $W$ (forces pressantes, agitateur, électrique) et chaleur $Q$ (conduction, convection, rayonnement). Reçue : $> 0$ ; cédée : $< 0$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Écrire.</span> Écrire la relation du premier principe pour un système au repos.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔU = U_2 − U_1 = W + Q$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Vérifier.</span> Doc 5 : calculer $W$ reçu par l’eau, puis $ΔU$ avec l’information. Comparer.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W = 20×20×9,8×1,5 = 5880~\u{J}$ ; $ΔU = 1,5×4185×0,94 ≈ 5900~\u{J}$ : $ΔU ≈ W$, avec $Q = 0$ : c’est bien $ΔU = W + Q$.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="joule"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 4 — Cycles et cas particuliers" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Questions 4 et 5">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Déduire.</span> $U$ étant une fonction d’état, de quoi dépend $ΔU$ ? Que vaut $ΔU$ sur un cycle ? Conséquence pour $W$ et $Q$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔU$ ne dépend que des états <b>initial et final</b>. Cycle : $ΔU = 0$ ⇒ $W + Q = 0$, soit $W = −Q$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">5</span><div class="qt"><span class="kw">Simplifier.</span> Premier principe pour une transformation adiabatique, puis pour un système isolé.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Adiabatique ($Q = 0$) : $ΔU = W$. Isolé ($W = Q = 0$) : $ΔU = 0$, l’énergie interne se conserve.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="bilanUWQ"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Le premier principe de la thermodynamique" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="À retenir · ΔU = W + Q">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack center">
+      <div class="def"><h3>Premier principe de la thermodynamique</h3><p style="margin:0 0 8px">Pour un système fermé au repos à l’échelle macroscopique, qui passe d’un état initial à un état final, la variation de son énergie interne est égale à la <b>somme du travail et de la chaleur échangés avec le milieu extérieur</b> :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$ΔU = U_f − U_i = W + Q$</span></div>
+        <p style="margin:8px 0 0">Énergie reçue : <b>positive</b> ; énergie cédée : <b>négative</b>.</p></div>
+      <div class="def"><h3>Propriétés</h3><p style="margin:0">$ΔU$ ne dépend que de l’<b>état initial</b> et de l’<b>état final</b> ($U$ est une fonction d’état). Cycle : <b>$ΔU = 0$</b>, donc $W + Q = 0$. Transformation adiabatique : <b>$ΔU = W$</b>. Système isolé : <b>$ΔU = 0$</b>. Si l’énergie mécanique varie : <b>$ΔE_{\u{tot}} = ΔE_{\u{m}} + ΔU = W + Q$</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="bilanUWQ"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="methode" data-chip="Méthode" data-title="Appliquer le premier principe" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Méthode">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="method"><h3>Méthode : appliquer le premier principe</h3>
+      <ol class="steps"><li>Définir le <b>système</b> et vérifier qu’il est au repos à l’échelle macroscopique.</li><li>Faire la liste des <b>échanges</b> : travaux (forces pressantes $−P·ΔV$, électrique $U·I·Δt$, mécanique) et chaleur.</li><li>Donner à chacun son <b>signe</b> : positif s’il est reçu, négatif s’il est cédé.</li><li>Écrire $ΔU = W + Q$ (adiabatique : $Q = 0$ ; isochore : $W_{\u{pressantes}} = 0$ ; cycle : $ΔU = 0$) et conclure.</li></ol></div>
+    <div class="fig" data-scene="bilanUWQ"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Un gaz comprimé qui se refroidit" data-part="Partie 4" data-group="Partie 4 · Premier principe" data-menu="Application · premier principe">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Un gaz est comprimé : les forces pressantes effectuent sur lui un travail $|W| = 450~\u{J}$ ; en même temps, il cède à l’extérieur une chaleur $|Q| = 180~\u{J}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Signes de $W$ et de $Q$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Compression : $W = +450~\u{J}$ (reçu) ; chaleur cédée : $Q = −180~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer $ΔU$. L’énergie interne a-t-elle augmenté ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔU = W + Q = 450 − 180 = +270~\u{J}$ : elle a <b>augmenté</b>.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="cylindre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="quiz" data-chip="Vrai ou faux ?" data-title="Je vérifie mes connaissances" data-part="Exercices" data-group="Exercices et bilan" data-menu="Vrai ou faux ?">
+  <div class="sbody">
+    <div class="vflist">
+      <div class="vf" data-answer="faux"><span class="qn">a</span><div>Un système qui reçoit un travail voit toujours sa vitesse augmenter.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : il peut aussi s’échauffer, se déformer, changer d’état ou se transformer chimiquement.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">b</span><div>Lors d’une compression, le travail des forces pressantes reçu par le gaz est positif.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $ΔV < 0$, donc $W = −P·ΔV > 0$.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">c</span><div>L’énergie interne d’un système immobile est nulle.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : c’est son énergie mécanique qui est nulle ; ses particules ont une énergie microscopique.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">d</span><div>Au cours d’une transformation isochore, le travail des forces pressantes est nul.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $ΔV = 0$.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">e</span><div>Au cours d’un cycle, la variation de l’énergie interne est nulle.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : l’état final est l’état initial.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">f</span><div>Au cours d’une transformation adiabatique, l’énergie interne ne varie pas.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : $ΔU = W$, qui n’est pas nul en général.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 1" data-title="Compression isobare d’un gaz parfait" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · énoncé">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Cylindre horizontal de section $S = 50~\u{cm^2}$, piston sans frottement. Gaz : $V_1 = 3,0~\u{L}$ sous $P = 2,0~\u{bar}$ (constante), à $27~\u{°C}$. On le refroidit lentement jusqu’à $V_2 = 1,8~\u{L}$ ; il cède une chaleur $|Q| = 600~\u{J}$.</p></div>
+      <ol class="exlist small"><li>Calculer $F$ et la distance $ℓ$ parcourue par le piston.</li><li>Calculer $W$ et justifier son signe.</li><li>Calculer $ΔU$ (premier principe).</li></ol>
+    </div>
+    <div class="fig" data-scene="cylindre"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 1 — Compression isobare" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · correction">
+  <div class="sbody">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Force et déplacement</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$F = P·S = 2,0×10^5×5,0×10^{−3} = 1000~\u{N}$ ; $ℓ = \frac{|ΔV|}{S} = \frac{1,2×10^{−3}}{5,0×10^{−3}} = 0,24~\u{m}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Travail</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W = −P·(V_2 − V_1) = −2,0×10^5×(−1,2×10^{−3}) = +240~\u{J}$ : compression, le gaz reçoit du travail.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Premier principe</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q = −600~\u{J}$ ; $ΔU = W + Q = 240 − 600 = −360~\u{J}$</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 2" data-title="Un cycle de trois transformations" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · énoncé">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">$A→B$ : compression adiabatique, $W_{AB} = +350~\u{J}$. $B→C$ : refroidissement isochore, $ΔU_{BC} = −550~\u{J}$. $C→A$ : détente isobare sous $P = 1,5×10^5~\u{Pa}$, de $V_C = 2,0~\u{L}$ à $V_A = 4,0~\u{L}$.</p></div>
+      <ol class="exlist small"><li>Déterminer $ΔU_{AB}$.</li><li>Justifier $W_{BC} = 0$ ; en déduire $Q_{BC}$.</li><li>Calculer $W_{CA}$.</li><li>Sur le cycle : calculer $ΔU_{CA}$, puis $Q_{CA}$.</li></ol>
+    </div>
+    <div class="fig" data-scene="cycle"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 2 — Le cycle" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · correction">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">A → B</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔU_{AB} = W_{AB} + Q_{AB} = +350~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">B → C</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔV = 0$ ⇒ $W_{BC} = 0$ ; $Q_{BC} = ΔU_{BC} = −550~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">C → A</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W_{CA} = −1,5×10^5×2,0×10^{−3} = −300~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Cycle</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔU_{CA} = −(350 − 550) = +200~\u{J}$ ; $Q_{CA} = ΔU_{CA} − W_{CA} = 200 + 300 = +500~\u{J}$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="cycle"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 3" data-title="Travail électrique et travail mécanique" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · énoncé">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0">Calorimètre isolé contenant de l’huile, une résistance et un dispositif à ressort. Système au repos, capacité thermique $C_{\u{tot}} = 800~\u{J·°C^{−1}}$ : $ΔU = C_{\u{tot}}·Δθ$.</p></div>
+    <ol class="exlist small"><li>Travail électrique $W_e$ : $I = 2,5~\u{A}$, $U_{AB} = 24~\u{V}$, $Δt = 4~\u{min}$.</li><li>Travail mécanique $W_m$ : dix compressions du ressort ($k = 500~\u{N·m^{−1}}$) de $0$ à $8,0~\u{cm}$, l’énergie de chaque détente étant dissipée dans l’huile.</li><li>Calculer $ΔU$, puis l’élévation de température $Δθ$.</li></ol>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 3 — Travail électrique et mécanique" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · correction">
+  <div class="sbody">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Travail électrique</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W_e = U_{AB}·I·Δt = 24×2,5×240 = 14400~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Travail mécanique</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W_m = 10×\frac{1}{2}k·x_f^2 = 10×\frac{1}{2}×500×0,080^2 = 16~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Premier principe</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$Q = 0$ : $ΔU = W_e + W_m = 14416~\u{J}$ ; $Δθ = \frac{ΔU}{C_{\u{tot}}} = \frac{14416}{800} ≈ 18,0~\u{°C}$</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="bilan" data-chip="L’essentiel" data-title="Ce qu’il faut retenir du chapitre" data-part="Bilan" data-group="Exercices et bilan" data-menu="L’essentiel du chapitre">
+  <div class="sbody">
+    <div class="bilan">
+      <div class="bil"><h3>Effets du travail</h3><p>élévation de température, déformation élastique, changement d’état, transformation chimique</p></div>
+      <div class="bil"><h3>Ressort</h3><span class="eq-wrap">$W = \frac{1}{2}k·x_2^2 − \frac{1}{2}k·x_1^2$</span><p>aire sous la courbe $F = k·x$</p></div>
+      <div class="bil"><h3>Forces pressantes</h3><span class="eq-wrap">$W = −P·ΔV$</span><p>compression : $W > 0$ ; détente : $W < 0$</p></div>
+      <div class="bil"><h3>Énergie interne</h3><span class="eq-wrap">$U = E_{\u{C,mic}} + E_{\u{p,mic}}$</span><p>fonction d’état ; $E_{\u{tot}} = E_{\u{m}} + U$</p></div>
+      <div class="bil"><h3>Premier principe</h3><span class="eq-wrap">$ΔU = W + Q$</span><p>énergie reçue positive, cédée négative</p></div>
+      <div class="bil"><h3>Cas particuliers</h3><p>cycle : $ΔU = 0$ ; adiabatique : $ΔU = W$ ; isolé : $ΔU = 0$</p></div>
+    </div>
+  </div>
+</section>
