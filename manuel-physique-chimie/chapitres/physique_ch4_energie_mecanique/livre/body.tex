@@ -1,0 +1,449 @@
+% =====================================================================
+%  Corps du chapitre 4 de physique : Énergie potentielle de pesanteur et énergie mécanique
+% =====================================================================
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+\newcommand{\Eppi}[1]{E_{\mathrm{pp}#1}}
+\newcommand{\Emi}[1]{E_{\mathrm{m}#1}}
+\newcommand{\Eci}[1]{E_{\mathrm{C}#1}}
+\newcommand{\WAB}[1]{W_{A\to B}(\vect{#1})}
+\begin{document}
+% =====================================================================
+
+% ---------------------- PAGE D'OUVERTURE ----------------------
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at (current page.north west) {\includegraphics[width=\paperwidth]{opener.jpg}};
+  \node[anchor=north west,text width=11.2cm,align=left,inner sep=0] at ([xshift=1.9cm,yshift=-2.1cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12} PHYSIQUE\enspace·\enspace PARTIE 1 — TRAVAIL MÉCANIQUE ET ÉNERGIE}\par\vspace{5mm}
+    \tikz\node[fill=cOrange,text=white,rounded corners=4mm,inner xsep=4mm,inner ysep=1.6mm,font=\sffamily\bfseries\large]{Chapitre 4};\par\vspace{5mm}
+    {\titlefont\bfseries\fontsize{26}{31}\selectfont\color{white}Énergie potentielle\\ de pesanteur et\\ énergie mécanique\par}};
+\end{tikzpicture}
+\vspace*{8.25cm}
+
+{\large\itshape L’eau retenue derrière un barrage, un rocher au sommet d’une falaise, un wagon en haut d’une montagne russe : ces corps possèdent une énergie liée à leur altitude. Comment l’exprimer ? Comment s’échange-t-elle avec l’énergie cinétique, et que devient-elle quand il y a des frottements ?\par}
+\vspace{2.5mm}
+
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cBlue!5,colframe=cBlue!5,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cBlue}Objectifs du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+Je vais apprendre à :
+\begin{itemize}
+  \item exprimer l’énergie potentielle de pesanteur d’un solide et choisir un état de référence ;
+  \item relier la variation de l’énergie potentielle de pesanteur au travail du poids ;
+  \item définir l’énergie mécanique et reconnaître les situations où elle se conserve ;
+  \item interpréter la diminution de l’énergie mécanique en présence de frottements : $\Delta\Em = -Q$.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cGreen!6,colframe=cGreen!6,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cGreen}Je dois déjà savoir},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+\begin{itemize}
+  \item calculer le travail du poids : $W_{A\to B}(\vect P) = m\cdot g\cdot(z_A - z_B)$ (chapitre 2) ;
+  \item calculer l’énergie cinétique $\Ec = \frac{1}{2}\,m\cdot V^2$ et appliquer le théorème de l’énergie cinétique (chapitre 3) ;
+  \item calculer une vitesse instantanée sur un enregistrement : $V_i = \dfrac{M_{i-1}M_{i+1}}{2\tau}$.
+\end{itemize}
+\end{tcolorbox}
+\vspace{1mm}
+\begin{tcolorbox}[enhanced,colback=cOrange!7,colframe=cOrange!7,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cOrange}Plan du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\sffamily]
+\textcolor{cOrange}{\textbf{1}}\enspace Travail du poids et énergie potentielle de pesanteur\par
+\textcolor{cOrange}{\textbf{2}}\enspace Énergie mécanique et sa conservation\par
+\textcolor{cOrange}{\textbf{3}}\enspace Non-conservation de l’énergie mécanique\par
+\raisebox{-0.8mm}{\includegraphics[height=3.6mm]{ic_exercices}}\enspace Exercices d’application et de synthèse
+\end{tcolorbox}
+\end{minipage}
+
+\begin{encart}{cCyan}{savoir}{Le saviez-vous ?}
+Au Maroc, la station de transfert d’énergie par pompage (STEP) d’Afourer, près d’Azilal, pompe de l’eau vers un bassin situé en hauteur quand la demande d’électricité est faible : l’énergie est stockée sous forme d’énergie potentielle de pesanteur. Aux heures de forte consommation, l’eau redescend et fait tourner des turbines.
+\end{encart}
+
+\newpage
+% =====================================================================
+\section[Travail du poids et énergie potentielle de pesanteur]{Travail du poids et énergie potentielle\\ de pesanteur}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 1\enspace·\enspace Une énergie liée à l’altitude}
+\begin{situation}
+\textbf{Situation de départ.} L’eau retenue en altitude derrière un barrage hydroélectrique peut, en descendant, faire tourner les turbines d’une centrale. Un rocher situé au sommet d’une falaise possède une énergie liée à son altitude, qui se transforme en énergie cinétique dès qu’il se détache. \textbf{Comment exprimer cette énergie de position ? Quel lien a-t-elle avec le travail du poids ?}
+\end{situation}
+
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 1. Repérage d’un solide.} Un solide (S) de masse $m$ se trouve au voisinage de la Terre, où le champ de pesanteur est uniforme, d’intensité $g$. On repère la position de son centre d’inertie $G$ par sa cote (altitude) $z$ sur un axe $Oz$ vertical, orienté vers le haut, de vecteur unitaire $\vect k$.\par\medskip
+\textbf{Énergie potentielle de pesanteur.} Du fait de son interaction avec la Terre et de sa position par rapport à elle, le solide possède une \textbf{énergie potentielle de pesanteur} $\Epp$. On admet qu’elle s’écrit :
+\[\Epp = m\cdot g\cdot z + C\]
+où $C$ est une constante. Pour fixer $C$, on choisit une position $G_0$ d’altitude $z_0$, appelée \textbf{état de référence}, pour laquelle on pose $\Epp = 0$.\par\medskip
+\textbf{Déplacement.} Le solide passe de la position A (altitude $z_A$) à la position B (altitude $z_B$) ; la dénivellation est $h$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc1_repere}\par\vspace{1mm}
+{\sffamily\small\docbadge{1}\enspace\color{cInk2}Une caisse soulevée de A vers B}
+\end{minipage}
+\end{rub}
+
+\begin{rappel}
+Travail du poids d’un solide qui passe de A à B (axe $Oz$ vertical orienté vers le haut) : $W_{A\to B}(\vect P) = m\cdot g\cdot(z_A - z_B)$. Il est moteur quand le solide descend et résistant quand il monte ; il ne dépend pas du chemin suivi.
+\end{rappel}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Définir.} Qu’est-ce que l’énergie potentielle de pesanteur d’un solide au voisinage de la Terre ? Quelle est son unité dans le Système international ?
+  \item \kw{Déterminer.} Qu’est-ce que l’état de référence ? En écrivant que $\Epp = 0$ pour $z = z_0$, exprimer la constante $C$ en fonction de $m$, $g$ et $z_0$.
+  \item \kw{Établir.} En déduire l’expression de $\Epp$ en fonction de $m$, $g$, $z$ et $z_0$, puis son expression lorsque l’état de référence est l’origine de l’axe ($z_0 = 0$).
+  \item \kw{Discuter.} Quel est le signe de $\Epp$ selon que le solide est au-dessus ou au-dessous de l’état de référence ? Comment varie $\Epp$ quand l’altitude $z$ augmente ?
+  \item \kw{Démontrer.} Exprimer la variation $\Delta\Epp = \Eppi{B} - \Eppi{A}$ quand le solide passe de A à B. À l’aide du rappel, démontrer la relation entre $\Delta\Epp$ et le travail du poids $\WAB P$.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{C’est l’énergie que possède un solide du fait de sa position par rapport à la Terre, avec laquelle il est en interaction. Elle s’exprime en joules (J).}
+  \item \rep{L’état de référence est une position choisie arbitrairement où l’on pose $\Epp = 0$. Pour $z = z_0$ : $m\cdot g\cdot z_0 + C = 0$, d’où $C = -m\cdot g\cdot z_0$.}
+  \item \rep{$\Epp = m\cdot g\cdot z - m\cdot g\cdot z_0$, soit $\Epp = m\cdot g\cdot(z - z_0)$. Si l’état de référence est à l’origine ($z_0 = 0$) : $\Epp = m\cdot g\cdot z$.}
+  \item \rep{Si $z > z_0$ (solide au-dessus de l’état de référence), $\Epp > 0$ ; si $z < z_0$ (au-dessous), $\Epp < 0$. L’énergie potentielle de pesanteur augmente quand l’altitude $z$ augmente.}
+  \item \rep{$\Delta\Epp = (m\cdot g\cdot z_B + C) - (m\cdot g\cdot z_A + C) = m\cdot g\cdot(z_B - z_A)$ : la constante $C$ disparaît. Or $\WAB P = m\cdot g\cdot(z_A - z_B) = -m\cdot g\cdot(z_B - z_A)$. Donc $\Delta\Epp = -\WAB P$ : la variation de l’énergie potentielle de pesanteur est l’opposée du travail du poids.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.58\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Énergie potentielle de pesanteur}\par\smallskip
+L’axe $Oz$ étant vertical et orienté vers le \trou{haut}, un solide de masse $m$ dont le centre d’inertie est à l’altitude $z$ possède l’énergie potentielle de pesanteur :
+\begin{center}\formule{\trou{$\Epp = m\cdot g\cdot z + C$\quad soit\quad$\Epp = m\cdot g\cdot(z - z_0)$}}\end{center}
+$\Epp$ en \trou{joules (J)}, $m$ en \trou{kg}, $g$ en \trou{\unit{N.kg^{-1}}}, $z$ et $z_0$ en \trou{mètres (m)}. $z_0$ est l’altitude de l’\trou{état de référence}, où $\Epp = 0$ et \trou{$C = -m\cdot g\cdot z_0$}.\par\smallskip
+$\Epp$ est \trou{positive} au-dessus de l’état de référence, \trou{négative} au-dessous ; elle \trou{augmente} avec l’altitude.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.39\linewidth}\vspace{0pt}\centering
+\ifeleve\includegraphics[width=\linewidth]{fig_epp_eleve}\else\includegraphics[width=\linewidth]{fig_epp}\fi
+\end{minipage}\par\medskip
+\sfb{\color{cRed}Variation de l’énergie potentielle de pesanteur}\par\smallskip
+Quand le solide passe de A (altitude $z_A$) à B (altitude $z_B$), la variation de son énergie potentielle de pesanteur \troul{ne dépend pas de l’état de référence choisi} et elle est égale à l’\troul{opposé du travail de son poids :}
+\begin{center}\formule{\trou{$\Delta\Epp = \Eppi{B} - \Eppi{A} = m\cdot g\cdot(z_B - z_A) = -\WAB P$}}\end{center}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Ranger un dictionnaire}
+\begin{minipage}[c]{0.55\linewidth}\RaggedRight
+Un dictionnaire de masse $m = \qty{600}{g}$ est posé sur une table, à la hauteur $h_1 = \qty{80}{cm}$ au-dessus du sol. On le range sur une étagère, à la hauteur $h_2 = \qty{2,00}{m}$ au-dessus du sol. On prend $g = \qty{10}{N.kg^{-1}}$.
+\begin{appq}
+  \item L’état de référence est le sol ($z_0 = 0$). Calculer l’énergie potentielle de pesanteur $\Eppi{1}$ du dictionnaire sur la table et $\Eppi{2}$ sur l’étagère.
+  \item L’état de référence est maintenant la surface de la table ($z_0 = h_1$). Calculer de nouveau ces énergies, notées $E'_{\mathrm{pp}1}$ et $E'_{\mathrm{pp}2}$.
+  \item Calculer la variation $\Delta\Epp$ dans les deux cas. Conclure, puis en déduire le travail du poids au cours du rangement.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.41\linewidth}\centering
+\includegraphics[width=\linewidth]{app1_dictionnaire}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section[Énergie mécanique d’un solide et sa conservation]{Énergie mécanique d’un solide\\ et sa conservation}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 2\enspace·\enspace L’énergie mécanique se conserve-t-elle ?}
+\begin{situation}
+\textbf{Situation de départ.} Quand une bille tombe en chute libre, ou qu’un chariot descend une rampe parfaitement lisse, son altitude diminue tandis que sa vitesse augmente. L’énergie potentielle de pesanteur perdue semble se transformer en énergie cinétique. \textbf{Quelle grandeur réunit ces deux énergies, et dans quelles conditions reste-t-elle constante au cours du mouvement ?}
+\end{situation}
+
+\begin{minipage}[c]{0.66\linewidth}\RaggedRight
+\textbf{Doc 2. Étude théorique : la chute libre.} Un solide (S) en chute libre n’est soumis qu’à son poids $\vect P$. Il passe du point A (altitude $z_A$, vitesse $V_A$) au point B (altitude $z_B$, vitesse $V_B$).\par\medskip
+\textbf{Doc 3. Étude expérimentale : le plan incliné sans frottement.} Un mobile autoporteur de masse $m = \qty{732}{g}$ est abandonné sur une table à coussin d’air inclinée de $\alpha = 10^\circ$ sur l’horizontale ; les frottements sont négligeables et $g = \qty{9,8}{N.kg^{-1}}$. On enregistre les positions successives $M_1, M_2, \dots, M_8$ de son centre d’inertie à intervalles de temps égaux $\tau = \qty{60}{ms}$ (doc 4).\par\smallskip
+L’état de référence de l’énergie potentielle de pesanteur est le plan horizontal qui passe par $M_8$. On note $d_i = M_{i-1}M_{i+1}$ et $D_i = M_iM_8$ ; l’altitude de $M_i$ au-dessus de $M_8$ est alors $h_i = D_i\cdot\sin\alpha$.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.3\linewidth}\centering
+\includegraphics[width=\linewidth]{doc2_chute}\par\vspace{1mm}
+{\sffamily\small\docbadge{2}\enspace\color{cInk2}Chute libre de A à B}
+\end{minipage}
+
+\medskip
+{\centering\includegraphics[width=0.78\linewidth]{doc3_table}\par\vspace{1mm}
+{\sffamily\small\docbadge{3}\enspace\color{cInk2}Mobile autoporteur sur une table à coussin d’air inclinée}\par}
+
+\medskip
+{\centering\includegraphics[width=15.5cm]{doc4_enregistrement}\par\vspace{1mm}
+{\sffamily\small\docbadge{4}\enspace\color{cInk2}Enregistrement à l’échelle 1 (positions du centre d’inertie)}\par}
+\smallskip
+\centerline{\mesures[1.15cm]{8}{%
+Position & $M_1$ & $M_2$ & $M_3$ & $M_4$ & $M_5$ & $M_6$ & $M_7$ & $M_8$\\ \hline
+$t$ (\unit{ms}) & 0 & 60 & 120 & 180 & 240 & 300 & 360 & 420\\ \hline
+$d_i$ (\unit{cm}) & — & 1,30 & 2,30 & 3,50 & 4,60 & 5,90 & 7,10 & —\\ \hline
+$D_i$ (\unit{cm}) & 14,5 & 14,0 & 13,2 & 11,7 & 9,7 & 7,1 & 3,8 & 0\\ \hline}}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Définir.} L’énergie mécanique $\Em$ d’un solide est la somme de son énergie cinétique et de son énergie potentielle de pesanteur. Écrire son expression pour un solide en translation, de masse $m$ et de vitesse $V$, situé à l’altitude $z$.
+  \item \kw{Démontrer.} Chute libre (doc 2) : appliquer le théorème de l’énergie cinétique entre A et B, puis utiliser la relation $\Delta\Epp = -\WAB P$ pour montrer que $\Emi{B} = \Emi{A}$. Que peut-on dire du poids ?
+  \item \kw{Calculer.} Plan incliné (docs 3 et 4) : exprimer la vitesse $V_i$, l’énergie cinétique $\Eci{i}$ et l’énergie potentielle de pesanteur $\Eppi{i}$ du mobile en $M_i$. Calculer ces grandeurs, puis $\Emi{i} = \Eci{i} + \Eppi{i}$, et les présenter dans un tableau. Que remarque-t-on ?
+  \item \kw{Interpréter.} Tracer sur un même graphique $\Ec$, $\Epp$ et $\Em$ en fonction du temps. Interpréter l’allure des trois courbes.
+  \item \kw{Formuler.} Le mobile est soumis à son poids et à la réaction normale $\vect R_N$ de la table. À quelle condition l’énergie mécanique d’un solide se conserve-t-elle ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$\Em = \Ec + \Epp = \frac{1}{2}\,m\cdot V^2 + m\cdot g\cdot z + C$.}
+  \item \rep{Seul le poids agit : $\Delta\Ec = \Eci{B} - \Eci{A} = \WAB P$. Comme $\Delta\Epp = -\WAB P$, on a $\Delta\Ec = -\Delta\Epp$, soit $\Eci{B} - \Eci{A} = \Eppi{A} - \Eppi{B}$, d’où $\Eci{B} + \Eppi{B} = \Eci{A} + \Eppi{A}$ : $\Emi{B} = \Emi{A}$. L’énergie mécanique se conserve ; on dit que le poids est une force conservative.}
+  \item \rep{$V_i = \dfrac{d_i}{2\tau}$ ; $\Eci{i} = \frac{1}{2}\,m\cdot V_i^2$ ; $\Eppi{i} = m\cdot g\cdot h_i = m\cdot g\cdot D_i\cdot\sin\alpha$. Par exemple en $M_2$ : $V_2 = \dfrac{1{,}30\times10^{-2}}{0{,}120} \approx \qty{0,108}{m.s^{-1}}$ ; $\Eci{2} \approx \qty{4,30}{mJ}$ ; $\Eppi{2} = 0{,}732\times9{,}8\times0{,}140\times\sin10^\circ \approx \qty{174}{mJ}$.}\par\smallskip
+  {\centering\mesures[1.08cm]{8}{%
+  Position & $M_1$ & $M_2$ & $M_3$ & $M_4$ & $M_5$ & $M_6$ & $M_7$ & $M_8$\\ \hline
+  $V_i$ (\unit{m.s^{-1}}) & — & \cel{0,108} & \cel{0,192} & \cel{0,292} & \cel{0,383} & \cel{0,492} & \cel{0,592} & —\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $\Eci{i}$ (\unit{mJ}) & — & \cel{4,30} & \cel{13,4} & \cel{31,1} & \cel{53,8} & \cel{88,5} & \cel{128} & —\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $\Eppi{i}$ (\unit{mJ}) & \cel{181} & \cel{174} & \cel{164} & \cel{146} & \cel{121} & \cel{88,4} & \cel{47,3} & \cel{0}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $\Emi{i}$ (\unit{mJ}) & — & \cel{179} & \cel{178} & \cel{177} & \cel{175} & \cel{177} & \cel{175} & —\\[\ifeleve 3mm\else 0mm\fi] \hline}\par}\smallskip
+  \rep{$\Ec$ augmente et $\Epp$ diminue, mais leur somme reste pratiquement constante, voisine de \qty{177}{mJ} (entre 175 et \qty{179}{mJ}), aux incertitudes de mesure près.}
+  \item \ifeleve\begin{minipage}[t]{0.5\linewidth}\vspace{0pt}\RaggedRight\rep{$\Epp(t)$ décroît pendant que $\Ec(t)$ croît : l’énergie potentielle de pesanteur se transforme progressivement en énergie cinétique au cours de la descente. La courbe $\Em(t)$ est pratiquement une droite horizontale : l’énergie mécanique reste constante, il n’y a pas de perte d’énergie mécanique.}\end{minipage}\hfill\begin{minipage}[t]{0.46\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_energies_eleve}\end{minipage}
+  \else\begin{minipage}[t]{0.52\linewidth}\vspace{0pt}\RaggedRight $\Epp(t)$ décroît pendant que $\Ec(t)$ croît : l’énergie potentielle de pesanteur se transforme progressivement en énergie cinétique au cours de la descente. La courbe $\Em(t)$ est pratiquement une droite horizontale : l’énergie mécanique reste constante, il n’y a pas de perte d’énergie mécanique.\end{minipage}\hfill\begin{minipage}[t]{0.45\linewidth}\vspace{0pt}\includegraphics[width=\linewidth]{fig_graphe_energies}\end{minipage}\fi
+  \item \rep{La réaction $\vect R_N$ est perpendiculaire au déplacement : son travail est nul. L’énergie mécanique d’un solide se conserve lorsqu’il n’est soumis qu’à son poids, ou lorsque les autres forces qui s’exercent sur lui ont un travail nul (pas de frottement).}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Énergie mécanique}\par\smallskip
+L’énergie mécanique d’un solide, à un instant donné, est la \troul{somme de son énergie cinétique et de son énergie potentielle de pesanteur :}
+\begin{center}\formule{\trou{$\Em = \Ec + \Epp = \dfrac{1}{2}\,m\cdot V^2 + m\cdot g\cdot z + C$}}\end{center}
+Elle s’exprime en \trou{joules (J)}.\par\medskip
+\begin{minipage}[c]{0.52\linewidth}\RaggedRight
+\sfb{\color{cRed}Conservation de l’énergie mécanique}\par\smallskip
+Lorsqu’un solide est en \trou{chute libre}, ou glisse \trou{sans frottement} (les forces autres que le poids ont un travail \trou{nul}), son énergie mécanique se \trou{conserve}.\par\smallskip
+Au cours du mouvement, l’énergie potentielle de pesanteur se transforme en \trou{énergie cinétique} quand le solide descend, et inversement quand il \trou{monte}.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.44\linewidth}\centering
+\includegraphics[width=\linewidth]{fig_conservation}
+\end{minipage}
+\begin{center}\formule{\trou{$\Delta\Em = 0 \iff \Eci{B} + \Eppi{B} = \Eci{A} + \Eppi{A} \iff \Delta\Ec = -\Delta\Epp$}}\end{center}
+\end{rub}
+
+\begin{encart}{cOrange}{methode}{Méthode : utiliser la conservation de l’énergie mécanique}
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=5mm, itemsep=0pt, topsep=1pt]
+  \item Définir le \textbf{système} et faire le \textbf{bilan des forces} extérieures.
+  \item Vérifier que l’énergie mécanique se \textbf{conserve} : seul le poids travaille (chute libre, glissement sans frottement).
+  \item Choisir l’\textbf{état de référence} de l’énergie potentielle de pesanteur.
+  \item Écrire l’énergie mécanique dans l’\textbf{état initial} et dans l’\textbf{état final}.
+  \item Écrire leur \textbf{égalité} et résoudre pour trouver la grandeur cherchée (vitesse, altitude, distance).
+\end{enumerate}
+\end{encart}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Une bille lancée vers le haut}
+\begin{minipage}[c]{0.58\linewidth}\RaggedRight
+Une bille d’acier de masse $m = \qty{100}{g}$ est lancée verticalement vers le haut, depuis le point A situé à l’altitude $z_A = \qty{1,2}{m}$ au-dessus du sol, avec la vitesse $V_A = \qty{6,0}{m.s^{-1}}$. La résistance de l’air est négligeable. L’état de référence de l’énergie potentielle de pesanteur est le sol ($z_0 = 0$) ; $g = \qty{10}{N.kg^{-1}}$.
+\begin{appq}
+  \item Calculer l’énergie cinétique $\Eci{A}$, l’énergie potentielle de pesanteur $\Eppi{A}$ et l’énergie mécanique $\Emi{A}$ de la bille en A.
+  \item Justifier la conservation de l’énergie mécanique de la bille, puis calculer l’altitude maximale $z_B$ atteinte au sommet B de sa trajectoire.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.38\linewidth}\centering
+\includegraphics[width=\linewidth]{app2_bille}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Non-conservation de l’énergie mécanique et énergie thermique}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 3\enspace·\enspace Que devient l’énergie mécanique avec des frottements ?}
+\begin{situation}
+\textbf{Situation de départ.} Un skieur qui descend une pente, ou une caisse qui glisse sur un sol rugueux, subit des frottements qui freinent son mouvement et échauffent les surfaces en contact. L’augmentation de l’énergie cinétique ne compense plus la diminution de l’énergie potentielle de pesanteur. \textbf{Comment varie alors l’énergie mécanique, et que devient l’énergie « perdue » ?}
+\end{situation}
+
+\textbf{Doc 5. Étude expérimentale : débit d’air réduit.} On reprend le dispositif des docs 3 et 4 ($m = \qty{732}{g}$, $\alpha = 10^\circ$, $g = \qty{9,8}{N.kg^{-1}}$) en réduisant modérément le débit d’air de la soufflerie : le mobile frotte un peu sur la table. On mesure sa vitesse $V$ et l’altitude $h$ de son centre d’inertie au-dessus de la position $P_5$ (état de référence) en cinq positions. Entre $P_1$ et $P_5$, le mobile parcourt la distance $P_1P_5 = \qty{20,9}{cm}$.\par\smallskip
+\centerline{\mesures[1.25cm]{5}{%
+Position & $P_1$ & $P_2$ & $P_3$ & $P_4$ & $P_5$\\ \hline
+$t$ (\unit{ms}) & 0 & 120 & 240 & 360 & 480\\ \hline
+$V$ (\unit{m.s^{-1}}) & 0,100 & 0,268 & 0,436 & 0,604 & 0,773\\ \hline
+$h$ (\unit{cm}) & 3,64 & 3,25 & 2,52 & 1,43 & 0\\ \hline}}
+
+\medskip
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\textbf{Doc 6. Étude théorique : glissement avec frottement.} Un solide (S) de masse $m$ glisse de A (altitude $z_A$) vers B (altitude $z_B$) sur un plan incliné d’un angle $\alpha$. Il est soumis à son poids $\vect P$ et à la réaction $\vect R$ du plan. Celle-ci se décompose en une composante normale $\vect R_N$, perpendiculaire au plan, et une force de frottement $\vect f$, parallèle au plan, de sens opposé au mouvement et d’intensité constante $f$ :
+\[\vect R = \vect R_N + \vect f\]
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{doc6_plan}\par\vspace{1mm}
+{\sffamily\small\docbadge{6}\enspace\color{cInk2}Glissement avec frottement de A vers B}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Exploiter.} Doc 5 : calculer $\Ec$, $\Epp$ et $\Em$ en chaque position. Comment évolue l’énergie mécanique du mobile ?
+  \item \kw{Exprimer.} Doc 6 : exprimer la variation de l’énergie mécanique $\Delta\Em = \Emi{B} - \Emi{A}$ du solide en fonction de $\Delta\Ec$ et de $\Delta\Epp$.
+  \item \kw{Établir.} Appliquer le théorème de l’énergie cinétique au solide entre A et B, puis utiliser $\Delta\Epp = -\WAB P$ pour exprimer $\Delta\Em$ en fonction du travail $\WAB R$ de la réaction du plan.
+  \item \kw{Démontrer.} En utilisant $\vect R = \vect R_N + \vect f$, montrer que $\Delta\Em = \WAB f = -f\cdot AB$. Quel est le signe de $\Delta\Em$ ?
+  \item \kw{Interpréter.} Que devient l’énergie mécanique « perdue » ? Écrire la relation entre $\Delta\Em$, le travail des forces de frottement et la quantité de chaleur $Q$ dégagée.
+  \item \kw{Estimer.} Revenir au doc 5 : en déduire la chaleur $Q$ dégagée entre $P_1$ et $P_5$ et l’intensité $f$ des frottements, supposée constante.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$\Ec = \frac{1}{2}\,m\cdot V^2$ et $\Epp = m\cdot g\cdot h$. Par exemple en $P_1$ : $\Ec = \frac{1}{2}\times0{,}732\times0{,}100^2 = \qty{3,66}{mJ}$ ; $\Epp = 0{,}732\times9{,}8\times0{,}0364 \approx \qty{261}{mJ}$.}\par\smallskip
+  {\centering\mesures[1.25cm]{5}{%
+  Position & $P_1$ & $P_2$ & $P_3$ & $P_4$ & $P_5$\\ \hline
+  $\Ec$ (\unit{mJ}) & \cel{3,66} & \cel{26,3} & \cel{69,6} & \cel{134} & \cel{219}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $\Epp$ (\unit{mJ}) & \cel{261} & \cel{233} & \cel{181} & \cel{103} & \cel{0}\\[\ifeleve 3mm\else 0mm\fi] \hline
+  $\Em$ (\unit{mJ}) & \cel{265} & \cel{259} & \cel{250} & \cel{236} & \cel{219}\\[\ifeleve 3mm\else 0mm\fi] \hline}\par}\smallskip
+  \rep{L’énergie mécanique diminue au cours du mouvement : elle ne se conserve pas.}
+  \item \rep{$\Delta\Em = (\Eci{B} + \Eppi{B}) - (\Eci{A} + \Eppi{A}) = (\Eci{B} - \Eci{A}) + (\Eppi{B} - \Eppi{A}) = \Delta\Ec + \Delta\Epp$.}
+  \item \rep{$\Delta\Ec = \WAB P + \WAB R$. Comme $\WAB P = -\Delta\Epp$ : $\Delta\Ec = -\Delta\Epp + \WAB R$, d’où $\Delta\Em = \Delta\Ec + \Delta\Epp = \WAB R$.}
+  \item \rep{$\WAB R = \WAB{R_N} + \WAB f$. $\vect R_N$ est perpendiculaire au déplacement : $\WAB{R_N} = 0$. $\vect f$ est opposée au déplacement : $\WAB f = -f\cdot AB$. Donc $\Delta\Em = \WAB f = -f\cdot AB < 0$ : l’énergie mécanique diminue.}
+  \item \rep{L’énergie mécanique perdue n’a pas disparu : elle est transformée en énergie thermique (chaleur $Q > 0$), qui échauffe le solide, le support et le milieu extérieur. $\Delta\Em = \WAB f = -Q$.}
+  \item \rep{$Q = -\Delta\Em = 265 - 219 = \qty{46}{mJ}$ ; $f = \dfrac{Q}{P_1P_5} = \dfrac{0{,}046}{0{,}209} \approx \qty{0,22}{N}$.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Non-conservation de l’énergie mécanique}\par\smallskip
+Lorsqu’un solide en mouvement est soumis à des \trou{forces de frottement}, son énergie mécanique ne se conserve pas : elle \trou{diminue}. Entre deux positions A et B, sa variation est égale au \troul{travail des forces de frottement :}
+\begin{center}\formule{\trou{$\Delta\Em = \Emi{B} - \Emi{A} = \Delta\Ec + \Delta\Epp = \WAB f = -f\cdot AB < 0$}}\end{center}
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+\sfb{\color{cRed}Transformation en énergie thermique}\par\smallskip
+Une partie de l’énergie mécanique est transformée en \trou{énergie thermique} (chaleur $Q$), cédée au milieu extérieur :
+\begin{center}\formule{\trou{$\Delta\Em = -Q$\quad soit\quad $Q = -\Delta\Em = f\cdot AB$}}\end{center}
+$Q$ s’exprime en \trou{joules (J)} ; elle est \trou{positive}.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{fig_dissipation}
+\end{minipage}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un solide freiné sur un plan incliné}
+\begin{minipage}[c]{0.56\linewidth}\RaggedRight
+Un solide (S) de masse $m = \qty{0,20}{kg}$ glisse avec frottement sur un plan incliné de $\alpha = 30^\circ$ sur l’horizontale. Il passe en A avec la vitesse $V_A = \qty{1,0}{m.s^{-1}}$ et arrive en B, plus bas, avec la vitesse $V_B = \qty{2,0}{m.s^{-1}}$ ; $AB = L = \qty{0,40}{m}$ et $g = \qty{10}{N.kg^{-1}}$.
+\begin{appq}
+  \item Calculer la variation de l’énergie cinétique $\Delta\Ec$ et celle de l’énergie potentielle de pesanteur $\Delta\Epp$ entre A et B. En déduire la variation de l’énergie mécanique $\Delta\Em$.
+  \item En appliquant le théorème de l’énergie cinétique entre A et B, montrer que $\Delta\Em = \WAB f$. En déduire la quantité de chaleur $Q$ dégagée et l’intensité $f$ de la force de frottement.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}\centering
+\includegraphics[width=\linewidth]{app3_plan}
+\end{minipage}
+\end{rub}
+
+% =====================================================================
+%  EXERCICES
+% =====================================================================
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcolorbox}[enhanced, colback=cInk, colframe=cInk, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0mm, after skip=5mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_exercices}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Exercices d’application et de synthèse}
+\end{tcolorbox}
+\begin{rub}[unbreakable, before skip=0mm, after skip=0mm]{cOrange}{questions}{Je vérifie mes connaissances\enspace·\enspace Vrai ou faux ?}
+Pour chaque affirmation, dire si elle est vraie ou fausse, puis corriger les affirmations fausses.
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\alph*)}, leftmargin=6mm, itemsep=1pt]
+  \item L’énergie potentielle de pesanteur d’un solide est toujours positive.
+  \item La variation de l’énergie potentielle de pesanteur entre deux positions dépend de l’état de référence choisi.
+  \item Quand un solide monte, le travail de son poids est résistant et son énergie potentielle de pesanteur augmente.
+  \item L’énergie mécanique d’un solide en chute libre se conserve.
+  \item Un solide qui glisse sans frottement sur un plan incliné garde une énergie cinétique constante.
+  \item En présence de frottements, l’énergie mécanique d’un solide augmente.
+\end{enumerate}
+\end{rub}
+\end{minipage}\par\medskip
+
+% ---------------- Exercice 1 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 1\enspace·\enspace Remontée d’un plan incliné}
+Un objet (S), assimilé à un point matériel de masse $m = \qty{2,00}{kg}$, glisse sans frottement sur une piste horizontale (HA), puis aborde en A une piste rectiligne (AB) inclinée de $\alpha = 20^\circ$ sur l’horizontale. Sa vitesse en A est $V_A = \qty{8,00}{m.s^{-1}}$ ; les frottements sont négligeables sur (AB) et $g = \qty{9,81}{N.kg^{-1}}$.\par\smallskip
+{\centering\includegraphics[width=11.5cm]{ex1_rampe}\par}
+\begin{exq}
+  \item L’état de référence de l’énergie potentielle de pesanteur est le plan horizontal qui contient (HA). Calculer l’énergie mécanique $\Emi{A}$ de l’objet en A.
+  \item L’objet s’arrête en B, son point le plus haut ($V_B = 0$). Exprimer son énergie mécanique $\Emi{B}$ en fonction de $m$, $g$, $L = AB$ et $\alpha$.
+  \item En utilisant la conservation de l’énergie mécanique entre A et B, calculer la distance $L = AB$ parcourue sur la piste inclinée.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 2 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 2\enspace·\enspace Une piste horizontale et un demi-cercle}
+\begin{minipage}[c]{0.56\linewidth}\RaggedRight
+Un solide ponctuel de masse $m = \qty{0,50}{kg}$ est lancé du point A sur une piste horizontale AB, de longueur $AB = \qty{1,0}{m}$. La piste se prolonge en B par un tube en demi-cercle vertical, de centre O et de rayon $R = \qty{1,0}{m}$, dont le sommet C est à l’altitude $2R$ au-dessus de AB ; le solide ne peut pas quitter la piste. On prend $\Epp = 0$ au niveau de AB et $g = \qty{9,81}{N.kg^{-1}}$.
+\begin{exq}
+  \item Les frottements sont négligeables sur tout le parcours ABC. Calculer la vitesse minimale $V_{\min}$ à donner au solide en A pour qu’il atteigne le sommet C (avec une vitesse pratiquement nulle).
+  \item Les frottements sur tout le parcours ABC équivalent maintenant à une force d’intensité constante $f = \qty{1,0}{N}$, tangente à la trajectoire et opposée au mouvement. Calculer la nouvelle vitesse minimale $V'_{\min}$.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.4\linewidth}\centering
+\includegraphics[width=\linewidth]{ex2_tube}
+\end{minipage}
+\end{rub}
+
+% ---------------- Exercice 3 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 3\enspace·\enspace Bilan énergétique d’un skieur}
+Un skieur de masse $m = \qty{70}{kg}$ part sans vitesse du sommet A d’une piste rectiligne inclinée, de longueur $AB = \qty{100}{m}$ et de dénivellation $h = z_A - z_B = \qty{30}{m}$. Il continue sur une piste horizontale BC, de longueur $BC = \qty{50}{m}$, et s’arrête en C. Le niveau de BC est l’état de référence de l’énergie potentielle de pesanteur ; $g = \qty{10}{N.kg^{-1}}$. Sur chaque tronçon, les frottements équivalent à une force constante, parallèle à la piste et opposée au mouvement.\par\smallskip
+{\centering\includegraphics[width=12cm]{ex3_skieur}\par}
+\begin{exq}
+  \item Calculer l’énergie potentielle de pesanteur $\Eppi{A}$ et l’énergie mécanique $\Emi{A}$ du skieur en A.
+  \item Si les frottements étaient négligeables sur AB, quelle serait la vitesse $V_{B,\mathrm{th}}$ du skieur en B ?
+  \item En réalité, le skieur arrive en B à la vitesse $V_B = \qty{20}{m.s^{-1}}$. Calculer son énergie mécanique $\Emi{B}$, la variation $\Delta\Em$ entre A et B, la chaleur $Q_1$ dégagée et l’intensité $f_1$ des frottements sur AB.
+  \item Calculer la chaleur $Q_2$ dégagée entre B et C et l’intensité $f_2$ des frottements sur BC.
+\end{exq}
+\end{rub}
+
+\ifeleve\needspace{7cm}\else\needspace{8cm}\fi
+% =====================================================================
+%  CORRIGÉS
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cGreen, colframe=cGreen, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=4mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_corrige}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}\titrecorriges}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small\RaggedRight
+\setlength{\columnsep}{7mm}
+\newcommand{\corr}[1]{\par\ifeleve\needspace{7\baselineskip}\medskip\else\smallskip\fi{\sffamily\bfseries\color{cGreen}#1}\par\nopagebreak\smallskip}
+
+\corr{Application 1 · Le dictionnaire}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Epp = m\cdot g\cdot z$ : $\Eppi{1} = 0{,}600\times10\times0{,}80 = \qty{4,8}{J}$ ;\\ $\Eppi{2} = 0{,}600\times10\times2{,}00 = \qty{12,0}{J}$.}
+  \item \rep{$E'_{\mathrm{pp}} = m\cdot g\cdot(z - z_0)$ avec $z_0 = \qty{0,80}{m}$ :\\ $E'_{\mathrm{pp}1} = 0$ ; $E'_{\mathrm{pp}2} = 0{,}600\times10\times(2{,}00 - 0{,}80) = \qty{7,2}{J}$.}
+  \item \rep{$\Delta\Epp = 12{,}0 - 4{,}8 = 7{,}2 - 0 = \qty{+7,2}{J}$ dans les deux cas : la variation ne dépend pas de l’état de référence.\\ $W(\vect P) = -\Delta\Epp = \qty{-7,2}{J}$ (travail résistant : le dictionnaire monte).}
+\end{enumerate}
+
+\corr{Application 2 · La bille}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Eci{A} = \frac{1}{2}\times0{,}100\times6{,}0^2 = \qty{1,8}{J}$ ;\\ $\Eppi{A} = 0{,}100\times10\times1{,}2 = \qty{1,2}{J}$ ;\\ $\Emi{A} = 1{,}8 + 1{,}2 = \qty{3,0}{J}$.}
+  \item \rep{La bille n’est soumise qu’à son poids (chute libre) : son énergie mécanique se conserve. Au sommet B, $V_B = 0$, donc $\Emi{B} = m\cdot g\cdot z_B = \Emi{A}$ et\\ $z_B = \dfrac{\Emi{A}}{m\cdot g} = \dfrac{3{,}0}{0{,}100\times10} = \qty{3,0}{m}$.}
+\end{enumerate}
+
+\corr{Application 3 · Le plan incliné}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Delta\Ec = \frac{1}{2}\,m\,(V_B^2 - V_A^2) = \frac{1}{2}\times0{,}20\times(2{,}0^2 - 1{,}0^2) = \qty{0,30}{J}$ ;\\ $\Delta\Epp = -m\cdot g\cdot L\cdot\sin\alpha = -0{,}20\times10\times0{,}40\times0{,}5 = \qty{-0,40}{J}$ ;\\ $\Delta\Em = 0{,}30 - 0{,}40 = \qty{-0,10}{J}$.}
+  \item \rep{$\Delta\Ec = W(\vect P) + W(\vect R_N) + W(\vect f)$ avec $W(\vect P) = -\Delta\Epp$ et $W(\vect R_N) = 0$, d’où $\Delta\Em = \WAB f$.\\ $Q = -\Delta\Em = \qty{0,10}{J}$ ; $f = \dfrac{Q}{AB} = \dfrac{0{,}10}{0{,}40} = \qty{0,25}{N}$.}
+\end{enumerate}
+
+\corr{Vrai ou faux ?}
+\begin{enumerate}[label={\sffamily\bfseries\alph*)},leftmargin=5mm,itemsep=0pt]
+  \item \rep{Faux : $\Epp < 0$ au-dessous de l’état de référence.}
+  \item \rep{Faux : $\Delta\Epp = m\cdot g\cdot(z_B - z_A)$ ne dépend pas de $z_0$.}
+  \item \rep{Vrai : $\Delta\Epp = -W(\vect P) > 0$.}
+  \item \rep{Vrai : seul le poids travaille.}
+  \item \rep{Faux : c’est l’énergie mécanique qui reste constante ; $\Ec$ augmente quand le solide descend.}
+  \item \rep{Faux : elle diminue, $\Delta\Em = -Q < 0$.}
+\end{enumerate}
+
+\corr{Exercice 1 · La remontée}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Eppi{A} = 0$ : $\Emi{A} = \frac{1}{2}\,m\cdot V_A^2 = \frac{1}{2}\times2{,}00\times8{,}00^2 = \qty{64,0}{J}$.}
+  \item \rep{$V_B = 0$ et $z_B = L\cdot\sin\alpha$ : $\Emi{B} = m\cdot g\cdot L\cdot\sin\alpha$.}
+  \item \rep{Pas de frottement ($W(\vect R_N) = 0$) : $\Emi{B} = \Emi{A}$, d’où\\ $L = \dfrac{V_A^2}{2\,g\cdot\sin\alpha} = \dfrac{8{,}00^2}{2\times9{,}81\times\sin20^\circ} \approx \qty{9,54}{m}$.}
+\end{enumerate}
+
+\corr{Exercice 2 · Le demi-cercle}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Emi{A} = \Emi{C}$ avec $V_C = 0$ et $z_C = 2R$ : $\frac{1}{2}\,m\cdot V_{\min}^2 = m\cdot g\cdot2R$, d’où\\ $V_{\min} = 2\sqrt{g\cdot R} = 2\sqrt{9{,}81\times1{,}0} \approx \qty{6,26}{m.s^{-1}}$.}
+  \item \rep{Longueur du trajet : $AB + \pi R = 1{,}0 + \pi \approx \qty{4,14}{m}$.\\ $\Emi{C} - \Emi{A} = -f\cdot(AB + \pi R)$, d’où\\ $\frac{1}{2}\,m\cdot V'^2_{\min} = 2\,m\cdot g\cdot R + f\cdot(AB + \pi R) = 9{,}81 + 4{,}14 = \qty{13,95}{J}$\\ $V'_{\min} = \sqrt{\dfrac{13{,}95}{0{,}25}} \approx \qty{7,47}{m.s^{-1}}$.}
+\end{enumerate}
+
+\corr{Exercice 3 · Le skieur}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Eppi{A} = m\cdot g\cdot h = 70\times10\times30 = \qty{2,1e4}{J}$ ; $V_A = 0$ : $\Emi{A} = \qty{2,1e4}{J}$.}
+  \item \rep{$\frac{1}{2}\,m\cdot V_{B,\mathrm{th}}^2 = \Emi{A}$, d’où $V_{B,\mathrm{th}} = \sqrt{\dfrac{2\times21\,000}{70}} = \sqrt{600} \approx \qty{24,5}{m.s^{-1}}$.}
+  \item \rep{$\Emi{B} = \frac{1}{2}\times70\times20^2 = \qty{1,4e4}{J}$ ; $\Delta\Em = 14\,000 - 21\,000 = \qty{-7,0e3}{J}$ ;\\ $Q_1 = -\Delta\Em = \qty{7,0e3}{J}$ ; $f_1 = \dfrac{Q_1}{AB} = \dfrac{7\,000}{100} = \qty{70}{N}$.}
+  \item \rep{En C : $V_C = 0$ et $z_C = 0$, donc $\Emi{C} = 0$. $\Delta\Em = 0 - 14\,000 = -f_2\cdot BC$ ;\\ $Q_2 = \qty{1,4e4}{J}$ ; $f_2 = \dfrac{14\,000}{50} = \qty{280}{N}$.}
+\end{enumerate}
+\end{multicols}
+
+\end{document}

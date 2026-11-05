@@ -1,0 +1,467 @@
+% =====================================================================
+%  FICHE PÉDAGOGIQUE — préambule commun (charte graphique du manuel)
+%  Compilation : xelatex (deux passes). Format A4 paysage.
+%  Le fichier de contenu définit, avant \begin{document} :
+%   \Matiere, \Partie, \NumChap, \TitreChap, \TitreCourt, \Niveau, \Duree, \Banniere, \BanniereDecalage
+% =====================================================================
+\documentclass[10pt]{article}
+\usepackage[a4paper,landscape,top=1.55cm,bottom=1.55cm,left=1.35cm,right=1.35cm,headheight=14pt,headsep=4.5mm,footskip=9mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\titlefont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, BoldFont=*-Bold]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,tikz,array,xltabular,multirow}
+\usetikzlibrary{calc,fadings}
+\usepackage[most]{tcolorbox}
+\graphicspath{{images/}}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=5}
+\usepackage{fancyhdr}
+\setlength{\parindent}{0pt}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+% ---------- Couleurs de la charte ----------
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6} \definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300} \definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}  \definecolor{cSoft}{HTML}{F4F7FB}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+\newcommand{\ch}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\arc}[1]{\overparen{#1}}
+% puce de liste dans les cellules : \pt{texte}
+\newcommand{\pt}[1]{\par\noindent\hangindent=3.4mm\hangafter=1\makebox[3.4mm][l]{\textcolor{cOrange}{\scriptsize$\blacktriangleright$}}#1}
+% sous-puce
+\newcommand{\spt}[1]{\par\noindent\hangindent=6.6mm\hangafter=1\hspace*{3.4mm}\makebox[3.2mm][l]{\textcolor{cInk2}{\scriptsize$\bullet$}}#1}
+% intertitre dans une cellule
+\newcommand{\ct}[2][cInk]{\par\smallskip{\sffamily\bfseries\small\color{#1}#2}\par\nopagebreak\vspace{.5mm}}
+% pastille de rubrique : \pastille{couleur}{icône}{texte}
+\NewDocumentCommand{\pastille}{m m m}{\tikz[baseline=(t.base)]{\node[fill=#1,text=white,rounded corners=2.6mm,inner xsep=2mm,inner ysep=1.1mm,font=\sffamily\bfseries\scriptsize,anchor=base west](t){\raisebox{-.9mm}{\includegraphics[height=3.6mm]{#2}}\hspace{1.2mm}#3};}}
+% étiquette « Diapo n » / « Livre » / « Fiche »
+\NewDocumentCommand{\diapo}{m}{\tikz[baseline=(b.base)]\node[fill=cInk,text=white,rounded corners=3pt,inner xsep=2.6pt,inner ysep=1.2pt,font=\sffamily\bfseries\tiny](b){Diapo #1};}
+\NewDocumentCommand{\support}{O{cInk2} m}{\tikz[baseline=(b.base)]\node[draw=#1,text=#1,rounded corners=3pt,inner xsep=2.6pt,inner ysep=1.2pt,line width=.5pt,font=\sffamily\bfseries\tiny](b){#2};}
+% type d'évaluation
+\NewDocumentCommand{\evtype}{m m}{\tikz[baseline=(b.base)]\node[fill=#1!14,text=#1,rounded corners=3pt,inner xsep=3pt,inner ysep=1.3pt,font=\sffamily\bfseries\tiny](b){\MakeUppercase{#2}};\par\vspace{.6mm}}
+\newcommand{\diag}{\evtype{cCyan}{Diagnostique}}
+\newcommand{\form}{\evtype{cBlue}{Formative}}
+\newcommand{\somm}{\evtype{cRed}{Sommative}}
+\newcommand{\regul}{\evtype{cGreen}{Remédiation}}
+% durée : \duree{min}{cumul}
+\newcommand{\duree}[2]{\centering{\titlefont\fontsize{15}{16}\selectfont\color{cInk}#1}\par\vspace{-.4mm}{\sffamily\tiny\color{cInk2}min}\par\vspace{1.4mm}{\sffamily\tiny\color{cGrey}\(\to\) #2}\par}
+
+% ---------- Titres des grandes parties ----------
+\newcommand{\bloc}[3]{% \bloc{numéro}{icône}{titre}
+  \par\vspace{4mm}\noindent
+  \tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=9mm,minimum height=9mm,inner sep=0pt,font=\titlefont\fontsize{16}{18}\selectfont](n){#1};%
+  \hspace{3mm}\raisebox{-1.8mm}{\includegraphics[height=8mm]{#2}}\hspace{2.5mm}{\titlefont\fontsize{16}{20}\selectfont\color{cInk}#3}\par\vspace{1.3mm}
+  {\color{cOrange}\rule{\linewidth}{1.2pt}}\par\vspace{3mm}}
+
+% ---------- Bandeau de la première page ----------
+\newcommand{\bandeau}{%
+  \thispagestyle{premiere}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}
+      \clip ([yshift=0cm]current page.north west) rectangle ([yshift=-5.1cm]current page.north east);
+      \node[anchor=north west,inner sep=0] at ([yshift=\BanniereDecalage]current page.north west) {\includegraphics[width=\paperwidth]{\Banniere}};
+      \fill[cInk,path fading=east,opacity=.78] (current page.north west) rectangle ([xshift=19cm,yshift=-5.1cm]current page.north west);
+    \end{scope}
+    \fill[white] ([yshift=-5.1cm]current page.north west) .. controls ([xshift=10cm,yshift=-4.3cm]current page.north west) and ([xshift=-12cm,yshift=-5.6cm]current page.north east) .. ([yshift=-4.6cm]current page.north east) -- ([yshift=-5.3cm]current page.north east) -- ([yshift=-5.3cm]current page.north west) -- cycle;
+    \node[anchor=north west,text width=19.5cm,align=left,inner sep=0] at ([xshift=1.45cm,yshift=-1.0cm]current page.north west) {%
+      {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12}FICHE PÉDAGOGIQUE\enspace·\enspace\MakeUppercase{\Matiere}\enspace·\enspace\MakeUppercase{\Partie}}\par\vspace{3.2mm}
+      \tikz\node[fill=cOrange,text=white,rounded corners=3.2mm,inner xsep=3.4mm,inner ysep=1.3mm,font=\sffamily\bfseries\normalsize]{Chapitre \NumChap};\par\vspace{2.6mm}
+      {\titlefont\fontsize{21}{26}\selectfont\color{white}\TitreChap\par}};
+  \end{tikzpicture}%
+  \vspace*{3.25cm}\par}
+
+% carte d'information : \infocarte{icône}{couleur}{libellé}{valeur}
+\newcommand{\infocarte}[4]{%
+  \begin{tcolorbox}[enhanced,width=\linewidth,colback=#2!7!white,colframe=#2!7!white,arc=3mm,boxrule=0pt,left=14mm,right=3mm,top=2mm,bottom=2mm,
+    borderline west={2pt}{0pt}{#2},
+    overlay={\node at ([xshift=7.2mm]frame.west) {\includegraphics[width=8.4mm]{#1}};}]
+  {\sffamily\bfseries\scriptsize\color{#2}\MakeUppercase{#3}}\par\vspace{.4mm}
+  {\sffamily\small\color{cInk}\RaggedRight #4\par}
+  \end{tcolorbox}}
+
+% ---------- Tableau 1 : libellé de ligne ----------
+\newcommand{\lib}[3]{% \lib{icône}{couleur}{libellé}
+  \cellcolor{#2!10}\begin{minipage}[t]{\linewidth}\vspace{.6mm}\centering
+  \includegraphics[height=10mm]{#1}\par\vspace{1.4mm}
+  {\sffamily\bfseries\small\color{#2}#3}\par\vspace{1mm}\end{minipage}}
+
+% ---------- Tableau 2 : bandeau de partie ----------
+\newcommand{\partie}[3]{% \partie{couleur}{titre}{durée totale}
+  \multicolumn{5}{@{}l@{}}{\cellcolor{#1}\rule{0pt}{6.2mm}\hspace{2.5mm}{\sffamily\bfseries\small\color{white}#2}\hfill{\sffamily\bfseries\scriptsize\color{white}#3}\hspace{2.5mm}}\\[-.2mm]}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{FICHE PÉDAGOGIQUE}}\enspace·\enspace\Matiere\enspace·\enspace Chapitre \NumChap}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}\TitreCourt}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7mm,inner sep=0pt]{\thepage};}
+\fancyfoot[R]{\sffamily\scriptsize\color{cGrey}Durée : \Duree\enspace·\enspace \Niveau}
+\fancypagestyle{premiere}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7mm,inner sep=0pt]{\thepage};}}
+
+% ---------- Tableaux ----------
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\setlength{\arrayrulewidth}{.6pt}
+\arrayrulecolor{white}
+\keepXColumns
+% ---------- Macros des deux tableaux (fiche pédagogique) ----------
+\newcommand{\cellpad}[1]{\vspace{1.4mm}#1\par\vspace{1.6mm}}
+\newcommand{\sep}{!{\color{white}\vrule width 1.8pt}}
+\newcolumntype{I}{!{\color{white}\vrule width 1.8pt}}
+% Tableau 1 : \ligne{icône}{couleur}{libellé}{contenu}
+\newcommand{\ligne}[4]{\lib{#1}{#2}{#3} & \cellcolor{cSoft}\cellpad{#4}\\ \hline}
+% Tableau 2 : \etape{couleur}{axes}{enseignant}{apprenant}{évaluation}{minutes}{cumul}
+\newcommand{\etape}[7]{%
+  \cellcolor{#1!9}\cellpad{#2} & \cellcolor{cSoft}\cellpad{#3} & \cellcolor{cSoft}\cellpad{#4} &
+  \cellcolor{cSoft}\cellpad{\footnotesize #5} & \cellcolor{#1!9}\cellpad{\duree{#6}{#7}}\\ \hline}
+% axes : \axe{couleur}{icône}{rubrique}{titre}{supports}
+\newcommand{\axe}[5]{\pastille{#1}{#2}{#3}\par\vspace{1.4mm}{\sffamily\bfseries\footnotesize\color{cInk}#4}\par\vspace{1.4mm}#5}
+% bandeau de partie dans le tableau 2
+\renewcommand{\partie}[3]{\multicolumn{5}{@{}l@{}}{\begin{tikzpicture}
+  \node[fill=#1,rounded corners=2mm,minimum width=\linewidth,minimum height=7.2mm,inner sep=0](b){};
+  \node[anchor=west,text=white,font=\sffamily\bfseries\small] at ([xshift=3.5mm]b.west){#2};
+  \node[anchor=east,text=white,font=\sffamily\bfseries\scriptsize] at ([xshift=-3.5mm]b.east){#3};
+  \end{tikzpicture}}\\*[.8mm]}
+% en-tête du tableau 2
+\newcommand{\tete}[2]{\cellcolor{cInk}\rule{0pt}{7mm}\raisebox{-1.3mm}{\includegraphics[height=5mm]{#1}}\hspace{1.6mm}{\sffamily\bfseries\small\color{white}#2}}
+\newcommand{\enteteDeroulement}{\tete{fi_chemin}{Axes du cours} & \tete{fi_prof}{Activités de l’enseignant} & \tete{fi_toque}{Activités de l’apprenant} & \tete{fi_evaluation}{Évaluation} & \cellcolor{cInk}\centering\raisebox{-1.3mm}{\includegraphics[height=5mm]{fi_horloge}}\\ \hline}
+% frise du temps : \frise[durée totale en minutes]{ {couleur/minutes/libellé}, ... } (120 min par défaut)
+\newcommand{\frise}[2][120]{%
+  \makebox[\linewidth][l]{\begin{tikzpicture}
+    \pgfmathsetmacro{\unit}{\linewidth/#1}
+    \foreach \c/\m/\t [remember=\x as \xx (initially 0)] in {#2}{%
+      \pgfmathsetmacro{\x}{\xx+\m}
+      \fill[\c,rounded corners=1.2mm] ({\xx*\unit pt+.6pt},0) rectangle ({\x*\unit pt-.6pt},8mm);
+      \node[text=white,font=\sffamily\bfseries\scriptsize,align=center] at ({(\xx+\x)/2*\unit pt},4mm) {\t};
+      \node[font=\sffamily\tiny,text=cInk2,anchor=north] at ({\x*\unit pt},-.6mm) {\pgfmathprintnumber{\x}};
+    }
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north] at (0,-.6mm) {0};
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north east] at (\linewidth,-3.4mm) {minutes};
+  \end{tikzpicture}}}
+% titre de séance au-dessus d'une frise : \seance{numéro}{durée}{contenu}
+\newcommand{\seance}[3]{\par\vspace{1.5mm}\noindent{\sffamily\bfseries\small\color{cInk}Séance #1\enspace·\enspace #2}\enspace{\sffamily\footnotesize\color{cInk2}#3}\par\vspace{1mm}}
+% encadré final : \encadre{icône}{couleur}{titre}{contenu}
+\newcommand{\encadre}[4]{%
+  \begin{tcolorbox}[enhanced,colback=#2!6!white,colframe=#2!6!white,arc=3mm,boxrule=0pt,left=15mm,right=4mm,top=2.5mm,bottom=2.5mm,
+    borderline west={2pt}{0pt}{#2},height fill=false,
+    overlay={\node[anchor=north west] at ([xshift=2.5mm,yshift=-2.5mm]frame.north west) {\includegraphics[width=9.5mm]{#1}};}]
+  {\sffamily\bfseries\color{#2}#3}\par\vspace{1.5mm}\small #4
+  \end{tcolorbox}}
+\newcommand{\lignevide}{\par\vspace{2.6mm}\noindent{\color{cInk2!55}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 4 : Énergie potentielle de pesanteur et énergie mécanique (5 h, trois séances)
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{4}
+\newcommand{\TitreChap}{Énergie potentielle de pesanteur\\ et énergie mécanique}
+\newcommand{\TitreCourt}{Énergie potentielle de pesanteur et énergie mécanique}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{5 h}
+\newcommand{\Banniere}{opener_phys4.jpg}
+\newcommand{\BanniereDecalage}{1.3cm}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences expérimentales (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{5 heures — trois séances\\ 2 h + 2 h + 1 h}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1 · § 3.2 et 3.3\\ Énergie potentielle et énergie mécanique}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séquence}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Travail mécanique et énergie :} \textbf{interpréter les transferts d’énergie} et les phénomènes de \textbf{conservation et de dissipation} dans diverses situations de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} \textbf{énergie potentielle de pesanteur} et son lien avec le travail du poids ; \textbf{énergie mécanique} ; sa \textbf{conservation} (chute libre, glissement sans frottement) et sa \textbf{dissipation} en énergie thermique en présence de frottements ($\Delta\Em = -Q$), établies expérimentalement puis réinvesties dans des situations-problèmes (barrage, bille lancée, skieur).}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} situations-problèmes ; enregistrements sur table à coussin d’air (avec et sans frottement) ; démonstration théorique puis vérification expérimentale.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} tableaux de mesures, graphes $E(t)$, notations $\Ec$, $\Epp$, $\Em$, $Q$ et unités ; rédaction d’une démonstration.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations (rampe avec histogramme des énergies) ; calculs au tableur ou à la calculatrice.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en cinq étapes pour utiliser la conservation de l’énergie mécanique ; choix raisonné de l’état de référence.}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} énergie hydroélectrique (barrages, STEP d’Afourer) ; chute de pierres ; freinage et échauffement ; sécurité au laboratoire.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séquence, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — définir l’\textbf{énergie potentielle de pesanteur} et l’\textbf{état de référence} ; connaître l’expression $\Epp = m\cdot g\cdot z + \mathrm{cte}$ et son unité ;}
+\pt{\textbf{O2} — \textbf{exploiter} l’expression de $\Epp$ (calcul, signe) après avoir choisi un état de référence ;}
+\pt{\textbf{O3} — connaître et appliquer la relation $\Delta\Epp = -W_{A\to B}(\vect P)$ ;}
+\pt{\textbf{O4} — définir l’\textbf{énergie mécanique} $\Em = \Ec + \Epp$ et connaître son unité ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — mettre en évidence \textbf{expérimentalement} et démontrer la \textbf{conservation} de $\Em$ (chute libre, glissement sans frottement) ; décrire la transformation de $\Epp$ en $\Ec$ et inversement ;}
+\pt{\textbf{O6} — \textbf{utiliser} la conservation de $\Em$ pour calculer une vitesse, une altitude ou une distance ;}
+\pt{\textbf{O7} — mettre en évidence expérimentalement et \textbf{interpréter} la non-conservation de $\Em$ en présence de frottements ;}
+\pt{\textbf{O8} — \textbf{exploiter} la relation $\Delta\Em = W(\vect f) = -Q$ pour calculer une chaleur ou une force de frottement.}
+\end{minipage}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} connaître l’expression de l’énergie potentielle de pesanteur d’un solide ($\Epp = m\cdot g\cdot z + \mathrm{cte}$) et son unité ; exploiter cette expression ; connaître et appliquer la relation entre le travail du poids d’un solide et la variation de son énergie potentielle de pesanteur ; connaître l’expression de l’énergie mécanique et son unité ; connaître la transformation de l’énergie potentielle de pesanteur en énergie cinétique et inversement ; interpréter la non-conservation de l’énergie mécanique ; exploiter la relation entre la variation de l’énergie mécanique et l’énergie thermique due aux frottements ($\Delta\Em = -Q$).}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis du tronc commun et des chapitres 2 et 3}
+\pt{poids $P = m\cdot g$ ; réaction d’un plan (composante normale, frottement) ; bilan des forces ;}
+\pt{travail d’une force constante $W = \vect F\cdot\vect{AB}$ ; travail du poids $W_{A\to B}(\vect P) = m\cdot g\cdot(z_A - z_B)$, indépendant du chemin suivi (chapitre 2) ;}
+\pt{énergie cinétique $\Ec = \frac{1}{2}m\cdot V^2$ et théorème de l’énergie cinétique (chapitre 3) ;}
+\pt{vitesse instantanée sur un enregistrement : $V_i \approx M_{i-1}M_{i+1}/2\tau$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{axe orienté et coordonnée (cote) d’un point ; fonction sinus dans un triangle rectangle ($h = D\cdot\sin\alpha$) ;}
+\pt{résolution d’une équation du premier et du second degré simple ($V^2 = \dots$) ;}
+\pt{tracé de plusieurs courbes sur un même graphique ; conversions (\unit{g} $\to$ \unit{kg}, \unit{cm} $\to$ \unit{m}, \unit{mJ} $\to$ \unit{J}) ; chiffres significatifs.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{potence, poulie, masse marquée ou petite caisse, règle verticale graduée (repérage d’une altitude, état de référence) ;}
+\pt{chute libre : électroaimant sur potence, bille d’acier (éventuellement vidéo ou chronophotographie) ;}
+\pt{table à coussin d’air inclinable, mobile autoporteur, générateur d’impulsions, feuilles d’enregistrement, cales ; \textbf{soufflerie à débit réglable} (débit réduit modérément pour la partie 3) ;}
+\pt{dictionnaire et étagère de la salle (application 1).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (34 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis activité 3, à coller dans le cahier ; doc 4 à l’échelle 1, imprimer à 100 \%) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices, papier millimétré, tableur.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, § 3.2 « Le travail et l’énergie potentielle de pesanteur » : énergie potentielle de pesanteur d’un solide en interaction avec la Terre (cas particulier des corps au voisinage de la Terre) ; relation entre le travail du poids et la variation de l’énergie potentielle de pesanteur ; transformation de l’énergie potentielle en énergie cinétique et inversement. § 3.3 « L’énergie mécanique d’un solide » : définition ; conservation (chute libre ; glissement sans frottement sur un plan incliné) ; non-conservation et son interprétation ; relation $\Delta\Em = -Q$.}
+\pt{Activités proposées : exemples tirés de l’environnement de l’apprenant, documents ou logiciels pour introduire l’énergie potentielle de pesanteur ; établissement de son expression à partir du travail du poids ; mise en évidence expérimentale de la conservation de l’énergie mécanique (chute libre ; translation rectiligne d’un solide soumis seulement à son poids et à l’action du support) et de sa non-conservation (translation rectiligne avec frottement).}
+\pt{Orientations : se limiter aux corps en interaction avec la Terre, au voisinage de la Terre, et établir l’expression de $\Epp$ à partir du travail du poids ; souligner la nécessité de définir l’état de référence (en sciences expérimentales, se limiter aux situations où la constante est nulle) ; définir l’énergie mécanique et étudier sa conservation lorsque le poids est la seule force qui travaille ; expliquer sa non-conservation par les frottements et introduire $\Delta\Em = -Q$ avec $W(\vect f) = -Q$ ; lors de l’expérience de non-conservation, éviter de trop réduire le débit d’air de la soufflerie. Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat.}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{7cm}
+\bloc{2}{fi_chemin}{Déroulement de la séquence (trois séances)}
+
+\seance{1}{2 h}{énergie potentielle de pesanteur, puis énergie mécanique (étude théorique de la chute libre)}
+\frise[120]{cCyan/10/Mise en route, cTeal/67/Partie 1 · Énergie potentielle, cBlue/35/Partie 2 · Chute libre, cGreen/8/Bilan}
+\seance{2}{2 h}{conservation de l’énergie mécanique : étude expérimentale, méthode ; début de la partie 3}
+\frise[120]{cCyan/8/Rappels, cBlue/92/Partie 2 · Conservation (expérience), cPurple/17/Partie 3, cGreen/3/Bilan}
+\seance{3}{1 h}{non-conservation de l’énergie mécanique, exercices et évaluation}
+\noindent\begin{minipage}{0.5\linewidth}\frise[60]{cCyan/4/Rappels, cPurple/38/Partie 3 · Frottements, cOrange/16/Exercices, cGreen/2/Bilan}\end{minipage}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% =====================================================================
+\partie{cInk}{Séance 1 · Énergie potentielle de pesanteur et énergie mécanique (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, plan et prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; projette la diapositive de titre et annonce le plan des trois séances.}
+ \pt{Questions flash : « Travail du poids d’un corps de \qty{2}{kg} qui monte de \qty{3}{m} ? », « Énergie cinétique d’une bille de \qty{100}{g} à \qty{6}{m.s^{-1}} ? », « Énoncé du théorème de l’énergie cinétique ? », « $V_i$ si $M_{i-1}M_{i+1} = \qty{2,4}{cm}$ et $\tau = \qty{60}{ms}$ ? » ($g = \qty{10}{N.kg^{-1}}$).}}
+{\pt{Répond oralement : \qty{-60}{J} (travail résistant) ; \qty{1,8}{J} ; $\Delta\Ec = \sum W(\vect F_{\mathrm{ext}})$ ; \qty{0,20}{m.s^{-1}}.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} signe du travail du poids ; carré de la vitesse ; énoncé complet du théorème.\par\vspace{.8mm}
+ \regul Rappel au tableau de $W(\vect P) = m\cdot g\cdot(z_A - z_B)$ et du théorème.}
+{10}{0 h 10}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Travail du poids et énergie potentielle de pesanteur}{67 min · objectifs O1 à O3}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{Un barrage et un rocher}{\diapo{2}}}
+{\pt{Projette l’animation (diapo 2) : l’eau du barrage descend dans la conduite et fait tourner la turbine ; le rocher se détache et tombe.}
+ \pt{Pose le problème : comment exprimer l’énergie liée à l’altitude, et quel lien avec le travail du poids ?}}
+{\pt{Propose : « l’énergie dépend de la hauteur », « et de la masse » ; formule des hypothèses.}}
+{\diag Représentations initiales (énergie « stockée » en hauteur).}
+{5}{0 h 15}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Une énergie liée à l’altitude (doc 1)}{\diapo{3--5} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Soulève lentement une masse marquée le long d’une règle verticale graduée ; fait repérer sa cote $z$ sur un axe vertical orienté vers le haut ; projette la caisse animée (diapo 3) et le rappel du travail du poids.}
+ \pt{Fait choisir deux états de référence différents (sol, paillasse) pour montrer que $\Epp$ dépend de ce choix.}
+ \pt{Fait traiter les questions 1 à 5 en binômes ; corrige au clic (diapos 4 et 5).}}
+{\pt{Travaille sur la fiche d’activités collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Définit $\Epp$ (en joules) et l’état de référence ; trouve $C = -m\cdot g\cdot z_0$, puis $\Epp = m\cdot g\cdot(z - z_0)$ et $\Epp = m\cdot g\cdot z$ si $z_0 = 0$ ; discute le signe.}
+ \pt{Démontre $\Delta\Epp = m\cdot g\cdot(z_B - z_A) = -W_{A\to B}(\vect P)$.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} axe orienté vers le haut ; élimination de la constante dans $\Delta\Epp$.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier le signe « $-$ » dans $\Delta\Epp = -W(\vect P)$ (raisonner sur un objet qui monte).}
+{37}{0 h 52}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{$\Epp = m\cdot g\cdot(z - z_0)$ ; $\Delta\Epp = -W(\vect P)$}{\diapo{6--7} \support{Cahier}}}
+{\pt{Fait formuler l’expression de $\Epp$, les unités et le rôle de l’état de référence ; projette les diapos 6 et 7 (graphe $\Epp(z)$) et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « $\Epp$ d’un objet posé au sol si la référence est la table ? » $\to$ négative.}
+{12}{1 h 04}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Ranger un dictionnaire}{\diapo{8} \support{Cahier}}}
+{\pt{Range réellement un dictionnaire sur l’étagère de la salle ; projette l’énoncé (diapo 8) ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $E_{\mathrm{pp}1} = \qty{4,8}{J}$, $E_{\mathrm{pp}2} = \qty{12,0}{J}$ (référence : le sol), puis \qty{0}{J} et \qty{7,2}{J} (référence : la table) ; trouve $\Delta\Epp = \qty{+7,2}{J}$ dans les deux cas et $W(\vect P) = \qty{-7,2}{J}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversions (\unit{g}, \unit{cm}) ; indépendance de $\Delta\Epp$ vis-à-vis de la référence.}
+{13}{1 h 17}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Énergie mécanique d’un solide et sa conservation}{127 min (séances 1 et 2) · objectifs O4 à O6}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Un solide sur une rampe lisse}{\diapo{9}}}
+{\pt{Projette la rampe animée avec l’histogramme des énergies (diapo 9) : l’altitude diminue, la vitesse augmente.}
+ \pt{Pose le problème : quelle grandeur réunit $\Ec$ et $\Epp$, et quand reste-t-elle constante ?}}
+{\pt{Propose : « la somme des deux énergies reste la même ».}}
+{\diag Hypothèse de conservation.}
+{5}{1 h 22}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2 (1)}{Étude théorique : la chute libre (doc 2)}{\diapo{10--11} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Lâche une bille retenue par l’électroaimant ; projette la chute animée (diapo 10).}
+ \pt{Fait définir l’énergie mécanique (question 1), puis guide la démonstration de la question 2 ; corrige au clic (diapo 11).}}
+{\pt{Écrit $\Em = \frac{1}{2}m\cdot V^2 + m\cdot g\cdot z + C$.}
+ \pt{Combine $\Delta\Ec = W(\vect P)$ et $\Delta\Epp = -W(\vect P)$ : $\Delta\Ec = -\Delta\Epp$, d’où $E_{\mathrm{m}B} = E_{\mathrm{m}A}$ ; qualifie le poids de force conservative.}}
+{\form Correction collective de la démonstration.\par
+ \textit{Indicateur :} enchaînement logique des égalités.}
+{30}{1 h 52}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 1}{Synthèse et travail à faire}{\diapo{6--7}}}
+{\pt{Fait résumer oralement la séance ; donne le travail à faire (encadré « Travail à la maison »).}}
+{\pt{Résume : $\Epp = m\cdot g\cdot(z - z_0)$, $\Delta\Epp = -W(\vect P)$, $\Em = \Ec + \Epp$ conservée en chute libre.}}
+{\form Synthèse orale.}
+{8}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 2 · Conservation de l’énergie mécanique (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction du travail à faire}{\diapo{8} \diapo{11}}}
+{\pt{Corrige l’exercice donné : énergie potentielle d’un élève de \qty{60}{kg} au 3\textsuperscript{e} étage (\qty{9}{m}), référence au sol puis au 1\textsuperscript{er} étage (\qty{3}{m}) : \qty{5,4}{kJ} et \qty{3,6}{kJ}.}
+ \pt{Questions flash sur $\Epp$, $\Em$ et les conditions de conservation.}}
+{\pt{Compare ses résultats ; justifie le signe et le choix de la référence.}}
+{\diag Vérification du travail personnel.\par\vspace{.8mm}
+ \regul Reprendre l’orientation de l’axe si besoin.}
+{8}{0 h 08}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2 (2)}{Mobile sur une table inclinée sans frottement (docs 3 et 4)}{\diapo{12--13} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Réalise l’enregistrement sur la table à coussin d’air inclinée de $10^\circ$ (ou exploite le doc 4 à l’échelle 1) ; projette la table et l’enregistrement animés (diapo 12).}
+ \pt{Fait mesurer ou lire $d_i$ et $D_i$, calculer $V_i$, $E_{\mathrm{C}i}$, $E_{\mathrm{pp}i}$ et $E_{\mathrm{m}i}$ (question 3) ; répartit les colonnes entre les binômes ; corrige au clic (diapo 13).}}
+{\pt{Complète le tableau de la fiche : $V_2 \approx \qty{0,108}{m.s^{-1}}$, $E_{\mathrm{C}2} \approx \qty{4,30}{mJ}$, $E_{\mathrm{pp}2} \approx \qty{174}{mJ}$ …}
+ \pt{Constate que $\Em$ reste voisine de \qty{177}{mJ} (entre 175 et \qty{179}{mJ}).}}
+{\form Observation des binômes ; mise en commun des colonnes.\par
+ \textit{Indicateurs :} $V_i = d_i/2\tau$ ; $h_i = D_i\cdot\sin\alpha$ ; unités (\unit{mJ}).\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier $\sin\alpha$ ou utiliser $d_i/\tau$.}
+{40}{0 h 48}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2 (3)}{Les trois courbes ; condition de conservation}{\diapo{14} \support{Cahier}}}
+{\pt{Fait tracer $\Ec(t)$, $\Epp(t)$ et $\Em(t)$ sur papier millimétré (ou au tableur) ; projette le graphe animé (diapo 14) ; fait traiter les questions 4 et 5.}}
+{\pt{Trace les courbes ; interprète : $\Epp$ décroît, $\Ec$ croît, $\Em$ pratiquement constante.}
+ \pt{Formule : $\Em$ se conserve si seul le poids travaille ($W(\vect R_N) = 0$).}}
+{\form Graphes vérifiés en circulant.\par
+ \textit{Indicateurs :} échelles adaptées ; légende des trois courbes.}
+{22}{1 h 10}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir et méthode}{$\Em = \Ec + \Epp$ ; conservation ; méthode}{\diapo{15--17} \support{Cahier}}}
+{\pt{Fait formuler la définition de $\Em$ et la condition de conservation ; projette les diapos 15 et 16, puis la méthode en cinq étapes (diapo 17) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » et la méthode dans son cahier.}}
+{\form Question flash : « un solide glisse sans frottement : son $\Ec$ est-elle constante ? » $\to$ non, c’est $\Em$.}
+{17}{1 h 27}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Une bille lancée vers le haut}{\diapo{18} \support{Cahier}}}
+{\pt{Projette l’énoncé et l’animation (diapo 18) ; travail individuel dans le cahier en suivant la méthode ; correction au clic.}}
+{\pt{Calcule $E_{\mathrm{C}A} = \qty{1,8}{J}$, $E_{\mathrm{pp}A} = \qty{1,2}{J}$, $E_{\mathrm{m}A} = \qty{3,0}{J}$ ; justifie la conservation ; trouve $z_B = \qty{3,0}{m}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} $V_B = 0$ au sommet ; étapes de la méthode.}
+{13}{1 h 40}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Non-conservation de l’énergie mécanique et énergie thermique}{55 min (séances 2 et 3) · objectifs O7 et O8}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Une caisse sur un sol rugueux}{\diapo{19}}}
+{\pt{Projette l’animation (diapo 19) : la caisse ralentit, s’arrête et les surfaces s’échauffent ; fait frotter ses mains.}
+ \pt{Pose le problème : que devient l’énergie mécanique avec des frottements ?}}
+{\pt{Propose : « elle diminue », « elle se transforme en chaleur ».}}
+{\diag Hypothèses des apprenants.}
+{5}{1 h 45}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3 (1)}{Débit d’air réduit (doc 5)}{\diapo{20--21} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Reprend la table inclinée en réduisant \textbf{modérément} le débit de la soufflerie (sans l’excès qui bloquerait le mobile) ; projette le doc 5 (diapo 20) ; fait traiter la question 1 ; corrige au clic (diapo 21).}}
+{\pt{Complète le tableau : $\Em$ passe de \qty{265}{mJ} à \qty{219}{mJ} ; conclut que $\Em$ diminue.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} calculs de $\Ec$ et $\Epp$ en \unit{mJ}.}
+{12}{1 h 57}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 2}{Synthèse et travail à faire}{\diapo{17}}}
+{\pt{Rappelle la méthode ; donne le travail à faire (exercice 1, énoncé projeté, diapo 28).}}
+{\pt{Note le travail à faire et recopie l’énoncé de l’exercice 1.}}
+{\form Synthèse orale.}
+{3}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 3 · Frottements, exercices et évaluation (1 h)}{0 h 00 $\to$ 1 h 00 · objectifs O5 à O8}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction de l’exercice 1}{\diapo{29}}}
+{\pt{Corrige rapidement l’exercice 1 au clic avec l’animation (diapo 29).}}
+{\pt{Vérifie : $E_{\mathrm{m}A} = \qty{64,0}{J}$ ; $L \approx \qty{9,54}{m}$.}}
+{\diag Vérification du travail personnel.}
+{4}{0 h 04}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3 (2)}{Glissement avec frottement (doc 6)}{\diapo{22--24} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Projette le plan incliné animé avec les forces (diapo 22) ; guide les questions 2 à 5, puis fait estimer $f$ à partir du doc 5 (question 6) ; corrige au clic (diapos 23 et 24).}}
+{\pt{Établit $\Delta\Em = \Delta\Ec + \Delta\Epp = W(\vect R) = W(\vect f) = -f\cdot AB < 0$ ; interprète : $\Delta\Em = -Q$.}
+ \pt{Calcule $Q = \qty{46}{mJ}$ et $f \approx \qty{0,22}{N}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} $W(\vect R_N) = 0$ ; signe de $W(\vect f)$ ; $Q > 0$.\par\vspace{.8mm}
+ \regul Erreur fréquente : écrire $\Delta\Em = +Q$.}
+{20}{0 h 24}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{$\Delta\Em = W(\vect f) = -Q$}{\diapo{25} \support{Cahier}}}
+{\pt{Projette la diapo 25 (rampe avec frottement et histogramme : $Q$ augmente pendant que $\Em$ diminue) ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « signe de $Q$ ? » $\to$ positif.}
+{8}{0 h 32}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Un solide freiné sur un plan incliné}{\diapo{26} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 26) ; travail individuel dans le cahier ; correction au clic.}}
+{\pt{Calcule $\Delta\Ec = \qty{0,30}{J}$, $\Delta\Epp = \qty{-0,40}{J}$, $\Delta\Em = \qty{-0,10}{J}$ ; en déduit $Q = \qty{0,10}{J}$ et $f = \qty{0,25}{N}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} dénivellation $L\cdot\sin\alpha$ ; signe de $\Delta\Em$.}
+{10}{0 h 42}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ?}{\diapo{27}}}
+{\pt{Projette le vrai/faux interactif (diapo 27) ; fait voter à main levée, puis justifier oralement chaque réponse.}}
+{\pt{Répond à main levée et corrige les affirmations fausses dans le cahier : a) F, b) F, c) V, d) V, e) F, f) F.}}
+{\form Vote à main levée.\par
+ \textit{Indicateurs :} au moins 5 bonnes réponses sur 6.\par\vspace{.8mm}
+ \regul Reprendre les affirmations les plus échouées.}
+{6}{0 h 48}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 3}{Bilan énergétique d’un skieur}{\diapo{32--33} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 32) ; travail individuel dans le cahier ; corrige au clic (diapo 33).}}
+{\pt{Calcule $E_{\mathrm{m}A} = \qty{2,1e4}{J}$ ; $V_{B,\mathrm{th}} \approx \qty{24,5}{m.s^{-1}}$ ; $Q_1 = \qty{7,0e3}{J}$, $f_1 = \qty{70}{N}$ ; $Q_2 = \qty{1,4e4}{J}$, $f_2 = \qty{280}{N}$.}}
+{\somm Exercice individuel (évaluation de fin de chapitre).\par
+ \textit{Indicateurs :} distinction cas idéal / cas réel ; $\Delta\Em = -f\cdot d$ sur chaque tronçon ; unités.}
+{10}{0 h 58}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{L’essentiel}{Synthèse du chapitre}{\diapo{34}}}
+{\pt{Projette « L’essentiel du chapitre » (diapo 34) ; donne le travail à la maison (encadré ci-dessous).}}
+{\pt{Relit la synthèse ; note le travail à faire.}}
+{\somm Bilan des exercices.\par
+ \textit{Exploitation :} repérer les notions à reprendre avant le chapitre suivant.}
+{2}{1 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Après la séance 1} — énergie potentielle d’un élève de \qty{60}{kg} au 3\textsuperscript{e} étage (\qty{9}{m}) avec deux références (sol, 1\textsuperscript{er} étage), puis variation entre les deux étages : objectifs O1 à O3.}
+\pt{\textbf{Après la séance 2} — exercice 1 (énoncé projeté, diapo 28, à recopier et à résoudre dans le cahier) : objectif O6.}
+\pt{\textbf{Après la séance 3} — exercice 2 (énoncé projeté, diapo 30, à recopier et à résoudre dans le cahier) : objectifs O6 et O8.}
+\pt{Soutien : refaire l’application de la bille avec $V_A = \qty{4,0}{m.s^{-1}}$ et comparer $z_B$. Approfondissement : dans l’exercice 3, calculer la distance que parcourrait le skieur sur le plat si $f_2$ valait \qty{140}{N}.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séquence (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séquence :}\lignevide}
+\end{minipage}
+
+\end{document}

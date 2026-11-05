@@ -5,6 +5,7 @@
 | Physique ch1 | Rotation d'un solide autour d'un axe fixe | livré (modèle d'origine du livre : archives/modeles_ch1) |
 | Physique ch2 | Travail et puissance d'une force | livré ; doc 3 « produit scalaire » ajouté, question 3 reformulée |
 | Physique ch3 | Travail et énergie cinétique (5 h) | livré — sources complètes dans chapitres/physique_ch3_travail_energie_cinetique |
+| Physique ch4 | Énergie potentielle de pesanteur et énergie mécanique (§ 3.2 et 3.3, 5 h) | livré — chapitres/physique_ch4_energie_mecanique (livrables/ : PDF, HTML, .tex) ; application 3 corrigée (AB = 0,40 m), doc 5 « débit d’air réduit » ajouté, « livre » de l’application 1 remplacé par un dictionnaire |
 | Chimie ch1–ch5 | dont « Grandeurs physiques liées aux quantités de matière » | fiches pédagogiques dans archives/fiches_pedagogiques |
 
 ## Décisions techniques à retenir
@@ -18,3 +19,10 @@
   `\partie` suivi de `\\*` pour ne jamais rester seul en bas de page.
 - Dans les SVG, une couleur de texte passée en paramètre doit aller dans `style` (les classes CSS l'emportent sur l'attribut `fill`) : corrigé dans figlib.js.
 - Présentation : `fig` dans une grille centrée n'a pas de hauteur propre → donner une hauteur fixe à la rangée.
+- Ch4 : `simTrack` (mouvement sur une piste y = Y(x), avec ou sans frottement, déterministe) et `eBars` (histogramme des énergies)
+  sont définis dans `chapitres/physique_ch4_energie_mecanique/pres/src/scenes_p4a.js` ; à déplacer dans realisme.js s’ils resservent.
+- Dans une scène, protéger les indices de tableau calculés à partir de `t` (`clamp(…, 0, n − 1)`) : l’engine peut appeler `update` avec un `t` négatif.
+- Conteneur neuf : installer `texlive-xetex texlive-latex-extra texlive-lang-french texlive-science texlive-fonts-extra texlive-pictures fonts-texgyre poppler-utils`
+  et le paquet Python `playwright` à la version du Playwright Node installé (navigateurs déjà dans /opt/pw-browsers).
+- Orientations (§ 3.2) : en sciences expérimentales, se limiter aux situations où la constante de Epp est nulle ; le ch4 garde la question
+  « référence sur la table » (application 1) pour montrer que ΔEpp ne dépend pas de la référence.
