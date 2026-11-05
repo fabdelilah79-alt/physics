@@ -29,7 +29,7 @@ chapitres/<nom>/            uniquement ce qui est propre au chapitre
   fiches/                   contenu_*.tex, images/opener_*.jpg
   cours/, programme/        cours de l'enseignant et captures du programme
 archives/                   modèles et contenus des chapitres précédents (ch1 rotation, fiches ch1–ch5, cours .docx)
-manuel-physique-chimie/outils/                     preparer_chapitre.sh, sauver_chapitre.sh, nouveau_chapitre.sh
+outils/                     preparer_chapitre.sh, sauver_chapitre.sh, nouveau_chapitre.sh
 CONSIGNES.md                exigences de l'enseignant (à relire avant chaque chapitre)
 HISTORIQUE.md               chapitres réalisés et décisions importantes
 ```
@@ -41,9 +41,9 @@ Les commandes se lancent depuis le dossier `manuel-physique-chimie/` (branche `m
 ```sh
 cd manuel-physique-chimie
 # nouveau chapitre : squelette + dossier de travail complet
-manuel-physique-chimie/outils/nouveau_chapitre.sh physique_ch4_energie_potentielle /tmp/travail
+outils/nouveau_chapitre.sh physique_ch4_energie_potentielle /tmp/travail
 # reprendre un chapitre existant
-manuel-physique-chimie/outils/preparer_chapitre.sh chapitres/physique_ch3_travail_energie_cinetique /tmp/travail
+outils/preparer_chapitre.sh chapitres/physique_ch3_travail_energie_cinetique /tmp/travail
 
 cd /tmp/travail/pres && python3 gen_slides.py && python3 build.py && python3 shoot.py
 cd /tmp/travail/livre/figures_html && python3 render_book.py      # figures du livre (PNG ×4)
@@ -52,7 +52,7 @@ cd /tmp/travail/livre && xelatex fiche_unique.tex && xelatex fiche_unique.tex
 cd /tmp/travail/fiches && cat entete_fiche.tex outils_fiche.tex contenu_*.tex > Fiche_pedagogique.tex && xelatex Fiche_pedagogique.tex
 
 # ranger le travail dans le dépôt (chapitre + améliorations des fichiers communs)
-manuel-physique-chimie/outils/sauver_chapitre.sh /tmp/travail chapitres/physique_ch4_energie_potentielle
+outils/sauver_chapitre.sh /tmp/travail chapitres/physique_ch4_energie_potentielle
 git add -A && git commit -m "Chapitre 4 : …"
 ```
 
