@@ -1,0 +1,290 @@
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 7 : L’énergie thermique, le transfert thermique (sciences mathématiques, 5 h, trois séances)
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 1 — Travail mécanique et énergie}
+\newcommand{\NumChap}{7}
+\newcommand{\TitreChap}{L’énergie thermique :\\ le transfert thermique}
+\newcommand{\TitreCourt}{L’énergie thermique : le transfert thermique}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{5 h}
+\newcommand{\Banniere}{opener_phys7.jpg}
+\newcommand{\BanniereDecalage}{1.3cm}
+\newcommand{\dC}[1]{\qty{#1}{\degreeCelsius}}
+\newcommand{\cu}{\unit{J.kg^{-1}.\degreeCelsius^{-1}}}
+\newcommand{\Em}{E_{\mathrm{m}}}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences mathématiques (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{5 heures — trois séances\\ 2 h + 2 h + 1 h}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Partie 1 · § 5 (SM)\\ L’énergie thermique}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séquence}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Travail mécanique et énergie :} \textbf{interpréter les transferts d’énergie} et les phénomènes de \textbf{conservation et de dissipation} dans diverses situations de la vie quotidienne ; \textbf{résoudre une situation-problème} relative à la conservation et à la dissipation de l’énergie dans un système mécanique, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} la \textbf{chaleur}, forme de \textbf{transfert d’énergie} qui modifie l’énergie interne ($\Delta U = Q$ si $W = 0$) ; quantité de chaleur, chaleur massique, capacité thermique ; \textbf{équilibre thermique} et \textbf{équation calorimétrique} ; chaleur latente ; \textbf{rayonnement}. Situations-problèmes : calorimétrie à plusieurs corps, fusion partielle, capteur solaire, balle de plomb (énergie mécanique $\to$ énergie interne).}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} mesures d’énergie au joulemètre (une grandeur varie à la fois) ; calorimétrie ; comparaison avec les valeurs admises.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} bilans calorimétriques rigoureux (signes, unités) ; lecture des courbes $\theta = f(t)$ et $\theta = f(Q)$.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations (thermoplongeurs, calorimètre, courbes, rayonnement) ; joulemètre et thermomètres numériques.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode en cinq étapes pour la calorimétrie ; comparaison $Q_{\mathrm{tot}}$ / $Q_1$ / $Q_1 + Q_2$ pour prévoir l’état final.}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} énergie solaire (capteurs, effet de serre) ; climat côtier ; sécurité (eau bouillante, étuve, projectiles).}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séquence, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — savoir que la \textbf{chaleur} est une forme de transfert d’énergie et relier $Q$ à $\Delta U$ ($W = 0$) ;}
+\pt{\textbf{O2} — connaître et utiliser $Q = m\cdot c\cdot\Delta\theta$, son unité et la convention de signe ;}
+\pt{\textbf{O3} — définir la \textbf{chaleur massique} et la \textbf{capacité thermique} d’un calorimètre, avec leurs unités ;}
+\pt{\textbf{O4} — reconnaître l’\textbf{équilibre thermique} et appliquer l’\textbf{équation calorimétrique} $\sum Q_i = 0$ ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — connaître la \textbf{chaleur latente} et son unité ; utiliser $Q = \pm m\cdot L$ ;}
+\pt{\textbf{O6} — \textbf{déterminer} la capacité thermique d’un calorimètre, la chaleur massique d’un métal et la chaleur latente de fusion de la glace ;}
+\pt{\textbf{O7} — reconnaître le \textbf{rayonnement} comme une forme de transfert d’énergie.}
+\end{minipage}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} savoir que la chaleur est une forme de transfert d’énergie ; connaître l’expression de la quantité de chaleur $Q = m\cdot c\cdot\Delta\theta$ et son unité ; reconnaître l’équilibre thermique et appliquer la relation qui l’exprime ; connaître la chaleur massique d’un métal et son unité ; connaître la chaleur latente de changement d’état et son unité ; déterminer la capacité thermique, la chaleur massique et la chaleur latente ; reconnaître le rayonnement comme une forme de transfert d’énergie.}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis des chapitres 3, 4 et 6}
+\pt{énergie cinétique et énergie mécanique (chapitres 3 et 4) ;}
+\pt{énergie interne, premier principe $\Delta U = W + Q$ et convention de signe (chapitre 6) ;}
+\pt{énergie et puissance $E = P\cdot\Delta t$ ; changements d’état ; température en \unit{\degreeCelsius} et en K.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{proportionnalité ; résolution d’une équation du premier degré ;}
+\pt{lecture d’une courbe (paliers, pentes) ;}
+\pt{conversions (\unit{g} $\to$ \unit{kg}, \unit{kJ} $\to$ \unit{J}, \unit{h} $\to$ \unit{s}) ; pourcentages ; écriture scientifique.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{thermoplongeurs identiques, alimentation, joulemètres, béchers, thermomètres numériques, balance ; cylindre de fer percé (résistance chauffante), plaque isolante ;}
+\pt{calorimètre de Berthelot (agitateur, thermomètre) ; eau chaude ; cylindre de cuivre et étuve (ou eau bouillante), pince ;}
+\pt{glace fondante ;}
+\pt{cloche à vide, platine et pompe ; thermomètre à réservoir noirci ; lampe infrarouge.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (38 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis 3 et 4, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, § 5 « L’énergie thermique : le transfert thermique » (propre à la filière sciences mathématiques) : chaleur massique d’un corps pur ; quantité de chaleur $Q = m\cdot c\cdot\Delta\theta$ et son signe conventionnel ; équilibre thermique, équation calorimétrique ; chaleur latente de changement d’état d’un corps pur ; une autre forme de transfert d’énergie : le rayonnement.}
+\pt{Activités proposées : expériences simples pour mettre en évidence les grandeurs dont dépend la quantité de chaleur ; étude expérimentale quantitative du transfert thermique entre deux corps pour déterminer la capacité thermique d’un calorimètre, la chaleur massique d’un métal et la chaleur latente de changement d’état d’un solide ; expériences, exemples de l’environnement de l’apprenant, documents ou logiciels pour montrer que le rayonnement est une autre forme de transfert d’énergie.}
+\pt{Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat (sciences mathématiques).}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{7cm}
+\bloc{2}{fi_chemin}{Déroulement de la séquence (trois séances)}
+
+\seance{1}{2 h}{quantité de chaleur et chaleur massique ; équilibre thermique et calorimétrie}
+\frise[120]{cCyan/10/Mise en route, cTeal/53/Partie 1 · Chaleur massique, cBlue/52/Partie 2 · Calorimétrie, cGreen/5/Bilan}
+\seance{2}{2 h}{chaleur latente ; rayonnement}
+\frise[120]{cCyan/8/Rappels, cPurple/62/Partie 3 · Changement d’état, cAmber/45/Partie 4 · Rayonnement, cGreen/5/Bilan}
+\seance{3}{1 h}{exercices de synthèse et évaluation}
+\noindent\begin{minipage}{0.5\linewidth}\frise[60]{cCyan/5/Rappels, cOrange/48/Exercices, cGreen/7/Bilan}\end{minipage}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% =====================================================================
+\partie{cInk}{Séance 1 · Chaleur massique et calorimétrie (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, plan et prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; annonce le plan des trois séances.}
+ \pt{Questions flash : « énoncé du premier principe ? », « un gaz reçoit \qty{50}{J} de travail et cède \qty{20}{J} de chaleur : $\Delta U$ ? », « énergie fournie par \qty{100}{W} en \qty{1}{min} ? », « nom du passage solide $\to$ liquide ? ».}}
+{\pt{Répond oralement : $\Delta U = W + Q$ ; \qty{30}{J} ; \qty{6000}{J} ; la fusion.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} convention de signe ; $E = P\cdot\Delta t$.\par\vspace{.8mm}
+ \regul Rappel au tableau de $\Delta U = W + Q$ et des signes.}
+{10}{0 h 10}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Quantité de chaleur et chaleur massique}{53 min · objectifs O1 à O3}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{$\Delta U = Q$ ; eau et métal}{\diapo{2}}}
+{\pt{Projette l’animation des thermoplongeurs (diapo 2) ; rappelle que, sans travail, $\Delta U = Q$.}
+ \pt{Pose le problème : de quoi dépend la chaleur reçue par un corps qui s’échauffe ?}}
+{\pt{Propose : « la masse », « l’écart de température », « la matière ».}}
+{\diag Hypothèses des apprenants.}
+{5}{0 h 15}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{De quoi dépend la chaleur reçue ? (docs 1 à 3)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Réalise le chauffage de \qty{150}{g} et \qty{300}{g} d’eau avec des thermoplongeurs reliés à des joulemètres (diapo 3), puis compare l’eau et le fer (diapo 4).}
+ \pt{Présente l’information sur la chaleur massique ; fait traiter les questions 1 à 4 en binômes ; corrige au clic (diapos 5 et 6).}}
+{\pt{Travaille sur la fiche collée dans le cahier ; rédige ses réponses dans le cahier.}
+ \pt{Établit $Q \propto m$ et $Q \propto \Delta\theta$ ; trouve le rapport $9{,}3$ égal à $c_{\text{eau}}/c_{\text{fer}}$ ; écrit $Q = m\cdot c\cdot\Delta\theta$ ; en déduit $\Delta U = Q$ si $W = 0$.}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} proportionnalité ; unités de $c$ et de $C$.\par\vspace{.8mm}
+ \regul Erreur fréquente : calculer $\theta_i - \theta_f$ (« finale moins initiale »).}
+{30}{0 h 45}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{$Q = m\cdot c\cdot\Delta\theta$ ; $\Delta U = Q$}{\diapo{7--8} \support{Cahier}}}
+{\pt{Projette les diapos 7 et 8 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « quel corps du tableau s’échauffe le plus vite pour la même énergie ? » $\to$ le plomb.}
+{10}{0 h 55}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{Un bloc de fer qui refroidit}{\diapo{9} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 9) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $C = \qty{360}{J.\degreeCelsius^{-1}}$ et $Q = \qty{-1,08e5}{J}$ ; interprète le signe.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} signe de $Q$ justifié.}
+{8}{1 h 03}
+% ---------------------------------------------------------------------
+\partie{cBlue}{Partie 2 · Équilibre thermique et calorimétrie}{52 min · objectifs O4 et O6}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Un métal chaud dans l’eau froide}{\diapo{10}}}
+{\pt{Projette l’animation (diapo 10) : les températures tendent vers une même valeur.}
+ \pt{Pose le problème : comment mesurer $\mu$ et la chaleur massique d’un métal ?}}
+{\pt{Propose : « utiliser un récipient isolé », « mesurer la température finale ».}}
+{\diag Idée d’équilibre thermique.}
+{4}{1 h 07}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Mesurer avec un calorimètre (doc 4)}{\diapo{11--14} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Présente le calorimètre (diapo 11) ; réalise l’étape 1 (eau froide + eau chaude), puis l’étape 2 (cylindre de cuivre sorti de l’étuve, avec une pince) (diapo 12).}
+ \pt{Fait traiter les questions 1 à 4 ; corrige au clic (diapos 13 et 14).}}
+{\pt{Écrit $\sum Q_i = 0$ ; trouve $\mu \approx \qty{98}{J.\degreeCelsius^{-1}}$, puis $c_{\mathrm{Cu}} \approx \qty{392}{J.kg^{-1}.\degreeCelsius^{-1}}$ (proche de 385).}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} le calorimètre est compté ; signes des chaleurs.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier $\mu$.}
+{30}{1 h 37}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir et méthode}{$\sum Q_i = 0$ ; méthode}{\diapo{15--16} \support{Cahier}}}
+{\pt{Projette les diapos 15 et 16 ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » et la méthode dans son cahier.}}
+{\form Question flash : « $\theta_e$ peut-elle dépasser la plus haute température initiale ? » $\to$ non.}
+{12}{1 h 49}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Trois corps dans un calorimètre}{\diapo{17} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 17) ; travail individuel ; correction au clic.}}
+{\pt{Écrit l’équation à trois termes ; trouve $\theta_e \approx \dC{26,5}$.}}
+{\somm Exercice individuel.}
+{6}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 1}{Synthèse et travail à faire}{\diapo{15}}}
+{\pt{Fait résumer oralement ; donne le travail à faire (encadré « Travail à la maison »).}}
+{\pt{Résume : $Q = m\cdot c\cdot\Delta\theta$, $\sum Q_i = 0$.}}
+{\form Synthèse orale.}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 2 · Changement d’état et rayonnement (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction du travail à faire}{\diapo{17}}}
+{\pt{Corrige le travail donné ; questions flash sur $Q = m\cdot c\cdot\Delta\theta$ et $\sum Q_i = 0$.}}
+{\pt{Compare ses résultats ; justifie les signes.}}
+{\diag Vérification du travail personnel.}
+{8}{0 h 08}
+% ---------------------------------------------------------------------
+\partie{cPurple}{Partie 3 · Chaleur latente de changement d’état}{62 min · objectifs O5 et O6}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{La glace qui fond}{\diapo{18}}}
+{\pt{Projette la courbe animée (diapo 18) : la température reste à \dC{0} pendant la fusion.}
+ \pt{Pose le problème : comment calculer l’énergie reçue si $\Delta\theta = 0$ ?}}
+{\pt{Constate le palier ; propose : « l’énergie sert à faire fondre la glace ».}}
+{\diag Représentations sur le palier.}
+{4}{0 h 12}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{L’énergie d’un changement d’état (docs 5 et 6)}{\diapo{19--22} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Exploite la courbe (diapo 19) ; introduit $Q = m\cdot L$.}
+ \pt{Réalise la mesure de $L_f$ avec de la glace fondante essuyée (diapo 20) ; fait traiter les questions 1 à 5 ; corrige au clic (diapos 21 et 22).}}
+{\pt{Décrit la courbe ; trouve $L_s = -L_f$ ; écrit $Q_g$ et $Q_{ce}$ ; calcule $L_f \approx \qty{3,40e5}{J.kg^{-1}}$.}}
+{\form Correction collective.\par
+ \textit{Indicateurs :} deux étapes pour la glace ; signe de $\pm m\cdot L$.\par\vspace{.8mm}
+ \regul Erreur fréquente : oublier l’échauffement de l’eau de fusion.}
+{35}{0 h 47}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{$Q = \pm m\cdot L$}{\diapo{23} \support{Cahier}}}
+{\pt{Projette la diapo 23 ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « signe de $Q$ pour la solidification ? » $\to$ négatif.}
+{10}{0 h 57}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{La glace fond-elle entièrement ?}{\diapo{24} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 24) ; fait prévoir l’état final avant le calcul ; correction au clic.}}
+{\pt{Calcule $Q_1 = \qty{10450}{J}$ et $Q_2 = \qty{83500}{J}$ ; conclut à une fusion partielle ; trouve $m_{\mathrm{liq}} \approx \qty{148}{g}$ et $m_{\mathrm{sol}} \approx \qty{102}{g}$ à \dC{0}.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} comparaison $Q_{\mathrm{tot}}$ / $Q_1$ / $Q_1 + Q_2$.}
+{13}{1 h 10}
+% ---------------------------------------------------------------------
+\partie{cAmber}{Partie 4 · Une autre forme de transfert d’énergie : le rayonnement}{45 min · objectif O7}
+\etape{cAmber}{\axe{cAmber}{ic_situation}{Situation de départ}{La chaleur du Soleil}{\diapo{25}}}
+{\pt{Projette l’animation (diapo 25).}
+ \pt{Pose le problème : comment l’énergie se propage-t-elle sans matière ?}}
+{\pt{Propose : « par la lumière ».}}
+{\diag Représentations initiales.}
+{4}{1 h 14}
+\etape{cAmber}{\axe{cTeal}{ic_activite}{Activité 4}{Un transfert d’énergie à travers le vide (docs 7 et 8)}{\diapo{26--28} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Réalise ou projette l’expérience de la cloche à vide (diapo 26) ; présente le doc 8 (diapo 27) ; fait traiter les questions 1 à 3 ; corrige au clic (diapo 28).}}
+{\pt{Nomme le rayonnement ; le distingue de la conduction et de la convection ; explique le noir mat et la vitre d’un capteur solaire.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} le rayonnement se propage dans le vide.}
+{25}{1 h 39}
+\etape{cAmber}{\axe{cRed}{ic_retenir}{À retenir}{Le rayonnement}{\diapo{29} \support{Cahier}}}
+{\pt{Projette la diapo 29 ; laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « pourquoi s’habille-t-on en blanc l’été ? »}
+{8}{1 h 47}
+\etape{cAmber}{\axe{cPurple}{ic_application}{Application}{Un capteur solaire}{\diapo{30} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 30) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $E_{\mathrm{ray}} = \qty{1,44e7}{J}$, $Q = \qty{9,36e6}{J}$ et $\theta_f \approx \dC{32,9}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateurs :} conversion \unit{h} $\to$ \unit{s} ; rendement.}
+{8}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan de la séance 2}{Synthèse et travail à faire}{\diapo{23} \diapo{29}}}
+{\pt{Fait résumer oralement ; donne le travail à faire (exercice 2, énoncé projeté, diapo 34).}}
+{\pt{Recopie l’énoncé de l’exercice 2.}}
+{\form Synthèse orale.}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 3 · Exercices de synthèse et évaluation (1 h)}{0 h 00 $\to$ 1 h 00 · objectifs O2 à O6}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Correction de l’exercice 2}{\diapo{35}}}
+{\pt{Corrige rapidement l’exercice 2 au clic (diapo 35).}}
+{\pt{Vérifie : $m = \qty{0,200}{kg}$ ; $L_f = \qty{3,34e5}{J.kg^{-1}}$ ; $c_e = \qty{4185}{J.kg^{-1}.\degreeCelsius^{-1}}$.}}
+{\diag Vérification du travail personnel.}
+{5}{0 h 05}
+\etape{cGreen}{\axe{cOrange}{ic_exercices}{Évaluation}{Vrai ou faux ?}{\diapo{31}}}
+{\pt{Projette le vrai/faux interactif (diapo 31) ; vote à main levée, puis justification.}}
+{\pt{Répond : a) F, b) V, c) V, d) F, e) V, f) F ; corrige les fausses dans le cahier.}}
+{\form Vote à main levée.\par
+ \textit{Indicateur :} au moins 5 bonnes réponses sur 6.}
+{6}{0 h 11}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 1}{Trois opérations dans un calorimètre}{\diapo{32--33} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 32) ; travail en binômes ; corrige au clic (diapo 33).}}
+{\pt{Trouve $\mu \approx \qty{109}{J.\degreeCelsius^{-1}}$, $c_{\mathrm{Al}} \approx \qty{889}{J.kg^{-1}.\degreeCelsius^{-1}}$, $L_f \approx \qty{3,33e5}{J.kg^{-1}}$.}}
+{\form Observation des binômes.\par
+ \textit{Indicateur :} capacité thermique cumulée des corps présents.}
+{20}{0 h 31}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 3}{Une balle de plomb qui fond}{\diapo{36--37} \support{Cahier}}}
+{\pt{Projette l’énoncé et l’animation (diapo 36) ; travail individuel ; corrige au clic (diapo 37).}}
+{\pt{Calcule $\Delta\Em \approx \qty{-3,06e3}{J}$, $Q = \qty{2450}{J}$, $Q_1 = \qty{1950}{J}$, $m_{\mathrm{f}} = \qty{20}{g}$, $V_{\min} = \qty{400}{m.s^{-1}}$.}}
+{\somm Exercice individuel (évaluation de fin de chapitre).\par
+ \textit{Indicateurs :} lien énergie mécanique – énergie interne ; comparaison $Q$ / $Q_1$.}
+{22}{0 h 53}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{L’essentiel}{Synthèse du chapitre}{\diapo{38}}}
+{\pt{Projette « L’essentiel du chapitre » (diapo 38) ; donne le travail à la maison.}}
+{\pt{Relit la synthèse ; note le travail à faire.}}
+{\somm Bilan de l’évaluation.}
+{7}{1 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Après la séance 1} — refaire l’application 2 sans le bloc de cuivre et comparer $\theta_e$ : objectif O4.}
+\pt{\textbf{Après la séance 2} — exercice 2 (énoncé projeté, diapo 34, à recopier et à résoudre dans le cahier) : objectifs O2 et O5.}
+\pt{\textbf{Après la séance 3} — recopier au propre l’exercice 3 (diapo 36) : objectifs O1 et O5.}
+\pt{Soutien : refaire l’application 1 pour un bloc de cuivre de même masse. Approfondissement : dans l’application 3, calculer la chaleur à fournir en plus pour obtenir de l’eau liquide à \dC{10}.}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séquence (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séquence :}\lignevide}
+\end{minipage}
+
+\end{document}

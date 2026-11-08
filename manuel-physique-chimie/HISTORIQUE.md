@@ -8,6 +8,7 @@
 | Physique ch4 | Énergie potentielle de pesanteur et énergie mécanique (§ 3.2 et 3.3, 5 h) | livré — chapitres/physique_ch4_energie_mecanique (livrables/ : PDF, HTML, .tex) ; application 3 corrigée (AB = 0,40 m), doc 5 « débit d’air réduit » ajouté, « livre » de l’application 1 remplacé par un dictionnaire ; doc 6 corrigé (R, R_N et f appliquées au milieu I du contact) |
 | Physique ch5 | L’énergie thermique : le transfert thermique (§ 4, 4 h) | livré — chapitres/physique_ch5_energie_thermique ; μ du protocole 2 rendu cohérent (109 au lieu de 60, θ'e = 28,3 °C), θe du glaçon 13,3 °C (Lf ≈ 3,35×10⁵), températures de fusion notées θ_fus, docs 2, 3 et 8 complétés ; puis activités revues pour que chaque question soit traitable avec les documents (encadré « Information » chaleur massique, compléments des docs 4, 6, 7, 8, doc 9 conduction/convection ajouté) |
 | Physique ch6 | Le travail et l’énergie interne (§ 4, filière sciences mathématiques, 4 h) | livré — chapitres/physique_ch6_travail_energie_interne ; encadrés « Information » (aire sous F(x), convention de signe, énergie interne/fonction d’état, ΔU = m·c·Δθ), doc 5 « expérience de Joule » ajouté avec données ; doc 1 corrigé (allumette enflammée par la tête frottée, glace qui fond dans la zone frottée) |
+| Physique ch7 | L’énergie thermique : le transfert thermique (§ 5, filière sciences mathématiques, 5 h) | livré — chapitres/physique_ch7_energie_thermique_sm ; activité 1 complétée (joulemètres, tableaux de mesures), μ étape 2 rendu cohérent (98 au lieu de 90), exercice 1 θ'e = 38,6 °C et θ''e = 23,9 °C, exercice 3 V0 = 350 m/s ; encadrés « Information » et doc 8 (conduction, convection, absorption) ajoutés ; figures vérifiées (glace qui flotte, cylindre de fer de 200 g à l’échelle, ballon du capteur solaire au-dessus du capteur) |
 | Chimie ch1–ch5 | dont « Grandeurs physiques liées aux quantités de matière » | fiches pédagogiques dans archives/fiches_pedagogiques |
 
 ## Décisions techniques à retenir
@@ -34,3 +35,5 @@
 - Dans gen_slides.py, toute chaîne contenant `\u{…}` doit être brute (`r"…"`), sinon Python lit `\u` comme un échappement Unicode.
 - Ch6 : `spring` (ressort hélicoïdal horizontal, `set(x1, x2)`) ajouté à `commun/presentation/src/realisme.js` ;
   `gasParticles` (particules de gaz déterministes dans un rectangle) est dans les scènes du ch6.
+- Ch7 : `build_livre.sh` doit recevoir le nom de base (`./build_livre.sh physique_ch7`) : sans argument il écrase `chapitre.tex` (données du chapitre).
+  `thermoplongeur` (béchers + joulemètres, cylindre de fer chauffé), `courbeQ` (θ = f(Q)), `panneauSolaire` (thermosiphon), `balle` sont dans les scènes du ch7.
