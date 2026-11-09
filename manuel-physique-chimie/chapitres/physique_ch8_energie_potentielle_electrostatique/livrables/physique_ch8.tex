@@ -1,0 +1,754 @@
+% =====================================================================
+%  Préambule commun (modèle) : les données du chapitre sont dans chapitre.tex
+%  Chapitre de manuel de Physique-Chimie (1re année du baccalauréat)
+%  Préambule commun au livre du professeur et au livre de l'élève :
+%  \def\versioneleve{1} en première ligne active la version élève (à compléter).
+%  Compilation : ./build_livre.sh (XeLaTeX, deux passes)
+%  Les figures viennent des scènes animées de la présentation
+%  (figures_html/book.html + render_book.py) et sont exportées dans images/.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+\input{chapitre.tex}% \MatiereLivre, \DomaineLivre, \NumChapLivre, \TitreCourtLivre
+
+% ---------- Mise en page ----------
+\usepackage[a4paper,top=2.3cm,bottom=2.2cm,left=1.9cm,right=2.1cm,headsep=6mm,footskip=11mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\titlefont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, BoldFont=*-Bold]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+
+\usepackage[table]{xcolor}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning,shapes.misc}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{eso-pic}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{needspace}
+\usepackage{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+\usepackage{microtype}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=4}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt plus 1pt}
+\linespread{1.07}
+\emergencystretch=3em
+\tolerance=2500
+
+% ---------- Couleurs (identiques à la charte des figures) ----------
+\definecolor{cInk}{HTML}{1B2A41}
+\definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8}
+\definecolor{cSky}{HTML}{8EC5FF}
+\definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}
+\definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6}
+\definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300}
+\definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\arc}[1]{\overparen{#1}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Mom}{\mathcal{M}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}   % mot-clé des questions
+\newcommand{\hl}[1]{{\bfseries\color{cRed}#1}}             % mise en évidence
+\newcommand{\imp}[1]{\textbf{#1}}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+
+% Pastille « Doc n »
+\newcommand{\docbadge}[2][cBlue]{\tikz[baseline=(b.base)]\node[fill=#1,text=white,rounded corners=6pt,inner xsep=5pt,inner ysep=2.2pt,font=\sffamily\bfseries\footnotesize](b){Doc #2};}
+% Document illustré : [largeur]{n}{légende}{image}
+\newcommand{\docimg}[4][0.485\linewidth]{%
+  \begin{minipage}[t]{#1}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{1.4mm}
+    {\sffamily\small\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+% Figure numérotée simple
+\newcommand{\figcap}[1]{\par\vspace{1mm}{\centering\sffamily\small\color{cInk2}#1\par}}
+
+% Formule encadrée
+\newtcbox{\formule}[1][cRed]{on line, enhanced, colback=white, colframe=#1, boxrule=1pt, arc=2.5mm,
+  left=2.5mm,right=2.5mm,top=1.2mm,bottom=1.2mm, boxsep=0pt}
+
+% ---------- Rubriques (boîtes) ----------
+% \begin{rub}[options]{couleur}{icône}{titre}
+\newtcolorbox{rub}[4][]{%
+  enhanced, breakable,
+  colback=#2!4!white, colframe=#2!75!white, boxrule=0.9pt, arc=3mm,
+  left=4.5mm, right=4.5mm, top=6.5mm, bottom=3.5mm,
+  before skip=6mm, after skip=4mm,
+  title={\raisebox{-2.35mm}{\includegraphics[height=7.6mm]{ic_#3}}\hspace{2.2mm}#4},
+  fonttitle=\sffamily\bfseries\fontsize{11.5}{13}\selectfont\color{white},
+  attach boxed title to top left={xshift=5mm,yshift=-4.4mm},
+  boxed title style={enhanced, colback=#2, colframe=#2, arc=4.3mm, boxrule=0pt,
+     left=0.4mm, right=4.5mm, top=0.5mm, bottom=0.5mm},
+  #1}
+
+% Encadré secondaire (méthode, rappel, le saviez-vous) — non sécable
+\newtcolorbox{encart}[4][]{%
+  enhanced, colback=#2!6!white, colframe=#2!6!white, boxrule=0pt, arc=2.5mm,
+  left=13mm, right=3mm, top=2mm, bottom=2mm, before skip=3mm, after skip=3mm,
+  borderline west={1.6pt}{0pt}{#2},
+  overlay={\node[anchor=north west] at ([xshift=2mm,yshift=-2mm]frame.north west)
+     {\includegraphics[width=8.5mm]{ic_#3}};},
+  fontupper=\small,
+  title={#4}, detach title, coltitle=#2, before upper={{\sffamily\bfseries\color{#2}\tcbtitle}\par\smallskip},
+  #1}
+
+% Situation de départ (bulle)
+\newtcolorbox{situation}{%
+  enhanced, colback=cAmber!9!white, colframe=cAmber!9!white, boxrule=0pt, arc=3mm,
+  left=16mm, right=4mm, top=2.5mm, bottom=2.5mm, before skip=2mm, after skip=3mm,
+  overlay={\node at ([xshift=8mm]frame.west) {\includegraphics[width=10mm]{ic_situation}};
+           \draw[cAmber, line width=1.4pt, rounded corners=3mm] (frame.south west) rectangle (frame.north east);}}
+
+% Sous-titre à l'intérieur d'une rubrique
+\newcommand{\soustitre}[2][cTeal]{\par\medskip{\sffamily\bfseries\color{#1}\MakeUppercase{#2}}\par\smallskip}
+
+% Listes
+% pastille numérotée (commande robuste : enumitem développe l'étiquette)
+\DeclareRobustCommand{\pastille}[2]{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=5.2mm,font=\sffamily\bfseries\footnotesize](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=3pt, topsep=3pt}
+\newlist{reps}{enumerate}{1}
+\setlist[reps]{label={\pastille{cGreen}{\arabic*}},
+  leftmargin=8mm, labelsep=2.5mm, itemsep=4pt, topsep=3pt}
+\newlist{appq}{enumerate}{1}
+\setlist[appq]{label={\sffamily\bfseries\color{cPurple}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\newlist{exq}{enumerate}{1}
+\setlist[exq]{label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=6mm, itemsep=2pt, topsep=3pt}
+\setlist[itemize,1]{label={\color{cOrange}\small$\blacktriangleright$}, leftmargin=6mm, itemsep=2pt, topsep=2pt}
+\setlist[itemize,2]{label={\color{cInk2}\small$\bullet$}, leftmargin=5mm, itemsep=1pt, topsep=1pt}
+
+% ---------- Titres de sections ----------
+\titleformat{\section}[block]
+  {\sffamily\bfseries\fontsize{18}{22}\selectfont\color{cInk}\RaggedRight}
+  {\tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=10.5mm,minimum height=10.5mm,inner sep=0pt,font=\sffamily\bfseries\fontsize{18}{22}\selectfont](n){\thesection};}
+  {4mm}{}[\vspace{1.2mm}{\color{cOrange}\titlerule[1.3pt]}]
+\titlespacing*{\section}{0pt}{8mm}{4mm}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{\MatiereLivre}}\enspace·\enspace \DomaineLivre}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre \NumChapLivre\enspace·\enspace \TitreCourtLivre}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7.5mm,inner sep=0pt]{\thepage};}
+% onglet latéral
+\AddToShipoutPictureBG{%
+  \ifnum\value{page}>1
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill[cOrange,rounded corners=2.5mm] ([xshift=-6.5mm,yshift=-3.2cm]current page.north east) rectangle ([xshift=3mm,yshift=-7.2cm]current page.north east);
+    \node[rotate=-90,text=white,font=\sffamily\bfseries\footnotesize] at ([xshift=-3.3mm,yshift=-5.2cm]current page.north east) {CHAPITRE \NumChapLivre};
+  \end{tikzpicture}\fi}
+
+
+% ---------- Encadré « Rappel » ----------
+\newenvironment{rappel}{\begin{encart}{cGrey}{rappel}{Rappel}}{\end{encart}}
+
+% ---------- Tableaux de mesures : \mesures[largeur]{nb colonnes}{lignes} ----------
+\newcommand{\mesures}[3][1.25cm]{{\renewcommand{\arraystretch}{1.35}\setlength{\arrayrulewidth}{.6pt}\arrayrulecolor{cTeal!55}\setlength{\tabcolsep}{4pt}%
+  \begin{tabular}{|>{\sffamily\footnotesize\bfseries\color{cTeal}}l|*{#2}{>{\centering\arraybackslash}p{#1}|}}\hline #3\end{tabular}}}
+
+% =====================================================================
+%  Version élève (livre à compléter) : \def\versioneleve{1} avant \documentclass
+% =====================================================================
+\newif\ifeleve
+\ifdefined\versioneleve\elevetrue\fi
+\newlength{\interligne}\setlength{\interligne}{7mm}
+\newsavebox{\repbox}
+\newlength{\replen}
+\newcount\repn \newcount\lgn
+\newcommand{\pointilles}{{\color{cInk2!60}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}
+% \lignes{n} : n lignes pointillées (la première continue la ligne en cours)
+\newcommand{\lignes}[1]{\leavevmode\vrule width0pt height\dimexpr\interligne-1mm\relax depth0pt\pointilles
+  \lgn=1 \loop\ifnum\lgn<#1 \par\nointerlineskip\noindent\vrule width0pt height\interligne depth0pt\pointilles\advance\lgn by 1 \repeat}
+% \rep{réponse} : réponse rédigée (professeur) ou lignes pointillées en nombre adapté (élève)
+\newcommand{\rep}[1]{%
+  \ifeleve
+    \sbox{\repbox}{\parbox{\linewidth}{#1}}%
+    \replen=\dimexpr\ht\repbox+\dp\repbox\relax
+    \repn=\numexpr\replen/\baselineskip+1\relax
+    \ifnum\repn<2 \repn=2\fi
+    \edef\nblignes{\the\repn}\lignes{\nblignes}%
+  \else #1\fi}
+% \trou{mot ou formule} : mot clé des « À retenir » (professeur) ou espace pointillé (élève)
+\newlength{\troumax}
+\newcommand{\trou}[1]{%
+  \ifeleve
+    \sbox{\repbox}{#1}%
+    \replen=\dimexpr\wd\repbox*3/2+6mm\relax
+    \troumax=\linewidth \ifdim\hsize<\troumax \troumax=\hsize\fi
+    \advance\troumax by -14mm\relax
+    \ifdim\replen>\troumax \replen=\troumax\fi
+    \makebox[\replen][l]{\vphantom{\usebox{\repbox}}\pointilles}%
+  \else #1\fi}
+% \troul{fin de phrase} : fin de phrase à compléter sur une ou plusieurs lignes
+\newcommand{\troul}[1]{%
+  \ifeleve
+    \sbox{\repbox}{#1}%
+    \repn=\numexpr\dimexpr\wd\repbox*3/2\relax/\linewidth+1\relax
+    \edef\nblignes{\the\repn}\unskip\ \lignes{\nblignes}%
+  \else #1\fi}
+% \cel{valeur} : case de tableau (vide en version élève, hauteur conservée)
+\newcommand{\cel}[1]{\ifeleve\vphantom{#1}\else #1\fi}
+\newcommand{\titrereponses}{\ifeleve Mes réponses\else Réponses\fi}
+\newcommand{\titrecorriges}{\ifeleve Mes réponses aux exercices\else Éléments de correction\fi}
+\ifeleve
+  \fancyhead[R]{\sffamily\footnotesize\color{cInk2}Chapitre \NumChapLivre\enspace·\enspace\textcolor{cTeal}{\textbf{Livre de l’élève}}}
+\fi
+% =====================================================================
+%  Corps du chapitre 8 de physique : L’énergie potentielle électrostatique (sciences mathématiques)
+% =====================================================================
+\newcommand{\Epe}{E_{\mathrm{pe}}}
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\W}[2]{W_{#1\rightarrow #2}(\vect{F})}
+\newcommand{\info}[1]{\par\medskip\begin{tcolorbox}[enhanced,colback=white,colframe=cTeal!45,boxrule=.6pt,arc=2mm,left=3mm,right=3mm,top=1.5mm,bottom=1.5mm]#1\end{tcolorbox}}
+\begin{document}
+% =====================================================================
+
+% ---------------------- PAGE D'OUVERTURE ----------------------
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \node[anchor=north west,inner sep=0] at (current page.north west) {\includegraphics[width=\paperwidth]{opener.jpg}};
+  \node[anchor=north west,text width=11.2cm,align=left,inner sep=0] at ([xshift=1.9cm,yshift=-2.1cm]current page.north west) {%
+    {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12} PHYSIQUE\enspace·\enspace PARTIE 2 — ÉLECTRICITÉ}\par\vspace{5mm}
+    \tikz\node[fill=cOrange,text=white,rounded corners=4mm,inner xsep=4mm,inner ysep=1.6mm,font=\sffamily\bfseries\large]{Chapitre 8};\par\vspace{5mm}
+    {\titlefont\bfseries\fontsize{26}{31}\selectfont\color{white}L’énergie\\ potentielle\\ électrostatique\par}};
+\end{tikzpicture}
+\vspace*{8.25cm}
+
+{\large\itshape Une règle frottée attire des morceaux de papier, un éclair déchire le ciel, un écran ancien fait apparaître une image grâce à des électrons accélérés : toutes ces situations mettent en jeu des charges électriques et les forces qu’elles exercent. Comment décrire ces forces et l’énergie qu’elles transfèrent ?\par}
+\vspace{2.5mm}
+
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cBlue!5,colframe=cBlue!5,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cBlue}Objectifs du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+Je vais apprendre à :
+\begin{itemize}
+  \item interpréter l’électrisation et appliquer la loi de Coulomb ;
+  \item connaître le champ électrostatique et utiliser $\vect{F} = q\cdot\vect{E}$ ;
+  \item reconnaître les lignes de champ et le champ uniforme ;
+  \item calculer $\W{A}{B} = q\cdot(V_A - V_B)$ ;
+  \item utiliser $\Epe = q\cdot V + C$ et la conservation de l’énergie totale.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}\RaggedRight\vspace{0pt}
+\begin{tcolorbox}[enhanced,colback=cGreen!6,colframe=cGreen!6,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cGreen}Je dois déjà savoir},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\RaggedRight]
+\begin{itemize}
+  \item le travail d’une force constante $W = \vect{F}\cdot\vect{AB}$ (chapitre 2) ;
+  \item le théorème de l’énergie cinétique (chapitre 3) ;
+  \item l’énergie potentielle de pesanteur $\Epp = m\cdot g\cdot z + C$ (chapitre 4) ;
+  \item la structure de l’atome et la tension $U_{AB} = V_A - V_B$.
+\end{itemize}
+\end{tcolorbox}
+\vspace{1mm}
+\begin{tcolorbox}[enhanced,colback=cOrange!7,colframe=cOrange!7,arc=3mm,left=4mm,right=4mm,top=3mm,bottom=3mm,
+  title={\sffamily\bfseries\color{cOrange}Plan du chapitre},detach title,before upper={\tcbtitle\par\smallskip},fontupper=\small\sffamily]
+\textcolor{cOrange}{\textbf{1}}\enspace Électrisation et loi de Coulomb\par
+\textcolor{cOrange}{\textbf{2}}\enspace Le champ électrostatique\par
+\textcolor{cOrange}{\textbf{3}}\enspace Travail de la force électrostatique, potentiel\par
+\textcolor{cOrange}{\textbf{4}}\enspace Énergie potentielle électrostatique\par
+\raisebox{-0.8mm}{\includegraphics[height=3.6mm]{ic_exercices}}\enspace Exercices d’application et de synthèse
+\end{tcolorbox}
+\end{minipage}
+
+\begin{encart}{cCyan}{savoir}{Le saviez-vous ?}
+Un éclair est une gigantesque décharge électrostatique : entre la base d’un nuage d’orage, chargée négativement, et le sol, la tension peut dépasser cent millions de volts. Le paratonnerre, imaginé par Benjamin Franklin au \textsc{xviii}\textsuperscript{e} siècle, offre à cette décharge un chemin sans danger vers la terre.
+\end{encart}
+
+\newpage
+% =====================================================================
+\section{Électrisation et loi de Coulomb}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 1\enspace·\enspace Comment un corps s’électrise-t-il ?}
+\begin{situation}
+\textbf{Situation de départ.} Une règle en plastique frottée avec un tissu de laine attire à distance de petits morceaux de papier ; par temps sec, on ressent parfois une petite décharge en touchant une poignée métallique. \textbf{Que gagne un corps frotté, comment l’expliquer à l’échelle de l’atome, et quelle force s’exerce entre deux corps chargés ?}
+\end{situation}
+
+\begin{minipage}[c]{0.44\linewidth}\RaggedRight
+\textbf{Doc 1. Électrisation par frottement.} Une règle en plastique frottée avec un tissu de laine attire de petits morceaux de papier ; la même règle non frottée ne les attire pas.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.53\linewidth}\centering
+\includegraphics[width=\linewidth]{doc1_frottement}\par\vspace{1mm}
+{\sffamily\small\docbadge{1}\enspace\color{cInk2}Une règle frottée attire le papier}
+\end{minipage}\par\medskip
+
+\textbf{Doc 2. Deux sortes d’électricité.} Un bâton frotté est suspendu par un étrier à un fil et peut tourner librement. On approche de l’une de ses extrémités un second bâton frotté, tenu à la main. Le verre est frotté avec un tissu de soie, l’ébonite avec une peau de chat (fourrure).\par\smallskip
+{\centering\includegraphics[width=\linewidth]{doc2_batons}\par\vspace{1mm}
+{\sffamily\small\docbadge{2}\enspace\color{cInk2}Deux bâtons de verre se repoussent, deux bâtons d’ébonite se repoussent, un bâton de verre et un bâton d’ébonite s’attirent}\par}\medskip
+
+\begin{minipage}[c]{0.42\linewidth}\RaggedRight
+\textbf{Doc 3. Électrisation par contact et par influence.} Un pendule électrostatique est une petite boule légère et conductrice suspendue à un fil isolant.\par\smallskip
+(a) Un bâton d’ébonite chargé \textbf{touche} la boule neutre : la boule est aussitôt repoussée.\par\smallskip
+(b) Un bâton de verre chargé est \textbf{approché sans contact} de la boule neutre : la boule est attirée.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.55\linewidth}\centering
+\includegraphics[width=\linewidth]{doc3_pendule}\par\vspace{1mm}
+{\sffamily\small\docbadge{3}\enspace\color{cInk2}Pendule électrostatique}
+\end{minipage}
+\info{\textbf{Information 1 : charges électriques.} La matière est formée d’atomes électriquement neutres : un noyau chargé positivement (protons) entouré d’électrons chargés négativement. Lors d’une électrisation, \textbf{seuls des électrons se déplacent} : un corps qui perd des électrons devient chargé positivement, un corps qui en gagne devient chargé négativement. Dans un métal, certains électrons, dits \textbf{libres}, peuvent se déplacer à l’intérieur du corps. Par convention, le verre frotté avec la soie porte des charges \textbf{positives}, l’ébonite frottée avec la fourrure des charges \textbf{négatives}. Une charge s’exprime en coulombs (C) ; elle est un multiple de la charge élémentaire $e = \qty{1,6e-19}{C}$ : $q = \pm n\cdot e$.}
+
+\begin{minipage}[c]{0.54\linewidth}\RaggedRight
+\textbf{Doc 4. La loi de Coulomb (1785).} Deux corps ponctuels $A$ et $B$, de charges $q_A$ et $q_B$, immobiles dans le vide à la distance $d = AB$, exercent l’un sur l’autre deux forces $\vect{F}_{A/B}$ (exercée par $A$ sur $B$) et $\vect{F}_{B/A}$ (exercée par $B$ sur $A$) :
+\begin{itemize}
+  \item portées par la droite $(AB)$, de sens opposés : $\vect{F}_{A/B} = -\vect{F}_{B/A}$ ;
+  \item de même intensité $F = K\cdot\dfrac{|q_A|\cdot|q_B|}{AB^2}$, avec $K = \dfrac{1}{4\pi\varepsilon_0} = \qty{9e9}{N.m^2.C^{-2}}$ ($\varepsilon_0 = \frac{1}{36\pi}\cdot10^{-9}$ S.I., permittivité du vide) ;
+  \item attractives ou répulsives selon le signe des charges (doc 2).
+\end{itemize}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.42\linewidth}\centering
+\includegraphics[width=\linewidth]{doc4_coulomb}\par\vspace{1mm}
+{\sffamily\small\docbadge{4}\enspace\color{cInk2}Deux charges ponctuelles}
+\end{minipage}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Exploiter.} Doc 1 : que gagne la règle lors du frottement ? Doc 2 : montrer qu’il existe deux sortes de charges électriques et énoncer la règle d’attraction et de répulsion entre deux corps électrisés.
+  \item \kw{Interpréter.} À l’aide de l’information 1, interpréter à l’échelle de l’atome : l’électrisation du verre par frottement ; l’électrisation de la boule par contact (doc 3a) ; l’attraction de la boule par influence (doc 3b) : pourquoi reste-t-elle globalement neutre, et pourquoi est-elle attirée (utiliser la variation de $F$ avec la distance, doc 4) ?
+  \item \kw{Préciser.} D’après le doc 4, donner les caractéristiques (point d’application, direction, sens, intensité) des forces $\vect{F}_{A/B}$ et $\vect{F}_{B/A}$, ainsi que les unités de $F$, $q_A$, $q_B$ et $AB$.
+  \item \kw{Représenter.} Représenter $\vect{F}_{A/B}$ et $\vect{F}_{B/A}$ quand $q_A\cdot q_B > 0$, puis quand $q_A\cdot q_B < 0$.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Frottée, la règle attire des corps légers : elle s’est électrisée, elle porte des charges électriques. Deux bâtons de verre se repoussent, deux bâtons d’ébonite aussi, mais un verre et une ébonite s’attirent : les charges du verre et celles de l’ébonite ne sont pas de la même sorte. Il existe donc deux sortes de charges, positives (verre) et négatives (ébonite). Deux corps chargés de même signe se repoussent ; deux corps chargés de signes contraires s’attirent.}
+  \item \rep{Frottement : le verre cède des électrons à la soie ; il a un défaut d’électrons et devient positif, la soie devient négative. Contact : l’ébonite, qui a un excès d’électrons, en cède à la boule au point de contact ; la boule devient négative comme l’ébonite et elle est repoussée. Influence : les électrons libres de la boule sont attirés vers la face proche du verre (elle devient négative) et la face opposée devient positive ; aucun électron n’entre ni ne sort, la boule reste neutre. Les charges négatives sont plus proches du verre que les positives : l’attraction, en $1/d^2$, l’emporte sur la répulsion.}
+  \item \rep{$\vect{F}_{A/B}$ est appliquée en $B$, $\vect{F}_{B/A}$ en $A$ ; même droite d’action $(AB)$ ; sens opposés ($\vect{F}_{A/B} = -\vect{F}_{B/A}$) ; même intensité $F = K\cdot\dfrac{|q_A|\cdot|q_B|}{AB^2}$, avec $F$ en newtons (N), $q_A$ et $q_B$ en coulombs (C), $AB$ en mètres (m).}
+  \item \rep{$q_A\cdot q_B > 0$ : répulsion, les deux vecteurs sont dirigés vers l’extérieur du segment $[AB]$. $q_A\cdot q_B < 0$ : attraction, les deux vecteurs sont dirigés l’un vers l’autre (voir la figure de l’« À retenir »).}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.5\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Électrisation}\par\smallskip
+Un corps peut s’électriser par \trou{frottement}, par \trou{contact} ou par \trou{influence}. Toute électrisation d’un solide résulte d’un transfert ou d’un déplacement d’\trou{électrons}. Il existe deux sortes de charges : deux charges de même signe se \trou{repoussent}, deux charges de signes contraires s’\trou{attirent}. Une charge est un multiple de $e = \qty{1,6e-19}{C}$.\par\medskip
+\sfb{\color{cRed}Loi de Coulomb}\par\smallskip
+Deux charges ponctuelles $q_A$ et $q_B$, immobiles dans le vide à la distance $AB$, exercent l’une sur l’autre deux forces portées par $(AB)$, opposées ($\vect{F}_{A/B} = -\vect{F}_{B/A}$), d’intensité :
+\begin{center}\formule{\trou{$F = K\cdot\dfrac{|q_A|\cdot|q_B|}{AB^2}$}}\end{center}
+avec $K = \dfrac{1}{4\pi\varepsilon_0} = \trou{\qty{9e9}{N.m^2.C^{-2}}}$.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}\vspace{0pt}\centering
+\includegraphics[width=\linewidth]{fig_coulomb}
+\end{minipage}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace L’atome d’hydrogène}
+\begin{minipage}[c]{0.66\linewidth}\RaggedRight
+Dans l’atome d’hydrogène, un électron ($q_e = -e$, $m_e = \qty{9,1e-31}{kg}$) se trouve à la distance moyenne $d = \qty{0,53e-10}{m}$ du proton ($q_p = +e$, $m_p = \qty{1,7e-27}{kg}$). On donne $e = \qty{1,6e-19}{C}$, $K = \qty{9e9}{N.m^2.C^{-2}}$ et la constante de gravitation $G = \qty{6,7e-11}{N.m^2.kg^{-2}}$.
+\begin{appq}
+  \item Calculer l’intensité $F_e$ de la force électrostatique et celle $F_G$ de la force de gravitation entre le proton et l’électron.
+  \item Calculer le rapport $\dfrac{F_e}{F_G}$ et conclure.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.3\linewidth}\centering
+\includegraphics[width=\linewidth]{app1_hydrogene}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section{Le champ électrostatique}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 2\enspace·\enspace Une propriété de l’espace autour des charges}
+\begin{situation}
+\textbf{Situation de départ.} Une charge électrique agit à distance, sans contact, sur toute autre charge placée dans son voisinage. On dit qu’elle crée autour d’elle un \emph{champ électrostatique}. \textbf{Comment caractériser ce champ en un point, le calculer pour une charge ponctuelle et visualiser sa forme dans l’espace ?}
+\end{situation}
+
+\begin{minipage}[c]{0.4\linewidth}\RaggedRight
+\textbf{Doc 5. Pendules chargés près d’une sphère chargée.} Une sphère métallique chargée positivement est posée sur un pied isolant. Des pendules dont les boules portent une charge positive sont placés à sa hauteur, à différentes distances : ils sont déviés en s’éloignant de la sphère, d’autant plus qu’ils en sont proches.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.57\linewidth}\centering
+\includegraphics[width=\linewidth]{doc5_sphere}\par\vspace{1mm}
+{\sffamily\small\docbadge{5}\enspace\color{cInk2}Des pendules déviés à distance}
+\end{minipage}\par\medskip
+
+\textbf{Doc 6. Des charges témoins au même point $P$.} Une charge source $q = \qty{+50}{nC}$ est fixée en $A$. On place successivement au point $P$ ($r = AP = \qty{30}{cm}$) des charges témoins $q_i$ et on mesure la force $\vect{F}_i$ qu’elles subissent ; $\vect{u}$ est le vecteur unitaire dirigé de $A$ vers $P$.\par\smallskip
+\begin{minipage}[c]{0.5\linewidth}\centering
+\mesures[1.6cm]{3}{%
+$q_i$ (\unit{nC}) & $+2{,}0$ & $+5{,}0$ & $-4{,}0$\\ \hline
+$F_i$ (\unit{N}) & \num{1,0e-5} & \num{2,5e-5} & \num{2,0e-5}\\ \hline
+sens de $\vect{F}_i$ & $\vect{u}$ & $\vect{u}$ & $-\vect{u}$\\ \hline}\par\smallskip
+{\small En un point $P'$ tel que $AP' = \qty{60}{cm}$, la charge $q_1 = \qty{+2,0}{nC}$ subit une force d’intensité \qty{2,5e-6}{N}.}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.47\linewidth}\centering
+\includegraphics[width=\linewidth]{doc6_champ_test}\par\vspace{1mm}
+{\sffamily\small\docbadge{6}\enspace\color{cInk2}Charge source et charge témoin}
+\end{minipage}
+\info{\textbf{Information 2 : vecteur champ électrostatique.} Il règne un champ électrostatique en un point si une charge $q$ placée en ce point subit une force électrostatique $\vect{F}$. Le \textbf{vecteur champ} $\vect{E}$ en ce point est défini par $\vect{F} = q\cdot\vect{E}$ ; son intensité $E$ s’exprime en \unit{N.C^{-1}} ou, de façon équivalente, en volts par mètre (\unit{V.m^{-1}}). Lorsque plusieurs charges ponctuelles $q_1, q_2, \dots$ agissent sur une charge $q$, la force totale qu’elle subit est la \textbf{somme vectorielle} des forces exercées par chacune d’elles.}
+
+\textbf{Doc 7. Spectres électrostatiques.} Dans une cuve, on saupoudre des grains de semoule à la surface d’une huile isolante (huile de paraffine) et on relie les électrodes à une haute tension : les grains s’orientent et dessinent des courbes, les \textbf{lignes de champ}. En chaque point, une ligne de champ est \textbf{tangente au vecteur champ} ; on l’oriente dans le sens de $\vect{E}$. L’ensemble des lignes forme le \textbf{spectre électrostatique}.\par\smallskip
+{\centering\includegraphics[width=.92\linewidth]{doc7_spectres}\par\vspace{1mm}
+{\sffamily\small\docbadge{7}\enspace\color{cInk2}Grains de semoule alignés par le champ (vus de dessus)}\par}
+\info{\textbf{Information 3 : champ uniforme.} Un champ électrostatique est \textbf{uniforme} dans une région si le vecteur $\vect{E}$ y garde la même direction, le même sens et la même intensité en tout point ; ses lignes de champ sont alors des droites parallèles.}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Observer.} Doc 5 : qu’est-ce qui montre que l’espace autour de la sphère possède une propriété particulière ? Comment cet effet varie-t-il avec la distance ?
+  \item \kw{Calculer.} Doc 6 : calculer $\dfrac{F_i}{|q_i|}$ pour chaque charge témoin. Ce rapport dépend-il de la charge témoin ? À l’aide de l’information 2, en déduire les caractéristiques du champ $\vect{E}$ en $P$. Comparer le sens de $\vect{F}$ et de $\vect{E}$ selon le signe de $q_i$.
+  \item \kw{Établir.} En appliquant la loi de Coulomb (doc 4) à la charge source $q$ et à une charge témoin placée en $P$, établir l’expression de $\vect{E}$ en fonction de $K$, $q$, $r$ et $\vect{u}$, puis son intensité. Vérifier avec les valeurs en $P$ et en $P'$. Le champ est-il dirigé vers la charge source ou en sens inverse quand $q > 0$ ? quand $q < 0$ ?
+  \item \kw{Déduire.} À l’aide de l’information 2, exprimer le champ $\vect{E}(M)$ créé en un point $M$ par plusieurs charges ponctuelles en fonction des champs $\vect{E}_1(M), \vect{E}_2(M), \dots$ que créerait chacune d’elles seule.
+  \item \kw{Décrire.} Doc 7 : décrire les lignes de champ dans les cas (a), (b) et (c). D’où partent-elles et où aboutissent-elles ? À l’aide de l’information 3, justifier que le champ est uniforme entre les deux plaques ; quel est son sens si une plaque est positive et l’autre négative ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{Les boules chargées sont déviées sans contact : en tout point autour de la sphère, une charge subit une force ; il y règne un champ électrostatique. Les pendules les plus proches sont les plus déviés : l’effet diminue quand la distance augmente. La déviation se fait dans la direction de la droite qui passe par le centre de la sphère.}
+  \item \rep{$\dfrac{\num{1,0e-5}}{\num{2,0e-9}} = \dfrac{\num{2,5e-5}}{\num{5,0e-9}} = \dfrac{\num{2,0e-5}}{\num{4,0e-9}} = \qty{5,0e3}{N.C^{-1}}$ : le rapport ne dépend pas de la charge témoin, il caractérise le point $P$. Avec $\vect{F} = q\cdot\vect{E}$ : $\vect{E}$ est porté par $(AP)$, de sens $\vect{u}$ (comme $\vect{F}_1$ pour $q_1 > 0$), d’intensité $E = \qty{5,0e3}{N.C^{-1}}$. Si $q > 0$, $\vect{F}$ et $\vect{E}$ ont le même sens ; si $q < 0$, ils sont de sens contraires ($\vect{F}_3$).}
+  \item \rep{La force exercée par $q$ (en $A$) sur $q_i$ (en $P$) s’écrit $\vect{F}_i = K\cdot\dfrac{q\cdot q_i}{r^2}\,\vect{u}$ (répulsive si $q\cdot q_i > 0$). Avec $\vect{F}_i = q_i\cdot\vect{E}$ : $\vect{E} = K\cdot\dfrac{q}{r^2}\,\vect{u}$ et $E = K\cdot\dfrac{|q|}{r^2}$. En $P$ : $E = \dfrac{\num{9e9}\times\num{50e-9}}{0{,}30^2} = \qty{5,0e3}{N.C^{-1}}$ ; en $P'$ : $E' = \dfrac{\num{2,5e-6}}{\num{2,0e-9}} = \qty{1,25e3}{N.C^{-1}} = \dfrac{E}{4}$ (distance double). Si $q > 0$, $\vect{E}$ a le sens de $\vect{u}$ : il s’éloigne de la charge (champ \textbf{centrifuge}) ; si $q < 0$, il est dirigé vers la charge (champ \textbf{centripète}).}
+  \item \rep{$\vect{F} = \vect{F}_1 + \vect{F}_2 + \dots = q\cdot\vect{E}_1 + q\cdot\vect{E}_2 + \dots = q\cdot\vect{E}$, d’où $\vect{E}(M) = \vect{E}_1(M) + \vect{E}_2(M) + \dots = \sum\vect{E}_i(M)$ : c’est le principe de superposition.}
+  \item \rep{(a) Électrode ponctuelle : demi-droites issues de l’électrode (radiales). (b) Deux électrodes : courbes qui partent de l’une et aboutissent à l’autre. (c) Plaques : entre les plaques, segments de droites parallèles, perpendiculaires aux plaques. Les lignes de champ, orientées comme $\vect{E}$, partent des charges positives et aboutissent aux charges négatives. Entre les plaques, les lignes sont des droites parallèles : $\vect{E}$ a la même direction, le même sens et la même intensité, le champ est uniforme ; il est perpendiculaire aux plaques et dirigé de la plaque positive vers la plaque négative.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.5\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Vecteur champ électrostatique}\par\smallskip
+Une charge $q$ placée en un point où règne un champ $\vect{E}$ subit la force :
+\begin{center}\formule{\trou{$\vect{F} = q\cdot\vect{E}$}}\quad soit\quad $F = |q|\cdot E$\end{center}
+$E$ en \trou{\unit{N.C^{-1}} ou \unit{V.m^{-1}}}. Si $q > 0$, $\vect{F}$ et $\vect{E}$ ont le \trou{même sens} ; si $q < 0$, ils sont de \trou{sens contraires}.\par\medskip
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Champ créé par une charge ponctuelle}\par\smallskip
+À la distance $r$ d’une charge $q$ ($\vect{u}$ unitaire, dirigé de la charge vers le point) :
+\begin{center}\formule{\trou{$\vect{E} = K\cdot\dfrac{q}{r^2}\,\vect{u}$}}\quad $E = K\cdot\dfrac{|q|}{r^2}$\end{center}
+Champ \trou{centrifuge} si $q > 0$, \trou{centripète} si $q < 0$.
+\end{minipage}\par\medskip
+\sfb{\color{cRed}Superposition, lignes de champ, champ uniforme}\par\smallskip
+Plusieurs charges : \trou{$\vect{E}(M) = \sum\vect{E}_i(M)$}. Une ligne de champ est \trou{tangente} en chacun de ses points au vecteur $\vect{E}$ ; elle est orientée dans le sens de $\vect{E}$, des charges \trou{positives} vers les charges \trou{négatives}. Entre deux plaques métalliques planes et parallèles soumises à une tension continue, le champ est \trou{uniforme} : perpendiculaire aux plaques, dirigé de la plaque \trou{positive} vers la plaque \trou{négative}.\par\medskip
+\centering\includegraphics[width=\linewidth]{fig_lignes}
+\end{rub}
+
+\begin{encart}{cOrange}{methode}{Méthode : déterminer le champ créé par plusieurs charges}
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\arabic*.}, leftmargin=5mm, itemsep=0pt, topsep=1pt]
+  \item Représenter au point $M$ le champ $\vect{E}_i$ de chaque charge : sur la droite (charge, $M$), \textbf{fuyant} la charge si elle est positive, \textbf{vers} la charge si elle est négative.
+  \item Calculer chaque intensité $E_i = K\cdot\dfrac{|q_i|}{r_i^2}$ (distances en mètres).
+  \item Additionner les vecteurs : directement s’ils sont colinéaires, sinon par projection sur deux axes (ou avec les propriétés de la figure : diagonale d’un carré, triangle équilatéral…).
+  \item Donner les caractéristiques du champ résultant : direction, sens, intensité.
+\end{enumerate}
+\end{encart}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Le champ au milieu de deux charges opposées}
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+Deux charges ponctuelles $q_A = \qty{+2,0}{\micro C}$ et $q_B = \qty{-2,0}{\micro C}$ sont placées dans le vide en $A$ et $B$, avec $AB = 2a = \qty{10}{cm}$ ; $K = \qty{9e9}{N.m^2.C^{-2}}$.
+\begin{appq}
+  \item Représenter les champs $\vect{E}_A$ et $\vect{E}_B$ créés par $q_A$ et $q_B$ au milieu $O$ de $[AB]$.
+  \item Déterminer les caractéristiques du champ résultant $\vect{E}(O)$.
+\end{appq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.46\linewidth}\centering
+\includegraphics[width=\linewidth]{app2_champO}
+\end{minipage}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section[Travail de la force électrostatique et potentiel électrique]{Travail de la force électrostatique\\ et potentiel électrique}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 3\enspace·\enspace Le travail de la force électrostatique dans un champ uniforme}
+\begin{situation}
+\textbf{Situation de départ.} Le travail du poids, force constante dans le champ de pesanteur uniforme, ne dépend que de la différence d’altitude : $W_{A\rightarrow B}(\vect{P}) = m\cdot g\cdot(z_A - z_B)$. Une particule chargée qui se déplace entre deux plaques chargées subit, elle aussi, une force constante. \textbf{Comment calculer son travail, et quelle grandeur électrique joue le rôle de l’altitude ?}
+\end{situation}
+
+\begin{minipage}[c]{0.43\linewidth}\RaggedRight
+\textbf{Doc 8. Une boule chargée entre deux plaques.} Deux plaques métalliques planes, verticales et parallèles, $N$ et $P$, distantes de $d$, sont reliées à un générateur haute tension : $U_{PN} = V_P - V_N > 0$. Entre elles règne un champ uniforme $\vect{E}$, perpendiculaire aux plaques, dirigé de $P$ vers $N$. Dans le repère $(O, \vect{i}, \vect{j})$, l’axe $(Ox)$ est orienté de $N$ vers $P$ ($O$ sur la plaque $N$) : $\vect{E} = -E\,\vect{i}$. Une boule de charge $q > 0$, soumise à $\vect{F} = q\cdot\vect{E}$, va de $A(x_A ; y_A)$ à $B(x_B ; y_B)$ par deux chemins différents.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.54\linewidth}\centering
+\includegraphics[width=\linewidth]{doc8_condensateur}\par\vspace{1mm}
+{\sffamily\small\docbadge{8}\enspace\color{cInk2}Champ uniforme entre deux plaques}
+\end{minipage}
+\begin{rappel}
+\textbf{Travail d’une force constante} (chapitre 2) : pour un déplacement de $A$ à $B$, $W_{A\rightarrow B}(\vect{F}) = \vect{F}\cdot\vect{AB}$. En coordonnées, si $\vect{F} = F_x\,\vect{i} + F_y\,\vect{j}$ et $\vect{AB} = (x_B - x_A)\,\vect{i} + (y_B - y_A)\,\vect{j}$ : $\vect{F}\cdot\vect{AB} = F_x\cdot(x_B - x_A) + F_y\cdot(y_B - y_A)$.
+\end{rappel}
+\info{\textbf{Information 4 : potentiel électrique.} À chaque point d’un champ électrostatique, on associe une grandeur scalaire, le \textbf{potentiel électrique} $V$, en volts (V), défini à une constante près (on choisit un point de référence où $V = 0$). Dans un champ \textbf{uniforme}, la différence de potentiel, ou tension, entre deux points $A$ et $B$ est égale au produit scalaire du vecteur champ et du vecteur $\vect{AB}$ : $U_{AB} = V_A - V_B = \vect{E}\cdot\vect{AB}$. Une \textbf{surface équipotentielle} est l’ensemble des points qui ont le même potentiel.}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Établir.} À l’aide du rappel, exprimer le travail $\W{A}{B}$ de la force électrostatique en fonction de $q$, $E$, $x_A$ et $x_B$. Dépend-il du chemin suivi (doc 8) ? Que peut-on dire de la force électrostatique ?
+  \item \kw{Exprimer.} À l’aide de l’information 4, exprimer $V_A - V_B$ en fonction de $E$, $x_A$ et $x_B$, puis écrire $\W{A}{B}$ en fonction de $q$ et de $V_A - V_B$.
+  \item \kw{Montrer.} Calculer $V_P - V_N$ en fonction de $E$ et de $d$. Quelle plaque a le potentiel le plus élevé ? Montrer que $\vect{E}$ est orienté dans le sens des potentiels décroissants.
+  \item \kw{Démontrer.} Soit $C$ un point de même potentiel que $A$ : montrer que $\vect{AC}$ est perpendiculaire à $\vect{E}$. En déduire la forme des surfaces équipotentielles entre les plaques et le travail de $\vect{F}$ pour un déplacement sur l’une d’elles.
+  \item \kw{Établir.} En déduire la relation entre l’intensité $E$ du champ, la tension $U_{PN}$ et la distance $d$ entre les plaques.
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$\vect{F} = q\cdot\vect{E} = -q\cdot E\,\vect{i}$ est constante, donc $\W{A}{B} = \vect{F}\cdot\vect{AB} = -q\cdot E\cdot(x_B - x_A) + 0\times(y_B - y_A) = q\cdot E\cdot(x_A - x_B)$. Ce travail ne dépend que des positions de $A$ et de $B$, pas du chemin suivi : la force électrostatique est une force \textbf{conservative}.}
+  \item \rep{$V_A - V_B = \vect{E}\cdot\vect{AB} = -E\cdot(x_B - x_A) = E\cdot x_A - E\cdot x_B$ (on peut poser $V = E\cdot x$ avec $V_N = 0$). Donc $\W{A}{B} = q\cdot E\cdot(x_A - x_B) = q\cdot(V_A - V_B) = q\cdot U_{AB}$.}
+  \item \rep{$V_P - V_N = E\cdot x_P - E\cdot x_N = E\cdot d > 0$ : la plaque $P$ (positive) a le potentiel le plus élevé. $\vect{E}$ est dirigé de $P$ vers $N$, c’est-à-dire du potentiel le plus élevé vers le plus bas : dans le sens des potentiels décroissants. (Une charge $q > 0$ lâchée en $A$ se déplace dans le sens de $\vect{F}$, donc de $\vect{E}$, avec un travail moteur $q(V_A - V_B) > 0$ : $V_A > V_B$.)}
+  \item \rep{$V_A - V_C = \vect{E}\cdot\vect{AC} = 0$ avec $\vect{E} \neq \vect{0}$ : $\vect{AC} \perp \vect{E}$. Les surfaces équipotentielles sont des plans perpendiculaires aux lignes de champ, donc parallèles aux plaques ($x = $ constante). Sur un tel plan, $\W{A}{C} = q\cdot(V_A - V_C) = 0$.}
+  \item \rep{$U_{PN} = V_P - V_N = E\cdot d$, d’où $E = \dfrac{U_{PN}}{d}$ ($E$ en \unit{V.m^{-1}}, $U$ en V, $d$ en m) : c’est pourquoi $E$ s’exprime aussi en volts par mètre.}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\begin{minipage}[t]{0.52\linewidth}\RaggedRight\vspace{0pt}
+\sfb{\color{cRed}Travail de la force électrostatique}\par\smallskip
+La force électrostatique est \trou{conservative} : son travail ne dépend pas du \trou{chemin suivi}.
+\begin{center}\formule{\trou{$\W{A}{B} = q\cdot(V_A - V_B) = q\cdot U_{AB}$}}\end{center}
+(relation admise valable même si le champ n’est pas uniforme).\par\medskip
+\sfb{\color{cRed}Potentiel dans un champ uniforme}\par\smallskip
+\trou{$V_A - V_B = \vect{E}\cdot\vect{AB}$} ; entre deux plaques distantes de $d$ : \trou{$E = \dfrac{U}{d}$}.\par\smallskip
+Le vecteur $\vect{E}$ est toujours orienté dans le sens des potentiels \trou{décroissants}. Les surfaces équipotentielles ($V$ = constante) sont \trou{perpendiculaires} aux lignes de champ : dans un champ uniforme, ce sont des plans parallèles aux plaques. Pour un déplacement sur une équipotentielle, le travail est \trou{nul}.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.44\linewidth}\vspace{0pt}\centering
+\includegraphics[width=\linewidth]{fig_equipot}
+\end{minipage}
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Un électron entre deux plaques}
+Deux plaques métalliques planes et parallèles $P$ et $N$, distantes de $d = \qty{10}{cm}$, créent entre elles un champ uniforme d’intensité $E = \qty{3,0e4}{V.m^{-1}}$. On donne $e = \qty{1,6e-19}{C}$.
+\begin{appq}
+  \item Calculer la tension $U_{PN} = V_P - V_N$ entre les plaques.
+  \item Calculer le travail $\W{N}{P}$ de la force électrostatique qui s’exerce sur un électron ($q = -e$) allant de la plaque $N$ à la plaque $P$. Ce travail est-il moteur ou résistant ?
+\end{appq}
+\end{rub}
+
+\needspace{15cm}
+% =====================================================================
+\section[Énergie potentielle électrostatique et conservation de l’énergie]{Énergie potentielle électrostatique\\ et conservation de l’énergie}
+% =====================================================================
+
+\begin{rub}{cTeal}{activite}{Activité 4\enspace·\enspace L’énergie d’une particule chargée dans un champ}
+\begin{situation}
+\textbf{Situation de départ.} Dans le canon à électrons d’un ancien téléviseur ou d’un oscilloscope, des électrons presque immobiles sont accélérés jusqu’à des dizaines de milliers de kilomètres par seconde. Par analogie avec l’énergie potentielle de pesanteur, ils possèdent une énergie liée à leur position dans le champ. \textbf{Comment la définir, et comment l’énergie se conserve-t-elle au cours du mouvement ?}
+\end{situation}
+
+\begin{minipage}[c]{0.4\linewidth}\RaggedRight
+\textbf{Doc 9. Le canon à électrons.} Dans une ampoule de verre où règne le vide, une cathode $C$ chauffée émet des électrons avec une vitesse pratiquement nulle. Une tension $U_{AC} = V_A - V_C > 0$ est appliquée entre l’anode percée $A$ et la cathode : les électrons sont accélérés entre $C$ et $A$, traversent le trou de l’anode puis frappent l’écran. Pour un électron, le poids ($\approx\qty{9e-30}{N}$) est négligeable devant la force électrostatique (de l’ordre de \qty{e-14}{N}) et il n’y a pas de frottement.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.57\linewidth}\centering
+\includegraphics[width=\linewidth]{doc9_canon}\par\vspace{1mm}
+{\sffamily\small\docbadge{9}\enspace\color{cInk2}Canon à électrons (dans le vide)}
+\end{minipage}
+\info{\textbf{Information 5.} \textbf{Énergie potentielle électrostatique.} Par analogie avec $\Epp = m\cdot g\cdot z + C$, l’énergie potentielle électrostatique d’une charge $q$ placée en un point de potentiel $V$ est $\Epe = q\cdot V + C$, où la constante $C$ dépend de l’état de référence choisi (état où $\Epe = 0$). \textbf{Théorème de l’énergie cinétique} (chapitre 3) : $\Delta\Ec = \Ec(B) - \Ec(A) = \sum W_{A\rightarrow B}$ (forces appliquées). \textbf{Électron-volt} : l’électron-volt (eV) est l’énergie, ou le travail, que reçoit une particule de charge $e$ accélérée sous une tension de \qty{1}{V} ; les multiples usuels sont le keV ($10^3$ eV), le MeV ($10^6$ eV) et le GeV ($10^9$ eV).}
+\end{rub}
+
+\begin{rub}{cBlue}{questions}{Questions pour construire le savoir}
+\begin{enumerate}
+  \item \kw{Préciser.} D’après l’information 5, quelle est l’unité de $\Epe$ ? Comment détermine-t-on la constante $C$ ? Que devient l’expression de $\Epe$ si l’on choisit $\Epe = 0$ là où $V = 0$ ?
+  \item \kw{Démontrer.} Exprimer la variation $\Delta\Epe = \Epe(B) - \Epe(A)$ quand la charge $q$ va de $A$ à $B$, et la comparer au travail $\W{A}{B}$ (partie 3).
+  \item \kw{Démontrer.} Doc 9 : appliquer le théorème de l’énergie cinétique à un électron entre deux points quelconques et montrer que son énergie totale $E = \Ec + \Epe$ se conserve.
+  \item \kw{Calculer.} Calculer la valeur de \qty{1}{eV} en joules, puis celles de \qty{1}{keV}, \qty{1}{MeV} et \qty{1}{GeV}. Pourquoi cette unité est-elle commode à l’échelle des particules ?
+\end{enumerate}
+\end{rub}
+
+\begin{rub}{cGreen}{reponses}{\titrereponses}
+\begin{reps}
+  \item \rep{$\Epe = q\cdot V + C$ s’exprime en joules (C × V = J). La constante $C$ se détermine avec l’état de référence : si $\Epe = 0$ là où $V = 0$, alors $0 = q\times0 + C$, donc $C = 0$ et $\Epe = q\cdot V$.}
+  \item \rep{$\Delta\Epe = (q\cdot V_B + C) - (q\cdot V_A + C) = q\cdot(V_B - V_A) = -q\cdot(V_A - V_B)$. Or $\W{A}{B} = q\cdot(V_A - V_B)$ : $\Delta\Epe = -\W{A}{B}$. La variation d’énergie potentielle électrostatique est l’opposée du travail de la force électrostatique.}
+  \item \rep{Le poids et les frottements étant négligeables, seule $\vect{F}$ travaille : $\Ec(B) - \Ec(A) = \W{A}{B} = -\Delta\Epe = \Epe(A) - \Epe(B)$, d’où $\Ec(B) + \Epe(B) = \Ec(A) + \Epe(A)$ : l’énergie totale $E = \Ec + \Epe = \frac{1}{2}\,m\cdot v^2 + q\cdot V + C$ reste constante.}
+  \item \rep{$\qty{1}{eV} = \qty{1,6e-19}{C}\times\qty{1}{V} = \qty{1,6e-19}{J}$ ; $\qty{1}{keV} = \qty{1,6e-16}{J}$ ; $\qty{1}{MeV} = \qty{1,6e-13}{J}$ ; $\qty{1}{GeV} = \qty{1,6e-10}{J}$. Les énergies des particules sont très petites en joules : en électrons-volts, on obtient des nombres simples (un électron accéléré sous \qty{3000}{V} gagne \qty{3000}{eV}).}
+\end{reps}
+\end{rub}
+
+\begin{rub}[colback=cRed!4!white, boxrule=1.4pt, unbreakable]{cRed}{retenir}{À retenir}
+\ifeleve\RaggedRight\fi
+\sfb{\color{cRed}Énergie potentielle électrostatique}\par\smallskip
+Une charge $q$ placée en un point de potentiel $V$ possède l’énergie potentielle électrostatique :
+\begin{center}\formule{\trou{$\Epe = q\cdot V + C$}}\qquad ($\Epe = q\cdot V$ si l’on choisit $\Epe = 0$ là où $V = 0$)\end{center}
+$\Epe$ en \trou{joules (J)}, $q$ en C, $V$ en V. Entre deux points : \trou{$\Delta\Epe = \Epe(B) - \Epe(A) = q\cdot(V_B - V_A) = -\W{A}{B}$}.\par\medskip
+\sfb{\color{cRed}Conservation de l’énergie totale}\par\smallskip
+Pour une particule chargée soumise à la seule force électrostatique, l’énergie totale $E = \Ec + \Epe$ se \trou{conserve} :
+\begin{center}\formule{\trou{$\frac{1}{2}\,m\cdot v_A^2 + q\cdot V_A = \frac{1}{2}\,m\cdot v_B^2 + q\cdot V_B$}}\qquad soit\quad $\Delta\Ec = -\Delta\Epe$\end{center}
+\sfb{\color{cRed}L’électron-volt}\par\smallskip
+\trou{$\qty{1}{eV} = \qty{1,6e-19}{J}$} ; $\qty{1}{keV} = 10^3$ eV ; $\qty{1}{MeV} = 10^6$ eV ; $\qty{1}{GeV} = 10^9$ eV.
+\end{rub}
+
+\begin{rub}[unbreakable]{cPurple}{application}{Application\enspace·\enspace Le canon à électrons}
+Dans un canon à électrons, la tension accélératrice entre l’anode $A$ et la cathode $C$ est $U_{AC} = V_A - V_C = \qty{3000}{V}$. Les électrons ($q = -e = \qty{-1,6e-19}{C}$, $m_e = \qty{9,1e-31}{kg}$) quittent la cathode avec une vitesse nulle.
+\begin{appq}
+  \item Calculer, en eV puis en J, la variation $\Delta\Epe$ de l’énergie potentielle électrostatique d’un électron entre $C$ et $A$, puis l’énergie cinétique $\Ec(A)$ qu’il possède en arrivant à l’anode.
+  \item Calculer la vitesse $v_A$ des électrons à l’anode.
+\end{appq}
+\end{rub}
+
+% =====================================================================
+%  EXERCICES
+% =====================================================================
+\par\medskip\noindent\begin{minipage}{\linewidth}
+\begin{tcolorbox}[enhanced, colback=cInk, colframe=cInk, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0mm, after skip=5mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_exercices}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}Exercices d’application et de synthèse}
+\end{tcolorbox}
+\begin{rub}[unbreakable, before skip=0mm, after skip=0mm]{cOrange}{questions}{Je vérifie mes connaissances\enspace·\enspace Vrai ou faux ?}
+Pour chaque affirmation, dire si elle est vraie ou fausse, puis corriger les affirmations fausses.
+\begin{enumerate}[label={\sffamily\bfseries\color{cOrange}\alph*)}, leftmargin=6mm, itemsep=1pt]
+  \item Lors d’une électrisation par frottement, des protons passent d’un corps à l’autre.
+  \item Deux corps portant des charges de même signe s’attirent.
+  \item Si la distance entre deux charges ponctuelles double, la force de Coulomb est divisée par 4.
+  \item Le champ créé par une charge ponctuelle négative est centrifuge.
+  \item Entre deux plaques parallèles chargées, le champ est dirigé de la plaque négative vers la plaque positive.
+  \item Le travail de la force électrostatique dépend du chemin suivi.
+  \item Un électron accéléré sous une tension de \qty{100}{V} gagne une énergie cinétique de \qty{100}{eV}.
+\end{enumerate}
+\end{rub}
+\end{minipage}\par\medskip
+
+% ---------------- Exercice 1 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 1\enspace·\enspace Champ créé par une charge ponctuelle}
+On donne $K = \qty{9e9}{N.m^2.C^{-2}}$ et $e = \qty{1,6e-19}{C}$.
+\begin{exq}
+  \item Calculer l’intensité $E_p$ du champ créé par un proton ($q_p = +e$) en un point situé à $r = \qty{10}{\micro m}$ de ce proton.
+  \item Une charge ponctuelle positive $q$ crée un champ d’intensité $E_1 = \qty{10}{N.C^{-1}}$ en un point $M_1$ situé à $x_1 = \qty{1,0}{cm}$ d’elle. Calculer $q$.
+  \item Calculer l’intensité $E$ du champ créé par $q$ aux distances $x = 2{,}0$ ; $3{,}0$ ; $4{,}0$ et \qty{5,0}{cm}, puis décrire l’allure de la courbe $E = f(x)$.
+\end{exq}
+\end{rub}
+
+% ---------------- Exercice 2 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 2\enspace·\enspace Superposition de champs}
+\begin{minipage}[c]{0.5\linewidth}\RaggedRight
+On travaille dans le vide ; $K = \dfrac{1}{4\pi\varepsilon_0}$.
+\begin{exq}
+  \item Deux charges $+q$ ($q > 0$) et $-q$ sont placées en $A$ et $B$ avec $AB = 2a$. Déterminer, en fonction de $K$, $q$ et $a$, la direction, le sens et l’intensité du champ $\vect{E}(M)$ en un point $M$ de la médiatrice de $[AB]$ tel que $MA = MB = 2a$.
+  \item Un carré $ABCD$ de côté $a$ porte $+q$ en $A$, $-q$ en $B$ et $+q$ en $C$. Établir l’expression de l’intensité du champ $\vect{E}(D)$ créé par les trois charges au sommet $D$.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.47\linewidth}\centering
+\includegraphics[width=\linewidth]{ex2_geo}
+\end{minipage}
+\end{rub}
+
+% ---------------- Exercice 3 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 3\enspace·\enspace Une particule $\alpha$ dans un champ uniforme}
+\begin{minipage}[c]{0.58\linewidth}\RaggedRight
+Dans un repère orthonormé $(O, \vect{i}, \vect{j}, \vect{k})$, dont l’unité de longueur est le centimètre, règne un champ uniforme $\vect{E} = E\,\vect{i}$ avec $E = \qty{1,0e3}{V.m^{-1}}$. Un noyau d’hélium ${}^{4}_{2}\mathrm{He}^{2+}$ (particule $\alpha$, $q = +2e$, $e = \qty{1,6e-19}{C}$) va du point $A(2 ; 0 ; 0)$ au point $B(4 ; 2 ; 0)$.
+\begin{exq}
+  \item Calculer le travail $\W{A}{B}$ de la force électrostatique.
+  \item Calculer l’énergie potentielle électrostatique $\Epe(B)$, sachant que $\Epe(A) = 0$.
+  \item Une particule $\alpha$ initialement au repos est accélérée sous une tension $U = \qty{1,0e6}{V}$. Calculer, en MeV puis en J, l’énergie cinétique acquise.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.39\linewidth}\centering
+\includegraphics[width=\linewidth]{ex3_repere}
+\end{minipage}
+\end{rub}
+
+% ---------------- Exercice 4 ----------------
+\begin{rub}[unbreakable]{cOrange}{exercices}{Exercice 4\enspace·\enspace Pendule et ion entre deux plaques}
+\begin{minipage}[c]{0.56\linewidth}\RaggedRight
+Deux plaques métalliques verticales et parallèles $N$ et $P$, distantes de $d = \qty{8,0}{cm}$, sont soumises à la tension $U_{PN} = V_P - V_N = \qty{400}{V}$ ; $g = \qty{10}{N.kg^{-1}}$.
+\begin{exq}
+  \item Calculer l’intensité $E$ du champ entre les plaques. Un pendule électrostatique, de masse $m = \qty{0,20}{g}$ et de charge $q = \qty{+40}{nC}$, est en équilibre entre les plaques : déterminer l’angle $\alpha$ du fil avec la verticale.
+  \item L’axe $(Ox)$ est orienté de $N$ vers $P$, d’origine sur $N$ ; on prend $V_N = 0$ et $\Epe = 0$ sur la plaque $N$. Calculer le potentiel $V_M$ et l’énergie potentielle électrostatique $\Epe(M)$ de la boule en un point $M$ tel que $x_M = \qty{5,0}{cm}$.
+  \item Un ion lithium $\mathrm{Li}^{+}$ ($q' = +e$, $m = \qty{1,16e-26}{kg}$), de poids négligeable, part sans vitesse du point $M$. Vers quelle plaque se dirige-t-il ? Calculer sa vitesse $v_N$ quand il atteint la plaque $N$.
+\end{exq}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.41\linewidth}\centering
+\includegraphics[width=\linewidth]{ex4_pendule}
+\end{minipage}
+\end{rub}
+
+\ifeleve\needspace{7cm}\else\needspace{8cm}\fi
+% =====================================================================
+%  CORRIGÉS
+% =====================================================================
+\begin{tcolorbox}[enhanced, colback=cGreen, colframe=cGreen, arc=3mm, boxrule=0pt, left=5mm, right=5mm, top=3mm, bottom=3mm, before skip=0pt, after skip=4mm]
+\raisebox{-2.8mm}{\includegraphics[height=9mm]{ic_corrige}}\hspace{3mm}{\sffamily\bfseries\fontsize{18}{22}\selectfont\color{white}\titrecorriges}
+\end{tcolorbox}
+
+\begin{multicols}{2}
+\small\RaggedRight
+\setlength{\columnsep}{7mm}
+\newcommand{\corr}[1]{\par\ifeleve\needspace{7\baselineskip}\medskip\else\smallskip\fi{\sffamily\bfseries\color{cGreen}#1}\par\nopagebreak\smallskip}
+
+\corr{Application 1 · L’atome d’hydrogène}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$F_e = K\cdot\dfrac{e^2}{d^2} = \dfrac{\num{9e9}\times(\num{1,6e-19})^2}{(\num{0,53e-10})^2} \approx \qty{8,2e-8}{N}$ ;\\ $F_G = G\cdot\dfrac{m_p\cdot m_e}{d^2} = \dfrac{\num{6,7e-11}\times\num{1,7e-27}\times\num{9,1e-31}}{(\num{0,53e-10})^2} \approx \qty{3,7e-47}{N}$.}
+  \item \rep{$\dfrac{F_e}{F_G} \approx \num{2,2e39}$ : à l’échelle de l’atome, la gravitation est totalement négligeable devant l’interaction électrostatique.}
+\end{enumerate}
+
+\corr{Application 2 · Champ en O}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$q_A > 0$ : $\vect{E}_A$ fuit $A$, dirigé de $A$ vers $B$. $q_B < 0$ : $\vect{E}_B$ est dirigé vers $B$. Les deux vecteurs, portés par $(AB)$, ont le sens de $A$ vers $B$ et la même intensité.}
+  \item \rep{$OA = OB = a = \qty{0,050}{m}$ ; $E(O) = E_A + E_B = \dfrac{2K\cdot|q_A|}{a^2} = \dfrac{2\times\num{9e9}\times\num{2,0e-6}}{0{,}050^2} = \qty{1,44e7}{V.m^{-1}}$, porté par $(AB)$, de $A$ vers $B$.}
+\end{enumerate}
+
+\corr{Application 3 · L’électron}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$U_{PN} = E\cdot d = \num{3,0e4}\times0{,}10 = \qty{3,0e3}{V}$.}
+  \item \rep{$\W{N}{P} = q\cdot(V_N - V_P) = (-e)(-U_{PN}) = \num{1,6e-19}\times3000 = \qty{4,8e-16}{J} > 0$ : travail moteur, l’électron est attiré par la plaque positive.}
+\end{enumerate}
+
+\corr{Application 4 · Le canon à électrons}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\Delta\Epe = q\cdot(V_A - V_C) = -e\cdot U_{AC} = \qty{-3000}{eV} = \qty{-4,8e-16}{J}$ ;\\ $\Ec(A) = \Ec(C) - \Delta\Epe = \qty{3000}{eV} = \qty{4,8e-16}{J}$.}
+  \item \rep{$\frac{1}{2}\,m_e\cdot v_A^2 = e\cdot U_{AC}$, d’où $v_A = \sqrt{\dfrac{2e\cdot U_{AC}}{m_e}} = \sqrt{\dfrac{2\times\num{4,8e-16}}{\num{9,1e-31}}} \approx \qty{3,25e7}{m.s^{-1}}$.}
+\end{enumerate}
+
+\corr{Vrai ou faux ?}
+\begin{enumerate}[label={\sffamily\bfseries\alph*)},leftmargin=5mm,itemsep=0pt]
+  \item \rep{Faux : seuls des électrons se déplacent.}
+  \item \rep{Faux : ils se repoussent.}
+  \item \rep{Vrai : $F$ est proportionnelle à $1/d^2$.}
+  \item \rep{Faux : il est centripète.}
+  \item \rep{Faux : de la plaque positive vers la négative.}
+  \item \rep{Faux : il ne dépend que des points de départ et d’arrivée.}
+  \item \rep{Vrai : $\Ec = e\cdot U = \qty{100}{eV}$.}
+\end{enumerate}
+
+\corr{Exercice 1 · Charge ponctuelle}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$E_p = K\cdot\dfrac{e}{r^2} = \dfrac{\num{9e9}\times\num{1,6e-19}}{(\num{1,0e-5})^2} = \qty{14,4}{N.C^{-1}}$.}
+  \item \rep{$q = \dfrac{E_1\cdot x_1^2}{K} = \dfrac{10\times(\num{0,010})^2}{\num{9e9}} \approx \qty{1,11e-13}{C}$.}
+  \item \rep{$E = E_1\cdot\left(\dfrac{x_1}{x}\right)^2$ : \qty{2,50}{N.C^{-1}} ; \qty{1,11}{N.C^{-1}} ; \qty{0,625}{N.C^{-1}} ; \qty{0,400}{N.C^{-1}}. La courbe est décroissante et tend vers 0 : $E$ varie comme $\dfrac{1}{x^2}$.}
+\end{enumerate}
+
+\corr{Exercice 2 · Superposition}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$ABM$ est équilatéral. $E_A = E_B = \dfrac{K\cdot q}{4a^2}$ ; $\vect{E}_A$ fuit $A$, $\vect{E}_B$ est dirigé vers $B$ ; ils font chacun $60^\circ$ avec la parallèle à $(AB)$ et leurs composantes perpendiculaires s’annulent :\\ $E(M) = 2E_A\cos60^\circ = \dfrac{K\cdot q}{4a^2}$, parallèle à $(AB)$, de $A$ vers $B$.}
+  \item \rep{$E_A = E_C = \dfrac{K\cdot q}{a^2}$, perpendiculaires : somme portée par $(BD)$, de $B$ vers $D$, d’intensité $\dfrac{\sqrt2\,K\cdot q}{a^2}$. $E_B = \dfrac{K\cdot q}{2a^2}$, dirigé de $D$ vers $B$.\\ $E(D) = \left(\sqrt2 - \dfrac{1}{2}\right)\dfrac{K\cdot q}{a^2} \approx 0{,}914\,\dfrac{K\cdot q}{a^2}$, de $B$ vers $D$.}
+\end{enumerate}
+
+\corr{Exercice 3 · La particule $\alpha$}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$\W{A}{B} = q\cdot\vect{E}\cdot\vect{AB} = q\cdot E\cdot(x_B - x_A) = \num{3,2e-19}\times\num{1,0e3}\times0{,}020 = \qty{6,4e-18}{J}$.}
+  \item \rep{$\Epe(B) = \Epe(A) - \W{A}{B} = \qty{-6,4e-18}{J}$.}
+  \item \rep{$\Ec = q\cdot U = 2e\times\qty{1,0e6}{V} = \qty{2,0}{MeV} = \qty{3,2e-13}{J}$.}
+\end{enumerate}
+
+\corr{Exercice 4 · Pendule et ion}
+\begin{enumerate}[label={\sffamily\bfseries\arabic*.},leftmargin=5mm,itemsep=1pt]
+  \item \rep{$E = \dfrac{U_{PN}}{d} = \dfrac{400}{0{,}080} = \qty{5,0e3}{V.m^{-1}}$. À l’équilibre, $\vect{P} + \vect{F} + \vect{T} = \vect{0}$ : $\tan\alpha = \dfrac{q\cdot E}{m\cdot g} = \dfrac{\num{40e-9}\times\num{5,0e3}}{\num{0,20e-3}\times10} = 0{,}10$, $\alpha \approx 5{,}7^\circ$ (fil incliné vers $N$).}
+  \item \rep{$V_N - V_M = \vect{E}\cdot\vect{NM}$ avec $\vect{E} = -E\,\vect{i}$ et $\vect{NM} = x_M\,\vect{i}$ : $V_N - V_M = -E\cdot x_M$, donc $V_M = E\cdot x_M = \qty{250}{V}$. $\Epe(M) = q\cdot V_M = \num{40e-9}\times250 = \qty{1,0e-5}{J}$.}
+  \item \rep{$q' > 0$ : la force a le sens de $\vect{E}$, l’ion va vers $N$. Conservation de l’énergie : $\frac{1}{2}\,m\cdot v_N^2 + 0 = 0 + e\cdot V_M$,\\ $v_N = \sqrt{\dfrac{2e\cdot V_M}{m}} = \sqrt{\dfrac{2\times\num{1,6e-19}\times250}{\num{1,16e-26}}} \approx \qty{8,30e4}{m.s^{-1}}$.}
+\end{enumerate}
+\end{multicols}
+
+\end{document}

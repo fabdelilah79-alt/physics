@@ -1,0 +1,540 @@
+% =====================================================================
+%  FICHE PÉDAGOGIQUE — préambule commun (charte graphique du manuel)
+%  Compilation : xelatex (deux passes). Format A4 paysage.
+%  Le fichier de contenu définit, avant \begin{document} :
+%   \Matiere, \Partie, \NumChap, \TitreChap, \TitreCourt, \Niveau, \Duree, \Banniere, \BanniereDecalage
+% =====================================================================
+\documentclass[10pt]{article}
+\usepackage[a4paper,landscape,top=1.55cm,bottom=1.55cm,left=1.35cm,right=1.35cm,headheight=14pt,headsep=4.5mm,footskip=9mm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\newfontfamily\titlefont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Bold, BoldFont=*-Bold]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,tikz,array,xltabular,multirow}
+\usetikzlibrary{calc,fadings}
+\usepackage[most]{tcolorbox}
+\graphicspath{{images/}}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 6em}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=5}
+\usepackage{fancyhdr}
+\setlength{\parindent}{0pt}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+% ---------- Couleurs de la charte ----------
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\definecolor{cPurple}{HTML}{6C4AB6} \definecolor{cTeal}{HTML}{0E8F8A}
+\definecolor{cAmber}{HTML}{F4A300} \definecolor{cCyan}{HTML}{0B84C6}
+\definecolor{cGrey}{HTML}{8A96A8}  \definecolor{cSoft}{HTML}{F4F7FB}
+\color{cInk}
+
+% ---------- Petites commandes ----------
+\newcommand\og{«\nobreak\thinspace}
+\newcommand\fg{\nobreak\thinspace»}
+\newcommand{\sfb}[1]{{\sffamily\bfseries #1}}
+\newcommand{\ch}[1]{\ensuremath{\mathrm{#1}}}
+\newcommand{\arc}[1]{\overparen{#1}}
+% puce de liste dans les cellules : \pt{texte}
+\newcommand{\pt}[1]{\par\noindent\hangindent=3.4mm\hangafter=1\makebox[3.4mm][l]{\textcolor{cOrange}{\scriptsize$\blacktriangleright$}}#1}
+% sous-puce
+\newcommand{\spt}[1]{\par\noindent\hangindent=6.6mm\hangafter=1\hspace*{3.4mm}\makebox[3.2mm][l]{\textcolor{cInk2}{\scriptsize$\bullet$}}#1}
+% intertitre dans une cellule
+\newcommand{\ct}[2][cInk]{\par\smallskip{\sffamily\bfseries\small\color{#1}#2}\par\nopagebreak\vspace{.5mm}}
+% pastille de rubrique : \pastille{couleur}{icône}{texte}
+\NewDocumentCommand{\pastille}{m m m}{\tikz[baseline=(t.base)]{\node[fill=#1,text=white,rounded corners=2.6mm,inner xsep=2mm,inner ysep=1.1mm,font=\sffamily\bfseries\scriptsize,anchor=base west](t){\raisebox{-.9mm}{\includegraphics[height=3.6mm]{#2}}\hspace{1.2mm}#3};}}
+% étiquette « Diapo n » / « Livre » / « Fiche »
+\NewDocumentCommand{\diapo}{m}{\tikz[baseline=(b.base)]\node[fill=cInk,text=white,rounded corners=3pt,inner xsep=2.6pt,inner ysep=1.2pt,font=\sffamily\bfseries\tiny](b){Diapo #1};}
+\NewDocumentCommand{\support}{O{cInk2} m}{\tikz[baseline=(b.base)]\node[draw=#1,text=#1,rounded corners=3pt,inner xsep=2.6pt,inner ysep=1.2pt,line width=.5pt,font=\sffamily\bfseries\tiny](b){#2};}
+% type d'évaluation
+\NewDocumentCommand{\evtype}{m m}{\tikz[baseline=(b.base)]\node[fill=#1!14,text=#1,rounded corners=3pt,inner xsep=3pt,inner ysep=1.3pt,font=\sffamily\bfseries\tiny](b){\MakeUppercase{#2}};\par\vspace{.6mm}}
+\newcommand{\diag}{\evtype{cCyan}{Diagnostique}}
+\newcommand{\form}{\evtype{cBlue}{Formative}}
+\newcommand{\somm}{\evtype{cRed}{Sommative}}
+\newcommand{\regul}{\evtype{cGreen}{Remédiation}}
+% durée : \duree{min}{cumul}
+\newcommand{\duree}[2]{\centering{\titlefont\fontsize{15}{16}\selectfont\color{cInk}#1}\par\vspace{-.4mm}{\sffamily\tiny\color{cInk2}min}\par\vspace{1.4mm}{\sffamily\tiny\color{cGrey}\(\to\) #2}\par}
+
+% ---------- Titres des grandes parties ----------
+\newcommand{\bloc}[3]{% \bloc{numéro}{icône}{titre}
+  \par\vspace{4mm}\noindent
+  \tikz[baseline=(n.base)]\node[fill=cOrange,rounded corners=3pt,text=white,minimum width=9mm,minimum height=9mm,inner sep=0pt,font=\titlefont\fontsize{16}{18}\selectfont](n){#1};%
+  \hspace{3mm}\raisebox{-1.8mm}{\includegraphics[height=8mm]{#2}}\hspace{2.5mm}{\titlefont\fontsize{16}{20}\selectfont\color{cInk}#3}\par\vspace{1.3mm}
+  {\color{cOrange}\rule{\linewidth}{1.2pt}}\par\vspace{3mm}}
+
+% ---------- Bandeau de la première page ----------
+\newcommand{\bandeau}{%
+  \thispagestyle{premiere}%
+  \begin{tikzpicture}[remember picture,overlay]
+    \begin{scope}
+      \clip ([yshift=0cm]current page.north west) rectangle ([yshift=-5.1cm]current page.north east);
+      \node[anchor=north west,inner sep=0] at ([yshift=\BanniereDecalage]current page.north west) {\includegraphics[width=\paperwidth]{\Banniere}};
+      \fill[cInk,path fading=east,opacity=.78] (current page.north west) rectangle ([xshift=19cm,yshift=-5.1cm]current page.north west);
+    \end{scope}
+    \fill[white] ([yshift=-5.1cm]current page.north west) .. controls ([xshift=10cm,yshift=-4.3cm]current page.north west) and ([xshift=-12cm,yshift=-5.6cm]current page.north east) .. ([yshift=-4.6cm]current page.north east) -- ([yshift=-5.3cm]current page.north east) -- ([yshift=-5.3cm]current page.north west) -- cycle;
+    \node[anchor=north west,text width=19.5cm,align=left,inner sep=0] at ([xshift=1.45cm,yshift=-1.0cm]current page.north west) {%
+      {\sffamily\bfseries\footnotesize\color{cAmber}\addfontfeatures{LetterSpace=12}FICHE PÉDAGOGIQUE\enspace·\enspace\MakeUppercase{\Matiere}\enspace·\enspace\MakeUppercase{\Partie}}\par\vspace{3.2mm}
+      \tikz\node[fill=cOrange,text=white,rounded corners=3.2mm,inner xsep=3.4mm,inner ysep=1.3mm,font=\sffamily\bfseries\normalsize]{Chapitre \NumChap};\par\vspace{2.6mm}
+      {\titlefont\fontsize{21}{26}\selectfont\color{white}\TitreChap\par}};
+  \end{tikzpicture}%
+  \vspace*{3.25cm}\par}
+
+% carte d'information : \infocarte{icône}{couleur}{libellé}{valeur}
+\newcommand{\infocarte}[4]{%
+  \begin{tcolorbox}[enhanced,width=\linewidth,colback=#2!7!white,colframe=#2!7!white,arc=3mm,boxrule=0pt,left=14mm,right=3mm,top=2mm,bottom=2mm,
+    borderline west={2pt}{0pt}{#2},
+    overlay={\node at ([xshift=7.2mm]frame.west) {\includegraphics[width=8.4mm]{#1}};}]
+  {\sffamily\bfseries\scriptsize\color{#2}\MakeUppercase{#3}}\par\vspace{.4mm}
+  {\sffamily\small\color{cInk}\RaggedRight #4\par}
+  \end{tcolorbox}}
+
+% ---------- Tableau 1 : libellé de ligne ----------
+\newcommand{\lib}[3]{% \lib{icône}{couleur}{libellé}
+  \cellcolor{#2!10}\begin{minipage}[t]{\linewidth}\vspace{.6mm}\centering
+  \includegraphics[height=10mm]{#1}\par\vspace{1.4mm}
+  {\sffamily\bfseries\small\color{#2}#3}\par\vspace{1mm}\end{minipage}}
+
+% ---------- Tableau 2 : bandeau de partie ----------
+\newcommand{\partie}[3]{% \partie{couleur}{titre}{durée totale}
+  \multicolumn{5}{@{}l@{}}{\cellcolor{#1}\rule{0pt}{6.2mm}\hspace{2.5mm}{\sffamily\bfseries\small\color{white}#2}\hfill{\sffamily\bfseries\scriptsize\color{white}#3}\hspace{2.5mm}}\\[-.2mm]}
+
+% ---------- En-têtes et pieds de page ----------
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\sffamily\footnotesize\color{cInk2}\textcolor{cOrange}{\textbf{FICHE PÉDAGOGIQUE}}\enspace·\enspace\Matiere\enspace·\enspace Chapitre \NumChap}
+\fancyhead[R]{\sffamily\footnotesize\color{cInk2}\TitreCourt}
+\renewcommand{\headrulewidth}{0.6pt}
+\renewcommand{\headrule}{{\color{cBlue!25}\hrule height\headrulewidth width\headwidth}}
+\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7mm,inner sep=0pt]{\thepage};}
+\fancyfoot[R]{\sffamily\scriptsize\color{cGrey}Durée : \Duree\enspace·\enspace \Niveau}
+\fancypagestyle{premiere}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[C]{\tikz\node[circle,fill=cBlue,text=white,font=\sffamily\bfseries\small,minimum size=7mm,inner sep=0pt]{\thepage};}}
+
+% ---------- Tableaux ----------
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\setlength{\arrayrulewidth}{.6pt}
+\arrayrulecolor{white}
+\keepXColumns
+% ---------- Macros des deux tableaux (fiche pédagogique) ----------
+\newcommand{\cellpad}[1]{\vspace{1.4mm}#1\par\vspace{1.6mm}}
+\newcommand{\sep}{!{\color{white}\vrule width 1.8pt}}
+\newcolumntype{I}{!{\color{white}\vrule width 1.8pt}}
+% Tableau 1 : \ligne{icône}{couleur}{libellé}{contenu}
+\newcommand{\ligne}[4]{\lib{#1}{#2}{#3} & \cellcolor{cSoft}\cellpad{#4}\\ \hline}
+% Tableau 2 : \etape{couleur}{axes}{enseignant}{apprenant}{évaluation}{minutes}{cumul}
+\newcommand{\etape}[7]{%
+  \cellcolor{#1!9}\cellpad{#2} & \cellcolor{cSoft}\cellpad{#3} & \cellcolor{cSoft}\cellpad{#4} &
+  \cellcolor{cSoft}\cellpad{\footnotesize #5} & \cellcolor{#1!9}\cellpad{\duree{#6}{#7}}\\ \hline}
+% axes : \axe{couleur}{icône}{rubrique}{titre}{supports}
+\newcommand{\axe}[5]{\pastille{#1}{#2}{#3}\par\vspace{1.4mm}{\sffamily\bfseries\footnotesize\color{cInk}#4}\par\vspace{1.4mm}#5}
+% bandeau de partie dans le tableau 2
+\renewcommand{\partie}[3]{\multicolumn{5}{@{}l@{}}{\begin{tikzpicture}
+  \node[fill=#1,rounded corners=2mm,minimum width=\linewidth,minimum height=7.2mm,inner sep=0](b){};
+  \node[anchor=west,text=white,font=\sffamily\bfseries\small] at ([xshift=3.5mm]b.west){#2};
+  \node[anchor=east,text=white,font=\sffamily\bfseries\scriptsize] at ([xshift=-3.5mm]b.east){#3};
+  \end{tikzpicture}}\\*[.8mm]}
+% en-tête du tableau 2
+\newcommand{\tete}[2]{\cellcolor{cInk}\rule{0pt}{7mm}\raisebox{-1.3mm}{\includegraphics[height=5mm]{#1}}\hspace{1.6mm}{\sffamily\bfseries\small\color{white}#2}}
+\newcommand{\enteteDeroulement}{\tete{fi_chemin}{Axes du cours} & \tete{fi_prof}{Activités de l’enseignant} & \tete{fi_toque}{Activités de l’apprenant} & \tete{fi_evaluation}{Évaluation} & \cellcolor{cInk}\centering\raisebox{-1.3mm}{\includegraphics[height=5mm]{fi_horloge}}\\ \hline}
+% frise du temps : \frise[durée totale en minutes]{ {couleur/minutes/libellé}, ... } (120 min par défaut)
+\newcommand{\frise}[2][120]{%
+  \makebox[\linewidth][l]{\begin{tikzpicture}
+    \pgfmathsetmacro{\unit}{\linewidth/#1}
+    \foreach \c/\m/\t [remember=\x as \xx (initially 0)] in {#2}{%
+      \pgfmathsetmacro{\x}{\xx+\m}
+      \fill[\c,rounded corners=1.2mm] ({\xx*\unit pt+.6pt},0) rectangle ({\x*\unit pt-.6pt},8mm);
+      \node[text=white,font=\sffamily\bfseries\scriptsize,align=center] at ({(\xx+\x)/2*\unit pt},4mm) {\t};
+      \node[font=\sffamily\tiny,text=cInk2,anchor=north] at ({\x*\unit pt},-.6mm) {\pgfmathprintnumber{\x}};
+    }
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north] at (0,-.6mm) {0};
+    \node[font=\sffamily\tiny,text=cInk2,anchor=north east] at (\linewidth,-3.4mm) {minutes};
+  \end{tikzpicture}}}
+% titre de séance au-dessus d'une frise : \seance{numéro}{durée}{contenu}
+\newcommand{\seance}[3]{\par\vspace{1.5mm}\noindent{\sffamily\bfseries\small\color{cInk}Séance #1\enspace·\enspace #2}\enspace{\sffamily\footnotesize\color{cInk2}#3}\par\vspace{1mm}}
+% encadré final : \encadre{icône}{couleur}{titre}{contenu}
+\newcommand{\encadre}[4]{%
+  \begin{tcolorbox}[enhanced,colback=#2!6!white,colframe=#2!6!white,arc=3mm,boxrule=0pt,left=15mm,right=4mm,top=2.5mm,bottom=2.5mm,
+    borderline west={2pt}{0pt}{#2},height fill=false,
+    overlay={\node[anchor=north west] at ([xshift=2.5mm,yshift=-2.5mm]frame.north west) {\includegraphics[width=9.5mm]{#1}};}]
+  {\sffamily\bfseries\color{#2}#3}\par\vspace{1.5mm}\small #4
+  \end{tcolorbox}}
+\newcommand{\lignevide}{\par\vspace{2.6mm}\noindent{\color{cInk2!55}\leaders\hbox to 1.8mm{\hss.\hss}\hfill}\kern0pt}
+% =====================================================================
+%  Fiche pédagogique — Physique, chapitre 8 : L’énergie potentielle électrostatique (sciences mathématiques, 10 h, cinq séances)
+% =====================================================================
+\newcommand{\Matiere}{Physique}
+\newcommand{\Partie}{Partie 2 — Électricité}
+\newcommand{\NumChap}{8}
+\newcommand{\TitreChap}{L’énergie potentielle\\ électrostatique}
+\newcommand{\TitreCourt}{L’énergie potentielle électrostatique}
+\newcommand{\Niveau}{1\textsuperscript{re} année du baccalauréat}
+\newcommand{\Duree}{10 h}
+\newcommand{\Banniere}{opener_phys8.jpg}
+\newcommand{\BanniereDecalage}{1.3cm}
+\newcommand{\Epe}{E_{\mathrm{pe}}}
+\newcommand{\Ecin}{E_{\mathrm{C}}}
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\W}[2]{W_{#1\rightarrow #2}(\vect{F})}
+
+\begin{document}
+\bandeau
+
+\noindent
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_toque}{cPurple}{Niveau}{\Niveau\\ Sciences mathématiques (option française)}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_horloge}{cAmber}{Durée}{10 heures — 5 séances\\ 8 h cours + 2 h exercices}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_prof}{cCyan}{Professeur}{\rule{0pt}{3.6mm}{\color{cInk2!60}\dotfill}\\ Classe : {\color{cInk2!60}\dotfill}}\end{minipage}\hfill
+\begin{minipage}[t]{0.235\linewidth}\infocarte{fi_chemin}{cInk}{Programme}{Physique · Électricité · § 1 (SM)\\ Énergie potentielle électrostatique}\end{minipage}
+
+% =====================================================================
+\bloc{1}{fi_cible}{Cadre pédagogique de la séquence}
+
+\begin{xltabular}{\linewidth}{@{}C{3.5cm}I Y@{}}
+\ligne{fi_cible}{cRed}{Compétence\\ spécifique}{%
+\textbf{Électricité :} \textbf{interpréter les transferts d’énergie} et les phénomènes de \textbf{dissipation et de conservation} dans des circuits électriques, dans diverses situations ; \textbf{résoudre une situation-problème} relative au bilan énergétique dans des circuits électriques, expérimentalement ou par une étude analytique {\color{cInk2}(compétence spécifique de la physique, 1\textsuperscript{re} année du baccalauréat)}.
+\pt{\textbf{Contribution de ce chapitre :} premier chapitre de la partie Électricité (propre à la filière sciences mathématiques) : \textbf{électrisation} et \textbf{loi de Coulomb} ; \textbf{champ électrostatique} (charge ponctuelle, superposition, lignes de champ, champ uniforme) ; \textbf{travail de la force électrostatique}, \textbf{potentiel} et différence de potentiel ; \textbf{énergie potentielle électrostatique} et \textbf{conservation de l’énergie totale} d’une particule chargée. Situations-problèmes : atome d’hydrogène, électron entre deux plaques, canon à électrons, pendule et ion dans un condensateur plan.}}
+\ligne{fi_reseau}{cTeal}{Compétences\\ transversales}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{Démarche scientifique} — maîtriser les éléments de la démarche scientifique dans toutes ses dimensions.\hfill\break{\color{cTeal}\itshape Ici :} expériences d’électrisation et interprétation par un modèle (électrons) ; mesures avec des charges témoins ; spectres électrostatiques.}
+\pt{\textbf{Communication} — lire, écrire, écouter, dialoguer ; maîtriser la langue écrite et le langage mathématique ; utiliser les symboles ; respecter l’éthique du dialogue.\hfill\break{\color{cTeal}\itshape Ici :} notations vectorielles ($\vect{F}_{A/B}$, $\vect{E}$, $\vect{AB}$), schémas de forces et de champs, rédaction de démonstrations.}
+\pt{\textbf{Technologies de l’information} — utiliser les TIC pour s’informer, traiter des données, éprouver des hypothèses, construire des modèles.\hfill\break{\color{cTeal}\itshape Ici :} animations (électrisation, pendules, spectres, plaques chargées, canon à électrons).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{Méthodologie} — acquérir une méthodologie de recherche, de travail et d’autoformation ; réaliser des tâches complémentaires.\hfill\break{\color{cTeal}\itshape Ici :} méthode de superposition des champs ; analogie avec le travail du poids et l’énergie potentielle de pesanteur.}
+\pt{\textbf{Culture intégrée} — s’intégrer dans son environnement, citoyenneté active, positions positives face aux questions d’environnement, de santé, de prévention et de consommation.\hfill\break{\color{cTeal}\itshape Ici :} décharges électrostatiques et sécurité (éclairs, paratonnerre, stations-service) ; tubes cathodiques et accélérateurs de particules.}
+\end{minipage}}
+\ligne{fi_drapeau}{cBlue}{Objectifs\\ d’apprentissage}{%
+{\color{cInk2}\itshape À la fin de la séquence, l’apprenant(e) est capable de :}\par\vspace{.6mm}
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+\pt{\textbf{O1} — interpréter l’\textbf{électrisation} (frottement, contact, influence) par des transferts ou des déplacements d’électrons ;}
+\pt{\textbf{O2} — connaître et appliquer la \textbf{loi de Coulomb} (forme vectorielle, intensité) ;}
+\pt{\textbf{O3} — connaître le \textbf{champ électrostatique}, utiliser $\vect{F} = q\cdot\vect{E}$ et le champ d’une charge ponctuelle ; appliquer la superposition ;}
+\pt{\textbf{O4} — reconnaître les \textbf{lignes de champ} (charge ponctuelle, deux charges) et le \textbf{champ uniforme} entre deux plaques ;}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+\pt{\textbf{O5} — établir et exploiter $\W{A}{B} = q\cdot(V_A - V_B)$, $V_A - V_B = \vect{E}\cdot\vect{AB}$ et $E = U/d$ ; reconnaître les équipotentielles ;}
+\pt{\textbf{O6} — connaître et exploiter $\Epe = q\cdot V + C$ et $\Delta\Epe = -\W{A}{B}$ ;}
+\pt{\textbf{O7} — appliquer la \textbf{conservation de l’énergie totale} d’une particule chargée ; utiliser l’\textbf{électron-volt}.}
+\end{minipage}
+\par\vspace{1mm}{\footnotesize\color{cInk2}\textit{Connaissances et habiletés du programme :} connaître et appliquer la loi de Coulomb ; connaître le champ électrostatique ; connaître et appliquer la relation $\vect{E} = \vect{F}/q$ ; reconnaître une ligne de champ ; connaître la forme des lignes de champ pour une charge ponctuelle et pour deux charges ponctuelles ; connaître et exploiter $W = q(V_A - V_B)$, où $V_A - V_B$ est la différence de potentiel et $V$ le potentiel électrique en un point du champ ; connaître et exploiter $\Epe = q\cdot V + C$, énergie potentielle électrostatique en un point du champ.}}
+\ligne{fi_marches}{cGreen}{Prérequis}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Acquis des chapitres 2, 3 et 4 et du tronc commun}
+\pt{travail d’une force constante $W = \vect{F}\cdot\vect{AB}$ (chapitre 2) ; théorème de l’énergie cinétique (chapitre 3) ;}
+\pt{énergie potentielle de pesanteur $\Epp = m\cdot g\cdot z + C$, énergie mécanique (chapitre 4) ;}
+\pt{structure de l’atome, charge élémentaire ; loi de gravitation universelle ; tension $U_{AB} = V_A - V_B$.}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cGreen}Outils à réactiver}
+\pt{vecteurs : somme, projection, produit scalaire en coordonnées ;}
+\pt{trigonométrie ($\cos 60^\circ$, $\tan\alpha$), théorème de Pythagore ;}
+\pt{puissances de 10, préfixes (n, µ), conversions cm $\to$ m.}
+\end{minipage}}
+\ligne{fi_boite}{cOrange}{Matériel\\ didactique}{%
+\begin{minipage}[t]{0.493\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Expériences de cours}
+\pt{règle en plastique, tissu de laine, petits morceaux de papier ; bâtons de verre et d’ébonite, soie, fourrure, étrier et potence ;}
+\pt{pendules électrostatiques (boules légères métallisées, fils isolants) ;}
+\pt{générateur haute tension (ou machine électrostatique), sphère conductrice sur pied isolant ;}
+\pt{cuve transparente, huile de paraffine, semoule, électrodes ponctuelles et plaques ; deux plaques métalliques parallèles sur supports isolants ;}
+\pt{oscilloscope ou tube à faisceau d’électrons, s’il est disponible (sinon l’animation du canon à électrons).}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.483\linewidth}\RaggedRight
+{\sffamily\bfseries\footnotesize\color{cOrange}Supports}
+\pt{vidéoprojecteur et ordinateur : \textbf{présentation animée} du chapitre (42 diapositives) ;}
+\pt{\textbf{cahier} de l’apprenant : fiche d’activités collée, réponses aux questions, « À retenir », applications et exercices ;}
+\pt{\textbf{fiche d’activités} imprimée (deux pages : activités 1 et 2, puis 3 et 4, à coller dans le cahier) ;}
+\pt{tableau, feutres ou craies de couleur, calculatrices.}
+\pt{\textbf{Sécurité :} la haute tension est manipulée par le professeur seul, générateur à courant limité.}
+\end{minipage}}
+\ligne{fi_livre}{cInk2}{Références}{%
+\pt{Ministère de l’Éducation nationale — \textit{Orientations pédagogiques générales et programmes spécifiques à l’enseignement de la physique et de la chimie au cycle secondaire qualifiant}, 2007 : programme de la 1\textsuperscript{re} année du baccalauréat — physique, Électricité, § 1 « Énergie potentielle électrostatique » (propre à la filière sciences mathématiques, 8 h de cours et 2 h d’exercices) : 1.1 le champ électrostatique (interaction électrostatique, loi de Coulomb ; champ créé par une charge ponctuelle : définition, direction, sens ; exemples de lignes de champ ; superposition de deux champs ; champ uniforme) ; 1.2 énergie potentielle d’une charge dans un champ électrostatique uniforme (travail de la force électrostatique ; potentiel et différence de potentiel ; surfaces équipotentielles ; relation entre énergie potentielle et travail ; énergie totale d’une particule chargée soumise à la seule force électrostatique et sa conservation).}
+\pt{Activités proposées, toutes traitées dans la séquence : expériences d’électrisation de la matière (frottement, contact, influence) ; mise en évidence expérimentale du champ électrostatique ; visualisation des lignes de champ avec l’huile de paraffine et la semoule ; réalisation d’un champ uniforme avec deux plaques métalliques parallèles ; établissement du travail de la force électrostatique et lien avec la différence de potentiel et l’énergie potentielle électrostatique.}
+\pt{Supports : présentation animée et fiche d’activités ; manuels scolaires agréés de la 1\textsuperscript{re} année du baccalauréat (sciences mathématiques).}}
+\end{xltabular}
+
+% =====================================================================
+\needspace{9cm}
+\bloc{2}{fi_chemin}{Déroulement de la séquence (cinq séances)}
+
+\seance{1}{2 h}{électrisation et loi de Coulomb}
+\frise[120]{cCyan/10/Mise en route, cTeal/103/Partie 1 · Électrisation et loi de Coulomb, cGreen/7/Bilan}
+\seance{2}{2 h}{le champ électrostatique}
+\frise[120]{cCyan/8/Rappels, cBlue/107/Partie 2 · Champ électrostatique, cGreen/5/Bilan}
+\seance{3}{2 h}{travail de la force électrostatique et potentiel}
+\frise[120]{cCyan/18/Rappels et exercice 1, cPurple/97/Partie 3 · Travail et potentiel, cGreen/5/Bilan}
+\seance{4}{2 h}{énergie potentielle électrostatique}
+\frise[120]{cCyan/8/Rappels, cAmber/97/Partie 4 · Énergie potentielle, cOrange/10/Vrai ou faux, cGreen/5/Bilan}
+\seance{5}{2 h}{exercices de synthèse et évaluation}
+\frise[120]{cCyan/5/Rappels, cOrange/100/Exercices 2 à 4, cGreen/15/L’essentiel et bilan}
+\par\vspace{4mm}
+
+\begin{xltabular}{\linewidth}{@{}L{3.75cm}I >{\small\RaggedRight\arraybackslash}XI >{\small\RaggedRight\arraybackslash}XI L{4.6cm}I C{1.45cm}@{}}
+\enteteDeroulement
+\endfirsthead
+\enteteDeroulement
+\endhead
+% =====================================================================
+\partie{cInk}{Séance 1 · Électrisation et loi de Coulomb (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Mise en route}{Accueil, plan et prérequis}{\diapo{1} \support{Fiche}}}
+{\pt{Distribue la fiche d’activités (deux pages), que chacun colle dans son cahier ; annonce le plan des cinq séances.}
+ \pt{Questions flash : « de quoi est formé un atome ? », « charge d’un électron ? », « expression du travail d’une force constante ? », « loi de gravitation entre deux masses ? ».}}
+{\pt{Répond oralement : noyau (protons, neutrons) et électrons ; $-e = \qty{-1,6e-19}{C}$ ; $W = \vect{F}\cdot\vect{AB}$ ; $F = G\cdot m_A\cdot m_B/d^2$.}
+ \pt{Colle la fiche d’activités dans le cahier.}}
+{\diag Questions flash.\par
+ \textit{Indicateurs :} structure de l’atome ; produit scalaire.\par\vspace{.8mm}
+ \regul Rappel au tableau du produit scalaire en coordonnées.}
+{10}{0 h 10}
+% ---------------------------------------------------------------------
+\partie{cTeal}{Partie 1 · Électrisation et loi de Coulomb}{103 min · objectifs O1 et O2}
+\etape{cTeal}{\axe{cAmber}{ic_situation}{Situation de départ}{La règle frottée, la petite décharge}{\diapo{2}}}
+{\pt{Frotte une règle en plastique avec un tissu de laine et l’approche de petits morceaux de papier ; projette l’animation (diapo 2).}
+ \pt{Pose le problème : que gagne un corps frotté, comment l’expliquer, quelle force agit ?}}
+{\pt{Observe ; propose : « la règle s’est chargée », « elle attire comme un aimant »…}}
+{\diag Représentations initiales (confusion avec le magnétisme).}
+{8}{0 h 18}
+\etape{cTeal}{\axe{cTeal}{ic_activite}{Activité 1}{Deux sortes de charges ; contact et influence (docs 1 à 3)}{\diapo{3--6} \support{Fiche · Act. 1} \support{Cahier}}}
+{\pt{Réalise les expériences des bâtons suspendus (verre-verre, ébonite-ébonite, verre-ébonite), puis du pendule électrostatique par contact et par influence (diapos 3 et 4).}
+ \pt{Présente l’information 1 ; fait traiter les questions 1 et 2 en binômes ; corrige au clic (diapo 6).}}
+{\pt{Observe, décrit, rédige ses réponses dans le cahier.}
+ \pt{Conclut à deux sortes de charges et à la règle « même signe : répulsion » ; explique le frottement et le contact par un transfert d’électrons, l’influence par un déplacement des électrons libres (boule neutre, attraction en $1/d^2$ plus forte).}}
+{\form Observation des binômes, correction collective.\par
+ \textit{Indicateurs :} seuls les électrons se déplacent ; neutralité de la boule influencée.\par\vspace{.8mm}
+ \regul Erreur fréquente : « des charges positives passent » ; revenir à l’information 1.}
+{45}{1 h 03}
+\etape{cTeal}{\axe{cTeal}{ic_questions}{Activité 1 (suite)}{La loi de Coulomb (doc 4)}{\diapo{5, 7} \support{Cahier}}}
+{\pt{Présente la loi de Coulomb (diapo 5) ; fait préciser les caractéristiques des deux forces et les représenter (questions 3 et 4, diapo 7).}}
+{\pt{Donne point d’application, droite d’action, sens et intensité ; représente les forces répulsives puis attractives.}}
+{\form Schémas au tableau par deux apprenants.\par
+ \textit{Indicateurs :} $\vect{F}_{A/B}$ appliquée en $B$ ; $\vect{F}_{A/B} = -\vect{F}_{B/A}$.}
+{20}{1 h 23}
+\etape{cTeal}{\axe{cRed}{ic_retenir}{À retenir}{Électrisation ; loi de Coulomb}{\diapo{8--9} \support{Cahier}}}
+{\pt{Projette les diapos 8 et 9 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « la distance entre deux charges triple : que devient $F$ ? » $\to$ divisée par 9.}
+{12}{1 h 35}
+\etape{cTeal}{\axe{cPurple}{ic_application}{Application}{L’atome d’hydrogène}{\diapo{10} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 10) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $F_e \approx \qty{8,2e-8}{N}$, $F_G \approx \qty{3,7e-47}{N}$, $F_e/F_G \approx \num{2,2e39}$ ; conclut que la gravitation est négligeable à l’échelle atomique.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} puissances de 10 correctes.}
+{18}{1 h 53}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan}{Synthèse et travail à la maison}{\support{Cahier}}}
+{\pt{Fait reformuler la règle d’attraction et la loi de Coulomb ; donne le travail à la maison.}}
+{\pt{Reformule ; note le travail.}}
+{\form Reformulation orale.}
+{7}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 2 · Le champ électrostatique (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Loi de Coulomb}{\diapo{9}}}
+{\pt{Questions flash : « expression de $F$ ? », « valeur de $K$ ? », « point d’application de $\vect{F}_{A/B}$ ? ».}}
+{\pt{Répond : $F = K\cdot|q_A|\cdot|q_B|/AB^2$ ; \qty{9e9}{N.m^2.C^{-2}} ; en $B$.}}
+{\diag Questions flash.}
+{8}{0 h 08}
+\partie{cBlue}{Partie 2 · Le champ électrostatique}{107 min · objectifs O3 et O4}
+\etape{cBlue}{\axe{cAmber}{ic_situation}{Situation de départ}{Une action à distance}{\diapo{11}}}
+{\pt{Approche un pendule chargé d’une sphère chargée ; projette l’animation (diapo 11) ; pose le problème : comment caractériser la propriété de l’espace autour d’une charge ?}}
+{\pt{Observe la déviation à distance ; propose « une zone d’influence ».}}
+{\diag Hypothèses.}
+{7}{0 h 15}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2}{Pendules déviés, charges témoins (docs 5 et 6)}{\diapo{12, 14} \support{Fiche · Act. 2} \support{Cahier}}}
+{\pt{Déplace le pendule chargé autour de la sphère (doc 5) ; exploite le tableau des charges témoins (doc 6, diapo 12) et l’information 2 ; fait traiter les questions 1 et 2 ; corrige (diapo 14).}}
+{\pt{Constate la déviation qui diminue avec la distance ; calcule $F_i/|q_i| = \qty{5,0e3}{N.C^{-1}}$ pour les trois charges ; en déduit $\vect{E}$ en $P$ et compare les sens de $\vect{F}$ et de $\vect{E}$.}}
+{\form Calculs vérifiés en binômes.\par
+ \textit{Indicateurs :} rapport indépendant de $q_i$ ; sens de $\vect{F}$ pour $q < 0$.}
+{28}{0 h 43}
+\etape{cBlue}{\axe{cTeal}{ic_questions}{Activité 2 (suite)}{Charge ponctuelle, superposition}{\diapo{15} \support{Cahier}}}
+{\pt{Guide l’établissement de $\vect{E} = K\cdot\dfrac{q}{r^2}\,\vect{u}$ à partir de la loi de Coulomb ; fait vérifier en $P$ et en $P'$ ; questions 3 et 4 (diapo 15).}}
+{\pt{Établit $\vect{E}$ et $E$ ; trouve \num{5,0e3} et \qty{1,25e3}{N.C^{-1}} ; distingue champ centrifuge et centripète ; écrit $\vect{E} = \sum\vect{E}_i$.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} le vecteur $\vect{u}$ va de la charge vers le point.}
+{20}{1 h 03}
+\etape{cBlue}{\axe{cTeal}{ic_activite}{Activité 2 (suite)}{Spectres électrostatiques (doc 7)}{\diapo{13, 16} \support{Fiche · Act. 2}}}
+{\pt{Réalise les spectres (huile de paraffine, semoule, haute tension) avec une électrode, deux électrodes, deux plaques ; présente l’information 3 ; question 5 (diapo 16).}}
+{\pt{Décrit les lignes radiales, courbes, parallèles ; justifie que le champ est uniforme entre les plaques, de la plaque positive vers la négative.}}
+{\form Description orale guidée.\par
+ \textit{Indicateur :} lignes orientées des charges positives vers les négatives.}
+{20}{1 h 23}
+\etape{cBlue}{\axe{cRed}{ic_retenir}{À retenir}{$\vect{F} = q\cdot\vect{E}$ ; lignes de champ}{\diapo{17--18} \support{Cahier}}}
+{\pt{Projette les diapos 17 et 18 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « sens de $\vect{E}$ autour d’une charge négative ? » $\to$ vers la charge.}
+{14}{1 h 37}
+\etape{cBlue}{\axe{cOrange}{ic_methode}{Méthode}{Champ créé par plusieurs charges}{\diapo{19} \support{Cahier}}}
+{\pt{Présente la méthode en quatre étapes (diapo 19) sur l’exemple de deux charges opposées.}}
+{\pt{Note la méthode dans le cahier.}}
+{\form Questions de compréhension.}
+{8}{1 h 45}
+\etape{cBlue}{\axe{cPurple}{ic_application}{Application}{Champ au milieu de deux charges opposées}{\diapo{20} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 20) ; travail individuel ; correction au clic.}}
+{\pt{Représente $\vect{E}_A$ et $\vect{E}_B$, de même sens ; calcule $E(O) = \qty{1,44e7}{V.m^{-1}}$, de $A$ vers $B$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} sens de $\vect{E}_B$ (vers la charge négative).}
+{10}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan}{Travail à la maison}{\diapo{34}}}
+{\pt{Donne l’exercice 1 (énoncé projeté, diapo 34) à résoudre dans le cahier.}}
+{\pt{Recopie l’énoncé.}}
+{\form —}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 3 · Travail de la force électrostatique et potentiel (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Champ électrostatique}{\diapo{17}}}
+{\pt{Questions flash : « relation entre $\vect{F}$ et $\vect{E}$ ? », « champ entre deux plaques ? », « travail d’une force constante ? ».}}
+{\pt{Répond : $\vect{F} = q\cdot\vect{E}$ ; uniforme, de $P$ vers $N$ ; $W = \vect{F}\cdot\vect{AB}$.}}
+{\diag Questions flash.}
+{8}{0 h 08}
+\etape{cCyan}{\axe{cOrange}{ic_exercices}{Exercice 1}{Correction du travail à la maison}{\diapo{35} \support{Cahier}}}
+{\pt{Corrige l’exercice 1 au clic (diapo 35) ; commente la courbe $E = f(x)$.}}
+{\pt{Compare avec sa solution : $E_p = \qty{14,4}{N.C^{-1}}$, $q \approx \qty{1,11e-13}{C}$, décroissance en $1/x^2$.}}
+{\form Autocorrection.\par\vspace{.8mm}
+ \regul Conversions µm et cm $\to$ m.}
+{10}{0 h 18}
+\partie{cPurple}{Partie 3 · Travail de la force électrostatique et potentiel électrique}{97 min · objectif O5}
+\etape{cPurple}{\axe{cAmber}{ic_situation}{Situation de départ}{Analogie avec le travail du poids}{\diapo{21}}}
+{\pt{Rappelle $W(\vect{P}) = m\cdot g\cdot(z_A - z_B)$ ; projette l’animation des plaques (diapo 21) ; pose le problème.}}
+{\pt{Propose que le travail dépende « de la position » ou « de la tension ».}}
+{\diag Hypothèses.}
+{7}{0 h 25}
+\etape{cPurple}{\axe{cTeal}{ic_activite}{Activité 3}{Boule chargée entre deux plaques (doc 8)}{\diapo{22--23} \support{Fiche · Act. 3} \support{Cahier}}}
+{\pt{Montre la déviation d’un pendule chargé entre deux plaques reliées à la haute tension (doc 8) ; présente le rappel et l’information 4 ; questions 1 et 2 en binômes ; corrige (diapo 23).}}
+{\pt{Calcule $\W{A}{B} = q\cdot E\cdot(x_A - x_B)$, indépendant du chemin (force conservative) ; écrit $V_A - V_B = E\cdot x_A - E\cdot x_B$ et $\W{A}{B} = q\cdot(V_A - V_B)$.}}
+{\form Observation des binômes.\par
+ \textit{Indicateurs :} produit scalaire avec $\vect{E} = -E\,\vect{i}$ ; signe.\par\vspace{.8mm}
+ \regul Refaire le calcul pour un déplacement parallèle aux plaques.}
+{35}{1 h 00}
+\etape{cPurple}{\axe{cTeal}{ic_questions}{Activité 3 (suite)}{Potentiels décroissants, équipotentielles, $E = U/d$}{\diapo{24} \support{Cahier}}}
+{\pt{Fait traiter les questions 3 à 5 ; corrige au clic (diapo 24).}}
+{\pt{Trouve $V_P - V_N = E\cdot d > 0$ ; montre que $\vect{E}$ va vers les potentiels décroissants, que les équipotentielles sont des plans parallèles aux plaques ; écrit $E = U_{PN}/d$.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} $\vect{E}\cdot\vect{AC} = 0 \Rightarrow \vect{AC} \perp \vect{E}$.}
+{25}{1 h 25}
+\etape{cPurple}{\axe{cRed}{ic_retenir}{À retenir}{$W = q\cdot(V_A - V_B)$ ; $E = U/d$}{\diapo{25} \support{Cahier}}}
+{\pt{Projette la diapo 25 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « travail sur une équipotentielle ? » $\to$ nul.}
+{15}{1 h 40}
+\etape{cPurple}{\axe{cPurple}{ic_application}{Application}{Un électron entre deux plaques}{\diapo{26} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 26) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $U_{PN} = \qty{3,0e3}{V}$ et $\W{N}{P} = \qty{4,8e-16}{J}$, travail moteur.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} signe de $q = -e$ et ordre $V_N - V_P$.}
+{15}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan}{Synthèse}{\support{Cahier}}}
+{\pt{Fait comparer $W(\vect{P}) = m\cdot g\cdot(z_A - z_B)$ et $W(\vect{F}) = q\cdot(V_A - V_B)$.}}
+{\pt{Établit l’analogie $m\cdot g \leftrightarrow q$, $z \leftrightarrow V$.}}
+{\form Reformulation orale.}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 4 · Énergie potentielle électrostatique (2 h)}{0 h 00 $\to$ 2 h 00}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Travail et potentiel ; théorème de l’énergie cinétique}{\diapo{25}}}
+{\pt{Questions flash : « $\W{A}{B}$ ? », « énoncé du théorème de l’énergie cinétique ? », « expression de $\Epp$ ? ».}}
+{\pt{Répond : $q\cdot(V_A - V_B)$ ; $\Delta\Ecin = \sum W$ ; $m\cdot g\cdot z + C$.}}
+{\diag Questions flash.}
+{8}{0 h 08}
+\partie{cAmber}{Partie 4 · Énergie potentielle électrostatique et conservation de l’énergie}{97 min · objectifs O6 et O7}
+\etape{cAmber}{\axe{cAmber}{ic_situation}{Situation de départ}{Le canon à électrons}{\diapo{27}}}
+{\pt{Projette l’animation du canon à électrons (diapo 27) ou montre le spot d’un oscilloscope ; pose le problème.}}
+{\pt{Propose : l’énergie cinétique vient « de la tension », « du champ ».}}
+{\diag Hypothèses.}
+{7}{0 h 15}
+\etape{cAmber}{\axe{cTeal}{ic_activite}{Activité 4}{Énergie potentielle et travail (doc 9)}{\diapo{28--29} \support{Fiche · Act. 4} \support{Cahier}}}
+{\pt{Présente le doc 9 et l’information 5 (diapo 28) ; questions 1 et 2 en binômes ; corrige (diapo 29).}}
+{\pt{Donne l’unité (J) ; détermine $C$ avec la référence ; établit $\Delta\Epe = q\cdot(V_B - V_A) = -\W{A}{B}$.}}
+{\form Observation des binômes.\par
+ \textit{Indicateur :} analogie avec $\Delta\Epp = -W(\vect{P})$.}
+{30}{0 h 45}
+\etape{cAmber}{\axe{cTeal}{ic_questions}{Activité 4 (suite)}{Conservation de l’énergie, électron-volt}{\diapo{30} \support{Cahier}}}
+{\pt{Fait démontrer la conservation de $E = \Ecin + \Epe$ (question 3) et calculer l’électron-volt (question 4) ; corrige (diapo 30).}}
+{\pt{Démontre $\Ecin(B) + \Epe(B) = \Ecin(A) + \Epe(A)$ ; trouve $\qty{1}{eV} = \qty{1,6e-19}{J}$ et les multiples.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} poids négligeable justifié par les ordres de grandeur.}
+{25}{1 h 10}
+\etape{cAmber}{\axe{cRed}{ic_retenir}{À retenir}{$\Epe = q\cdot V + C$ ; énergie totale}{\diapo{31} \support{Cahier}}}
+{\pt{Projette la diapo 31 et laisse le temps de recopier.}}
+{\pt{Recopie l’« À retenir » dans son cahier.}}
+{\form Question flash : « énergie gagnée par un proton accéléré sous \qty{500}{V} ? » $\to$ \qty{500}{eV}.}
+{15}{1 h 25}
+\etape{cAmber}{\axe{cPurple}{ic_application}{Application}{Le canon à électrons}{\diapo{32} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 32) ; travail individuel ; correction au clic.}}
+{\pt{Calcule $\Delta\Epe = \qty{-3000}{eV} = \qty{-4,8e-16}{J}$, $\Ecin(A) = \qty{4,8e-16}{J}$ et $v_A \approx \qty{3,25e7}{m.s^{-1}}$.}}
+{\somm Exercice individuel.\par
+ \textit{Indicateur :} conversion eV $\to$ J ; racine carrée.}
+{20}{1 h 45}
+\etape{cOrange}{\axe{cOrange}{ic_questions}{Vrai ou faux ?}{Je vérifie mes connaissances}{\diapo{33}}}
+{\pt{Projette le vrai/faux interactif (diapo 33) ; interroge à main levée.}}
+{\pt{Répond et corrige les affirmations fausses à l’oral.}}
+{\form Vrai/faux à main levée.\par
+ \textit{Indicateur :} au moins 5 réponses justes sur 7.\par\vspace{.8mm}
+ \regul Reprendre la notion correspondante pour chaque erreur fréquente.}
+{10}{1 h 55}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{Bilan}{Travail à la maison}{\diapo{36}}}
+{\pt{Donne l’exercice 2 (énoncé projeté, diapo 36) à préparer dans le cahier.}}
+{\pt{Recopie l’énoncé.}}
+{\form —}
+{5}{2 h 00}
+% =====================================================================
+\partie{cInk}{Séance 5 · Exercices de synthèse et évaluation (2 h)}{0 h 00 $\to$ 2 h 00 · objectifs O2 à O7}
+\etape{cCyan}{\axe{cInk2}{ic_rappel}{Rappels}{Les relations du chapitre}{\diapo{42}}}
+{\pt{Fait citer les relations du chapitre à partir de la diapo « L’essentiel » (masquée au départ).}}
+{\pt{Cite les relations et leurs unités.}}
+{\diag Questions flash.}
+{5}{0 h 05}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 2}{Superposition de champs}{\diapo{36--37} \support{Cahier}}}
+{\pt{Fait présenter au tableau la solution préparée ; corrige au clic (diapo 37) en insistant sur les projections.}}
+{\pt{Trouve $E(M) = \dfrac{K\cdot q}{4a^2}$, parallèle à $(AB)$, et $E(D) = \left(\sqrt2 - \tfrac12\right)\dfrac{K\cdot q}{a^2} \approx 0{,}914\,\dfrac{K\cdot q}{a^2}$.}}
+{\form Présentation au tableau.\par
+ \textit{Indicateurs :} sens de chaque $\vect{E}_i$ ; distances ($a\sqrt2$).\par\vspace{.8mm}
+ \regul Schéma vectoriel repris pas à pas pour les apprenants en difficulté.}
+{30}{0 h 35}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 3}{Une particule $\alpha$ dans un champ uniforme}{\diapo{38--39} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 38) ; travail en binômes ; correction au clic (diapo 39).}}
+{\pt{Calcule $\W{A}{B} = \qty{6,4e-18}{J}$, $\Epe(B) = \qty{-6,4e-18}{J}$, $\Ecin = \qty{2,0}{MeV} = \qty{3,2e-13}{J}$.}}
+{\form Correction collective.\par
+ \textit{Indicateur :} seule la coordonnée $x$ intervient ($\vect{E} = E\,\vect{i}$).}
+{25}{1 h 00}
+\etape{cOrange}{\axe{cOrange}{ic_exercices}{Exercice 4}{Pendule et ion entre deux plaques}{\diapo{40--41} \support{Cahier}}}
+{\pt{Projette l’énoncé (diapo 40) ; travail individuel noté ; ramasse quelques cahiers ; corrige au clic (diapo 41).}}
+{\pt{Calcule $E = \qty{5,0e3}{V.m^{-1}}$, $\alpha \approx 5{,}7^\circ$, $V_M = \qty{250}{V}$, $\Epe(M) = \qty{1,0e-5}{J}$, $v_N \approx \qty{8,30e4}{m.s^{-1}}$.}}
+{\somm Évaluation individuelle de fin de chapitre.\par
+ \textit{Indicateurs :} équilibre ($\tan\alpha$) ; potentiel avec la bonne référence ; conservation de l’énergie.}
+{45}{1 h 45}
+\etape{cGreen}{\axe{cGreen}{ic_reponses}{L’essentiel}{Synthèse du chapitre}{\diapo{42}}}
+{\pt{Projette « L’essentiel du chapitre » (diapo 42) ; fait le bilan de l’évaluation ; donne le travail à la maison.}}
+{\pt{Relit la synthèse ; note le travail à faire.}}
+{\somm Bilan de l’évaluation.}
+{15}{2 h 00}
+\end{xltabular}
+
+\vspace{2mm}
+\noindent
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{fi_maison}{cOrange}{Travail à la maison et prolongements}{%
+\pt{\textbf{Après la séance 1} — refaire l’application 1 avec deux protons d’un noyau distants de \qty{2e-15}{m} : objectif O2.}
+\pt{\textbf{Après la séance 2} — exercice 1 (énoncé projeté, diapo 34, à recopier et à résoudre dans le cahier) : objectif O3.}
+\pt{\textbf{Après la séance 3} — reprendre l’application 3 pour un proton allant de $P$ vers $N$ : objectif O5.}
+\pt{\textbf{Après la séance 4} — exercice 2 (diapo 36) : objectifs O3 et O4.}
+\pt{Soutien : représenter les champs de l’application 2 au point situé à \qty{5}{cm} de $B$ hors du segment. Approfondissement : calculer la vitesse d’une particule $\alpha$ de l’exercice 3 ($m = \qty{6,6e-27}{kg}$).}}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.49\linewidth}\vspace{0pt}
+\encadre{ic_application}{cPurple}{Bilan de la séquence (à compléter par le professeur)}{%
+{\sffamily\footnotesize Objectifs atteints :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Difficultés rencontrées :}\lignevide\lignevide
+\par\vspace{1.5mm}{\sffamily\footnotesize Ajustements pour la prochaine séquence :}\lignevide}
+\end{minipage}
+
+\end{document}

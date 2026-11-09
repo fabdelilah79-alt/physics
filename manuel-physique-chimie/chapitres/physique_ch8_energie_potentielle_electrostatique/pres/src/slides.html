@@ -1,0 +1,468 @@
+<section class="slide s-title" data-kind="titre" data-group="Début" data-menu="Titre du chapitre">
+  <div class="fig-full fig bare" data-scene="titre"></div>
+  <div class="title-block">
+    <div class="eyebrow">PHYSIQUE · ÉLECTRICITÉ</div>
+    <div class="chapter">Chapitre 8</div>
+    <h1>L’énergie potentielle électrostatique</h1>
+    <div class="plan">
+      <span><b>1</b>Électrisation et loi de Coulomb</span>
+      <span><b>2</b>Le champ électrostatique</span>
+      <span><b>3</b>Travail de la force électrostatique et potentiel</span>
+      <span><b>4</b>Énergie potentielle électrostatique</span>
+    </div>
+    <div class="hint">Appuyez sur → (ou cliquez sur la flèche en bas à droite) pour avancer · F : plein écran</div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 1 — Comment un corps s’électrise-t-il ?" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.85fr;--c2:1.15fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Une règle en plastique frottée avec un tissu de laine attire à distance de petits morceaux de papier ; par temps sec, on ressent parfois une petite décharge en touchant une poignée métallique.</p>
+        <ul class="problems"><li>Que gagne un corps frotté ?</li><li>Comment l’expliquer à l’échelle de l’atome ?</li><li>Quelle force s’exerce entre deux corps chargés ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="frottement"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Électrisation par frottement : deux sortes de charges" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Activité 1 · docs 1 et 2">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0"><b>Doc 1.</b> Une règle en plastique frottée avec la laine attire de petits morceaux de papier ; non frottée, elle ne les attire pas. <b>Doc 2.</b> Un bâton frotté, suspendu par un étrier, peut tourner ; on approche de l’une de ses extrémités un second bâton frotté (verre frotté avec la soie, ébonite avec une fourrure).</p></div>
+    <div style="display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="frottement"><div class="cap"><span class="doc">Doc 1</span>Règle frottée</div></div>
+      <div class="fig" data-scene="batons"><div class="cap"><span class="doc">Doc 2</span>Verre-verre : répulsion · ébonite-ébonite : répulsion · verre-ébonite : attraction</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="Électrisation par contact et par influence" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Activité 1 · doc 3 et information 1">
+  <div class="sbody cols" style="--c1:.95fr;--c2:1.05fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 3.</b> Pendule électrostatique : boule légère et conductrice suspendue à un fil isolant. (a) L’ébonite chargée <b>touche</b> la boule neutre : la boule est repoussée. (b) Le verre chargé est <b>approché sans contact</b> : la boule neutre est attirée.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information 1.</b> La matière est formée d’atomes neutres : noyau positif (protons), électrons négatifs. Lors d’une électrisation, <b>seuls des électrons se déplacent</b> : perte d’électrons ⇒ charge positive ; gain ⇒ charge négative. Dans un métal, des électrons <b>libres</b> peuvent se déplacer. Convention : verre frotté <b>positif</b>, ébonite frottée <b>négative</b>. $q = ±n·e$ avec $e = 1,6×10^{−19}~\u{C}$.</p></div>
+    </div>
+    <div class="fig" data-scene="pendule"><div class="cap"><span class="doc">Doc 3</span>Contact (a) et influence (b)</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 1" data-title="La loi de Coulomb" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Activité 1 · doc 4">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack center">
+      <div class="card "><p style="margin:0"><b>Doc 4. Loi de Coulomb (1785).</b> Deux corps ponctuels $A$ et $B$, de charges $q_A$ et $q_B$, immobiles dans le vide à la distance $d = AB$, exercent l’un sur l’autre deux forces $\vec{F}_{A/B}$ (exercée par $A$ sur $B$) et $\vec{F}_{B/A}$ :<br>• portées par la droite $(AB)$, de sens opposés : $\vec{F}_{A/B} = −\vec{F}_{B/A}$ ;<br>• de même intensité $F = K·\frac{|q_A|·|q_B|}{AB^2}$, avec $K = \frac{1}{4πε_0} = 9×10^9~\u{N·m^2·C^{−2}}$ ;<br>• attractives ou répulsives selon le signe des charges (doc 2).</p></div>
+    </div>
+    <div class="fig" data-scene="coulomb" data-opts='{"forces":false,"mode":"meme"}'><div class="cap"><span class="doc">Doc 4</span>Deux charges ponctuelles</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — Charges et électrisation" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Exploiter.</span> Doc 1 : que gagne la règle frottée ? Doc 2 : montrer qu’il existe deux sortes de charges ; énoncer la règle d’attraction et de répulsion.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">La règle frottée attire des corps légers : elle est <b>électrisée</b>. Verre-verre et ébonite-ébonite se repoussent, verre-ébonite s’attirent : <b>deux sortes</b> de charges (positives, négatives). Même signe : <b>répulsion</b> ; signes contraires : <b>attraction</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Interpréter.</span> Interpréter le frottement du verre, le contact (3a) et l’influence (3b) : pourquoi la boule reste-t-elle neutre et pourquoi est-elle attirée ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Frottement : le verre <b>cède des électrons</b> à la soie (il devient positif). Contact : l’ébonite cède des électrons à la boule, qui devient négative et est repoussée. Influence : les électrons libres migrent vers la face proche du verre ; aucun électron n’entre ni ne sort, la boule reste <b>neutre</b>. Les charges négatives sont plus proches : l’attraction (en $1/d^2$) l’emporte.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="pendule"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 1 — Les forces de Coulomb" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Questions 3 et 4">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Préciser.</span> Caractéristiques de $\vec{F}_{A/B}$ et $\vec{F}_{B/A}$ ; unités.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\vec{F}_{A/B}$ appliquée en $B$, $\vec{F}_{B/A}$ en $A$ ; droite d’action $(AB)$ ; sens opposés ; même intensité $F = K·\frac{|q_A|·|q_B|}{AB^2}$ : $F$ en N, $q$ en C, $AB$ en m.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Représenter.</span> Représenter les deux forces si $q_A·q_B > 0$, puis si $q_A·q_B < 0$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$q_A·q_B > 0$ : <b>répulsion</b>, vecteurs dirigés vers l’extérieur de $[AB]$. $q_A·q_B < 0$ : <b>attraction</b>, vecteurs dirigés l’un vers l’autre (figure).</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="coulomb"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Électrisation" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="À retenir · électrisation">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="stack center">
+      <div class="def"><h3>Électrisation</h3><p style="margin:0">Un corps peut s’électriser par <b>frottement</b>, par <b>contact</b> ou par <b>influence</b>. Toute électrisation d’un solide résulte d’un transfert ou d’un déplacement d’<b>électrons</b>. Il existe deux sortes de charges : deux charges de même signe se <b>repoussent</b>, deux charges de signes contraires s’<b>attirent</b>. Une charge est un multiple de $e = 1,6×10^{−19}~\u{C}$.</p></div>
+    </div>
+    <div class="fig" data-scene="pendule"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Loi de Coulomb" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="À retenir · loi de Coulomb">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="stack center">
+      <div class="def"><h3>Loi de Coulomb</h3><p style="margin:0 0 8px">Deux charges ponctuelles $q_A$ et $q_B$, immobiles dans le vide à la distance $AB$, exercent l’une sur l’autre deux forces portées par $(AB)$, opposées ($\vec{F}_{A/B} = −\vec{F}_{B/A}$), d’intensité :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$F = K·\frac{|q_A|·|q_B|}{AB^2}$</span></div>
+        <p style="margin:8px 0 0">avec $K = \frac{1}{4πε_0} = 9×10^9~\u{N·m^2·C^{−2}}$.</p></div>
+    </div>
+    <div class="fig" data-scene="coulomb"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="L’atome d’hydrogène" data-part="Partie 1" data-group="Partie 1 · Électrisation, loi de Coulomb" data-menu="Application · atome d’hydrogène">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Électron ($q_e = −e$, $m_e = 9,1×10^{−31}~\u{kg}$) à $d = 0,53×10^{−10}~\u{m}$ du proton ($q_p = +e$, $m_p = 1,7×10^{−27}~\u{kg}$) ; $e = 1,6×10^{−19}~\u{C}$ ; $K = 9×10^9~\u{N·m^2·C^{−2}}$ ; $G = 6,7×10^{−11}~\u{N·m^2·kg^{−2}}$.</p></div>
+          <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer $F_e$ et $F_G$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$F_e = K·\frac{e^2}{d^2} ≈ 8,2×10^{−8}~\u{N}$ ; $F_G = G·\frac{m_p·m_e}{d^2} ≈ 3,7×10^{−47}~\u{N}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Calculer $\frac{F_e}{F_G}$ et conclure.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\frac{F_e}{F_G} ≈ 2,2×10^{39}$ : à l’échelle de l’atome, la gravitation est <b>négligeable</b> devant l’interaction électrostatique.</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="hydrogene"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 2 — Une propriété de l’espace" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.85fr;--c2:1.15fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Une charge électrique agit à distance, sans contact, sur toute autre charge placée dans son voisinage : elle crée autour d’elle un <i>champ électrostatique</i>.</p>
+        <ul class="problems"><li>Comment caractériser ce champ en un point ?</li><li>Comment le calculer pour une charge ponctuelle ?</li><li>Comment visualiser sa forme dans l’espace ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="sphere"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Des pendules déviés, des charges témoins" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Activité 2 · docs 5 et 6">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="card small"><p style="margin:0"><b>Doc 5.</b> Sphère chargée positivement sur un pied isolant ; des pendules chargés positivement, placés à sa hauteur, sont déviés en s’éloignant d’elle, d’autant plus qu’ils en sont proches.</p></div>
+      <div class="card small"><p style="margin:0"><b>Doc 6.</b> Charge source $q = +50~\u{nC}$ en $A$ ; charges témoins $q_i$ placées au point $P$ ($r = AP = 30~\u{cm}$) ; $\vec{u}$ unitaire de $A$ vers $P$. En $P'$ ($AP' = 60~\u{cm}$), $q_1 = +2,0~\u{nC}$ subit $2,5×10^{−6}~\u{N}$.</p></div>
+      <table class="mtab "><tr><th>$q_i$ (nC)</th><td>+2,0</td><td>+5,0</td><td>−4,0</td></tr><tr><th>$F_i$ (N)</th><td>1,0×10<sup>−5</sup></td><td>2,5×10<sup>−5</sup></td><td>2,0×10<sup>−5</sup></td></tr><tr><th>sens de $\vec{F}_i$</th><td>$\vec{u}$</td><td>$\vec{u}$</td><td>$−\vec{u}$</td></tr></table>
+    </div>
+    <div class="stack">
+      <div class="fig" data-scene="sphere" style="height:340px"><div class="cap"><span class="doc">Doc 5</span>Pendules déviés à distance</div></div>
+      <div class="fig" data-scene="champTest" style="height:250px"><div class="cap"><span class="doc">Doc 6</span>Charge source et charges témoins</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Vecteur champ, spectres électrostatiques" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Activité 2 · information 2, doc 7">
+  <div class="sbody">
+    <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information 2.</b> Il règne un champ électrostatique en un point si une charge $q$ placée en ce point subit une force $\vec{F}$. Le <b>vecteur champ</b> est défini par $\vec{F} = q·\vec{E}$ ; $E$ en $\u{N·C^{−1}}$ ou $\u{V·m^{−1}}$. Plusieurs charges : la force totale est la <b>somme vectorielle</b> des forces. <b>Doc 7.</b> Grains de semoule sur l’huile, électrodes reliées à une haute tension : les grains dessinent les <b>lignes de champ</b>, tangentes en chaque point à $\vec{E}$, orientées dans le sens de $\vec{E}$. <b>Information 3.</b> Champ <b>uniforme</b> : $\vec{E}$ a même direction, même sens et même intensité en tout point ; lignes de champ parallèles.</p></div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="spectres"><div class="cap"><span class="doc">Doc 7</span>Spectres électrostatiques (vue de dessus)</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — Le champ en un point" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Observer.</span> Doc 5 : qu’est-ce qui montre que l’espace autour de la sphère possède une propriété particulière ? Variation avec la distance ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Les boules chargées sont déviées <b>sans contact</b> : il règne un <b>champ électrostatique</b>. Les plus proches sont les plus déviées : l’effet <b>diminue avec la distance</b> ; déviation suivant la droite passant par le centre de la sphère.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Calculer.</span> Doc 6 : calculer $\frac{F_i}{|q_i|}$. Dépend-il de $q_i$ ? Caractéristiques de $\vec{E}$ en $P$ ; sens de $\vec{F}$ et $\vec{E}$ selon le signe de $q_i$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\frac{1,0×10^{−5}}{2,0×10^{−9}} = \frac{2,5×10^{−5}}{5,0×10^{−9}} = \frac{2,0×10^{−5}}{4,0×10^{−9}} = 5,0×10^3~\u{N·C^{−1}}$ : indépendant de $q_i$. $\vec{E}$ porté par $(AP)$, sens de $\vec{u}$, $E = 5,0×10^3~\u{N·C^{−1}}$. $q > 0$ : même sens ; $q < 0$ : sens contraires.</div></div></div></div>
+    </div>
+    <div class="stack">
+      <div class="fig" data-scene="champTest"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — Charge ponctuelle et superposition" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Questions 3 et 4">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Établir.</span> Avec la loi de Coulomb, établir $\vec{E}$ créé par $q$ à la distance $r$ ; vérifier en $P$ et $P'$. Sens si $q > 0$ ? si $q < 0$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\vec{F}_i = K·\frac{q·q_i}{r^2}\vec{u} = q_i·\vec{E}$ ⇒ $\vec{E} = K·\frac{q}{r^2}\vec{u}$, $E = K·\frac{|q|}{r^2}$. En $P$ : $\frac{9×10^9×50×10^{−9}}{0,30^2} = 5,0×10^3~\u{N·C^{−1}}$ ; en $P'$ : $1,25×10^3~\u{N·C^{−1}} = \frac{E}{4}$. $q > 0$ : <b>centrifuge</b> ; $q < 0$ : <b>centripète</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Déduire.</span> Exprimer $\vec{E}(M)$ créé par plusieurs charges.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\vec{F} = Σ\vec{F}_i = q·Σ\vec{E}_i$ ⇒ $\vec{E}(M) = \vec{E}_1(M) + \vec{E}_2(M) + … $ : <b>principe de superposition</b>.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="champTest"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 2 — Lignes de champ" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Question 5">
+  <div class="sbody">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">5</span><div class="qt"><span class="kw">Décrire.</span> Doc 7 : décrire les lignes de champ en (a), (b), (c). D’où partent-elles ? Justifier que le champ est uniforme entre les plaques ; son sens ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">(a) demi-droites <b>radiales</b> ; (b) courbes allant d’une électrode à l’autre ; (c) entre les plaques, droites <b>parallèles</b>, perpendiculaires aux plaques. Les lignes partent des charges positives et aboutissent aux charges négatives. Entre les plaques, $ec{E}$ garde direction, sens et intensité : champ <b>uniforme</b>, de la plaque <b>positive</b> vers la plaque <b>négative</b>.</div></div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="spectres"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Vecteur champ électrostatique" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="À retenir · F = q·E">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="def"><h3>Vecteur champ électrostatique</h3><p style="margin:0 0 8px">Une charge $q$ placée en un point où règne un champ $\vec{E}$ subit la force :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$\vec{F} = q·\vec{E}$</span> &nbsp; soit $F = |q|·E$</div>
+        <p style="margin:8px 0 0">$E$ en <b>$\u{N·C^{−1}}$ ou $\u{V·m^{−1}}$</b>. Si $q > 0$, $\vec{F}$ et $\vec{E}$ ont le <b>même sens</b> ; si $q < 0$, ils sont de <b>sens contraires</b>.</p></div>
+    </div>
+    <div class="stack center">
+      <div class="def"><h3>Champ créé par une charge ponctuelle</h3><p style="margin:0 0 8px">À la distance $r$ d’une charge $q$ ($\vec{u}$ unitaire, dirigé de la charge vers le point) :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$\vec{E} = K·\frac{q}{r^2}\vec{u}$</span> &nbsp; $E = K·\frac{|q|}{r^2}$</div>
+        <p style="margin:8px 0 0">Champ <b>centrifuge</b> si $q > 0$, <b>centripète</b> si $q < 0$.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Superposition, lignes de champ, champ uniforme" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="À retenir · lignes de champ">
+  <div class="sbody">
+    <div class="def"><h3>Superposition, lignes de champ, champ uniforme</h3><p style="margin:0">Plusieurs charges : <b>$\vec{E}(M) = Σ\vec{E}_i(M)$</b>. Une ligne de champ est <b>tangente</b> en chacun de ses points au vecteur $\vec{E}$ ; elle est orientée dans le sens de $\vec{E}$, des charges <b>positives</b> vers les charges <b>négatives</b>. Entre deux plaques métalliques planes et parallèles soumises à une tension continue, le champ est <b>uniforme</b> : perpendiculaire aux plaques, dirigé de la plaque <b>positive</b> vers la plaque <b>négative</b>.</p></div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="lignes"></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="methode" data-chip="Méthode" data-title="Déterminer le champ créé par plusieurs charges" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Méthode">
+  <div class="sbody cols" style="--c1:1.25fr;--c2:.75fr">
+    <div class="method"><h3>Méthode : déterminer le champ créé par plusieurs charges</h3>
+      <ol class="steps"><li>Représenter au point $M$ le champ $\vec{E}_i$ de chaque charge : sur la droite (charge, $M$), <b>fuyant</b> la charge si elle est positive, <b>vers</b> la charge si elle est négative.</li><li>Calculer chaque intensité $E_i = K·\frac{|q_i|}{r_i^2}$ (distances en mètres).</li><li>Additionner les vecteurs : directement s’ils sont colinéaires, sinon par projection sur deux axes (ou avec les propriétés de la figure : diagonale d’un carré, triangle équilatéral…).</li><li>Donner les caractéristiques du champ résultant : direction, sens, intensité.</li></ol></div>
+    <div class="fig" data-scene="champO" data-opts='{"final":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Le champ au milieu de deux charges opposées" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Application · champ en O">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0">$q_A = +2,0~\u{µC}$ en $A$, $q_B = −2,0~\u{µC}$ en $B$ ; $AB = 2a = 10~\u{cm}$ ; $K = 9×10^9~\u{N·m^2·C^{−2}}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Représenter $\vec{E}_A$ et $\vec{E}_B$ en $O$, milieu de $[AB]$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$q_A > 0$ : $\vec{E}_A$ fuit $A$ (de $A$ vers $B$) ; $q_B < 0$ : $\vec{E}_B$ dirigé vers $B$. Même direction, même sens, même intensité.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Caractéristiques de $\vec{E}(O)$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E(O) = \frac{2K·|q_A|}{a^2} = \frac{2×9×10^9×2,0×10^{−6}}{0,050^2} = 1,44×10^7~\u{V·m^{−1}}$, porté par $(AB)$, de $A$ vers $B$.</div></div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
+      <div class="fig" data-scene="champO" data-opts='{"final":1}'></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 3 — Le travail de la force électrostatique" data-part="Partie 3" data-group="Partie 3 · Travail et potentiel" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.85fr;--c2:1.15fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Le travail du poids ne dépend que de la différence d’altitude : $W_{A→B}(\vec{P}) = m·g·(z_A − z_B)$. Une particule chargée entre deux plaques chargées subit, elle aussi, une force constante.</p>
+        <ul class="problems"><li>Comment calculer le travail de la force électrostatique ?</li><li>Quelle grandeur électrique joue le rôle de l’altitude ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="condensateur"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 3" data-title="Une boule chargée entre deux plaques" data-part="Partie 3" data-group="Partie 3 · Travail et potentiel" data-menu="Activité 3 · doc 8, rappel, information 4">
+  <div class="sbody cols" style="--c1:1.05fr;--c2:.95fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0"><b>Doc 8.</b> Plaques verticales parallèles $N$ et $P$, distantes de $d$ ; $U_{PN} = V_P − V_N > 0$. Champ uniforme $\vec{E}$, perpendiculaire aux plaques, de $P$ vers $N$. Axe $(Ox)$ de $N$ vers $P$ ($O$ sur $N$) : $\vec{E} = −E\vec{i}$. Boule de charge $q > 0$ allant de $A(x_A ; y_A)$ à $B(x_B ; y_B)$ par deux chemins.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Rappel (chapitre 2).</b> $W_{A→B}(\vec{F}) = \vec{F}·\vec{AB} = F_x·(x_B − x_A) + F_y·(y_B − y_A)$.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information 4.</b> <b>Potentiel électrique</b> $V$ (en volts), défini à une constante près. Dans un champ uniforme : $U_{AB} = V_A − V_B = \vec{E}·\vec{AB}$. <b>Surface équipotentielle</b> : points de même potentiel.</p></div>
+    </div>
+    <div class="fig" data-scene="condensateur"><div class="cap"><span class="doc">Doc 8</span>Champ uniforme entre deux plaques</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Travail et potentiel" data-part="Partie 3" data-group="Partie 3 · Travail et potentiel" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Établir.</span> Exprimer $W_{A→B}(\vec{F})$ en fonction de $q$, $E$, $x_A$, $x_B$. Dépend-il du chemin ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$\vec{F} = −q·E\vec{i}$ : $W_{A→B}(\vec{F}) = −q·E·(x_B − x_A) = q·E·(x_A − x_B)$. Il ne dépend que de $A$ et $B$ : la force électrostatique est <b>conservative</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Exprimer.</span> Exprimer $V_A − V_B$, puis $W_{A→B}(\vec{F})$ en fonction de $q$ et de $V_A − V_B$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_A − V_B = \vec{E}·\vec{AB} = E·x_A − E·x_B$ ; donc $W_{A→B}(\vec{F}) = q·(V_A − V_B) = q·U_{AB}$.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="condensateur"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 3 — Potentiels et équipotentielles" data-part="Partie 3" data-group="Partie 3 · Travail et potentiel" data-menu="Questions 3 à 5">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Montrer.</span> Calculer $V_P − V_N$. Quelle plaque a le potentiel le plus élevé ? Sens de $\vec{E}$ et potentiels ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_P − V_N = E·d > 0$ : $P$ a le potentiel le plus élevé ; $\vec{E}$ va de $P$ vers $N$ : sens des potentiels <b>décroissants</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Démontrer.</span> $C$ de même potentiel que $A$ : montrer $\vec{AC} ⊥ \vec{E}$. Forme des équipotentielles ? Travail sur l’une d’elles ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_A − V_C = \vec{E}·\vec{AC} = 0$ ⇒ $\vec{AC} ⊥ \vec{E}$ : plans <b>parallèles aux plaques</b>, perpendiculaires aux lignes de champ ; $W = q·(V_A − V_C) = 0$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">5</span><div class="qt"><span class="kw">Établir.</span> Relation entre $E$, $U_{PN}$ et $d$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$U_{PN} = E·d$ ⇒ $E = \frac{U_{PN}}{d}$ (d’où l’unité $\u{V·m^{−1}}$).</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="equipot"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Travail de la force électrostatique, potentiel" data-part="Partie 3" data-group="Partie 3 · Travail et potentiel" data-menu="À retenir · W = q(VA − VB)">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack center">
+      <div class="def"><h3>Travail de la force électrostatique</h3><p style="margin:0 0 8px">La force électrostatique est <b>conservative</b> : son travail ne dépend pas du <b>chemin suivi</b>.</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$W_{A→B}(\vec{F}) = q·(V_A − V_B) = q·U_{AB}$</span></div>
+        <p style="margin:8px 0 0">(relation admise valable même si le champ n’est pas uniforme)</p></div>
+      <div class="def"><h3>Potentiel dans un champ uniforme</h3><p style="margin:0"><b>$V_A − V_B = \vec{E}·\vec{AB}$</b> ; entre deux plaques distantes de $d$ : <b>$E = \frac{U}{d}$</b>. $\vec{E}$ est toujours orienté dans le sens des potentiels <b>décroissants</b>. Les surfaces équipotentielles sont <b>perpendiculaires</b> aux lignes de champ (plans parallèles aux plaques) ; sur une équipotentielle, le travail est <b>nul</b>.</p></div>
+    </div>
+    <div class="fig" data-scene="equipot"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Un électron entre deux plaques" data-part="Partie 3" data-group="Partie 3 · Travail et potentiel" data-menu="Application · électron">
+  <div class="sbody">
+    <div class="card small"><p style="margin:0">Plaques $P$ et $N$ distantes de $d = 10~\u{cm}$ ; champ uniforme $E = 3,0×10^4~\u{V·m^{−1}}$ ; $e = 1,6×10^{−19}~\u{C}$.</p></div>
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">Calculer $U_{PN} = V_P − V_N$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$U_{PN} = E·d = 3,0×10^4×0,10 = 3,0×10^3~\u{V}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Travail $W_{N→P}(\vec{F})$ pour un électron ($q = −e$) de $N$ à $P$ : moteur ou résistant ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W_{N→P}(\vec{F}) = q·(V_N − V_P) = (−e)(−U_{PN}) = 1,6×10^{−19}×3000 = 4,8×10^{−16}~\u{J} > 0$ : <b>moteur</b>, l’électron est attiré par la plaque positive.</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="situation" data-chip="Situation de départ" data-title="Partie 4 — L’énergie d’une particule chargée" data-part="Partie 4" data-group="Partie 4 · Énergie potentielle électrostatique" data-menu="Situation de départ">
+  <div class="sbody cols" style="--c1:.85fr;--c2:1.15fr">
+    <div class="stack center">
+      <div class="card situ"><svg class="bulb" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57" fill="#e89b00"/><path d="M60,22 a24,24 0 0 1 14,43 q-4,4 -4,10 v4 h-20 v-4 q0,-6 -4,-10 a24,24 0 0 1 14,-43 z" fill="#fff"/><rect x="50" y="83" width="20" height="6" rx="3" fill="#fff"/><rect x="52" y="92" width="16" height="6" rx="3" fill="#fff"/></svg>
+        <p>Dans le canon à électrons d’un oscilloscope, des électrons presque immobiles sont accélérés jusqu’à des dizaines de milliers de kilomètres par seconde : ils possèdent une énergie liée à leur position dans le champ.</p>
+        <ul class="problems"><li>Comment définir cette énergie potentielle électrostatique ?</li><li>Comment l’énergie se conserve-t-elle au cours du mouvement ?</li></ul>
+      </div>
+    </div>
+    <div class="fig" data-scene="canon"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="activite" data-chip="Activité 4" data-title="Le canon à électrons" data-part="Partie 4" data-group="Partie 4 · Énergie potentielle électrostatique" data-menu="Activité 4 · doc 9, information 5">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0"><b>Doc 9.</b> Dans le vide, la cathode $C$ chauffée émet des électrons de vitesse pratiquement nulle ; $U_{AC} = V_A − V_C > 0$ : ils sont accélérés vers l’anode percée $A$, puis frappent l’écran. Poids ($≈ 9×10^{−30}~\u{N}$) négligeable devant la force électrostatique ($≈ 10^{−14}~\u{N}$) ; pas de frottement.</p></div>
+      <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information 5.</b> <b>Énergie potentielle électrostatique</b> (par analogie avec $E_{\u{pp}} = m·g·z + C$) : $E_{\u{pe}} = q·V + C$, $C$ dépend de la référence ($E_{\u{pe}} = 0$). <b>Théorème de l’énergie cinétique</b> : $ΔE_{\u{C}} = ΣW_{A→B}$. <b>Électron-volt</b> : énergie reçue par une charge $e$ accélérée sous $1~\u{V}$ ; keV, MeV, GeV.</p></div>
+    </div>
+    <div class="fig" data-scene="canon"><div class="cap"><span class="doc">Doc 9</span>Canon à électrons (dans le vide)</div></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 4 — Énergie potentielle et travail" data-part="Partie 4" data-group="Partie 4 · Énergie potentielle électrostatique" data-menu="Questions 1 et 2">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Préciser.</span> Unité de $E_{\u{pe}}$ ? Comment déterminer $C$ ? Expression si $E_{\u{pe}} = 0$ là où $V = 0$ ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{pe}}$ en <b>joules</b> (C×V = J). $C$ se déduit de la référence : $0 = q×0 + C$ ⇒ $C = 0$ et $E_{\u{pe}} = q·V$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Démontrer.</span> Exprimer $ΔE_{\u{pe}}$ de $A$ à $B$ et comparer à $W_{A→B}(\vec{F})$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔE_{\u{pe}} = q·(V_B − V_A) = −q·(V_A − V_B)$ ⇒ <b>$ΔE_{\u{pe}} = −W_{A→B}(\vec{F})$</b>.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="canon"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="questions" data-chip="Questions" data-title="Activité 4 — Conservation, électron-volt" data-part="Partie 4" data-group="Partie 4 · Énergie potentielle électrostatique" data-menu="Questions 3 et 4">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Démontrer.</span> Théorème de l’énergie cinétique : montrer que $E = E_{\u{C}} + E_{\u{pe}}$ se conserve.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">Seule $\vec{F}$ travaille : $E_{\u{C}}(B) − E_{\u{C}}(A) = W_{A→B}(\vec{F}) = E_{\u{pe}}(A) − E_{\u{pe}}(B)$ ⇒ $E_{\u{C}}(B) + E_{\u{pe}}(B) = E_{\u{C}}(A) + E_{\u{pe}}(A)$ : l’énergie totale est <b>constante</b>.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">4</span><div class="qt"><span class="kw">Calculer.</span> Valeur de 1 eV en joules ; keV, MeV, GeV. Intérêt ?</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$1~\u{eV} = 1,6×10^{−19}~\u{C}×1~\u{V} = 1,6×10^{−19}~\u{J}$ ; $1~\u{keV} = 1,6×10^{−16}~\u{J}$ ; $1~\u{MeV} = 1,6×10^{−13}~\u{J}$ ; $1~\u{GeV} = 1,6×10^{−10}~\u{J}$. Nombres simples à l’échelle des particules.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="canon"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="retenir" data-chip="À retenir" data-title="Énergie potentielle électrostatique" data-part="Partie 4" data-group="Partie 4 · Énergie potentielle électrostatique" data-menu="À retenir · Epe = q·V + C">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack center">
+      <div class="def"><h3>Énergie potentielle électrostatique</h3><p style="margin:0 0 8px">Une charge $q$ placée en un point de potentiel $V$ possède l’énergie potentielle électrostatique :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$E_{\u{pe}} = q·V + C$</span></div>
+        <p style="margin:8px 0 0">($E_{\u{pe}} = q·V$ si $E_{\u{pe}} = 0$ là où $V = 0$) ; $E_{\u{pe}}$ en <b>joules (J)</b>. Entre deux points : <b>$ΔE_{\u{pe}} = q·(V_B − V_A) = −W_{A→B}(\vec{F})$</b>.</p></div>
+    </div>
+    <div class="stack center">
+      <div class="def"><h3>Conservation de l’énergie totale</h3><p style="margin:0 0 8px">Particule chargée soumise à la seule force électrostatique : $E = E_{\u{C}} + E_{\u{pe}}$ se <b>conserve</b> :</p>
+        <div class="big-eq" style="justify-content:center"><span class="boxeq">$\frac{1}{2}m·v_A^2 + q·V_A = \frac{1}{2}m·v_B^2 + q·V_B$</span></div>
+        <p style="margin:8px 0 0">soit $ΔE_{\u{C}} = −ΔE_{\u{pe}}$.</p></div>
+      <div class="def"><h3>L’électron-volt</h3><p style="margin:0"><b>$1~\u{eV} = 1,6×10^{−19}~\u{J}$</b> ; $1~\u{keV} = 10^3~\u{eV}$ ; $1~\u{MeV} = 10^6~\u{eV}$ ; $1~\u{GeV} = 10^9~\u{eV}$.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="application" data-chip="Application" data-title="Le canon à électrons" data-part="Partie 4" data-group="Partie 4 · Énergie potentielle électrostatique" data-menu="Application · canon à électrons">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">$U_{AC} = V_A − V_C = 3000~\u{V}$ ; électrons : $q = −e = −1,6×10^{−19}~\u{C}$, $m_e = 9,1×10^{−31}~\u{kg}$, vitesse nulle à la cathode.</p></div>
+          <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt">$ΔE_{\u{pe}}$ entre $C$ et $A$ (eV, J), puis $E_{\u{C}}(A)$.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$ΔE_{\u{pe}} = −e·U_{AC} = −3000~\u{eV} = −4,8×10^{−16}~\u{J}$ ; $E_{\u{C}}(A) = −ΔE_{\u{pe}} = 3000~\u{eV} = 4,8×10^{−16}~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt">Vitesse $v_A$ à l’anode.</div></div><div class="ans"><div class="ans-in"><div class="ans-box">$v_A = \sqrt{\frac{2e·U_{AC}}{m_e}} = \sqrt{\frac{2×4,8×10^{−16}}{9,1×10^{−31}}} ≈ 3,25×10^7~\u{m·s^{−1}}$</div></div></div></div>
+    </div>
+    </div>
+    <div class="fig" data-scene="canon" data-opts='{"U":"3000 V"}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="quiz" data-chip="Vrai ou faux ?" data-title="Je vérifie mes connaissances" data-part="Exercices" data-group="Exercices et bilan" data-menu="Vrai ou faux ?">
+  <div class="sbody">
+    <div class="vflist">
+      <div class="vf" data-answer="faux"><span class="qn">a</span><div>Lors d’une électrisation par frottement, des protons passent d’un corps à l’autre.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : seuls des électrons se déplacent.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">b</span><div>Deux corps portant des charges de même signe s’attirent.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : ils se repoussent.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">c</span><div>Si la distance entre deux charges double, la force de Coulomb est divisée par 4.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $F$ varie comme $\frac{1}{d^2}$.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">d</span><div>Le champ créé par une charge ponctuelle négative est centrifuge.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : il est centripète.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">e</span><div>Entre deux plaques chargées, le champ va de la plaque négative vers la plaque positive.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : de la plaque positive vers la négative.</div></div>
+      <div class="vf" data-answer="faux"><span class="qn">f</span><div>Le travail de la force électrostatique dépend du chemin suivi.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Faux : il ne dépend que des points de départ et d’arrivée.</div></div>
+      <div class="vf" data-answer="vrai"><span class="qn">g</span><div>Un électron accéléré sous 100 V gagne une énergie cinétique de 100 eV.</div><div class="vfb"><button type="button" data-v="vrai">Vrai</button><button type="button" data-v="faux">Faux</button></div><div class="vf-exp">Vrai : $E_{\u{C}} = e·U = 100~\u{eV}$.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 1" data-title="Champ créé par une charge ponctuelle" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · énoncé">
+  <div class="sbody">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">$K = 9×10^9~\u{N·m^2·C^{−2}}$ ; $e = 1,6×10^{−19}~\u{C}$.</p></div>
+      <ol class="exlist small"><li>Intensité $E_p$ du champ d’un proton à $r = 10~\u{µm}$.</li><li>Une charge $q > 0$ crée $E_1 = 10~\u{N·C^{−1}}$ à $x_1 = 1,0~\u{cm}$ : calculer $q$.</li><li>Calculer $E$ à $x = 2,0$ ; $3,0$ ; $4,0$ et $5,0~\u{cm}$ ; allure de $E = f(x)$.</li></ol>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 1 — Charge ponctuelle" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 1 · correction">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Proton</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_p = K·\frac{e}{r^2} = \frac{9×10^9×1,6×10^{−19}}{(1,0×10^{−5})^2} = 14,4~\u{N·C^{−1}}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Charge</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$q = \frac{E_1·x_1^2}{K} = \frac{10×0,010^2}{9×10^9} ≈ 1,11×10^{−13}~\u{C}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Courbe</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E = E_1·(\frac{x_1}{x})^2$ : $2,50$ ; $1,11$ ; $0,625$ ; $0,400~\u{N·C^{−1}}$. Courbe décroissante, tend vers 0 : $E$ varie comme $\frac{1}{x^2}$.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="courbeE"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 2" data-title="Superposition de champs" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · énoncé">
+  <div class="sbody cols" style="--c1:1fr;--c2:1fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Dans le vide ; $K = \frac{1}{4πε_0}$.</p></div>
+      <ol class="exlist small"><li>$+q$ en $A$, $−q$ en $B$, $AB = 2a$ : champ $\vec{E}(M)$ en $M$ de la médiatrice tel que $MA = MB = 2a$ (direction, sens, intensité).</li><li>Carré $ABCD$ de côté $a$ : $+q$ en $A$, $−q$ en $B$, $+q$ en $C$. Intensité de $\vec{E}(D)$.</li></ol>
+    </div>
+    <div class="fig" data-scene="ex2geo"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 2 — Superposition" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 2 · correction">
+  <div class="sbody cols" style="--c1:1.1fr;--c2:.9fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Triangle équilatéral</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_A = E_B = \frac{K·q}{4a^2}$ ; composantes perpendiculaires à $(AB)$ opposées : $E(M) = 2E_A\u{cos}60° = \frac{K·q}{4a^2}$, parallèle à $(AB)$, de $A$ vers $B$.</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Carré</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_A = E_C = \frac{K·q}{a^2}$ ⊥ : somme $\frac{\sqrt{2}K·q}{a^2}$ de $B$ vers $D$ ; $E_B = \frac{K·q}{2a^2}$ vers $B$ ⇒ $E(D) = (\sqrt{2} − \frac{1}{2})\frac{K·q}{a^2} ≈ 0,914\frac{K·q}{a^2}$, de $B$ vers $D$.</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="ex2geo" data-opts='{"final":1}'></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 3" data-title="Une particule α dans un champ uniforme" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · énoncé">
+  <div class="sbody cols" style="--c1:1.2fr;--c2:.8fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Repère $(O, \vec{i}, \vec{j}, \vec{k})$, unité : le cm ; $\vec{E} = E\vec{i}$, $E = 1,0×10^3~\u{V·m^{−1}}$. Particule α ($q = +2e$, $e = 1,6×10^{−19}~\u{C}$) de $A(2 ; 0 ; 0)$ à $B(4 ; 2 ; 0)$.</p></div>
+      <ol class="exlist small"><li>Travail $W_{A→B}(\vec{F})$.</li><li>$E_{\u{pe}}(B)$, avec $E_{\u{pe}}(A) = 0$.</li><li>Particule α au repos accélérée sous $U = 1,0×10^6~\u{V}$ : énergie cinétique en MeV puis en J.</li></ol>
+    </div>
+    <div class="fig" data-scene="repere"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 3 — La particule α" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 3 · correction">
+  <div class="sbody cols" style="--c1:1.3fr;--c2:.7fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Travail</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$W_{A→B}(\vec{F}) = q·E·(x_B − x_A) = 3,2×10^{−19}×1,0×10^3×0,020 = 6,4×10^{−18}~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Énergie potentielle</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{pe}}(B) = E_{\u{pe}}(A) − W_{A→B}(\vec{F}) = −6,4×10^{−18}~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Accélération</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E_{\u{C}} = q·U = 2e×1,0×10^6~\u{V} = 2,0~\u{MeV} = 3,2×10^{−13}~\u{J}$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="repere"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Exercice 4" data-title="Pendule et ion entre deux plaques" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 4 · énoncé">
+  <div class="sbody cols" style="--c1:1.15fr;--c2:.85fr">
+    <div class="stack">
+      <div class="card small"><p style="margin:0">Plaques verticales $N$ et $P$, $d = 8,0~\u{cm}$, $U_{PN} = 400~\u{V}$ ; $g = 10~\u{N·kg^{−1}}$.</p></div>
+      <ol class="exlist small"><li>Calculer $E$. Pendule ($m = 0,20~\u{g}$, $q = +40~\u{nC}$) en équilibre : angle $α$ avec la verticale.</li><li>Axe $(Ox)$ de $N$ vers $P$, $V_N = 0$, $E_{\u{pe}} = 0$ sur $N$ : $V_M$ et $E_{\u{pe}}(M)$ pour $x_M = 5,0~\u{cm}$.</li><li>Ion $\u{Li}^+$ ($q' = +e$, $m = 1,16×10^{−26}~\u{kg}$) lâché en $M$ : vers quelle plaque ? Vitesse $v_N$ en $N$.</li></ol>
+    </div>
+    <div class="fig" data-scene="ex4"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="exercice" data-chip="Correction" data-title="Exercice 4 — Pendule et ion" data-part="Exercices" data-group="Exercices et bilan" data-menu="Exercice 4 · correction">
+  <div class="sbody cols" style="--c1:1.35fr;--c2:.65fr">
+    <div class="qlist">
+      <div class="q"><div class="qh"><span class="qn">1</span><div class="qt"><span class="kw">Champ et équilibre</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$E = \frac{400}{0,080} = 5,0×10^3~\u{V·m^{−1}}$ ; $\u{tan}α = \frac{q·E}{m·g} = \frac{40×10^{−9}×5,0×10^3}{0,20×10^{−3}×10} = 0,10$ ⇒ $α ≈ 5,7°$ (vers $N$).</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">2</span><div class="qt"><span class="kw">Potentiel et énergie</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$V_N − V_M = \vec{E}·\vec{NM} = −E·x_M$ ⇒ $V_M = 250~\u{V}$ ; $E_{\u{pe}}(M) = q·V_M = 1,0×10^{−5}~\u{J}$</div></div></div></div>
+      <div class="q"><div class="qh"><span class="qn">3</span><div class="qt"><span class="kw">Ion lithium</span></div></div><div class="ans"><div class="ans-in"><div class="ans-box">$q' > 0$ : vers $N$. $\frac{1}{2}m·v_N^2 = e·V_M$ ⇒ $v_N = \sqrt{\frac{2×1,6×10^{−19}×250}{1,16×10^{−26}}} ≈ 8,30×10^4~\u{m·s^{−1}}$</div></div></div></div>
+    </div>
+    <div class="fig" data-scene="ex4"></div>
+  </div>
+</section>
+
+<section class="slide" data-kind="bilan" data-chip="L’essentiel" data-title="Ce qu’il faut retenir du chapitre" data-part="Bilan" data-group="Exercices et bilan" data-menu="L’essentiel du chapitre">
+  <div class="sbody">
+    <div class="bilan">
+      <div class="bil"><h3>Électrisation</h3><p>frottement, contact, influence : transfert ou déplacement d’électrons ; même signe : répulsion</p></div>
+      <div class="bil"><h3>Loi de Coulomb</h3><span class="eq-wrap">$F = K·\frac{|q_A|·|q_B|}{AB^2}$</span><p>$K = 9×10^9$ S.I.</p></div>
+      <div class="bil"><h3>Champ électrostatique</h3><span class="eq-wrap">$\vec{F} = q·\vec{E}$</span><p>charge ponctuelle : $E = K·\frac{|q|}{r^2}$ ; superposition</p></div>
+      <div class="bil"><h3>Champ uniforme</h3><span class="eq-wrap">$E = \frac{U}{d}$</span><p>$V_A − V_B = \vec{E}·\vec{AB}$ ; $\vec{E}$ vers les potentiels décroissants</p></div>
+      <div class="bil"><h3>Travail</h3><span class="eq-wrap">$W_{A→B} = q·(V_A − V_B)$</span><p>force conservative</p></div>
+      <div class="bil"><h3>Énergie</h3><span class="eq-wrap">$E_{\u{pe}} = q·V + C$</span><p>$ΔE_{\u{pe}} = −W$ ; $E_{\u{C}} + E_{\u{pe}}$ constante ; $1~\u{eV} = 1,6×10^{−19}~\u{J}$</p></div>
+    </div>
+  </div>
+</section>

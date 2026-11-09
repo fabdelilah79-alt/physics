@@ -1,0 +1,150 @@
+% =====================================================================
+%  Fiche d’activités : les 4 activités du chapitre 8 (physique, sciences mathématiques) — deux pages A4
+%  L’énergie potentielle électrostatique (activités 1 et 2 page 1, activités 3 et 4 page 2)
+%  (sans situation de départ, sans zone de nom, sans bandeau de titre)
+%  À coller dans le cahier. Compilation : xelatex fiche_unique.tex (deux passes)
+% =====================================================================
+\documentclass[10pt,a4paper]{article}
+\usepackage[a4paper,top=.75cm,bottom=.6cm,left=.8cm,right=.8cm]{geometry}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{TeX Gyre Pagella}
+\setsansfont{Poppins}[Path=fonts/, Extension=.ttf, UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmathfont{Latin Modern Math}
+\setmathfont[range={it/{latin,Latin,greek,Greek}}]{texgyrepagella-italic.otf}
+\setmathfont[range={up/{latin,Latin,num}}]{texgyrepagella-regular.otf}
+\usepackage[table]{xcolor}
+\usepackage{graphicx,tikz,array}
+\usepackage[most]{tcolorbox}
+\graphicspath{{images/}}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[newcommands]{ragged2e}
+\setlength{\RaggedRightRightskip}{0pt plus 8em}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\sisetup{locale=FR, per-mode=power, inter-unit-product=\ensuremath{\mathord{\cdot}}, group-minimum-digits=5}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\relpenalty=10000 \binoppenalty=10000
+\emergencystretch=3em
+
+\definecolor{cInk}{HTML}{1B2A41}  \definecolor{cInk2}{HTML}{51627A}
+\definecolor{cBlue}{HTML}{1F5FA8} \definecolor{cOrange}{HTML}{F07F1E}
+\definecolor{cTeal}{HTML}{0E8F8A} \definecolor{cSoft}{HTML}{F4F7FB}
+\definecolor{cRed}{HTML}{D62839}  \definecolor{cGreen}{HTML}{1F9D74}
+\color{cInk}
+
+\newcommand{\kw}[1]{{\sffamily\bfseries\color{cBlue}#1}}
+\NewDocumentCommand{\docbadge}{m}{\tikz[baseline=(b.base)]\node[fill=cBlue,text=white,rounded corners=4pt,inner xsep=3pt,inner ysep=1.4pt,font=\sffamily\bfseries\tiny](b){Doc #1};}
+% document : {largeur}{n}{légende}{image}
+\newcommand{\doc}[4]{%
+  \begin{minipage}[t]{#1}\vspace{0pt}\centering
+    \includegraphics[width=\linewidth]{#4}\par\vspace{.5mm}
+    {\sffamily\scriptsize\docbadge{#2}\enspace\color{cInk2}#3}
+  \end{minipage}}
+\NewDocumentCommand{\pastille}{m m}{\tikz[baseline=(n.base)]\node[circle,fill=#1,text=white,inner sep=0pt,minimum size=3.9mm,font=\sffamily\bfseries\tiny](n){#2};}
+\setlist[enumerate,1]{label={\pastille{cBlue}{\arabic*}}, leftmargin=6mm, labelsep=1.8mm, itemsep=2pt, topsep=2pt, parsep=0pt}
+% séparateur discret entre les activités
+\newcommand{\sep}[1]{\par\vspace{2.5mm}%
+  \noindent\tikz[baseline=(t.base)]\node[fill=cTeal,text=white,rounded corners=3pt,inner xsep=4pt,inner ysep=1.5pt,font=\sffamily\bfseries\scriptsize](t){Activité #1};%
+  \hspace{2mm}{\color{cTeal!70}\leaders\hrule height .7pt\hfill\kern0pt}\par\vspace{1mm}}
+
+% ---------- tableau de mesures compact ----------
+\newcommand{\mesures}[3][0.8cm]{{\renewcommand{\arraystretch}{1.2}\setlength{\arrayrulewidth}{.5pt}\arrayrulecolor{cTeal!55}\setlength{\tabcolsep}{3pt}%
+  \begin{tabular}{|>{\sffamily\scriptsize\bfseries\color{cTeal}}l|*{#2}{>{\centering\arraybackslash}p{#1}|}}\hline #3\end{tabular}}}
+
+\newcommand{\vect}[1]{\overrightarrow{#1}}
+\newcommand{\Ec}{E_{\mathrm{C}}}
+\newcommand{\Epe}{E_{\mathrm{pe}}}
+\newcommand{\Epp}{E_{\mathrm{pp}}}
+\newcommand{\W}[2]{W_{#1\rightarrow #2}(\vect{F})}
+\newcommand{\info}[1]{\par\vspace{.5mm}{\setlength{\fboxsep}{2pt}\colorbox{cSoft}{\parbox{\dimexpr\linewidth-4pt}{\RaggedRight #1}}}\par\vspace{.5mm}}
+\begin{document}
+\small\RaggedRight
+\setlength{\parskip}{0pt}
+% =====================================================================
+\sep{1}
+\begin{minipage}[t]{0.40\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 1.} Une règle en plastique frottée avec un tissu de laine attire de petits morceaux de papier ; non frottée, elle ne les attire pas.\par\vspace{.8mm}
+\textbf{Doc 2.} Un bâton frotté, suspendu par un étrier, peut tourner ; on approche de l’une de ses extrémités un second bâton frotté (verre frotté avec la soie, ébonite avec une fourrure).\par\vspace{.8mm}
+\textbf{Doc 3.} Pendule électrostatique (boule légère conductrice, fil isolant). (a) L’ébonite chargée \textbf{touche} la boule neutre : la boule est repoussée. (b) Le verre chargé est \textbf{approché sans contact} : la boule est attirée.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.58\linewidth}\vspace{0pt}\centering
+\doc{0.42\linewidth}{1}{Règle frottée}{doc1_frottement}\hfill\doc{0.56\linewidth}{3}{Contact (a) et influence (b)}{doc3_pendule}\par\vspace{1mm}
+\doc{.9\linewidth}{2}{Verre-verre : répulsion ; ébonite-ébonite : répulsion ; verre-ébonite : attraction}{doc2_batons}
+\end{minipage}
+\info{\textbf{Information 1.} Atomes neutres : noyau positif (protons), électrons négatifs. Lors d’une électrisation, \textbf{seuls des électrons se déplacent} : perte d’électrons $\Rightarrow$ charge positive ; gain $\Rightarrow$ charge négative. Dans un métal, des électrons \textbf{libres} peuvent se déplacer. Convention : verre frotté \textbf{positif}, ébonite frottée \textbf{négative}. Charge en coulombs (C) : $q = \pm n\cdot e$, $e = \qty{1,6e-19}{C}$.}
+\begin{minipage}[t]{0.70\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 4. Loi de Coulomb.} Deux corps ponctuels $A$ et $B$ (charges $q_A$, $q_B$), immobiles dans le vide à la distance $AB$, exercent l’un sur l’autre deux forces $\vect{F}_{A/B}$ (exercée par $A$ sur $B$) et $\vect{F}_{B/A}$, portées par $(AB)$, de sens opposés ($\vect{F}_{A/B} = -\vect{F}_{B/A}$), de même intensité $F = K\cdot\dfrac{|q_A|\cdot|q_B|}{AB^2}$ avec $K = \dfrac{1}{4\pi\varepsilon_0} = \qty{9e9}{N.m^2.C^{-2}}$ ; attractives ou répulsives selon le signe des charges.
+\end{minipage}\hfill
+\doc{0.28\linewidth}{4}{Deux charges ponctuelles}{doc4_coulomb}
+\begin{enumerate}
+  \item \kw{Exploiter.} Doc 1 : que gagne la règle frottée ? Doc 2 : montrer qu’il existe deux sortes de charges ; énoncer la règle d’attraction et de répulsion.
+  \item \kw{Interpréter.} Avec l’information 1 : électrisation du verre par frottement ; de la boule par contact (3a) ; attraction par influence (3b) : pourquoi la boule reste-t-elle neutre et pourquoi est-elle attirée ?
+  \item \kw{Préciser.} Doc 4 : caractéristiques de $\vect{F}_{A/B}$ et $\vect{F}_{B/A}$ (point d’application, direction, sens, intensité) et unités.
+  \item \kw{Représenter.} Représenter les deux forces si $q_A\cdot q_B > 0$, puis si $q_A\cdot q_B < 0$.
+\end{enumerate}
+
+\sep{2}
+\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 5.} Une sphère chargée positivement est posée sur un pied isolant ; des pendules chargés positivement, placés à sa hauteur, sont déviés en s’éloignant d’elle, d’autant plus qu’ils en sont proches.\par\vspace{.8mm}
+\textbf{Doc 6.} Charge source $q = \qty{+50}{nC}$ en $A$ ; charges témoins $q_i$ au point $P$ ($r = AP = \qty{30}{cm}$) ; $\vect{u}$ unitaire de $A$ vers $P$.\par\vspace{.5mm}
+\centerline{\mesures[1.25cm]{3}{%
+$q_i$ (\unit{nC}) & $+2{,}0$ & $+5{,}0$ & $-4{,}0$\\ \hline
+$F_i$ (\unit{N}) & \num{1,0e-5} & \num{2,5e-5} & \num{2,0e-5}\\ \hline
+sens de $\vect{F}_i$ & $\vect{u}$ & $\vect{u}$ & $-\vect{u}$\\ \hline}}\par\vspace{.5mm}
+En $P'$ ($AP' = \qty{60}{cm}$), $q_1 = \qty{+2,0}{nC}$ subit \qty{2,5e-6}{N}.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.51\linewidth}\vspace{0pt}\centering
+\doc{0.53\linewidth}{5}{Pendules déviés}{doc5_sphere}\hfill\doc{0.45\linewidth}{6}{Charge source, charge témoin}{doc6_champ_test}
+\end{minipage}
+\info{\textbf{Information 2.} Il règne un champ électrostatique en un point si une charge $q$ placée en ce point subit une force $\vect{F}$. Le \textbf{vecteur champ} est défini par $\vect{F} = q\cdot\vect{E}$ ; $E$ en \unit{N.C^{-1}} ou \unit{V.m^{-1}}. Plusieurs charges : la force totale est la \textbf{somme vectorielle} des forces. \textbf{Information 3.} Champ \textbf{uniforme} : $\vect{E}$ a même direction, même sens et même intensité en tout point ; ses lignes de champ sont parallèles.}
+\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 7. Spectres.} Grains de semoule sur l’huile de paraffine, électrodes reliées à une haute tension : les grains dessinent les \textbf{lignes de champ}, tangentes en chaque point à $\vect{E}$, orientées dans le sens de $\vect{E}$.\par\vspace{.5mm}
+\doc{\linewidth}{7}{(a) une électrode, (b) deux électrodes, (c) deux plaques}{doc7_spectres}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.51\linewidth}\vspace{0pt}\RaggedRight
+\begin{enumerate}
+  \item \kw{Observer.} Doc 5 : qu’est-ce qui montre que l’espace autour de la sphère possède une propriété particulière ? Variation avec la distance ?
+  \item \kw{Calculer.} Doc 6 : calculer $F_i/|q_i|$ ; dépend-il de $q_i$ ? Caractéristiques de $\vect{E}$ en $P$ ; sens de $\vect{F}$ et de $\vect{E}$ selon le signe de $q_i$.
+  \item \kw{Établir.} Avec la loi de Coulomb, exprimer $\vect{E}$ en fonction de $K$, $q$, $r$, $\vect{u}$, puis $E$ ; vérifier en $P$ et $P'$. Sens de $\vect{E}$ si $q > 0$, si $q < 0$ ?
+  \item \kw{Déduire.} Exprimer le champ $\vect{E}(M)$ créé par plusieurs charges ponctuelles.
+  \item \kw{Décrire.} Doc 7 : lignes de champ en (a), (b), (c) ; d’où partent-elles ? Justifier que le champ est uniforme entre les plaques ; son sens ?
+\end{enumerate}
+\end{minipage}
+
+\newpage
+% =====================================================================
+\sep{3}
+\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 8.} Deux plaques métalliques verticales et parallèles $N$ et $P$, distantes de $d$, reliées à un générateur haute tension : $U_{PN} = V_P - V_N > 0$. Entre elles, champ uniforme $\vect{E}$, perpendiculaire aux plaques, de $P$ vers $N$. Repère $(O, \vect{i}, \vect{j})$, axe $(Ox)$ de $N$ vers $P$ ($O$ sur $N$) : $\vect{E} = -E\,\vect{i}$. Une boule de charge $q > 0$, soumise à $\vect{F} = q\cdot\vect{E}$, va de $A(x_A ; y_A)$ à $B(x_B ; y_B)$ par deux chemins différents.\par\vspace{.8mm}
+\info{\textbf{Rappel (chapitre 2).} $\W{A}{B} = \vect{F}\cdot\vect{AB} = F_x\cdot(x_B - x_A) + F_y\cdot(y_B - y_A)$.}
+\info{\textbf{Information 4.} \textbf{Potentiel électrique} $V$, en volts, défini à une constante près (référence où $V = 0$). Dans un champ uniforme : $U_{AB} = V_A - V_B = \vect{E}\cdot\vect{AB}$. \textbf{Surface équipotentielle} : ensemble des points de même potentiel.}
+\end{minipage}\hfill
+\doc{0.51\linewidth}{8}{Champ uniforme entre deux plaques}{doc8_condensateur}
+\begin{enumerate}
+  \item \kw{Établir.} Exprimer $\W{A}{B}$ en fonction de $q$, $E$, $x_A$ et $x_B$. Dépend-il du chemin suivi ? Que dire de la force électrostatique ?
+  \item \kw{Exprimer.} Exprimer $V_A - V_B$ en fonction de $E$, $x_A$, $x_B$, puis $\W{A}{B}$ en fonction de $q$ et de $V_A - V_B$.
+  \item \kw{Montrer.} Calculer $V_P - V_N$ en fonction de $E$ et $d$. Quelle plaque a le potentiel le plus élevé ? Montrer que $\vect{E}$ est orienté dans le sens des potentiels décroissants.
+  \item \kw{Démontrer.} $C$ a le même potentiel que $A$ : montrer que $\vect{AC} \perp \vect{E}$. Forme des surfaces équipotentielles ? Travail de $\vect{F}$ sur l’une d’elles ?
+  \item \kw{Établir.} Relation entre $E$, $U_{PN}$ et $d$.
+\end{enumerate}
+
+\sep{4}
+\begin{minipage}[t]{0.47\linewidth}\vspace{0pt}\RaggedRight
+\textbf{Doc 9. Canon à électrons.} Dans une ampoule où règne le vide, la cathode $C$ chauffée émet des électrons de vitesse pratiquement nulle. La tension $U_{AC} = V_A - V_C > 0$ entre l’anode percée $A$ et la cathode les accélère ; ils traversent l’anode puis frappent l’écran. Le poids d’un électron ($\approx\qty{9e-30}{N}$) est négligeable devant la force électrostatique ($\approx\qty{e-14}{N}$) ; pas de frottement.
+\end{minipage}\hfill
+\doc{0.51\linewidth}{9}{Canon à électrons (dans le vide)}{doc9_canon}
+\info{\textbf{Information 5.} \textbf{Énergie potentielle électrostatique} (par analogie avec $\Epp = m\cdot g\cdot z + C$) : une charge $q$ en un point de potentiel $V$ a l’énergie $\Epe = q\cdot V + C$ ; $C$ dépend de l’état de référence ($\Epe = 0$). \textbf{Théorème de l’énergie cinétique} : $\Delta\Ec = \Ec(B) - \Ec(A) = \sum W_{A\rightarrow B}$. \textbf{Électron-volt} (eV) : énergie reçue par une particule de charge $e$ accélérée sous \qty{1}{V} ; multiples : keV ($10^3$ eV), MeV ($10^6$ eV), GeV ($10^9$ eV).}
+\begin{enumerate}
+  \item \kw{Préciser.} Unité de $\Epe$ ? Comment déterminer $C$ ? Expression de $\Epe$ si $\Epe = 0$ là où $V = 0$ ?
+  \item \kw{Démontrer.} Exprimer $\Delta\Epe = \Epe(B) - \Epe(A)$ quand $q$ va de $A$ à $B$ et la comparer à $\W{A}{B}$.
+  \item \kw{Démontrer.} Doc 9 : appliquer le théorème de l’énergie cinétique à un électron et montrer que $E = \Ec + \Epe$ se conserve.
+  \item \kw{Calculer.} Valeur de \qty{1}{eV} en joules ; de \qty{1}{keV}, \qty{1}{MeV} et \qty{1}{GeV}. Intérêt de cette unité ?
+\end{enumerate}
+\end{document}
