@@ -227,7 +227,7 @@ body.dark .rappel{background:#243246;}
     <div class="card small"><p style="margin:0"><b>Doc 1.</b> Une règle en plastique frottée avec la laine attire de petits morceaux de papier ; non frottée, elle ne les attire pas. <b>Doc 2.</b> Un bâton frotté, suspendu par un étrier, peut tourner ; on approche de l’une de ses extrémités un second bâton frotté (verre frotté avec la soie, ébonite avec une fourrure).</p></div>
     <div style="display:grid;grid-template-columns:.8fr 1.2fr;gap:24px;flex:1;min-height:0">
       <div class="fig" data-scene="frottement"><div class="cap"><span class="doc">Doc 1</span>Règle frottée</div></div>
-      <div class="fig" data-scene="batons"><div class="cap"><span class="doc">Doc 2</span>Verre-verre : répulsion · ébonite-ébonite : répulsion · verre-ébonite : attraction</div></div>
+      <div class="fig" data-scene="batons"><div class="cap"><span class="doc">Doc 2</span>Vues de face et de dessus · verre-verre et ébonite-ébonite : répulsion · verre-ébonite : attraction</div></div>
     </div>
   </div>
 </section>
@@ -332,7 +332,7 @@ body.dark .rappel{background:#243246;}
 
 <section class="slide" data-kind="activite" data-chip="Activité 2" data-title="Vecteur champ, spectres électrostatiques" data-part="Partie 2" data-group="Partie 2 · Champ électrostatique" data-menu="Activité 2 · information 2, doc 7">
   <div class="sbody">
-    <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information 2.</b> Il règne un champ électrostatique en un point si une charge <span class="eq"><var>q</var></span> placée en ce point subit une force <span class="eq"><span class="vec"><var>F</var></span></span>. Le <b>vecteur champ</b> est défini par <span class="eq"><span class="vec"><var>F</var></span><span class="op">=</span><var>q</var><span class="dot">·</span><span class="vec"><var>E</var></span></span> ; <span class="eq"><var>E</var></span> en <span class="eq"><span class="unit">N<span class="dot">·</span>C<sup><span class="op">−</span>1</sup></span></span> ou <span class="eq"><span class="unit">V<span class="dot">·</span>m<sup><span class="op">−</span>1</sup></span></span>. Plusieurs charges : la force totale est la <b>somme vectorielle</b> des forces. <b>Doc 7.</b> Grains de semoule sur l’huile, électrodes reliées à une haute tension : les grains dessinent les <b>lignes de champ</b>, tangentes en chaque point à <span class="eq"><span class="vec"><var>E</var></span></span>, orientées dans le sens de <span class="eq"><span class="vec"><var>E</var></span></span>. <b>Information 3.</b> Champ <b>uniforme</b> : <span class="eq"><span class="vec"><var>E</var></span></span> a même direction, même sens et même intensité en tout point ; lignes de champ parallèles.</p></div>
+    <div class="card small" style="border:1.5px solid #0e8f8a66"><p style="margin:0"><b>Information 2.</b> Il règne un champ électrostatique en un point si une charge <span class="eq"><var>q</var></span> placée en ce point subit une force <span class="eq"><span class="vec"><var>F</var></span></span>. Le <b>vecteur champ</b> est défini par <span class="eq"><span class="vec"><var>F</var></span><span class="op">=</span><var>q</var><span class="dot">·</span><span class="vec"><var>E</var></span></span> ; <span class="eq"><var>E</var></span> en <span class="eq"><span class="unit">N<span class="dot">·</span>C<sup><span class="op">−</span>1</sup></span></span> ou <span class="eq"><span class="unit">V<span class="dot">·</span>m<sup><span class="op">−</span>1</sup></span></span>. Plusieurs charges : la force totale est la <b>somme vectorielle</b> des forces. <b>Doc 7.</b> Grains de semoule sur l’huile, électrodes reliées à une haute tension : les grains dessinent les <b>lignes de champ</b> (pour une seule pointe, l’autre borne est reliée à un anneau contre la paroi), tangentes en chaque point à <span class="eq"><span class="vec"><var>E</var></span></span>, orientées dans le sens de <span class="eq"><span class="vec"><var>E</var></span></span>. <b>Information 3.</b> Champ <b>uniforme</b> : <span class="eq"><span class="vec"><var>E</var></span></span> a même direction, même sens et même intensité en tout point ; lignes de champ parallèles.</p></div>
     <div style="display:grid;grid-template-columns:1fr;gap:24px;flex:1;min-height:0">
       <div class="fig" data-scene="spectres"><div class="cap"><span class="doc">Doc 7</span>Spectres électrostatiques (vue de dessus)</div></div>
     </div>
@@ -1275,39 +1275,47 @@ SCENES.frottement = (host, o = {}) => {
 
 /* ---------- Doc 2 : bâtons suspendus — répulsion ou attraction (vue en perspective cavalière) ---------- */
 SCENES.batons = (host, o = {}) => {
-  const W = 960, H = 300, f = new Fig(host, W, H, {label: 'Bâton suspendu par un étrier : verre et verre se repoussent, ébonite et ébonite se repoussent, verre et ébonite s’attirent'});
-  const sc = labScene(f, 262), d = realDefs(f);
-  const cases = [['verre', 'verre', -1, 'verre frotté · verre frotté'], ['ebonite', 'ebonite', -1, 'ébonite frottée · ébonite frottée'], ['verre', 'ebonite', 1, 'verre frotté · ébonite frottée']];
-  const k = .5 * Math.SQRT1_2;   // profondeur z (vers l'arrière) dessinée vers le haut à droite
-  const prj = (cx, cy, x, z) => [cx + x + k * z, cy - k * z];
-  const Ls = 140, Lh = 80;
-  const items = cases.map(([s1, s2, att, lab], i) => {
-    const x0 = 14 + i * 318, cx = x0 + 120, cy = 160;
-    if (i) f.line(x0 - 8, 14, x0 - 8, 258, {stroke: '#c9d6e6', 'stroke-width': 1.2, 'stroke-dasharray': '5 5', parent: sc});
-    standClamp(f, sc, x0 + 22, 262, 52, cx + 6, {top: 36});
-    f.line(cx, 56, cx, cy - 12, {stroke: '#9c8f6a', 'stroke-width': 1.4, parent: sc});
-    f.path(`M${cx - 11},${cy - 12} L${cx},${cy - 2} L${cx + 11},${cy - 12}`, {stroke: '#5d6978', 'stroke-width': 1.6, fill: 'none', parent: sc});
-    const arc = f.path('', {stroke: C.orange, 'stroke-width': 2.6, fill: 'none', 'stroke-dasharray': '6 4', 'marker-end': f.mk('orange'), parent: sc});
-    const ghost = f.g({parent: sc, opacity: .28}); const gs = stick(f, ghost, Ls, s1); setT(gs, cx - Ls / 2, cy);
+  // Vue de face (en haut) + vue de dessus (en bas). Le bâton suspendu tourne autour du fil vertical :
+  // le bâton tenu à la main est placé en avant de l'extrémité droite (décalé sur le côté, sinon la force passerait par l'axe).
+  const W = 960, H = 420, f = new Fig(host, W, H, {label: 'Bâton frotté suspendu par un étrier ; on approche un second bâton frotté de l’une de ses extrémités : verre-verre et ébonite-ébonite se repoussent, verre-ébonite s’attirent'});
+  const sc = labScene(f, 240);
+  const cases = [['verre', 'verre', 1, 'verre frotté · verre frotté'], ['ebonite', 'ebonite', 1, 'ébonite frottée · ébonite frottée'], ['verre', 'ebonite', -1, 'verre frotté · ébonite frottée']];
+  const Ls = 140, Lh = 86, R = Ls / 2, DZ = 34;   // DZ : décalage du bâton approché vers l'avant (vue de dessus)
+  const items = cases.map(([s1, s2, rep, lab], i) => {
+    const x0 = 14 + i * 318, cx = x0 + 118, cy = 150, ty = 330;
+    if (i) f.line(x0 - 8, 10, x0 - 8, 410, {stroke: '#c9d6e6', 'stroke-width': 1.2, 'stroke-dasharray': '5 5', parent: sc});
+    // ----- vue de face -----
+    standClamp(f, sc, x0 + 20, 240, 44, cx + 6, {top: 26});
+    f.path(`M${cx},48 L${cx},${cy - 11}`, {stroke: '#9c8f6a', 'stroke-width': 1.4, parent: sc});
     const rodG = f.g({parent: sc}); stick(f, rodG, Ls, s1);
-    // bâton approché (tenu à la main), en avant (z < 0) du bout droit
-    const [hx, hy] = prj(cx, cy, Ls / 2 + 10, -64);
-    const hand = f.g({parent: sc}); const h2 = stick(f, hand, Lh, s2); setT(h2, hx, hy); holdStick(f, hand, hx + Lh - 12, hy, .85);
-    tag(f, sc, x0 + 150, 288, lab, {size: 13, w: lab.length * 6.6});
-    return {cx, cy, rodG, arc, att};
+    f.path(`M${cx - 9},${cy - 11} L${cx - 9},${cy + 3} Q${cx},${cy + 12} ${cx + 9},${cy + 3} L${cx + 9},${cy - 11} Z`, {stroke: '#5d6978', 'stroke-width': 1.6, fill: 'none', parent: sc});   // étrier qui entoure le bâton
+    f.path(`M${cx - 9},${cy - 11} L${cx},${cy - 11} L${cx + 9},${cy - 11}`, {stroke: '#5d6978', 'stroke-width': 1.6, parent: sc});
+    const hx = cx + R + 6;   // bout du bâton approché : juste au-delà de l'extrémité droite, en avant (pas de contact)
+    const hand = f.g({parent: sc}); const h2 = stick(f, hand, Lh, s2); setT(h2, hx, cy + 2); holdStick(f, hand, hx + Lh - 12, cy + 2, .85);
+    tag(f, sc, x0 + 150, 232, lab, {size: 13, w: lab.length * 6.6});
+    // ----- vue de dessus -----
+    f.rect(x0 + 4, 252, 296, 160, {rx: 10, fill: '#f6f9fd', stroke: '#c9d6e6', 'stroke-width': 1.2, parent: sc});
+    f.T(x0 + 14, 270, 'vue de dessus', {cls: 'lbl-s', size: 12, fill: C.ink2, parent: sc});
+    f.T(x0 + 290, 404, 'avant (côté observateur) ↓', {cls: 'lbl-s', anchor: 'end', size: 11, fill: C.ink2, parent: sc});
+    const ghost = f.g({parent: sc, opacity: .3}); setT(stick(f, ghost, Ls, s1), cx - R, ty);
+    const topG = f.g({parent: sc}); setT(stick(f, topG, Ls, s1), -R, 0);
+    f.circ(cx, ty, 4, {fill: '#5d6978', parent: sc}); f.circ(cx, ty, 8, {fill: 'none', stroke: '#5d6978', 'stroke-width': 1.2, parent: sc});
+    const h3 = stick(f, sc, Lh, s2); setT(h3, hx, ty + DZ);
+    const arc = f.path('', {stroke: C.orange, 'stroke-width': 2.6, fill: 'none', 'marker-end': f.mk('orange'), parent: sc});
+    return {cx, cy, ty, rodG, topG, arc, rep};
   });
   f.frame();
   return {update(t){
     const p = o.book ? 1 : ease(clamp(((t % 7) - 1) / 2.5, 0, 1));
     items.forEach(it => {
-      // rotation autour du fil vertical : attraction, le bout droit vient vers l'avant (z < 0) ; répulsion, il part vers l'arrière
-      const phi = rad(it.att * 30 * p), xr = Ls / 2 * Math.cos(phi), zr = -Ls / 2 * Math.sin(phi);
-      const [x1, y1] = prj(it.cx, it.cy, -xr, -zr), [x2, y2] = prj(it.cx, it.cy, xr, zr);
-      const len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-      it.rodG.setAttribute('transform', `translate(${f2(x1)},${f2(y1)}) rotate(${f2(ang)}) scale(${f2(len / Ls)},1)`);
-      let dd = ''; const N = 14;
-      for (let i = 0; i <= N; i++){ const b = rad(it.att * 30 * p * i / N), [x, y] = prj(it.cx, it.cy, (Ls / 2 + 4) * Math.cos(b), -(Ls / 2 + 4) * Math.sin(b)); dd += (i ? ' L' : 'M') + f2(x) + ',' + f2(y - 16); }
-      it.arc.setAttribute('d', p > .15 ? dd : '');
+      // angle de rotation (vue de dessus, positif = l'extrémité droite part vers l'arrière) : répulsion 30°, attraction −20° (s'arrête avant le contact)
+      const a = rad((it.rep > 0 ? 30 : -20) * p);
+      const half = R * Math.cos(a);   // vue de face : le bâton paraît raccourci, symétrique autour du fil
+      it.rodG.setAttribute('transform', `translate(${f2(it.cx - half)},${f2(it.cy)}) scale(${f2(half / R)},1)`);
+      it.topG.setAttribute('transform', `translate(${f2(it.cx)},${f2(it.ty)}) rotate(${f2(-a * 180 / Math.PI)})`);
+      let d = ''; const N = 14, r = R + 10;
+      for (let i = 0; i <= N; i++){ const b = a * i / N; d += (i ? ' L' : 'M') + f2(it.cx + r * Math.cos(b)) + ',' + f2(it.ty - r * Math.sin(b)); }
+      it.arc.setAttribute('d', p > .12 ? d : '');
     });
   }};
 };
@@ -1318,9 +1326,9 @@ SCENES.pendule = (host, o = {}) => {
   const sc = labScene(f, 300);
   const L = 150, py = 60;
   // (a) contact : ébonite (−) à droite de la boule
-  const pa = pendulum(f, sc, 40, 300, py, L, {armX: 200}), pb = pendulum(f, sc, 440, 300, py, L, {armX: 600});
+  const pa = pendulum(f, sc, 40, 300, py, L, {armX: 200}), pb = pendulum(f, sc, 476, 300, py, L, {armX: 600});
   const ra = f.g({parent: sc}); stick(f, ra, 150, 'ebonite', {signs: 4, sgn: -1, gap: 13}); holdStick(f, ra, 135, 0, .9);
-  const rb = f.g({parent: sc}); stick(f, rb, 150, 'verre', {signs: 4, sgn: 1, gap: 13}); holdStick(f, rb, 135, 0, .9);
+  const rb = f.g({parent: sc}); stick(f, rb, 110, 'verre', {signs: 4, sgn: 1, gap: 13}); holdStick(f, rb, 98, 0, .9);
   tag(f, sc, 200, 330, '(a) contact avec l’ébonite chargée', {size: 13, w: 210}); tag(f, sc, 600, 330, '(b) influence du verre chargé', {size: 13, w: 180});
   f.line(400, 14, 400, 296, {stroke: '#c9d6e6', 'stroke-width': 1.2, 'stroke-dasharray': '5 5', parent: sc});
   f.frame();
@@ -1334,7 +1342,7 @@ SCENES.pendule = (host, o = {}) => {
     const [bx, by] = pa.set(aa); pa.signs(sa); setT(ra, Math.max(xa, bx + 13 + 1), by);
     // (b) : le verre s'approche sans toucher ; les électrons libres migrent du côté du bâton ; la boule est attirée
     const u = o.book ? 1 : ease(clamp(p / 3, 0, 1)), ab = 10 * u;
-    const [cx, cy] = pb.set(ab); setT(rb, lerp(740, cx + 13 + 34, u), cy);
+    const [cx, cy] = pb.set(ab); setT(rb, lerp(820, cx + 13 + 34, u), cy);
     pb.signs(u > .3 ? [[7, -5, -1], [7, 5, -1], [-7, -5, 1], [-7, 5, 1]] : []);
   }};
 };
@@ -1491,7 +1499,7 @@ SCENES.spectres = (host, o = {}) => {
     else plates = [cx - 48, cx + 48];
     const R0 = rng(31 + i), grains = [];
     for (let k = 0; k < 520; k++){
-      const rr = R * Math.sqrt(R0()) * .96, a = 2 * Math.PI * R0(), x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
+      const rr = R * Math.sqrt(R0()) * (kind === 'a' ? .9 : .96), a = 2 * Math.PI * R0(), x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
       if (ch.some(c => Math.hypot(x - c[0], y - c[1]) < 12)) continue;
       let ang, aligned = true;
       if (plates){ const inside = x > plates[0] + 6 && x < plates[1] - 6 && Math.abs(y - cy) < 82; if (Math.abs(x - plates[0]) < 6 || Math.abs(x - plates[1]) < 6) continue;
@@ -1503,9 +1511,12 @@ SCENES.spectres = (host, o = {}) => {
     // électrodes et fils vers le générateur haute tension
     if (plates) plates.forEach((px, j) => { f.rect(px - 4, cy - 86, 8, 172, {rx: 2, fill: f.lg(uid('pl'), [[0, '#7c8896'], [.5, '#e9eef3'], [1, '#5d6978']], 0, 0, 1, 0), stroke: '#3b4654', 'stroke-width': .8, parent: sc});
       f.path(`M${px},${cy - 86} L${px},${cy - R - 14}`, {stroke: j ? '#1f5fa8' : '#d62839', 'stroke-width': 2.4, parent: sc}); });
+    // (a) l'autre borne du générateur est reliée à un anneau métallique posé contre la paroi : champ radial entre la pointe et l'anneau
+    if (kind === 'a'){ f.circ(cx, cy, R - 5, {fill: 'none', stroke: '#5d6978', 'stroke-width': 5.5, parent: sc}); f.circ(cx, cy, R - 5, {fill: 'none', stroke: '#d7dde4', 'stroke-width': 2, parent: sc});
+      f.path(`M${cx + (R - 5) * .5},${cy - (R - 5) * .866} C${cx + 70},${cy - R - 2} ${cx + 66},${cy - R - 8} ${cx + 72},${cy - R - 14}`, {stroke: '#1f5fa8', 'stroke-width': 2.4, fill: 'none', parent: sc}); }
     ch.forEach(([x, y, q]) => { f.circ(x, y, 7, {fill: f.rg(uid('el'), [[0, '#ffffff'], [1, '#5d6978']], .35, .3, .75), stroke: '#3b4654', 'stroke-width': .8, parent: sc});
       f.path(`M${x},${y - 7} C${x},${y - 60} ${x + (q > 0 ? -10 : 10)},${cy - R + 10} ${x + (q > 0 ? -16 : 16)},${cy - R - 14}`, {stroke: q > 0 ? '#d62839' : '#1f5fa8', 'stroke-width': 2.4, fill: 'none', parent: sc}); });
-    tag(f, sc, cx, 318, {a: '(a) une électrode ponctuelle', b: '(b) deux électrodes ponctuelles', c: '(c) deux plaques parallèles'}[kind], {size: 13, w: 180});
+    tag(f, sc, cx, 318, {a: '(a) une pointe au centre d’un anneau', b: '(b) deux électrodes ponctuelles', c: '(c) deux plaques parallèles'}[kind], {size: 12, w: 240});
     return grains;
   });
   f.frame();
@@ -1619,14 +1630,16 @@ function plate(f, parent, x, y, h, s){
   return g;
 }
 // générateur haute tension (boîtier + afficheur) ; renvoie les bornes [x+, y], [x−, y]
-function hvGen(f, parent, x, y, w, txt){
+function hvGen(f, parent, x, y, w, txt){   // bornes : − à gauche, + à droite ; renvoie [borne +, borne −]
   const g = caseBox(f, parent, x, y, w, 46, {c1: '#f2f5f8', c2: '#aeb9c6'});
   f.T(x + 10, y + 17, 'HAUTE TENSION', {cls: 'lbl-b', size: 10, fill: '#1f5fa8', parent: g});
   const t = lcd(f, g, x + 10, y + 21, 86, 20, {size: 14}); t.textContent = txt || '';
-  f.circ(x + w - 46, y + 30, 7, {fill: '#d62839', stroke: '#7a0f1c', parent: g}); f.circ(x + w - 20, y + 30, 7, {fill: '#1b2430', stroke: '#000', parent: g});
-  f.T(x + w - 46, y + 15, '+', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#d62839', parent: g}); f.T(x + w - 20, y + 15, '−', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#1b2430', parent: g});
-  return [[x + w - 46, y + 30], [x + w - 20, y + 30]];
+  f.circ(x + w - 46, y + 30, 7, {fill: '#1b2430', stroke: '#000', parent: g}); f.circ(x + w - 20, y + 30, 7, {fill: '#d62839', stroke: '#7a0f1c', parent: g});
+  f.T(x + w - 46, y + 15, '−', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#1b2430', parent: g}); f.T(x + w - 20, y + 15, '+', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#d62839', parent: g});
+  return [[x + w - 20, y + 30], [x + w - 46, y + 30]];
 }
+// fiche banane enfoncée dans une borne (dessinée par-dessus le fil)
+const plug = (f, parent, p, col) => { f.rect(p[0] - 4, p[1] - 13, 8, 12, {rx: 2, fill: col, parent}); f.circ(p[0], p[1], 4, {fill: shade(col, .3), parent}); };
 const wire = (f, parent, d, col) => f.path(d, {stroke: col, 'stroke-width': 3, fill: 'none', 'stroke-linejoin': 'round', parent});
 
 /* ---------- Doc 8 : pendule chargé entre deux plaques ; repère, points A et B ---------- */
@@ -1651,7 +1664,7 @@ SCENES.condensateur = (host, o = {}) => {
   vec(f, sc, O[0], O[1], O[0] + 42, O[1], C.ink, 2.4); vec(f, sc, O[0], O[1], O[0], O[1] - 42, C.ink, 2.4);
   f.path(`M${O[0]},${O[1]} L${xP + 40},${O[1]}`, {stroke: C.ink, 'stroke-width': 1, 'stroke-dasharray': '4 4', 'marker-end': f.mk('ink'), parent: sc});
   f.T(xP + 44, O[1] + 20, M('x'), {cls: 'm', anchor: 'middle', size: 19, parent: sc});
-  f.T(O[0] - 10, O[1] + 18, M('O'), {cls: 'm', anchor: 'end', size: 19, parent: sc}); vlab(f, sc, O[0] + 26, O[1] + 24, 'i', C.ink, 19); vlab(f, sc, O[0] - 14, O[1] - 26, 'j', C.ink, 19);
+  f.T(O[0] - 10, O[1] + 18, M('O'), {cls: 'm', anchor: 'end', size: 19, parent: sc}); vlab(f, sc, O[0] + 26, O[1] + 24, 'i', C.ink, 19); vlab(f, sc, O[0] + 8, O[1] - 28, 'j', C.ink, 19, 'start');
   const A = [410, 120], B = [230, 240];
   f.path(`M${A[0]},${A[1]} L${B[0]},${B[1]}`, {stroke: C.orange, 'stroke-width': 2, 'stroke-dasharray': '7 5', parent: sc});
   f.path(`M${A[0]},${A[1]} C${A[0] - 20},${A[1] + 120} ${B[0] + 120},${B[1] + 40} ${B[0]},${B[1]}`, {stroke: C.orange, 'stroke-width': 2, 'stroke-dasharray': '2 5', parent: sc});
@@ -1660,8 +1673,9 @@ SCENES.condensateur = (host, o = {}) => {
   vlab(f, sc, 236, 58, 'E', C.red, 22);
   [[xN, 'N'], [xP, 'P']].forEach(([x, n]) => f.T(x, yT - 10, M(n, 21), {cls: 'm', anchor: 'middle', size: 21, parent: sc}));
   const [tp, tm] = hvGen(f, sc, 220, 334, 200, o.U || '');
-  wire(f, sc, `M${xP + 6},${yT + h - 10} L${xP + 30},${yT + h - 10} L${xP + 30},${372} L${tp[0]},${372} L${tp[0]},${tp[1] + 7}`, '#d62839');
-  wire(f, sc, `M${xN - 6},${yT + h - 10} L${xN - 30},${yT + h - 10} L${xN - 30},${376} L${tm[0]},${376} L${tm[0]},${tm[1] + 7}`, '#1b2430');
+  // fils posés sur la paillasse : plaque N → borne −, plaque P → borne + (aucun croisement)
+  wire(f, sc, `M${xN - 5},280 L118,280 L118,331 L${tm[0]},331 L${tm[0]},${tm[1]}`, '#1b2430'); plug(f, sc, tm, '#1b2430');
+  wire(f, sc, `M${xP + 5},280 L502,280 L502,331 L${tp[0]},331 L${tp[0]},${tp[1]}`, '#d62839'); plug(f, sc, tp, '#d62839');
   f.frame();
   const bez = (u) => { const P0 = A, P1 = [A[0] - 20, A[1] + 120], P2 = [B[0] + 120, B[1] + 40], P3 = B, v = 1 - u;
     return [0, 1].map(i => v * v * v * P0[i] + 3 * v * v * u * P1[i] + 3 * v * u * u * P2[i] + u * u * u * P3[i]); };
@@ -1718,9 +1732,10 @@ SCENES.canon = (host, o = {}) => {
   vec(f, sc, 270, cy - 26, 180, cy - 26, C.red, 3); vlab(f, sc, 226, cy - 34, 'E', C.red, 20);
   // générateur : + à l'anode, − à la cathode
   const [tp, tm] = hvGen(f, sc, 150, 214, 200, o.U || '');
-  wire(f, sc, `M${xA},${cy + 46} L${xA},${200} L${tp[0]},${200} L${tp[0]},${tp[1] - 7}`, '#d62839');
-  wire(f, sc, `M${xC - 3},${cy + 30} L${xC - 3},${190} L${70},${190} L${70},${282} L${tm[0]},${282} L${tm[0]},${tm[1] + 7}`, '#1b2430');
-  f.T(260, 194, M('U_{AC}', 18), {cls: 'm', anchor: 'middle', size: 18, parent: sc});
+  // anode → borne +, cathode → borne − (les fils traversent le culot de l'ampoule par des passages étanches)
+  wire(f, sc, `M${xA},${cy + 46} L${tp[0]},${tp[1]}`, '#d62839'); plug(f, sc, tp, '#d62839');
+  wire(f, sc, `M${xC - 3},${cy + 30} L${xC - 3},200 L${tm[0]},200 L${tm[0]},${tm[1]}`, '#1b2430'); plug(f, sc, tm, '#1b2430');
+  f.T(392, 214, M('U_{AC} = V_A − V_C', 17), {cls: 'm', size: 17, parent: sc});
   // électrons
   const R = rng(9), el = []; for (let k = 0; k < 9; k++){ const g = f.g({parent: sc}); f.circ(0, 0, 4.2, {fill: '#3f8ae0', stroke: '#123e8a', 'stroke-width': .8, parent: g}); el.push({g, ph: k / 9, dy: (R() - .5) * 6}); }
   tag(f, sc, 220, cy + 30, 'électrons', {size: 13, w: 60});

@@ -117,39 +117,47 @@ SCENES.frottement = (host, o = {}) => {
 
 /* ---------- Doc 2 : bâtons suspendus — répulsion ou attraction (vue en perspective cavalière) ---------- */
 SCENES.batons = (host, o = {}) => {
-  const W = 960, H = 300, f = new Fig(host, W, H, {label: 'Bâton suspendu par un étrier : verre et verre se repoussent, ébonite et ébonite se repoussent, verre et ébonite s’attirent'});
-  const sc = labScene(f, 262), d = realDefs(f);
-  const cases = [['verre', 'verre', -1, 'verre frotté · verre frotté'], ['ebonite', 'ebonite', -1, 'ébonite frottée · ébonite frottée'], ['verre', 'ebonite', 1, 'verre frotté · ébonite frottée']];
-  const k = .5 * Math.SQRT1_2;   // profondeur z (vers l'arrière) dessinée vers le haut à droite
-  const prj = (cx, cy, x, z) => [cx + x + k * z, cy - k * z];
-  const Ls = 140, Lh = 80;
-  const items = cases.map(([s1, s2, att, lab], i) => {
-    const x0 = 14 + i * 318, cx = x0 + 120, cy = 160;
-    if (i) f.line(x0 - 8, 14, x0 - 8, 258, {stroke: '#c9d6e6', 'stroke-width': 1.2, 'stroke-dasharray': '5 5', parent: sc});
-    standClamp(f, sc, x0 + 22, 262, 52, cx + 6, {top: 36});
-    f.line(cx, 56, cx, cy - 12, {stroke: '#9c8f6a', 'stroke-width': 1.4, parent: sc});
-    f.path(`M${cx - 11},${cy - 12} L${cx},${cy - 2} L${cx + 11},${cy - 12}`, {stroke: '#5d6978', 'stroke-width': 1.6, fill: 'none', parent: sc});
-    const arc = f.path('', {stroke: C.orange, 'stroke-width': 2.6, fill: 'none', 'stroke-dasharray': '6 4', 'marker-end': f.mk('orange'), parent: sc});
-    const ghost = f.g({parent: sc, opacity: .28}); const gs = stick(f, ghost, Ls, s1); setT(gs, cx - Ls / 2, cy);
+  // Vue de face (en haut) + vue de dessus (en bas). Le bâton suspendu tourne autour du fil vertical :
+  // le bâton tenu à la main est placé en avant de l'extrémité droite (décalé sur le côté, sinon la force passerait par l'axe).
+  const W = 960, H = 420, f = new Fig(host, W, H, {label: 'Bâton frotté suspendu par un étrier ; on approche un second bâton frotté de l’une de ses extrémités : verre-verre et ébonite-ébonite se repoussent, verre-ébonite s’attirent'});
+  const sc = labScene(f, 240);
+  const cases = [['verre', 'verre', 1, 'verre frotté · verre frotté'], ['ebonite', 'ebonite', 1, 'ébonite frottée · ébonite frottée'], ['verre', 'ebonite', -1, 'verre frotté · ébonite frottée']];
+  const Ls = 140, Lh = 86, R = Ls / 2, DZ = 34;   // DZ : décalage du bâton approché vers l'avant (vue de dessus)
+  const items = cases.map(([s1, s2, rep, lab], i) => {
+    const x0 = 14 + i * 318, cx = x0 + 118, cy = 150, ty = 330;
+    if (i) f.line(x0 - 8, 10, x0 - 8, 410, {stroke: '#c9d6e6', 'stroke-width': 1.2, 'stroke-dasharray': '5 5', parent: sc});
+    // ----- vue de face -----
+    standClamp(f, sc, x0 + 20, 240, 44, cx + 6, {top: 26});
+    f.path(`M${cx},48 L${cx},${cy - 11}`, {stroke: '#9c8f6a', 'stroke-width': 1.4, parent: sc});
     const rodG = f.g({parent: sc}); stick(f, rodG, Ls, s1);
-    // bâton approché (tenu à la main), en avant (z < 0) du bout droit
-    const [hx, hy] = prj(cx, cy, Ls / 2 + 10, -64);
-    const hand = f.g({parent: sc}); const h2 = stick(f, hand, Lh, s2); setT(h2, hx, hy); holdStick(f, hand, hx + Lh - 12, hy, .85);
-    tag(f, sc, x0 + 150, 288, lab, {size: 13, w: lab.length * 6.6});
-    return {cx, cy, rodG, arc, att};
+    f.path(`M${cx - 9},${cy - 11} L${cx - 9},${cy + 3} Q${cx},${cy + 12} ${cx + 9},${cy + 3} L${cx + 9},${cy - 11} Z`, {stroke: '#5d6978', 'stroke-width': 1.6, fill: 'none', parent: sc});   // étrier qui entoure le bâton
+    f.path(`M${cx - 9},${cy - 11} L${cx},${cy - 11} L${cx + 9},${cy - 11}`, {stroke: '#5d6978', 'stroke-width': 1.6, parent: sc});
+    const hx = cx + R + 6;   // bout du bâton approché : juste au-delà de l'extrémité droite, en avant (pas de contact)
+    const hand = f.g({parent: sc}); const h2 = stick(f, hand, Lh, s2); setT(h2, hx, cy + 2); holdStick(f, hand, hx + Lh - 12, cy + 2, .85);
+    tag(f, sc, x0 + 150, 232, lab, {size: 13, w: lab.length * 6.6});
+    // ----- vue de dessus -----
+    f.rect(x0 + 4, 252, 296, 160, {rx: 10, fill: '#f6f9fd', stroke: '#c9d6e6', 'stroke-width': 1.2, parent: sc});
+    f.T(x0 + 14, 270, 'vue de dessus', {cls: 'lbl-s', size: 12, fill: C.ink2, parent: sc});
+    f.T(x0 + 290, 404, 'avant (côté observateur) ↓', {cls: 'lbl-s', anchor: 'end', size: 11, fill: C.ink2, parent: sc});
+    const ghost = f.g({parent: sc, opacity: .3}); setT(stick(f, ghost, Ls, s1), cx - R, ty);
+    const topG = f.g({parent: sc}); setT(stick(f, topG, Ls, s1), -R, 0);
+    f.circ(cx, ty, 4, {fill: '#5d6978', parent: sc}); f.circ(cx, ty, 8, {fill: 'none', stroke: '#5d6978', 'stroke-width': 1.2, parent: sc});
+    const h3 = stick(f, sc, Lh, s2); setT(h3, hx, ty + DZ);
+    const arc = f.path('', {stroke: C.orange, 'stroke-width': 2.6, fill: 'none', 'marker-end': f.mk('orange'), parent: sc});
+    return {cx, cy, ty, rodG, topG, arc, rep};
   });
   f.frame();
   return {update(t){
     const p = o.book ? 1 : ease(clamp(((t % 7) - 1) / 2.5, 0, 1));
     items.forEach(it => {
-      // rotation autour du fil vertical : attraction, le bout droit vient vers l'avant (z < 0) ; répulsion, il part vers l'arrière
-      const phi = rad(it.att * 30 * p), xr = Ls / 2 * Math.cos(phi), zr = -Ls / 2 * Math.sin(phi);
-      const [x1, y1] = prj(it.cx, it.cy, -xr, -zr), [x2, y2] = prj(it.cx, it.cy, xr, zr);
-      const len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-      it.rodG.setAttribute('transform', `translate(${f2(x1)},${f2(y1)}) rotate(${f2(ang)}) scale(${f2(len / Ls)},1)`);
-      let dd = ''; const N = 14;
-      for (let i = 0; i <= N; i++){ const b = rad(it.att * 30 * p * i / N), [x, y] = prj(it.cx, it.cy, (Ls / 2 + 4) * Math.cos(b), -(Ls / 2 + 4) * Math.sin(b)); dd += (i ? ' L' : 'M') + f2(x) + ',' + f2(y - 16); }
-      it.arc.setAttribute('d', p > .15 ? dd : '');
+      // angle de rotation (vue de dessus, positif = l'extrémité droite part vers l'arrière) : répulsion 30°, attraction −20° (s'arrête avant le contact)
+      const a = rad((it.rep > 0 ? 30 : -20) * p);
+      const half = R * Math.cos(a);   // vue de face : le bâton paraît raccourci, symétrique autour du fil
+      it.rodG.setAttribute('transform', `translate(${f2(it.cx - half)},${f2(it.cy)}) scale(${f2(half / R)},1)`);
+      it.topG.setAttribute('transform', `translate(${f2(it.cx)},${f2(it.ty)}) rotate(${f2(-a * 180 / Math.PI)})`);
+      let d = ''; const N = 14, r = R + 10;
+      for (let i = 0; i <= N; i++){ const b = a * i / N; d += (i ? ' L' : 'M') + f2(it.cx + r * Math.cos(b)) + ',' + f2(it.ty - r * Math.sin(b)); }
+      it.arc.setAttribute('d', p > .12 ? d : '');
     });
   }};
 };
@@ -160,9 +168,9 @@ SCENES.pendule = (host, o = {}) => {
   const sc = labScene(f, 300);
   const L = 150, py = 60;
   // (a) contact : ébonite (−) à droite de la boule
-  const pa = pendulum(f, sc, 40, 300, py, L, {armX: 200}), pb = pendulum(f, sc, 440, 300, py, L, {armX: 600});
+  const pa = pendulum(f, sc, 40, 300, py, L, {armX: 200}), pb = pendulum(f, sc, 476, 300, py, L, {armX: 600});
   const ra = f.g({parent: sc}); stick(f, ra, 150, 'ebonite', {signs: 4, sgn: -1, gap: 13}); holdStick(f, ra, 135, 0, .9);
-  const rb = f.g({parent: sc}); stick(f, rb, 150, 'verre', {signs: 4, sgn: 1, gap: 13}); holdStick(f, rb, 135, 0, .9);
+  const rb = f.g({parent: sc}); stick(f, rb, 110, 'verre', {signs: 4, sgn: 1, gap: 13}); holdStick(f, rb, 98, 0, .9);
   tag(f, sc, 200, 330, '(a) contact avec l’ébonite chargée', {size: 13, w: 210}); tag(f, sc, 600, 330, '(b) influence du verre chargé', {size: 13, w: 180});
   f.line(400, 14, 400, 296, {stroke: '#c9d6e6', 'stroke-width': 1.2, 'stroke-dasharray': '5 5', parent: sc});
   f.frame();
@@ -176,7 +184,7 @@ SCENES.pendule = (host, o = {}) => {
     const [bx, by] = pa.set(aa); pa.signs(sa); setT(ra, Math.max(xa, bx + 13 + 1), by);
     // (b) : le verre s'approche sans toucher ; les électrons libres migrent du côté du bâton ; la boule est attirée
     const u = o.book ? 1 : ease(clamp(p / 3, 0, 1)), ab = 10 * u;
-    const [cx, cy] = pb.set(ab); setT(rb, lerp(740, cx + 13 + 34, u), cy);
+    const [cx, cy] = pb.set(ab); setT(rb, lerp(820, cx + 13 + 34, u), cy);
     pb.signs(u > .3 ? [[7, -5, -1], [7, 5, -1], [-7, -5, 1], [-7, 5, 1]] : []);
   }};
 };

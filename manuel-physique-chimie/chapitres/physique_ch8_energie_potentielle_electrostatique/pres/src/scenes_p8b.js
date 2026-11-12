@@ -97,7 +97,7 @@ SCENES.spectres = (host, o = {}) => {
     else plates = [cx - 48, cx + 48];
     const R0 = rng(31 + i), grains = [];
     for (let k = 0; k < 520; k++){
-      const rr = R * Math.sqrt(R0()) * .96, a = 2 * Math.PI * R0(), x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
+      const rr = R * Math.sqrt(R0()) * (kind === 'a' ? .9 : .96), a = 2 * Math.PI * R0(), x = cx + rr * Math.cos(a), y = cy + rr * Math.sin(a);
       if (ch.some(c => Math.hypot(x - c[0], y - c[1]) < 12)) continue;
       let ang, aligned = true;
       if (plates){ const inside = x > plates[0] + 6 && x < plates[1] - 6 && Math.abs(y - cy) < 82; if (Math.abs(x - plates[0]) < 6 || Math.abs(x - plates[1]) < 6) continue;
@@ -109,9 +109,12 @@ SCENES.spectres = (host, o = {}) => {
     // électrodes et fils vers le générateur haute tension
     if (plates) plates.forEach((px, j) => { f.rect(px - 4, cy - 86, 8, 172, {rx: 2, fill: f.lg(uid('pl'), [[0, '#7c8896'], [.5, '#e9eef3'], [1, '#5d6978']], 0, 0, 1, 0), stroke: '#3b4654', 'stroke-width': .8, parent: sc});
       f.path(`M${px},${cy - 86} L${px},${cy - R - 14}`, {stroke: j ? '#1f5fa8' : '#d62839', 'stroke-width': 2.4, parent: sc}); });
+    // (a) l'autre borne du générateur est reliée à un anneau métallique posé contre la paroi : champ radial entre la pointe et l'anneau
+    if (kind === 'a'){ f.circ(cx, cy, R - 5, {fill: 'none', stroke: '#5d6978', 'stroke-width': 5.5, parent: sc}); f.circ(cx, cy, R - 5, {fill: 'none', stroke: '#d7dde4', 'stroke-width': 2, parent: sc});
+      f.path(`M${cx + (R - 5) * .5},${cy - (R - 5) * .866} C${cx + 70},${cy - R - 2} ${cx + 66},${cy - R - 8} ${cx + 72},${cy - R - 14}`, {stroke: '#1f5fa8', 'stroke-width': 2.4, fill: 'none', parent: sc}); }
     ch.forEach(([x, y, q]) => { f.circ(x, y, 7, {fill: f.rg(uid('el'), [[0, '#ffffff'], [1, '#5d6978']], .35, .3, .75), stroke: '#3b4654', 'stroke-width': .8, parent: sc});
       f.path(`M${x},${y - 7} C${x},${y - 60} ${x + (q > 0 ? -10 : 10)},${cy - R + 10} ${x + (q > 0 ? -16 : 16)},${cy - R - 14}`, {stroke: q > 0 ? '#d62839' : '#1f5fa8', 'stroke-width': 2.4, fill: 'none', parent: sc}); });
-    tag(f, sc, cx, 318, {a: '(a) une électrode ponctuelle', b: '(b) deux électrodes ponctuelles', c: '(c) deux plaques parallèles'}[kind], {size: 13, w: 180});
+    tag(f, sc, cx, 318, {a: '(a) une pointe au centre d’un anneau', b: '(b) deux électrodes ponctuelles', c: '(c) deux plaques parallèles'}[kind], {size: 12, w: 240});
     return grains;
   });
   f.frame();

@@ -33,6 +33,16 @@
   rotations, sens et point d’application des vecteurs, orientation des objets (avant, haut, côté actif), niveaux de
   liquide horizontaux, cohérence des valeurs affichées avec les données, causes et effets au bon endroit et au bon moment.
 - Avant la livraison, relire chaque figure et chaque animation avec cette liste ; corriger avant d’envoyer.
+- **Montages électriques** (remarque de l’enseignant sur le chapitre 8) : chaque fil part d’un point métallique réel (plaque, électrode,
+  anode, cathode) et arrive **par le dessus** dans la bonne borne du générateur (+ rouge, − noire), avec une fiche ; aucun fil ne passe
+  derrière ou à travers un boîtier, aucun croisement de fils, ordre des bornes choisi pour éviter les croisements. Un montage doit être
+  complet et possible : par exemple, un spectre « une seule pointe » demande une seconde électrode (anneau contre la paroi).
+- **Contacts entre corps** : un contact n’est dessiné que s’il existe (bâton qui touche la boule au contact, règle posée sur le tissu) ;
+  sinon garder un écart visible (influence, attraction à distance) ; une main tient toujours l’objet, entièrement dans le cadre.
+- **Mouvements en trois dimensions** (rotation autour d’un fil vertical…) : ajouter une **vue de dessus** au lieu d’une perspective ambiguë ;
+  placer la cause (bâton approché) de façon qu’elle produise réellement l’effet (force décalée par rapport à l’axe de rotation).
+- **Contrôle des animations** : capturer chaque scène animée à plusieurs instants (début, contact, fin) et vérifier chaque image
+  avec la liste ci-dessus, pas seulement l’état figé du livre ; la présentation est vue par les élèves, une faute de dessin y induit une fausse idée.
 
 ## Contenu
 - **Chaque question d’activité doit pouvoir être traitée avec les seuls documents fournis** (et les prérequis réels des élèves).

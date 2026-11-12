@@ -8,14 +8,16 @@ function plate(f, parent, x, y, h, s){
   return g;
 }
 // générateur haute tension (boîtier + afficheur) ; renvoie les bornes [x+, y], [x−, y]
-function hvGen(f, parent, x, y, w, txt){
+function hvGen(f, parent, x, y, w, txt){   // bornes : − à gauche, + à droite ; renvoie [borne +, borne −]
   const g = caseBox(f, parent, x, y, w, 46, {c1: '#f2f5f8', c2: '#aeb9c6'});
   f.T(x + 10, y + 17, 'HAUTE TENSION', {cls: 'lbl-b', size: 10, fill: '#1f5fa8', parent: g});
   const t = lcd(f, g, x + 10, y + 21, 86, 20, {size: 14}); t.textContent = txt || '';
-  f.circ(x + w - 46, y + 30, 7, {fill: '#d62839', stroke: '#7a0f1c', parent: g}); f.circ(x + w - 20, y + 30, 7, {fill: '#1b2430', stroke: '#000', parent: g});
-  f.T(x + w - 46, y + 15, '+', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#d62839', parent: g}); f.T(x + w - 20, y + 15, '−', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#1b2430', parent: g});
-  return [[x + w - 46, y + 30], [x + w - 20, y + 30]];
+  f.circ(x + w - 46, y + 30, 7, {fill: '#1b2430', stroke: '#000', parent: g}); f.circ(x + w - 20, y + 30, 7, {fill: '#d62839', stroke: '#7a0f1c', parent: g});
+  f.T(x + w - 46, y + 15, '−', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#1b2430', parent: g}); f.T(x + w - 20, y + 15, '+', {cls: 'lbl-b', anchor: 'middle', size: 12, fill: '#d62839', parent: g});
+  return [[x + w - 20, y + 30], [x + w - 46, y + 30]];
 }
+// fiche banane enfoncée dans une borne (dessinée par-dessus le fil)
+const plug = (f, parent, p, col) => { f.rect(p[0] - 4, p[1] - 13, 8, 12, {rx: 2, fill: col, parent}); f.circ(p[0], p[1], 4, {fill: shade(col, .3), parent}); };
 const wire = (f, parent, d, col) => f.path(d, {stroke: col, 'stroke-width': 3, fill: 'none', 'stroke-linejoin': 'round', parent});
 
 /* ---------- Doc 8 : pendule chargé entre deux plaques ; repère, points A et B ---------- */
@@ -40,7 +42,7 @@ SCENES.condensateur = (host, o = {}) => {
   vec(f, sc, O[0], O[1], O[0] + 42, O[1], C.ink, 2.4); vec(f, sc, O[0], O[1], O[0], O[1] - 42, C.ink, 2.4);
   f.path(`M${O[0]},${O[1]} L${xP + 40},${O[1]}`, {stroke: C.ink, 'stroke-width': 1, 'stroke-dasharray': '4 4', 'marker-end': f.mk('ink'), parent: sc});
   f.T(xP + 44, O[1] + 20, M('x'), {cls: 'm', anchor: 'middle', size: 19, parent: sc});
-  f.T(O[0] - 10, O[1] + 18, M('O'), {cls: 'm', anchor: 'end', size: 19, parent: sc}); vlab(f, sc, O[0] + 26, O[1] + 24, 'i', C.ink, 19); vlab(f, sc, O[0] - 14, O[1] - 26, 'j', C.ink, 19);
+  f.T(O[0] - 10, O[1] + 18, M('O'), {cls: 'm', anchor: 'end', size: 19, parent: sc}); vlab(f, sc, O[0] + 26, O[1] + 24, 'i', C.ink, 19); vlab(f, sc, O[0] + 8, O[1] - 28, 'j', C.ink, 19, 'start');
   const A = [410, 120], B = [230, 240];
   f.path(`M${A[0]},${A[1]} L${B[0]},${B[1]}`, {stroke: C.orange, 'stroke-width': 2, 'stroke-dasharray': '7 5', parent: sc});
   f.path(`M${A[0]},${A[1]} C${A[0] - 20},${A[1] + 120} ${B[0] + 120},${B[1] + 40} ${B[0]},${B[1]}`, {stroke: C.orange, 'stroke-width': 2, 'stroke-dasharray': '2 5', parent: sc});
@@ -49,8 +51,9 @@ SCENES.condensateur = (host, o = {}) => {
   vlab(f, sc, 236, 58, 'E', C.red, 22);
   [[xN, 'N'], [xP, 'P']].forEach(([x, n]) => f.T(x, yT - 10, M(n, 21), {cls: 'm', anchor: 'middle', size: 21, parent: sc}));
   const [tp, tm] = hvGen(f, sc, 220, 334, 200, o.U || '');
-  wire(f, sc, `M${xP + 6},${yT + h - 10} L${xP + 30},${yT + h - 10} L${xP + 30},${372} L${tp[0]},${372} L${tp[0]},${tp[1] + 7}`, '#d62839');
-  wire(f, sc, `M${xN - 6},${yT + h - 10} L${xN - 30},${yT + h - 10} L${xN - 30},${376} L${tm[0]},${376} L${tm[0]},${tm[1] + 7}`, '#1b2430');
+  // fils posés sur la paillasse : plaque N → borne −, plaque P → borne + (aucun croisement)
+  wire(f, sc, `M${xN - 5},280 L118,280 L118,331 L${tm[0]},331 L${tm[0]},${tm[1]}`, '#1b2430'); plug(f, sc, tm, '#1b2430');
+  wire(f, sc, `M${xP + 5},280 L502,280 L502,331 L${tp[0]},331 L${tp[0]},${tp[1]}`, '#d62839'); plug(f, sc, tp, '#d62839');
   f.frame();
   const bez = (u) => { const P0 = A, P1 = [A[0] - 20, A[1] + 120], P2 = [B[0] + 120, B[1] + 40], P3 = B, v = 1 - u;
     return [0, 1].map(i => v * v * v * P0[i] + 3 * v * v * u * P1[i] + 3 * v * u * u * P2[i] + u * u * u * P3[i]); };
@@ -107,9 +110,10 @@ SCENES.canon = (host, o = {}) => {
   vec(f, sc, 270, cy - 26, 180, cy - 26, C.red, 3); vlab(f, sc, 226, cy - 34, 'E', C.red, 20);
   // générateur : + à l'anode, − à la cathode
   const [tp, tm] = hvGen(f, sc, 150, 214, 200, o.U || '');
-  wire(f, sc, `M${xA},${cy + 46} L${xA},${200} L${tp[0]},${200} L${tp[0]},${tp[1] - 7}`, '#d62839');
-  wire(f, sc, `M${xC - 3},${cy + 30} L${xC - 3},${190} L${70},${190} L${70},${282} L${tm[0]},${282} L${tm[0]},${tm[1] + 7}`, '#1b2430');
-  f.T(260, 194, M('U_{AC}', 18), {cls: 'm', anchor: 'middle', size: 18, parent: sc});
+  // anode → borne +, cathode → borne − (les fils traversent le culot de l'ampoule par des passages étanches)
+  wire(f, sc, `M${xA},${cy + 46} L${tp[0]},${tp[1]}`, '#d62839'); plug(f, sc, tp, '#d62839');
+  wire(f, sc, `M${xC - 3},${cy + 30} L${xC - 3},200 L${tm[0]},200 L${tm[0]},${tm[1]}`, '#1b2430'); plug(f, sc, tm, '#1b2430');
+  f.T(392, 214, M('U_{AC} = V_A − V_C', 17), {cls: 'm', size: 17, parent: sc});
   // électrons
   const R = rng(9), el = []; for (let k = 0; k < 9; k++){ const g = f.g({parent: sc}); f.circ(0, 0, 4.2, {fill: '#3f8ae0', stroke: '#123e8a', 'stroke-width': .8, parent: g}); el.push({g, ph: k / 9, dy: (R() - .5) * 6}); }
   tag(f, sc, 220, cy + 30, 'électrons', {size: 13, w: 60});
