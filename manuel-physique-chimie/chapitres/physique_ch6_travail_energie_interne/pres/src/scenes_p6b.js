@@ -60,19 +60,19 @@ SCENES.billeChute = (host, o = {}) => {
 SCENES.joule = (host, o = {}) => {
   const W = 620, H = 400, f = new Fig(host, W, H, {label: 'Expérience de Joule : des masses qui descendent font tourner des palettes dans l’eau d’un récipient isolé ; un thermomètre mesure l’élévation de température'});
   const sc = labScene(f, 370), d = realDefs(f), cx = 310;
-  const cal = calorimeter(f, sc, cx, 368, 200, 180, {level: .7});
+  const cal = calorimeter(f, sc, cx, 368, 200, 180, {level: .7}); cal.stir.setAttribute('display', 'none');   // les palettes remplacent l'agitateur
   const th = probeThermo(f, sc, cal.probeX + 30, 118, cal.yIn - 10, {title: 'θ (°C)', h: 52});
   // axe des palettes
   const ax = f.rect(cx - 4, 70, 8, cal.yIn - 80, {fill: d.metal, parent: sc});
   const pal = f.g({parent: sc});
   // poulies et masses
   const bar = 70; f.rect(60, bar - 6, 500, 10, {rx: 4, fill: '#5d6978', parent: sc});
-  [[110, -1], [510, 1]].forEach(([px]) => { f.rect(px - 4, bar, 8, 300, {fill: d.metal, parent: sc}); f.rect(px - 30, 362, 60, 8, {rx: 3, fill: '#3b4654', parent: sc}); });
+  [[70, -1], [550, 1]].forEach(([px]) => { f.rect(px - 4, bar, 8, 300, {fill: d.metal, parent: sc}); f.rect(px - 30, 362, 60, 8, {rx: 3, fill: '#3b4654', parent: sc}); });
   const drum = f.g({parent: sc}); setT(drum, cx, 90); f.rect(-30, -10, 60, 20, {rx: 6, fill: '#6b4f2e', parent: drum});
   const cordL = f.path('', {stroke: '#6b4f2e', 'stroke-width': 2.5, fill: 'none', parent: sc}), cordR = f.path('', {stroke: '#6b4f2e', 'stroke-width': 2.5, fill: 'none', parent: sc});
   const mL = f.g({parent: sc}), mR = f.g({parent: sc}); weight(f, mL, 0, 0, 40, 46, {label: '10 kg'}); weight(f, mR, 0, 0, 40, 46, {label: '10 kg'});
   [130, 490].forEach(x => f.circ(x, bar + 16, 12, {fill: f.rg(uid('pl'), [[0, '#e9eef3'], [1, '#5d6978']], .4, .35, .7), stroke: '#3b4654', 'stroke-width': 1, parent: sc}));
-  vec(f, sc, 578, 200, 578, 270, C.red, 2.6); f.T(578, 290, 'chute', {cls: 'lbl-b', anchor: 'middle', size: 13, fill: C.red, parent: sc});
+  vec(f, sc, 452, 200, 452, 270, C.red, 2.6); f.T(452, 290, 'chute', {cls: 'lbl-b', anchor: 'middle', size: 13, fill: C.red, parent: sc});
   tag(f, sc, cx, 34, 'eau : m = 1,5 kg (récipient isolé)', {size: 14, w: 232});
   if (!o.book) f.T(12, H - 6, 'animation ralentie', {cls: 'lbl-s', size: 12, fill: '#ffffff', parent: sc});
   f.frame();
@@ -102,23 +102,25 @@ SCENES.bilanUWQ = (host, o = {}) => {
 /* ---------- Exercice 2 : cycle dans le diagramme (V, P) ---------- */
 SCENES.cycle = (host, o = {}) => {
   const W = 460, H = 340, f = new Fig(host, W, H, {label: 'Cycle A, B, C : compression adiabatique de A à B, refroidissement isochore de B à C, détente isobare de C à A'});
-  const ox = 70, oy = 290, X = v => ox + v * 80, Y = p => oy - p * 70;   // V en L, P en 10^5 Pa
-  for (let v = 1; v <= 4.5; v += .5) f.line(X(v), oy, X(v), Y(3.6), {stroke: '#e6edf5', 'stroke-width': 1});
-  for (let p = .5; p <= 3.5; p += .5) f.line(ox, Y(p), X(4.6), Y(p), {stroke: '#e6edf5', 'stroke-width': 1});
-  f.line(ox, oy, X(4.8), oy, {stroke: C.ink, 'stroke-width': 1.8, 'marker-end': f.mk('ink')}); f.line(ox, oy, ox, Y(3.8), {stroke: C.ink, 'stroke-width': 1.8, 'marker-end': f.mk('ink')});
-  f.T(X(4.8), oy + 24, M('V (\\L)', 19), {cls: 'm', anchor: 'end', size: 19}); f.T(ox + 8, Y(3.75), M('P (10^5 \\P\\a)', 19), {cls: 'm', size: 19});
+  const ox = 70, oy = 300, X = v => ox + v * 80, Y = p => oy - p * 60, g = 1.4, PB = 1.5 * Math.pow(2, g);   // V en L, P en 10^5 Pa
+  const pad = v => 1.5 * Math.pow(4 / v, g);   // adiabatique d'un gaz parfait diatomique : P·V^1,4 = constante
+  for (let v = 1; v <= 4.5; v += .5) f.line(X(v), oy, X(v), Y(4.2), {stroke: '#e6edf5', 'stroke-width': 1});
+  for (let p = .5; p <= 4; p += .5) f.line(ox, Y(p), X(4.6), Y(p), {stroke: '#e6edf5', 'stroke-width': 1});
+  f.line(ox, oy, X(4.8), oy, {stroke: C.ink, 'stroke-width': 1.8, 'marker-end': f.mk('ink')}); f.line(ox, oy, ox, Y(4.5), {stroke: C.ink, 'stroke-width': 1.8, 'marker-end': f.mk('ink')});
+  f.T(X(4.8), oy + 24, M('V (\\L)', 19), {cls: 'm', anchor: 'end', size: 19}); f.T(ox + 8, Y(4.45), M('P (10^5 \\P\\a)', 19), {cls: 'm', size: 19});
   [1, 2, 3, 4].forEach(v => f.T(X(v), oy + 20, String(v), {cls: 'lbl', anchor: 'middle', size: 14}));
-  [1, 1.5, 2, 3].forEach(p => f.T(ox - 8, Y(p) + 5, fr(p, p % 1 ? 1 : 0), {cls: 'lbl', anchor: 'end', size: 14}));
-  const A = [4, 1.5], B = [2, 3.0], Cc = [2, 1.5];
-  let dAB = ''; for (let k = 0; k <= 20; k++){ const v = lerp(4, 2, k / 20), p = 1.5 * Math.pow(4 / v, 1.0); dAB += (k ? 'L' : 'M') + f2(X(v)) + ',' + f2(Y(p)); }
-  f.path(dAB, {stroke: C.orange, 'stroke-width': 3}); f.line(X(2), Y(3), X(2), Y(1.5), {stroke: C.orange, 'stroke-width': 3}); f.line(X(2), Y(1.5), X(4), Y(1.5), {stroke: C.orange, 'stroke-width': 3});
+  [1, 1.5, 2, 3, 4].forEach(p => f.T(ox - 8, Y(p) + 5, fr(p, p % 1 ? 1 : 0), {cls: 'lbl', anchor: 'end', size: 14}));
+  const A = [4, 1.5], B = [2, PB], Cc = [2, 1.5];
+  let dAB = ''; for (let k = 0; k <= 30; k++){ const v = lerp(4, 2, k / 30); dAB += (k ? 'L' : 'M') + f2(X(v)) + ',' + f2(Y(pad(v))); }
+  f.path(dAB, {stroke: C.orange, 'stroke-width': 3}); f.line(X(2), Y(PB), X(2), Y(1.5), {stroke: C.orange, 'stroke-width': 3}); f.line(X(2), Y(1.5), X(4), Y(1.5), {stroke: C.orange, 'stroke-width': 3});
+  f.line(ox, Y(PB), X(2), Y(PB), {stroke: C.ink2, 'stroke-width': 1, 'stroke-dasharray': '3 3'}); f.T(ox + 6, Y(PB) - 6, '3,96', {cls: 'lbl', size: 13, fill: C.ink2});
   [[A, 'A', 10, -8], [B, 'B', -14, -6], [Cc, 'C', -16, 18]].forEach(([p, n, dx, dy]) => { f.dot(X(p[0]), Y(p[1]), {r: 5}); f.T(X(p[0]) + dx, Y(p[1]) + dy, n, {cls: 'lbl-b', size: 17}); });
-  vec(f, null, X(3.2), Y(1.9) - 2, X(2.9), Y(2.15) - 4, C.orange, 2.4); vec(f, null, X(2), Y(2.4), X(2), Y(2.0), C.orange, 2.4); vec(f, null, X(2.8), Y(1.5), X(3.2), Y(1.5), C.orange, 2.4);
-  tag(f, null, X(3.5), Y(2.6), 'adiabatique', {size: 13, w: 82}); tag(f, null, X(1.45), Y(2.3), 'isochore', {size: 13, w: 60}); tag(f, null, X(3), Y(1.5) + 26, 'isobare', {size: 13, w: 56});
+  vec(f, null, X(3.1), Y(pad(3.1)) - 6, X(2.85), Y(pad(2.85)) - 6, C.orange, 2.4); vec(f, null, X(2), Y(2.9), X(2), Y(2.4), C.orange, 2.4); vec(f, null, X(2.8), Y(1.5), X(3.2), Y(1.5), C.orange, 2.4);
+  tag(f, null, X(3.45), Y(2.75), 'adiabatique', {size: 13, w: 82}); tag(f, null, X(1.45), Y(2.6), 'isochore', {size: 13, w: 60}); tag(f, null, X(3), Y(1.5) + 26, 'isobare', {size: 13, w: 56});
   const dot = f.dot(0, 0, {r: 7, fill: C.red});
   return {update(t){
     const u = o.book ? 0 : (t % 6) / 6; let v, p;
-    if (u < 1 / 3){ const k = u * 3; v = lerp(4, 2, k); p = 1.5 * 4 / v; } else if (u < 2 / 3){ const k = u * 3 - 1; v = 2; p = lerp(3, 1.5, k); } else { const k = u * 3 - 2; v = lerp(2, 4, k); p = 1.5; }
+    if (u < 1 / 3){ const k = u * 3; v = lerp(4, 2, k); p = pad(v); } else if (u < 2 / 3){ const k = u * 3 - 1; v = 2; p = lerp(PB, 1.5, k); } else { const k = u * 3 - 2; v = lerp(2, 4, k); p = 1.5; }
     dot.setAttribute('cx', f2(X(v))); dot.setAttribute('cy', f2(Y(p))); dot.setAttribute('opacity', o.book ? 0 : 1);
   }};
 };

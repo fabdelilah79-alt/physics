@@ -4,16 +4,26 @@
 const D4 = [14.5, 14.0, 13.2, 11.7, 9.7, 7.1, 3.8, 0];
 
 /* ---------- Activité 2, doc 3 : mobile autoporteur sur une table à coussin d'air inclinée ---------- */
+// Solide de longueur w qui franchit un angle rentrant (creux) entre deux segments : le coin arrière reste sur le
+// premier segment, le coin avant sur le second (pas d'interpénétration). C : coin ; u1, u2 : directions unitaires
+// d'entrée et de sortie ; e ∈ [0, w] : distance du coin avant au-delà de C. Renvoie [x, y, angle°] du milieu de la base.
+function bridgeCorner(C, u1, u2, w, e){
+  const c = u1[0] * u2[0] + u1[1] * u2[1], q = -e * c + Math.sqrt(Math.max(0, e * e * c * c - e * e + w * w));
+  const bk = [C[0] - q * u1[0], C[1] - q * u1[1]], fr_ = [C[0] + e * u2[0], C[1] + e * u2[1]];
+  return [(bk[0] + fr_[0]) / 2, (bk[1] + fr_[1]) / 2, Math.atan2(fr_[1] - bk[1], fr_[0] - bk[0]) * 180 / Math.PI];
+}
 SCENES.tableAir4 = (host, o = {}) => {
   const W = 600, H = 340, f = new Fig(host, W, H, {label: 'Mobile autoporteur sur une table à coussin d’air inclinée : positions M1 à M8, altitude hi de Mi au-dessus du plan horizontal de référence passant par M8'});
   const sc = labScene(f, 306), d = realDefs(f);
   const A = 10, ca = Math.cos(rad(A)), sa = Math.sin(rad(A)), P0 = [40, 92], L = 520;
   const at = (s, n = 0) => [P0[0] + s * ca + n * sa, P0[1] + s * sa - n * ca];
   const P1 = at(L), K = 24, s8 = 470, sOf = Dc => s8 - Dc * K;
-  f.rect(at(30)[0] - 6, at(30)[1] + 12, 12, 306 - at(30)[1] - 12 - 30, {fill: d.metal, parent: sc});
-  f.rect(at(30)[0] - 26, 276, 52, 30, {rx: 2, fill: f.lg('cale', [[0, '#d9a066'], [1, '#9c6633']]), stroke: '#6b4220', 'stroke-width': 1, parent: sc});
-  f.T(at(30)[0], 296, 'cale', {cls: 'lbl-b', anchor: 'middle', size: 13, fill: '#ffffff', parent: sc});
-  f.rect(P1[0] - 36, P1[1] + 12, 12, 306 - P1[1] - 12, {fill: d.metal, parent: sc});
+  // deux pieds identiques ; la cale, sous le pied gauche, a exactement la hauteur qui donne l'inclinaison α
+  const LG = at(30), RG = at(L - 30), legL = 306 - RG[1] - 12, cH = RG[1] - LG[1];
+  f.rect(LG[0] - 6, LG[1] + 12, 12, legL, {fill: d.metal, parent: sc});
+  f.rect(LG[0] - 26, 306 - cH, 52, cH, {rx: 2, fill: f.lg('cale', [[0, '#d9a066'], [1, '#9c6633']]), stroke: '#6b4220', 'stroke-width': 1, parent: sc});
+  f.T(LG[0], 306 - cH / 2 + 5, 'cale', {cls: 'lbl-b', anchor: 'middle', size: 13, fill: '#ffffff', parent: sc});
+  f.rect(RG[0] - 6, RG[1] + 12, 12, legL, {fill: d.metal, parent: sc});
   shadowEll(f, sc, (P0[0] + P1[0]) / 2, 308, 250, 5, .25);
   const pl = f.g({parent: sc}); pl.setAttribute('transform', `translate(${P0[0]},${P0[1]}) rotate(${A})`);
   f.rect(0, 0, L, 14, {rx: 2, fill: f.lg('glass', [[0, '#e9f4fb'], [.5, '#bcd6e6'], [1, '#8fb3c9']]), stroke: '#5d7f96', 'stroke-width': 1, parent: pl});
@@ -146,16 +156,16 @@ SCENES.appBille = (host, o = {}) => {
   if (o.final) f.T(W - 10, H - 8, 'animation ralentie', {cls: 'lbl-s', size: 12, anchor: 'end', parent: sc});
   f.frame();
   const g = 10, vA = 6, zA = 1.2, Tup = vA / g, Tdn = Math.sqrt(2 * 3 / g), Tt = Tup + Tdn, slow = 2.2;
-  const put = (z, v) => { const y = yG - z * K; setT(bG, xb, y); const L = v * 9;
-    vV.setAttribute('display', Math.abs(L) > 4 ? 'inline' : 'none'); lV.setAttribute('display', Math.abs(L) > 4 && !o.book ? 'inline' : 'none');
+  const put = (z, v) => { const y = Math.min(yG - z * K, yG - 11); setT(bG, xb, y); const L = v * 9;
+    const show = Math.abs(L) > 4 && z > 0; vV.setAttribute('display', show ? 'inline' : 'none'); lV.setAttribute('display', show && !o.book ? 'inline' : 'none');
     setVec(vV, xb, y - Math.sign(L) * 12, xb, y - Math.sign(L) * 12 - L); setT(lV, xb + 10, y - L / 2); };
   return {update(t){
     if (!o.final){ put(zA, vA); lab0.setAttribute('display', 'inline'); lV.setAttribute('display', 'none'); return; }
     lab0.setAttribute('display', 'none');
-    const c = (t % (Tt * slow + 1.2)) / slow, u = Math.min(c, Tt);
+    const c = (t % (Tt * slow + .5)) / slow, u = Math.min(c, Tt);
     let z, v;
     if (u < Tup){ z = zA + vA * u - .5 * g * u * u; v = vA - g * u; } else { const w = u - Tup; z = 3 - .5 * g * w * w; v = -g * w; }
-    if (z < 0){ z = 0; v = 0; }
+    if (z < 0) z = 0;   // arrivée au sol : on montre l'instant de l'impact (énergie mécanique conservée)
     put(z, v);
     const Em = .5 * vA * vA + g * zA; set([.5 * v * v / Em * .9, g * z / Em * .9, (.5 * v * v + g * z) / Em * .9]);
   }};
@@ -177,13 +187,17 @@ SCENES.caisseRugueuse = (host, o = {}) => {
   tag(f, sc, 330, 60, 'les surfaces en contact s’échauffent', {size: 14, w: 250});
   f.frame();
   // modèle (unités du dessin) : descente avec frottement, puis freinage sur le sol
-  const a1 = 120, a2 = -150, t1 = Math.sqrt(2 * L / a1), vB = a1 * t1, t2 = -vB / a2, dB = -vB * vB / (2 * a2);
+  const hw = 30, Ls = L - 2 * hw;   // le centre de la base part à hw du sommet A ; le creux B est franchi sur 2 hw
+  const a1 = 120, a2 = -150, t1 = Math.sqrt(2 * Ls / a1), vB = a1 * t1, t2 = -vB / a2, dB = -vB * vB / (2 * a2);
+  const u1 = [ca, sa], u2 = [1, 0];
   return {update(t){
-    let s, v;
+    let s, v;   // s : abscisse du centre de la base, comptée depuis A le long du chemin
     if (o.book){ s = L + dB * .45; v = 0; }
-    else { const c = t % (t1 + t2 + 1.6); if (c < t1){ s = .5 * a1 * c * c; v = a1 * c; } else { const u = Math.min(c - t1, t2); s = L + vB * u + .5 * a2 * u * u; v = vB + a2 * u; } }
+    else { const c = t % (t1 + t2 + 1.6); if (c < t1){ s = hw + .5 * a1 * c * c; v = a1 * c; } else { const u = Math.min(c - t1, t2); s = L - hw + vB * u + .5 * a2 * u * u; v = vB + a2 * u; } }
     let x, y, a;
-    if (s <= L){ x = A[0] + s * ca; y = A[1] + s * sa; a = al; } else { x = B[0] + (s - L); y = yb; a = 0; }
+    if (s <= L - hw){ x = A[0] + s * ca; y = A[1] + s * sa; a = al; }
+    else if (s < L + hw){ [x, y, a] = bridgeCorner(B, u1, u2, 2 * hw, s - (L - hw)); }
+    else { x = B[0] + (s - L); y = yb; a = 0; }
     setT(cr, x, y, a); setT(heat, x, y - 48, 0); heat.setAttribute('opacity', f2(clamp(v / 200, 0, 1) * (s > L ? 1 : .4)));
     glow.setAttribute('cx', f2(x)); glow.setAttribute('cy', f2(y)); glow.setAttribute('opacity', f2(clamp(v / 180, 0, 1)));
     disp.textContent = fr(Math.max(0, v) / 60, 2) + ' m/s';
@@ -268,6 +282,8 @@ SCENES.ex1Rampe = (host, o = {}) => {
     else if (c < t1){ x = 60 + v0 * c; y = A[1]; v = v0; onA = c > t1 - .45; }
     else { const u = c - t1; let s; if (u < t2){ s = v0 * u - .5 * dec * u * u; v = v0 - dec * u; } else { const w = u - t2; s = Math.max(0, Lp - .5 * dec * w * w); v = -dec * w; }
       if (s <= 0){ x = A[0] + (u - 2 * t2) * v0 * -1; y = A[1]; } else { x = A[0] + s * ca; y = A[1] - s * sa; a = -al; } }
+    // franchissement du creux en A (solide de 40 px) : base posée à la fois sur le plat et sur la pente
+    if (x > A[0] - 20 && x < A[0] + 20 * ca + 1 && !(c < 0)){ const sc_ = a === 0 ? x - A[0] : (x - A[0]) / ca; if (sc_ > -20 && sc_ < 20){ [x, y, a] = bridgeCorner(A, [1, 0], [ca, -sa], 40, sc_ + 20); } }
     setT(S, x, y, a);
     const show = onA || o.book; vV.setAttribute('display', show ? 'inline' : 'none'); lV.setAttribute('display', show ? 'inline' : 'none');
     if (show){ setVec(vV, x + 22, y - 13, x + 82, y - 13); setT(lV, x + 54, y - 22); }

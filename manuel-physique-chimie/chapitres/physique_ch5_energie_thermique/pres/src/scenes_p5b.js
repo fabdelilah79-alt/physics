@@ -221,8 +221,9 @@ SCENES.soleilTerre = (host, o = {}) => {
 SCENES.fourSolaire = (host, o = {}) => {
   const W = 520, H = 400, f = new Fig(host, W, H, {label: 'Four solaire parabolique : le miroir concentre le rayonnement du Soleil sur un creuset contenant de l’étain'});
   const sc = outdoor(f, 350), d = realDefs(f);
-  f.circ(470, 50, 30, {fill: f.rg('s3', [[0, '#fff6d6'], [.6, '#ffd166'], [1, '#f6a13a']]), parent: sc});
-  const cx = 230, cy = 230, R = 150;   // miroir parabolique (coupe), foyer en F
+  const cx = 230, cy = 230, R = 150;
+  // le four est orienté vers le Soleil : les rayons arrivent parallèlement à l'axe du miroir
+  f.circ(cx, -6, 34, {fill: f.rg('s3', [[0, '#fff6d6'], [.6, '#ffd166'], [1, '#f6a13a']]), parent: sc});   // miroir parabolique (coupe), foyer en F
   const F = [cx, cy - 95];
   let dm = '';
   dm = ''; for (let k = 0; k <= 40; k++){ const x = -R + 2 * R * k / 40, y = x * x / (4 * 95); dm += (k ? 'L' : 'M') + f2(cx + x) + ',' + f2(cy - y); }
@@ -241,7 +242,7 @@ SCENES.fourSolaire = (host, o = {}) => {
   return {update(t){
     rays.innerHTML = '';
     [-120, -70, 70, 120].forEach(x => { const y = x * x / (4 * 95); const p = [cx + x, cy - y];
-      f.line(p[0], 20, p[0], p[1], {stroke: '#f4a300', 'stroke-width': 1.8, opacity: .9, parent: rays});
+      f.line(p[0], 30, p[0], p[1], {stroke: '#f4a300', 'stroke-width': 1.8, opacity: .9, parent: rays});
       vec(f, rays, p[0], p[1], lerp(p[0], F[0], .85), lerp(p[1], F[1], .85), '#f07f1e', 1.8); });
     glow.setAttribute('opacity', f2(o.book ? .5 : .4 + .2 * Math.sin(t * 5)));
   }};

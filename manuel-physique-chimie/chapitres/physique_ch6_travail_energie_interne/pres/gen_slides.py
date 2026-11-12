@@ -270,16 +270,16 @@ S.append(slide("exercice", "Correction", "Exercice 1 — Compression isobare", *
           q(3, '<span class="kw">Premier principe</span>', r"$Q = −600~\u{J}$ ; $ΔU = W + Q = 240 − 600 = −360~\u{J}$")))))
 
 S.append(slide("exercice", "Exercice 2", "Un cycle de trois transformations", *EX, "Exercice 2 · énoncé", cols("1.2fr", ".8fr",
-    "    <div class=\"stack\">\n      " + card(r"$A→B$ : compression adiabatique, $W_{AB} = +350~\u{J}$. $B→C$ : refroidissement isochore, $ΔU_{BC} = −550~\u{J}$. $C→A$ : détente isobare sous $P = 1,5×10^5~\u{Pa}$, de $V_C = 2,0~\u{L}$ à $V_A = 4,0~\u{L}$.", "small") +
+    "    <div class=\"stack\">\n      " + card(r"$A→B$ : compression adiabatique, $W_{AB} = +480~\u{J}$. $B→C$ : refroidissement isochore, $ΔU_{BC} = −1230~\u{J}$. $C→A$ : détente isobare sous $P = 1,5×10^5~\u{Pa}$, de $V_C = 2,0~\u{L}$ à $V_A = 4,0~\u{L}$.", "small") +
     r'''
       <ol class="exlist small"><li>Déterminer $ΔU_{AB}$.</li><li>Justifier $W_{BC} = 0$ ; en déduire $Q_{BC}$.</li><li>Calculer $W_{CA}$.</li><li>Sur le cycle : calculer $ΔU_{CA}$, puis $Q_{CA}$.</li></ol>
     </div>''', "    " + fig("cycle"))))
 
 S.append(slide("exercice", "Correction", "Exercice 2 — Le cycle", *EX, "Exercice 2 · correction", cols("1.35fr", ".65fr",
-    qlist(q(1, '<span class="kw">A → B</span>', r"$ΔU_{AB} = W_{AB} + Q_{AB} = +350~\u{J}$"),
-          q(2, '<span class="kw">B → C</span>', r"$ΔV = 0$ ⇒ $W_{BC} = 0$ ; $Q_{BC} = ΔU_{BC} = −550~\u{J}$"),
+    qlist(q(1, '<span class="kw">A → B</span>', r"$ΔU_{AB} = W_{AB} + Q_{AB} = +480~\u{J}$"),
+          q(2, '<span class="kw">B → C</span>', r"$ΔV = 0$ ⇒ $W_{BC} = 0$ ; $Q_{BC} = ΔU_{BC} = −1230~\u{J}$"),
           q(3, '<span class="kw">C → A</span>', r"$W_{CA} = −1,5×10^5×2,0×10^{−3} = −300~\u{J}$"),
-          q(4, '<span class="kw">Cycle</span>', r"$ΔU_{CA} = −(350 − 550) = +200~\u{J}$ ; $Q_{CA} = ΔU_{CA} − W_{CA} = 200 + 300 = +500~\u{J}$")),
+          q(4, '<span class="kw">Cycle</span>', r"$ΔU_{CA} = −(480 − 1230) = +750~\u{J}$ ; $Q_{CA} = ΔU_{CA} − W_{CA} = 750 + 300 = +1050~\u{J}$")),
     "    " + fig("cycle"))))
 
 S.append(slide("exercice", "Exercice 3", "Travail électrique et travail mécanique", *EX, "Exercice 3 · énoncé", ("", "",

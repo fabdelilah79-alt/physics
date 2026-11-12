@@ -40,3 +40,12 @@
   `thermoplongeur` (béchers + joulemètres, cylindre de fer chauffé), `courbeQ` (θ = f(Q)), `panneauSolaire` (thermosiphon), `balle` sont dans les scènes du ch7.
 - Ch8 : scènes `chg`, `stick` (verre, ébonite, règle), `pendulum` (pendule électrostatique), `holdStick` (main qui tient un bâton), `pcharge`, `efield`/`fieldLines`/`drawLine` (lignes de champ), `plate`, `hvGen` (générateur haute tension) dans `chapitres/physique_ch8_energie_potentielle_electrostatique/pres/src/scenes_p8*.js`.
 - Fiche pédagogique : dans `\frise`, une étiquette ne doit contenir ni virgule ni barre oblique (séparateurs de la liste).
+- Révision des figures et animations des chapitres 4 à 7 (contrôle à plusieurs instants) :
+  ch4 : bille retenue par l'électroaimant, rocher qui tombe sans traverser la falaise et reste au sol, main qui porte le dictionnaire,
+  caisse et solide qui franchissent le creux sans traverser la piste (`bridgeCorner`), cale à la bonne hauteur sous la table, bille qui ne s'enfonce plus dans le sol ;
+  ch5 et ch7 : versement réaliste de l'eau tiède par l'orifice du couvercle (`pourBeaker`, surface horizontale calculée par aire),
+  bloc métallique et bille sans contact avec l'agitateur, glaçon entre l'agitateur et la sonde, montée du niveau quand le bloc est immergé,
+  tube de puisage d'eau chaude en haut du chauffe-eau, Soleil dans l'axe du four solaire ; ch7 : rayons solaires parallèles, vecteur V0 masqué dans le bois, cordons d'alimentation des joulemètres ;
+  ch6 : perceuse à colonne et sonde posée sur la plaque, montants de l'expérience de Joule écartés (masses libres), pas d'agitateur sous les palettes,
+  poignée de pompe toujours visible ; cycle de l'exercice 2 tracé avec une vraie adiabatique (P·V^1,4 = cte, P_B ≈ 3,96×10⁵ Pa) et données recalculées :
+  W_AB = +480 J, ΔU_BC = −1230 J, ΔU_CA = +750 J, Q_CA = +1050 J (livre, présentation, fiche pédagogique).

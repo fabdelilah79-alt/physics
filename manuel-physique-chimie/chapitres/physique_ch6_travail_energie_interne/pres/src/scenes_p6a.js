@@ -62,14 +62,17 @@ SCENES.effets = (host, o = {}) => {
     f.T(40, 26, title, {cls: 'lbl-b', size: 14, fill: C.ink, parent: g}); return inner; };
   // a) perçage
   const pa = panel(0, 'a', 'Perçage d’une plaque');
+  f.rect(200, 52, 12, 198, {fill: d.metal, parent: pa}); f.rect(186, 244, 50, 8, {rx: 2, fill: '#3b4654', parent: pa});   // colonne de la perceuse (derrière la plaque)
   f.rect(30, 200, 190, 50, {rx: 3, fill: f.lg('ac', [[0, '#c3ccd6'], [1, '#7c8896']]), stroke: '#3b4654', 'stroke-width': 1, parent: pa});
   const hot = f.ell(125, 200, 30, 8, {fill: '#ff5a2a', opacity: .0, filter: d.blur4, parent: pa});
   const drill = f.g({parent: pa});
+  f.rect(150, 72, 58, 14, {rx: 3, fill: '#3b4654', parent: drill}); f.rect(194, 66, 24, 26, {rx: 4, fill: '#2b3440', parent: drill});   // bras et coulisseau sur la colonne
   f.rect(95, 60, 60, 70, {rx: 10, fill: f.lg('dr', [[0, '#1f5fa8'], [1, '#123461']]), parent: drill});
   f.rect(118, 130, 14, 18, {fill: '#3b4654', parent: drill});
   const bit = f.path('M121,148 L129,148 L127,198 L125,203 L123,198 Z', {fill: d.metal, parent: drill});
   const spir = f.path('', {stroke: '#5d6978', 'stroke-width': 1.2, fill: 'none', parent: drill});
-  const ta = display(f, pa, 160, 50, 82, 56, 'θ (°C)', {noShadow: true});
+  const ta = display(f, pa, 8, 50, 82, 56, 'θ (°C)', {noShadow: true});
+  f.path('M49,106 C49,160 80,190 98,197', {stroke: '#1b2430', 'stroke-width': 2.2, fill: 'none', parent: pa}); f.rect(94, 193, 12, 7, {rx: 2, fill: '#1b2430', parent: pa});   // sonde posée sur la plaque, près du trou
   // b) ressort
   const pb = panel(1, 'b', 'Ressort étiré');
   f.rect(14, 120, 14, 110, {fill: '#8a96a8', parent: pb}); for (let y = 124; y < 230; y += 10) f.line(14, y, 4, y + 8, {stroke: '#5d6978', 'stroke-width': 1.2, parent: pb});
@@ -164,23 +167,23 @@ SCENES.ressortApp = (host, o = {}) => {
 /* ---------- Situation 2 : pompe à vélo bouchée, compression rapide ---------- */
 SCENES.pompe = (host, o = {}) => {
   const W = 560, H = 360, f = new Fig(host, W, H, {label: 'Pompe à vélo dont la sortie est bouchée : on enfonce le piston, l’air est comprimé et le cylindre s’échauffe'});
-  const sc = labScene(f, 330), d = realDefs(f), cx = 230, top = 70, h = 230, w = 80;
+  const sc = labScene(f, 330), d = realDefs(f), cx = 230, top = 120, h = 190, w = 80;
   f.rect(cx - 70, 318, 140, 14, {rx: 4, fill: '#2b3440', parent: sc});
   f.rect(cx - w / 2 - 6, top, w + 12, h, {rx: 8, fill: f.lg('pb', [[0, '#9aa7b6'], [.35, '#eef2f6'], [1, '#5d6978']], 0, 0, 1, 0), stroke: '#3b4654', 'stroke-width': 1, parent: sc});
-  const heat = f.rect(cx - w / 2 - 6, top + 120, w + 12, h - 120, {rx: 8, fill: '#ff5a2a', opacity: 0, filter: d.blur4, parent: sc});
+  const heat = f.rect(cx - w / 2 - 6, top + 95, w + 12, h - 95, {rx: 8, fill: '#ff5a2a', opacity: 0, filter: d.blur4, parent: sc});
   f.rect(cx - w / 2, top + 4, w, h - 8, {rx: 4, fill: '#f7fbfe', opacity: .9, parent: sc});
   const gasR = f.rect(cx - w / 2, 0, w, 0, {fill: '#cfe6fb', parent: sc});
   const gp = f.g({parent: sc}); const upd = gasParticles(f, gp, 0, 0, w, 100, 18, {r: 4});
   const pis = f.g({parent: sc});
-  f.rect(cx - w / 2, -14, w, 14, {rx: 3, fill: '#3b4654', parent: pis}); f.rect(cx - 5, -150, 10, 136, {fill: d.metal, parent: pis});
-  f.rect(cx - 60, -166, 120, 18, {rx: 9, fill: '#1b2a41', parent: pis});
+  f.rect(cx - w / 2, -14, w, 14, {rx: 3, fill: '#3b4654', parent: pis}); f.rect(cx - 5, -126, 10, 112, {fill: d.metal, parent: pis});
+  f.rect(cx - 60, -142, 120, 18, {rx: 9, fill: '#1b2a41', parent: pis});
   f.rect(cx + w / 2 + 6, top + h - 30, 46, 14, {fill: '#3b4654', parent: sc}); f.rect(cx + w / 2 + 50, top + h - 36, 14, 26, {rx: 4, fill: '#d62839', parent: sc});
   tag(f, sc, cx + 140, top + h - 50, 'sortie bouchée', {size: 14, w: 104});
   vec(f, sc, cx + 110, 40, cx + 110, 100, C.red, 3); f.T(cx + 122, 72, 'on enfonce', {cls: 'lbl-b', size: 13, fill: C.red, parent: sc});
   const disp = display(f, sc, 420, 160, 110, 60, 'θ paroi (°C)', {noShadow: true});
   f.frame();
   return {update(t){
-    const k = o.book ? .5 : clamp(((t % 6) - .8) / 1.2, 0, 1), yp = lerp(top + 40, top + 150, k);
+    const k = o.book ? .5 : clamp(((t % 6) - .8) / 1.2, 0, 1), yp = lerp(top + 30, top + 120, k);
     setT(pis, 0, yp); f.set(gasR, {y: f2(yp), height: f2(top + h - 4 - yp)});
     gp.setAttribute('transform', `translate(${cx - w / 2},${f2(yp)})`); upd(o.book ? 1 : t, w, 1 + 2 * k);
     gp.querySelectorAll('circle').forEach(c => c.setAttribute('cy', f2(+c.getAttribute('cy') * (top + h - 4 - yp) / 100)));

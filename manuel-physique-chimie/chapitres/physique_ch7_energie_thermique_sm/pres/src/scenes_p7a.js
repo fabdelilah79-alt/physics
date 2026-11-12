@@ -70,6 +70,7 @@ SCENES.equilibre = (host, o = {}) => {
   const W = 660, H = 360, f = new Fig(host, W, H, {label: 'Un bloc de métal chaud est plongé dans l’eau froide : les deux températures tendent vers une même valeur d’équilibre'});
   const sc = labScene(f, 320);
   const bk = beaker3D(f, sc, 150, 320, 150, 170, {level: .55});
+  const rise = f.rect(150 - bk.rx + 2, bk.yl, 2 * bk.rx - 4, 0, {fill: liquidGrad(f, '#9fd3f5'), parent: bk.content}), riseTop = f.ell(150, bk.yl, bk.rx - 2, bk.ry - 1, {fill: tint('#9fd3f5', .4), stroke: shade('#9fd3f5', .2), 'stroke-width': .8, parent: bk.content});
   const blk = f.g({parent: bk.content}); metalBlock(f, blk, 0, 0, 52, 62, '#c9cfd6', {hook: 160});
   const tm = probeThermo(f, sc, 214, 40, 300, {title: 'θ eau (°C)'});
   const tb = display(f, sc, 30, 24, 100, 62, 'θ métal (°C)', {noShadow: true});
@@ -88,12 +89,36 @@ SCENES.equilibre = (host, o = {}) => {
   const thM = u => 28.3 + 71.7 * Math.exp(-u * 5), thW = u => 28.3 - 8.3 * Math.exp(-u * 5);
   return {update(t){
     const c = o.book ? 3 : t % 8, drop = clamp(c / 1.2, 0, 1), u = clamp((c - 1.2) / 5, 0, 1);
-    setT(blk, 150, lerp(bk.yl - 150, bk.yl + 20, ease(drop)));
+    const yBk = lerp(bk.yl - 150, bk.yl + 20, ease(drop)); setT(blk, 150, yBk);
+    const imm = clamp((yBk + 62 - bk.yl) / 62, 0, 1), dh = 9 * imm;
+    rise.setAttribute('y', f2(bk.yl - dh)); rise.setAttribute('height', f2(dh)); riseTop.setAttribute('cy', f2(bk.yl - dh));
     tb.textContent = fr(u > 0 ? thM(u) : 100, 1); tm.textContent = fr(u > 0 ? thW(u) : 20, 1);
     let a = '', b = ''; const n = 40; for (let i = 0; i <= n; i++){ const v = u * i / n; a += (i ? 'L' : 'M') + f2(X(v)) + ',' + f2(Y(thM(v))); b += (i ? 'L' : 'M') + f2(X(v)) + ',' + f2(Y(thW(v))); }
     cm.setAttribute('d', a); cw.setAttribute('d', b); eq.setAttribute('opacity', u > .8 ? 1 : 0); leq.setAttribute('opacity', u > .8 ? 1 : 0);
   }};
 };
+
+// ----- versement réaliste : bécher incliné dont la surface libre reste horizontale (surface calculée par aire) -----
+function polyClipBelow(P, ys){   // partie du polygone P située sous la droite y = ys (y croissant vers le bas)
+  const out = []; for (let i = 0; i < P.length; i++){ const a = P[i], b = P[(i + 1) % P.length], ia = a[1] >= ys, ib = b[1] >= ys;
+    if (ia) out.push(a); if (ia !== ib){ const k = (ys - a[1]) / (b[1] - a[1]); out.push([a[0] + k * (b[0] - a[0]), ys]); } } return out; }
+function polyArea(P){ let s = 0; for (let i = 0; i < P.length; i++){ const a = P[i], b = P[(i + 1) % P.length]; s += a[0] * b[1] - b[0] * a[1]; } return Math.abs(s) / 2; }
+// bécher (largeur w, hauteur h) : bec = coin supérieur droit, placé en (sx, sy) ; incliné de th° dans le sens horaire, il verse vers la droite
+function pourBeaker(f, parent, w, h, liq){
+  const g = f.g({parent}), body = f.g({parent: g}), lq = f.path('', {fill: liquidGrad(f, liq), stroke: 'none', parent: g}), surf = f.path('', {stroke: tint(liq, .5), 'stroke-width': 2, parent: g});
+  f.rect(-w, 0, w, h, {rx: 3, fill: f.lg(uid('pb'), [[0, '#ffffff', .5], [.5, '#e3f0fa', .2], [1, '#ffffff', .5]], 0, 0, 1, 0), stroke: '#7d93a8', 'stroke-width': 1.8, parent: body});
+  f.path('M0,0 q6,-2 8,-7', {stroke: '#7d93a8', 'stroke-width': 1.8, fill: 'none', parent: body});
+  const corners = (sx, sy, th) => { const a = rad(th), c = Math.cos(a), s_ = Math.sin(a), T = ([x, y]) => [sx + x * c - y * s_, sy + x * s_ + y * c];
+    return [[-w, 0], [0, 0], [0, h], [-w, h]].map(T); };
+  return {g, body, lq, surf, corners,
+    cap(sx, sy, th){ return polyArea(polyClipBelow(corners(sx, sy, th), sy)); },   // volume que le bécher peut garder sans déborder par le bec
+    draw(sx, sy, th, V){ body.setAttribute('transform', `translate(${f2(sx)},${f2(sy)}) rotate(${f2(th)})`);
+      const P = corners(sx, sy, th); let lo = Math.min(...P.map(p => p[1])), hi = Math.max(...P.map(p => p[1]));
+      if (V <= .5){ lq.setAttribute('d', ''); surf.setAttribute('d', ''); return; }
+      for (let i = 0; i < 40; i++){ const m = (lo + hi) / 2; if (polyArea(polyClipBelow(P, m)) > V) lo = m; else hi = m; }
+      const Q = polyClipBelow(P, hi); lq.setAttribute('d', Q.map((p, i) => (i ? 'L' : 'M') + f2(p[0]) + ',' + f2(p[1])).join('') + 'Z');
+      const S = Q.filter(p => Math.abs(p[1] - hi) < .01).map(p => p[0]); surf.setAttribute('d', S.length >= 2 ? `M${f2(Math.min(...S))},${f2(hi)} L${f2(Math.max(...S))},${f2(hi)}` : ''); }};
+}
 
 /* ---------- Activités 2 et 3, applications, exercices : calorimètre de Berthelot ---------- */
 // o.mode : 'eau' (eau tiède ajoutée), 'metal' (bloc métallique), 'glace' (glaçon), 'deux' (fer + cuivre) ; o.th0 / o.th1 : températures affichées ; o.labels : légendes ; o.metal : couleur
@@ -104,15 +129,25 @@ SCENES.calorimetre = (host, o = {}) => {
   const th = probeThermo(f, sc, cal.probeX, 34, cal.yIn - 10, {title: 'θ (°C)'});
   const mode = o.mode || 'eau', in_ = f.g({parent: cal.content});
   let ice = null;
-  if (mode === 'metal') metalBlock(f, in_, cx - 4, cal.yIn - 58, 50, 46, o.metal || '#c9cfd6', {hook: cal.yIn - 58 - cal.lidY + 4});
+  if (mode === 'metal') metalBlock(f, in_, (cal.sx + (cal.xR - cal.xL) * .18 + cal.probeX) / 2, cal.yIn - 80, 40, 46, o.metal || '#c9cfd6', {hook: cal.yIn - 80 - cal.lidY + 4});
   if (mode === 'glace'){ ice = f.g({parent: in_}); iceCube(f, ice, -20, -20, 40, 12); }
   if (mode === 'deux'){   // bille de fer et bloc de cuivre suspendus par des fils, immergés dans l'eau
-    f.line(cx - 40, cal.lidY + 4, cx - 40, cal.yIn - 44, {stroke: '#3b4654', 'stroke-width': 1.2, parent: in_}); ball(f, in_, cx - 40, cal.yIn - 30, 14, {mid: '#9aa3ad', dark: '#3b4248'});
-    metalBlock(f, in_, cx + 12, cal.yIn - 62, 38, 44, '#c8794a', {hook: cal.yIn - 62 - cal.lidY + 4});
+    const xF = cal.sx + 18, yF = cal.yIn - 58, xC = cal.probeX - 22;   // la bille pend au-dessus de l'anneau de l'agitateur (pas de contact)
+    f.line(xF, cal.lidY + 4, xF, yF - 14, {stroke: '#3b4654', 'stroke-width': 1.2, parent: in_}); ball(f, in_, xF, yF, 13, {mid: '#9aa3ad', dark: '#3b4248'});
+    metalBlock(f, in_, xC, cal.yIn - 70, 34, 44, '#c8794a', {hook: cal.yIn - 70 - cal.lidY + 4});
     tag(f, sc, 380, 250, 'fer', {size: 13, w: 26}); tag(f, sc, 380, 280, 'cuivre', {size: 13, w: 48});
-    f.line(cx - 26, cal.yIn - 30, 360, 245, {stroke: C.ink2, 'stroke-width': 1, parent: sc}); f.line(cx + 31, cal.yIn - 40, 352, 276, {stroke: C.ink2, 'stroke-width': 1, parent: sc});
+    f.line(cal.sx + 31, cal.yIn - 58, 360, 245, {stroke: C.ink2, 'stroke-width': 1, parent: sc}); f.line(cal.probeX - 5, cal.yIn - 48, 352, 276, {stroke: C.ink2, 'stroke-width': 1, parent: sc});
   }
-  if (mode === 'eau' && !o.labels){ const bk = beaker3D(f, sc, 380, 398, 66, 80, {level: .6, liq: '#f6b48f'}); tag(f, sc, 380, 300, 'eau tiède', {size: 13, w: 64}); }
+  let pour = null;
+  if (mode === 'eau' && !o.labels){
+    const hx = cal.xL + 20;   // orifice de remplissage dans le couvercle, entre la paroi et la tige de l'agitateur
+    f.rect(hx - 8, cal.lidY, 16, 16, {fill: '#f7fbfe', parent: sc}); f.rect(hx - 8, cal.lidY, 2, 16, {fill: '#1b2430', parent: sc}); f.rect(hx + 6, cal.lidY, 2, 16, {fill: '#1b2430', parent: sc});
+    const added = f.rect(cal.xL, cal.yl, cal.xR - cal.xL, 0, {fill: liquidGrad(f, '#9fd3f5'), parent: cal.content});
+    const stream = f.path('', {stroke: '#f6b48f', 'stroke-width': 4, 'stroke-linecap': 'round', fill: 'none', opacity: .9, parent: sc});
+    const pb = pourBeaker(f, sc, 54, 70, '#f6b48f'); const V0 = 54 * 70 * .6;
+    const tg = tag(f, sc, 0, 0, 'eau tiède', {size: 13, w: 64});
+    pour = {hx, added, stream, pb, V0, tg};
+  }
   if (o.labels){
     const call = (x1, y1, x2, y2, txt) => { f.line(x1, y1, x2, y2, {stroke: C.ink2, 'stroke-width': 1.2, parent: sc}); f.dot(x1, y1, {r: 3, fill: C.ink2, parent: sc}); tag(f, sc, x2 + 4, y2 + 5, txt, {size: 15, w: txt.length * 8.6, anchor: 'start'}); };
     call(cal.probeX + 40, 60, 372, 60, 'thermomètre');
@@ -125,10 +160,25 @@ SCENES.calorimetre = (host, o = {}) => {
   f.frame();
   const th0 = o.th0 !== undefined ? o.th0 : 18, th1 = o.th1 !== undefined ? o.th1 : 29.5;
   return {update(t){
-    const c = o.book ? 0 : t % 9, u = clamp((c - 1) / 6, 0, 1);
+    const c = o.book ? 0 : t % 9, u = clamp((c - (mode === 'eau' && !o.labels ? 3.6 : 1)) / (mode === 'eau' && !o.labels ? 5 : 6), 0, 1);
     th.textContent = fr(th0 + (th1 - th0) * (1 - Math.exp(-u * 4)) / (1 - Math.exp(-4)), 1);
     setT(cal.stir, 0, o.book ? 0 : -14 * Math.abs(Math.sin(t * 2.4)));
-    if (ice){ const k = 1 - .9 * u; setT(ice, cx - 30, cal.yl + 14 * k, 12 * (1 - u), k); /* la glace flotte : une petite partie émerge */ ice.setAttribute('opacity', u > .97 ? 0 : 1); }
+    if (ice){ const k = 1 - .9 * u; setT(ice, (cal.sx + cal.probeX) / 2 + 8, cal.yl + 14 * k, 12 * (1 - u), k); /* la glace flotte : une petite partie émerge */ ice.setAttribute('opacity', u > .97 ? 0 : 1); }
+    if (pour){ const P = pour, w = 54, h = 70, xB = 62, yB = 398 - h, yUp = cal.lidY - 70, sxP = P.hx;   // bec : coin supérieur droit
+      let sx, sy, th; const ph = o.book ? 0 : c;
+      if (ph < 1){ sx = xB; sy = yB; th = 0; }
+      else if (ph < 1.5){ sx = xB; sy = lerp(yB, yUp, ease((ph - 1) / .5)); th = 0; }                       // on soulève le bécher (à gauche du calorimètre)
+      else if (ph < 2.2){ const k = ease((ph - 1.5) / .7); sx = lerp(xB, sxP, k); sy = yUp; th = 40 * k; }  // le bec vient au-dessus de l'orifice
+      else if (ph < 3.6){ sx = sxP; sy = yUp; th = lerp(40, 112, ease((ph - 2.2) / 1.4)); }                // on incline : l'eau s'écoule
+      else if (ph < 4.1){ const k = ease((ph - 3.6) / .5); sx = lerp(sxP, xB, k); sy = yUp; th = 112 * (1 - k); }
+      else if (ph < 4.5){ sx = xB; sy = lerp(yUp, yB, ease((ph - 4.1) / .4)); th = 0; }
+      else { sx = xB; sy = yB; th = 0; }
+      const Vr = ph < 2.2 ? P.V0 : ph < 3.6 ? Math.min(P.V0, P.pb.cap(sx, sy, th)) : 0;
+      P.pb.draw(sx, sy, th, Vr);
+      const frac = (P.V0 - Vr) / P.V0; P.added.setAttribute('y', f2(cal.yl - 22 * frac)); P.added.setAttribute('height', f2(frac > 0 ? 22 * frac + 4 : 0));   // recouvre l'ancienne surface
+      const flowing = ph >= 2.2 && ph < 3.6 && P.pb.cap(sx, sy, th) < P.V0 - 1 && Vr > 1;
+      P.stream.setAttribute('d', flowing ? `M${f2(sx)},${f2(sy)} Q${f2(sx + 3)},${f2(sy + 12)} ${f2(P.hx)},${f2(cal.lidY + 2)} L${f2(P.hx)},${f2(cal.yl - 22 * frac)}` : '');
+      P.tg.setAttribute('transform', `translate(${f2(sx - 27)},${f2(sy - 10)})`); P.tg.setAttribute('display', ph >= 1 && ph < 4.5 ? 'none' : 'inline'); }
   }};
 };
 
@@ -144,7 +194,7 @@ SCENES.thermoplongeur = (host, o = {}) => {
     let dz = `M${x},${yBot - 34}`; for (let k = 0; k < 3; k++) dz += ` q9,3 0,5 q-9,2 0,5`; f.path(dz, {stroke: '#7c8896', 'stroke-width': 3.2, fill: 'none', parent: g});
     const glow = f.path(dz, {stroke: '#ff7a3a', 'stroke-width': 2, fill: 'none', opacity: 0, parent: g});
     f.rect(x - 9, yTop - 34, 18, 36, {rx: 5, fill: '#1b2430', parent: g}); return {g, glow}; };
-  const joule = (x, y) => display(f, sc, x, y, 100, 58, 'JOULEMÈTRE', {noShadow: true});
+  const joule = (x, y) => { f.path(`M${x + 92},${y + 40} C${x + 112},${y + 46} ${x + 108},${y + 70} ${x + 100},${y + 96}`, {stroke: '#1b2430', 'stroke-width': 3, fill: 'none', parent: sc}); return display(f, sc, x, y, 100, 58, 'JOULEMÈTRE', {noShadow: true}); };   // cordon d'alimentation (secteur)
   const cable = (x1, y1, x2, y2) => f.path(`M${x1},${y1} C${x1 + 10},${y1 - 50} ${x2 - 10},${y2 - 60} ${x2},${y2}`, {stroke: '#1b2430', 'stroke-width': 3, fill: 'none', parent: sc});
   const set = [], cfg = exp === 1
     ? [{x: 150, kind: 'eau', lev: .32, lab: '150 g d’eau', Q: 12.555, dth: 20}, {x: 455, kind: 'eau', lev: .62, lab: '300 g d’eau', Q: 25.11, dth: 20}]

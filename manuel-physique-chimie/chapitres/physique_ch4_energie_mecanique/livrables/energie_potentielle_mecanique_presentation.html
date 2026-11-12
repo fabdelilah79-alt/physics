@@ -946,6 +946,121 @@ function skier(f, parent, x, y, s = 1, ang = 0, o = {}){
   return g;
 }
 
+/* ---------- Verrerie et appareils de thermique (ajoutés au chapitre 5 de physique) ---------- */
+// liquide en dégradé (couleur de base col)
+function liquidGrad(f, col){ return f.lg(uid('lq'), [[0, tint(col, .3), .85], [.5, col, .9], [1, shade(col, .18), .92]], 0, 0, 1, 0); }
+// bécher en perspective : centre du fond (cx, yb), largeur w, hauteur h ; o.level (0..1), o.liq (couleur)
+// renvoie {content (groupe pour le liquide et les objets, sous les parois), front, yl (surface du liquide), rx, ry}
+function beaker3D(f, parent, cx, yb, w, h, o = {}){
+  const g = f.g({parent}), rx = w / 2, ry = Math.max(4, w * .1), yt = yb - h, glass = '#7d93a8';
+  if (!o.noShadow) shadowEll(f, g, cx, yb + 3, rx * 1.05, ry * .7, .25);
+  f.path(`M${f2(cx - rx)},${f2(yt)} L${f2(cx - rx)},${f2(yb)} A${f2(rx)},${f2(ry)} 0 0 0 ${f2(cx + rx)},${f2(yb)} L${f2(cx + rx)},${f2(yt)} Z`,
+    {fill: f.lg(uid('gl'), [[0, '#ffffff', .45], [.5, '#e3f0fa', .2], [1, '#ffffff', .45]], 0, 0, 1, 0), stroke: 'none', parent: g});
+  f.ell(cx, yt, rx, ry, {fill: '#eef6fc', opacity: .35, stroke: 'none', parent: g});
+  const content = f.g({parent: g});
+  let yl = yb;
+  if (o.level){
+    yl = yb - h * o.level; const c = o.liq || '#9fd3f5';
+    f.path(`M${f2(cx - rx + 2)},${f2(yl)} L${f2(cx - rx + 2)},${f2(yb)} A${f2(rx - 2)},${f2(ry - 1)} 0 0 0 ${f2(cx + rx - 2)},${f2(yb)} L${f2(cx + rx - 2)},${f2(yl)} Z`, {fill: liquidGrad(f, c), stroke: 'none', parent: content});
+    f.ell(cx, yl, rx - 2, ry - 1, {fill: tint(c, .4), stroke: shade(c, .2), 'stroke-width': .8, opacity: .95, parent: content});
+  }
+  const front = f.g({parent: g});
+  f.line(cx - rx, yt, cx - rx, yb, {stroke: glass, 'stroke-width': 1.8, parent: front});
+  f.line(cx + rx, yt, cx + rx, yb, {stroke: glass, 'stroke-width': 1.8, parent: front});
+  f.path(`M${f2(cx - rx)},${f2(yb)} A${f2(rx)},${f2(ry)} 0 0 0 ${f2(cx + rx)},${f2(yb)}`, {stroke: glass, 'stroke-width': 1.8, fill: 'none', parent: front});
+  f.ell(cx, yt, rx, ry, {fill: 'none', stroke: glass, 'stroke-width': 1.8, parent: front});
+  f.path(`M${f2(cx - rx - 1)},${f2(yt)} q-7,-2 -9,-8`, {stroke: glass, 'stroke-width': 1.8, fill: 'none', parent: front});   // bec
+  f.rect(cx - rx + w * .1, yt + ry + 5, Math.max(3, w * .055), h * .72, {rx: 2, fill: '#ffffff', opacity: .6, parent: front});
+  if (!o.noGrad) for (let k = 1; k <= 4; k++){ const y = yb - h * k / 5; f.line(cx + rx * .5, y, cx + rx * (k % 2 ? .72 : .82), y, {stroke: '#5d7f96', 'stroke-width': 1, parent: front}); }
+  return {g, content, front, yl, rx, ry, yt, yb, cx};
+}
+// plaque chauffante électrique : centre du bas (cx, yb), largeur w ; renvoie {g, top, glow}
+function hotPlate(f, parent, cx, yb, w, o = {}){
+  const g = f.g({parent}), h = o.h || 34;
+  if (!o.noShadow) shadowEll(f, g, cx, yb + 2, w * .55, 5, .3);
+  f.rect(cx - w / 2, yb - h, w, h, {rx: 6, fill: f.lg(uid('hp'), [[0, '#eef2f6'], [1, '#9aa7b6']]), stroke: '#5d6978', 'stroke-width': 1, parent: g});
+  f.rect(cx - w / 2 + 4, yb - h - 7, w - 8, 9, {rx: 3, fill: '#2b3440', parent: g});
+  const glow = f.rect(cx - w / 2 + 9, yb - h - 5, w - 18, 4, {rx: 2, fill: '#ff5a2a', opacity: 0, filter: realDefs(f).blur2, parent: g});
+  f.circ(cx + w / 2 - 16, yb - h / 2, 8, {fill: f.rg(uid('kn'), [[0, '#ffffff'], [1, '#5d6978']], .35, .3, .8), stroke: '#3b4654', 'stroke-width': .8, parent: g});
+  const led = f.circ(cx - w / 2 + 14, yb - h / 2, 3.2, {fill: '#7c8896', parent: g});
+  const set = on => { glow.setAttribute('opacity', on ? .9 : 0); led.setAttribute('fill', on ? '#ff3b30' : '#7c8896'); };
+  set(!!o.on);
+  return {g, top: yb - h - 7, set};
+}
+// thermomètre numérique à sonde : boîtier en (x, yTop), sonde jusqu'à yTip ; renvoie le texte de l'écran
+function probeThermo(f, parent, x, yTop, yTip, o = {}){
+  const w = o.w || 96, h = o.h || 62, g = f.g({parent});
+  f.rect(x - 2.5, yTop + h - 4, 5, yTip - (yTop + h - 4), {rx: 2.5, fill: f.lg(uid('pr'), [[0, '#7c8896'], [.4, '#e9eef3'], [1, '#5d6978']], 0, 0, 1, 0), parent: g});
+  f.line(x, yTop + h + 2, x, yTop + h + 14, {stroke: '#1b2a41', 'stroke-width': 7, 'stroke-linecap': 'round', parent: g});
+  return display(f, g, x - w / 2, yTop, w, h, o.title || 'θ (°C)', {noShadow: true});
+}
+// glaçon translucide (coin haut gauche en (x, y), côté s, angle a)
+function iceCube(f, parent, x, y, s, a = 0){
+  const g = f.g({parent}); g.setAttribute('transform', `translate(${f2(x)},${f2(y)}) rotate(${f2(a)})`);
+  f.rect(0, 0, s, s, {rx: s * .18, fill: f.lg(uid('ic'), [[0, '#f4fbff', .95], [.6, '#c9e7f7', .85], [1, '#9fcde8', .9]]), stroke: '#8fbcd8', 'stroke-width': 1, parent: g});
+  f.path(`M${f2(s * .18)},${f2(s * .25)} L${f2(s * .55)},${f2(s * .2)}`, {stroke: '#ffffff', 'stroke-width': s * .08, 'stroke-linecap': 'round', opacity: .9, parent: g});
+  f.circ(s * .7, s * .62, s * .07, {fill: '#ffffff', opacity: .7, parent: g});
+  return g;
+}
+// bloc (cylindre) métallique vu de face : centre du haut (x, y), largeur w, hauteur h, couleur col ; o.hook : fil de suspension
+function metalBlock(f, parent, x, y, w, h, col = '#b8c2cc', o = {}){
+  const g = f.g({parent}), ry = w * .16;
+  if (o.hook) f.line(x, y - o.hook, x, y, {stroke: '#3b4654', 'stroke-width': 1.4, parent: g});
+  f.path(`M${f2(x - w / 2)},${f2(y)} L${f2(x - w / 2)},${f2(y + h)} A${f2(w / 2)},${f2(ry)} 0 0 0 ${f2(x + w / 2)},${f2(y + h)} L${f2(x + w / 2)},${f2(y)} Z`,
+    {fill: f.lg(uid('mb'), [[0, shade(col, .35)], [.35, tint(col, .55)], [.65, col], [1, shade(col, .45)]], 0, 0, 1, 0), stroke: shade(col, .5), 'stroke-width': .9, parent: g});
+  f.ell(x, y, w / 2, ry, {fill: tint(col, .3), stroke: shade(col, .5), 'stroke-width': .9, parent: g});
+  return g;
+}
+// calorimètre de Berthelot en coupe : centre du bas (cx, yb), largeur w, hauteur h ; o.level (0..1) du liquide
+// renvoie {content (groupe dans le vase intérieur), yl (surface du liquide), xL, xR, yIn (fond intérieur), lidY, stir (agitateur), probeX}
+function calorimeter(f, parent, cx, yb, w, h, o = {}){
+  const g = f.g({parent}), d = realDefs(f), t = h * .0;
+  if (!o.noShadow) shadowEll(f, g, cx, yb + 3, w * .55, 6, .3);
+  f.rect(cx - w / 2, yb - h, w, h, {rx: 10, fill: f.lg(uid('cx'), [[0, '#5d6978'], [.3, '#c3ccd6'], [.7, '#9aa7b6'], [1, '#3b4654']], 0, 0, 1, 0), stroke: '#2b3440', 'stroke-width': 1.2, parent: g});
+  const e1 = 9, e2 = w * .13;
+  f.rect(cx - w / 2 + e1, yb - h + 2, w - 2 * e1, h - e1 - 2, {rx: 6, fill: f.lg(uid('is'), [[0, '#f3e3b8'], [1, '#d9c28a']]), parent: g});
+  const r = rng(11); for (let i = 0; i < 70; i++) f.circ(cx - w / 2 + e1 + 2 + r() * (w - 2 * e1 - 4), yb - h + 6 + r() * (h - e1 - 10), 1 + r() * 1.6, {fill: '#c2a866', opacity: .55, parent: g});
+  const xL = cx - w / 2 + e2, xR = cx + w / 2 - e2, yIn = yb - e2 * .9;
+  f.rect(xL - 3, yb - h + 4, xR - xL + 6, yIn - (yb - h + 4) + 3, {rx: 4, fill: f.lg(uid('vi'), [[0, '#8a96a8'], [.4, '#f4f7fa'], [1, '#7c8896']], 0, 0, 1, 0), parent: g});
+  f.rect(xL, yb - h + 4, xR - xL, yIn - (yb - h + 4), {rx: 3, fill: '#f7fbfe', parent: g});
+  const content = f.g({parent: g}); let yl = yIn;
+  if (o.level){ yl = yIn - (yIn - (yb - h + 4)) * o.level; f.rect(xL, yl, xR - xL, yIn - yl, {rx: 2, fill: liquidGrad(f, o.liq || '#9fd3f5'), parent: content});
+    f.rect(xL, yl, xR - xL, 2.5, {fill: '#ffffff', opacity: .7, parent: content}); }
+  // couvercle, agitateur, thermomètre
+  const lidY = yb - h - 12;
+  f.rect(cx - w / 2 - 5, lidY, w + 10, 16, {rx: 5, fill: f.lg(uid('ld'), [[0, '#3b4654'], [1, '#1b2430']]), parent: g});
+  const sx = cx - (xR - xL) * .25, probeX = cx + (xR - xL) * .22;
+  const stir = f.g({parent: g});
+  f.rect(sx - 2, lidY - 34, 4, yIn - 10 - (lidY - 34), {fill: f.lg(uid('ag'), [[0, '#7c8896'], [.5, '#eef2f6'], [1, '#5d6978']], 0, 0, 1, 0), parent: stir});
+  f.rect(sx - 9, lidY - 42, 18, 10, {rx: 4, fill: '#d62839', parent: stir});
+  f.ell(sx, yIn - 12, (xR - xL) * .18, 4, {fill: 'none', stroke: '#7c8896', 'stroke-width': 3, parent: stir});
+  return {g, content, yl, xL, xR, yIn, lidY, stir, probeX, sx};
+}
+// petits filets de vapeur au-dessus d'un point (animés par setT de phase)
+function steam(f, parent, x, y, n = 3, o = {}){
+  const g = f.g({parent, opacity: o.op || .7});
+  const P = [...Array(n)].map((_, i) => f.path(`M${f2(x + (i - (n - 1) / 2) * (o.gap || 14))},${f2(y)} q-7,-12 0,-24 t0,-24`, {stroke: '#ffffff', 'stroke-width': 4, 'stroke-linecap': 'round', fill: 'none', filter: realDefs(f).blur2, parent: g}));
+  return {g, update(t){ P.forEach((p, i) => { const k = ((t * .6 + i / n) % 1); p.setAttribute('transform', `translate(0,${f2(-k * 18)})`); p.setAttribute('opacity', f2(Math.sin(Math.PI * k))); }); }};
+}
+
+/* ---------- Ressort hélicoïdal (ajouté au chapitre 6 de physique) ---------- */
+// ressort horizontal d'extrémités x1 et x2 à la hauteur y ; n spires, rayon r ; renvoie set(x1, x2)
+function spring(f, parent, x1, y, x2, o = {}){
+  const g = f.g({parent}), n = o.n || 12, r = o.r || 12, col = o.col || '#5d6978';
+  const back = f.path('', {stroke: shade(col, .35), 'stroke-width': o.w || 2.4, fill: 'none', parent: g});
+  const front = f.path('', {stroke: f.lg(uid('sp'), [[0, tint(col, .5)], [.5, col], [1, shade(col, .3)]], 0, 0, 0, 1), 'stroke-width': (o.w || 2.4) + .6, fill: 'none', 'stroke-linecap': 'round', parent: g});
+  const set = (a, b) => {
+    const L = b - a, e = Math.min(14, L * .08), p = (L - 2 * e) / n; let db = '', df = `M${f2(a)},${f2(y)} L${f2(a + e)},${f2(y)}`;
+    for (let k = 0; k < n; k++){ const x0 = a + e + k * p;
+      df += ` Q${f2(x0 + p * .25)},${f2(y - 1.6 * r)} ${f2(x0 + p * .5)},${f2(y - r * .05)}`;
+      db += `M${f2(x0 + p * .5)},${f2(y - r * .05)} Q${f2(x0 + p * .75)},${f2(y + 1.6 * r)} ${f2(x0 + p)},${f2(y)} `; }
+    df += ` M${f2(b - e)},${f2(y)} L${f2(b)},${f2(y)}`;
+    back.setAttribute('d', db); front.setAttribute('d', df);
+  };
+  set(x1, x2);
+  return {g, set};
+}
+
 /* ===== Physique, chapitre 4 — Énergie potentielle de pesanteur et énergie mécanique : titre, parties 1 et 2 ===== */
 
 // couleurs des énergies (graphes et histogrammes)
@@ -1060,12 +1175,12 @@ SCENES.barrage = (host, o = {}) => {
   const turb = f.g({parent: sc}); setT(turb, 304, 264);
   for (let k = 0; k < 6; k++) f.path('M0,0 L17,-5 L17,5 Z', {fill: '#ffc93c', transform: `rotate(${k * 60})`, parent: turb});
   f.circ(0, 0, 4, {fill: '#ffffff', parent: turb});
-  const out = f.path('M350,292 Q380,296 420,292', {stroke: '#7fc4ff', 'stroke-width': 6, 'stroke-dasharray': '12 8', parent: sc});
+  const out = f.path('M350,292 Q360,295 372,293', {stroke: '#7fc4ff', 'stroke-width': 6, 'stroke-dasharray': '12 8', parent: sc});
   // falaise et rocher
-  f.path('M470,300 L470,120 Q480,96 520,92 L640,88 L640,300 Z', {fill: f.lg('fal', [[0, '#b08a64'], [1, '#7a5a3c']], 0, 0, 1, 0), stroke: '#5a4030', 'stroke-width': 1.2, parent: sc});
+  f.path('M470,300 L470,96 Q471,92 476,92 L640,88 L640,300 Z', {fill: f.lg('fal', [[0, '#b08a64'], [1, '#7a5a3c']], 0, 0, 1, 0), stroke: '#5a4030', 'stroke-width': 1.2, parent: sc});
   for (let y = 130; y < 300; y += 26) f.path(`M470,${y} q20,6 40,-2 t40,4`, {stroke: '#6b4f36', 'stroke-width': 1.2, fill: 'none', opacity: .6, parent: sc});
-  const rock = f.g({parent: sc});
-  f.path('M-22,0 Q-26,-22 -6,-30 Q14,-34 22,-16 Q26,-2 14,2 Z', {fill: f.rg('rk', [[0, '#b7b0a6'], [1, '#5f574d']], .35, .3, .8), stroke: '#3f3830', 'stroke-width': 1, parent: rock});
+  const rock = f.g({parent: sc}), rk0 = f.g({parent: rock}); rk0.setAttribute('transform', 'translate(0,16)');   // rocher centré sur l'origine (rayon ≈ 20)
+  f.path('M-22,0 Q-26,-22 -6,-30 Q14,-34 22,-16 Q26,-2 14,2 Z', {fill: f.rg('rk', [[0, '#b7b0a6'], [1, '#5f574d']], .35, .3, .8), stroke: '#3f3830', 'stroke-width': 1, parent: rk0});
   tag(f, sc, 120, 30, 'eau retenue en altitude', {size: 14, w: 168});
   tag(f, sc, 330, 200, 'centrale : turbine', {size: 14, w: 132});
   tag(f, sc, 552, 60, 'rocher au sommet', {size: 14, w: 130});
@@ -1074,11 +1189,13 @@ SCENES.barrage = (host, o = {}) => {
     const tt = o.book ? 0 : t;
     flow.setAttribute('stroke-dashoffset', f2(-tt * 70)); out.setAttribute('stroke-dashoffset', f2(-tt * 40));
     setT(turb, 304, 264, tt * 240);
-    if (o.book){ setT(rock, 540, 92); return; }
-    const c = t % 5, u = c - 1;   // roule jusqu'au bord (1 s), puis chute libre
-    let x = 540, y = 92, a = 0;
-    if (u > 0 && u <= 1){ x = 540 - 82 * u * u; a = -82 * u * u / 24 * 57.3; }
-    else if (u > 1){ const w = u - 1; x = 458 - 20 * w; y = Math.min(300, 92 + 300 * w * w); a = -196 - 160 * w; }
+    const r = 19, yTop = 91 - r, vx = 60;   // centre du rocher posé sur le sommet ; vitesse horizontale au bord (px/s)
+    if (o.book){ setT(rock, 540, yTop); return; }
+    const c = t % 5, u = c - 1;   // roule jusqu'au bord (1 s), puis chute (parabole) jusqu'au sol, où il reste
+    let x = 560, y = yTop, a = 0;
+    if (u > 0 && u <= 1){ x = 560 - 90 * u; a = -(90 * u) / r * 57.3; }
+    else if (u > 1){ const w = u - 1, wl = Math.sqrt(2 * (300 - r - yTop) / 300); const ww = Math.min(w, wl);
+      x = 470 - vx * ww; y = yTop + 150 * ww * ww; a = -90 / r * 57.3 - 200 * ww; }
     setT(rock, x, y, a);
   }};
 };
@@ -1179,14 +1296,16 @@ SCENES.appDico = (host, o = {}) => {
     f.rect(-34, -20, 68, 20, {rx: 2, fill: '#fbf7ee', stroke: '#b9ad94', 'stroke-width': .8, parent: g});
     f.rect(-36, -24, 72, 5, {rx: 2, fill: '#b81f2a', parent: g}); f.rect(-36, -2, 72, 4, {rx: 2, fill: '#b81f2a', parent: g});
     f.rect(-38, -24, 6, 26, {rx: 2, fill: '#8e1520', parent: g}); return g; };
-  const ghost = book(.3); setT(ghost, 410, yS);
+  const ghost = book(.3); setT(ghost, 422, yS);
   const bk = book(1);
+  const hand = f.g({parent: sc}); fist(f, hand, 0, 0, -90, .8, {sleeve: '#3b4f6b'});   // la main qui porte le livre
   f.frame();
   return {update(t){
     let x = 170, y = yT;
     if (!o.book){ const c = t % 7, u = c < 1 ? 0 : c < 3.6 ? ease((c - 1) / 2.6) : c < 4.6 ? 1 : c < 6.6 ? 1 - ease((c - 4.6) / 2) : 0;
-      x = lerp(170, 410, u); y = lerp(yT, yS, u) - 60 * Math.sin(Math.PI * u); }
-    setT(bk, x, y); ghost.setAttribute('opacity', o.book ? .3 : 0);
+      x = lerp(170, 422, u); y = lerp(yT, yS, u) - 60 * Math.sin(Math.PI * u); }
+    setT(bk, x, y);
+    const moving = !o.book && Math.abs(y - yT) > .5 && Math.abs(y - yS) > .5; hand.setAttribute('display', moving ? 'inline' : 'none'); setT(hand, x, y + 13); ghost.setAttribute('opacity', o.book ? .3 : 0);
   }};
 };
 
@@ -1228,8 +1347,9 @@ SCENES.chuteBille = (host, o = {}) => {
   const sc = labScene(f, 392), d = realDefs(f);
   const xb = 220, yA = 96, yB = 318, yO = 392;
   standClamp(f, sc, 330, 392, 54, xb);
-  f.rect(xb - 16, 42, 32, 26, {rx: 4, fill: f.lg('em', [[0, '#d9483b'], [1, '#8e1f16']], 0, 0, 1, 0), stroke: '#5a120c', 'stroke-width': 1, parent: sc});
-  f.T(xb + 22, 84, 'électroaimant', {cls: 'lbl-s', size: 12, parent: sc});
+  f.rect(xb - 16, 58, 32, 26, {rx: 4, fill: f.lg('em', [[0, '#d9483b'], [1, '#8e1f16']], 0, 0, 1, 0), stroke: '#5a120c', 'stroke-width': 1, parent: sc});
+  f.rect(xb - 3, 54, 6, 5, {fill: '#3b4654', parent: sc});   // fixation de l'électroaimant au bras
+  f.T(xb + 22, 78, 'électroaimant', {cls: 'lbl-s', size: 12, parent: sc});
   f.line(60, yO, 60, 24, {stroke: C.ink, 'stroke-width': 1.8, 'marker-end': f.mk('ink'), parent: sc});
   f.T(72, 34, M('z', 22), {cls: 'm', size: 22, parent: sc});
   [[yA, 'z_A', 'A'], [yB, 'z_B', 'B']].forEach(([y, z, n]) => {
@@ -1245,7 +1365,7 @@ SCENES.chuteBille = (host, o = {}) => {
   const Tf = 2.4;
   const put = y => { setT(bG, xb, y); setVec(vP, xb, y + 13, xb, y + 66); setT(lP, xb + 9, y + 54); };
   return {update(t){
-    if (o.book){ put(yA + 6); ghosts.innerHTML = ''; ball(f, ghosts, xb, yB, 12).setAttribute('opacity', .35); return; }
+    if (o.book){ put(yA); ghosts.innerHTML = ''; ball(f, ghosts, xb, yB, 12).setAttribute('opacity', .35); return; }
     const c = t % (Tf + 1.2), u = Math.min(c, Tf) / Tf, y = yA + (yB - yA) * u * u;
     put(y);
     const n = Math.floor(u * 6 + 1e-6);
@@ -1259,16 +1379,26 @@ SCENES.chuteBille = (host, o = {}) => {
 const D4 = [14.5, 14.0, 13.2, 11.7, 9.7, 7.1, 3.8, 0];
 
 /* ---------- Activité 2, doc 3 : mobile autoporteur sur une table à coussin d'air inclinée ---------- */
+// Solide de longueur w qui franchit un angle rentrant (creux) entre deux segments : le coin arrière reste sur le
+// premier segment, le coin avant sur le second (pas d'interpénétration). C : coin ; u1, u2 : directions unitaires
+// d'entrée et de sortie ; e ∈ [0, w] : distance du coin avant au-delà de C. Renvoie [x, y, angle°] du milieu de la base.
+function bridgeCorner(C, u1, u2, w, e){
+  const c = u1[0] * u2[0] + u1[1] * u2[1], q = -e * c + Math.sqrt(Math.max(0, e * e * c * c - e * e + w * w));
+  const bk = [C[0] - q * u1[0], C[1] - q * u1[1]], fr_ = [C[0] + e * u2[0], C[1] + e * u2[1]];
+  return [(bk[0] + fr_[0]) / 2, (bk[1] + fr_[1]) / 2, Math.atan2(fr_[1] - bk[1], fr_[0] - bk[0]) * 180 / Math.PI];
+}
 SCENES.tableAir4 = (host, o = {}) => {
   const W = 600, H = 340, f = new Fig(host, W, H, {label: 'Mobile autoporteur sur une table à coussin d’air inclinée : positions M1 à M8, altitude hi de Mi au-dessus du plan horizontal de référence passant par M8'});
   const sc = labScene(f, 306), d = realDefs(f);
   const A = 10, ca = Math.cos(rad(A)), sa = Math.sin(rad(A)), P0 = [40, 92], L = 520;
   const at = (s, n = 0) => [P0[0] + s * ca + n * sa, P0[1] + s * sa - n * ca];
   const P1 = at(L), K = 24, s8 = 470, sOf = Dc => s8 - Dc * K;
-  f.rect(at(30)[0] - 6, at(30)[1] + 12, 12, 306 - at(30)[1] - 12 - 30, {fill: d.metal, parent: sc});
-  f.rect(at(30)[0] - 26, 276, 52, 30, {rx: 2, fill: f.lg('cale', [[0, '#d9a066'], [1, '#9c6633']]), stroke: '#6b4220', 'stroke-width': 1, parent: sc});
-  f.T(at(30)[0], 296, 'cale', {cls: 'lbl-b', anchor: 'middle', size: 13, fill: '#ffffff', parent: sc});
-  f.rect(P1[0] - 36, P1[1] + 12, 12, 306 - P1[1] - 12, {fill: d.metal, parent: sc});
+  // deux pieds identiques ; la cale, sous le pied gauche, a exactement la hauteur qui donne l'inclinaison α
+  const LG = at(30), RG = at(L - 30), legL = 306 - RG[1] - 12, cH = RG[1] - LG[1];
+  f.rect(LG[0] - 6, LG[1] + 12, 12, legL, {fill: d.metal, parent: sc});
+  f.rect(LG[0] - 26, 306 - cH, 52, cH, {rx: 2, fill: f.lg('cale', [[0, '#d9a066'], [1, '#9c6633']]), stroke: '#6b4220', 'stroke-width': 1, parent: sc});
+  f.T(LG[0], 306 - cH / 2 + 5, 'cale', {cls: 'lbl-b', anchor: 'middle', size: 13, fill: '#ffffff', parent: sc});
+  f.rect(RG[0] - 6, RG[1] + 12, 12, legL, {fill: d.metal, parent: sc});
   shadowEll(f, sc, (P0[0] + P1[0]) / 2, 308, 250, 5, .25);
   const pl = f.g({parent: sc}); pl.setAttribute('transform', `translate(${P0[0]},${P0[1]}) rotate(${A})`);
   f.rect(0, 0, L, 14, {rx: 2, fill: f.lg('glass', [[0, '#e9f4fb'], [.5, '#bcd6e6'], [1, '#8fb3c9']]), stroke: '#5d7f96', 'stroke-width': 1, parent: pl});
@@ -1401,16 +1531,16 @@ SCENES.appBille = (host, o = {}) => {
   if (o.final) f.T(W - 10, H - 8, 'animation ralentie', {cls: 'lbl-s', size: 12, anchor: 'end', parent: sc});
   f.frame();
   const g = 10, vA = 6, zA = 1.2, Tup = vA / g, Tdn = Math.sqrt(2 * 3 / g), Tt = Tup + Tdn, slow = 2.2;
-  const put = (z, v) => { const y = yG - z * K; setT(bG, xb, y); const L = v * 9;
-    vV.setAttribute('display', Math.abs(L) > 4 ? 'inline' : 'none'); lV.setAttribute('display', Math.abs(L) > 4 && !o.book ? 'inline' : 'none');
+  const put = (z, v) => { const y = Math.min(yG - z * K, yG - 11); setT(bG, xb, y); const L = v * 9;
+    const show = Math.abs(L) > 4 && z > 0; vV.setAttribute('display', show ? 'inline' : 'none'); lV.setAttribute('display', show && !o.book ? 'inline' : 'none');
     setVec(vV, xb, y - Math.sign(L) * 12, xb, y - Math.sign(L) * 12 - L); setT(lV, xb + 10, y - L / 2); };
   return {update(t){
     if (!o.final){ put(zA, vA); lab0.setAttribute('display', 'inline'); lV.setAttribute('display', 'none'); return; }
     lab0.setAttribute('display', 'none');
-    const c = (t % (Tt * slow + 1.2)) / slow, u = Math.min(c, Tt);
+    const c = (t % (Tt * slow + .5)) / slow, u = Math.min(c, Tt);
     let z, v;
     if (u < Tup){ z = zA + vA * u - .5 * g * u * u; v = vA - g * u; } else { const w = u - Tup; z = 3 - .5 * g * w * w; v = -g * w; }
-    if (z < 0){ z = 0; v = 0; }
+    if (z < 0) z = 0;   // arrivée au sol : on montre l'instant de l'impact (énergie mécanique conservée)
     put(z, v);
     const Em = .5 * vA * vA + g * zA; set([.5 * v * v / Em * .9, g * z / Em * .9, (.5 * v * v + g * z) / Em * .9]);
   }};
@@ -1432,13 +1562,17 @@ SCENES.caisseRugueuse = (host, o = {}) => {
   tag(f, sc, 330, 60, 'les surfaces en contact s’échauffent', {size: 14, w: 250});
   f.frame();
   // modèle (unités du dessin) : descente avec frottement, puis freinage sur le sol
-  const a1 = 120, a2 = -150, t1 = Math.sqrt(2 * L / a1), vB = a1 * t1, t2 = -vB / a2, dB = -vB * vB / (2 * a2);
+  const hw = 30, Ls = L - 2 * hw;   // le centre de la base part à hw du sommet A ; le creux B est franchi sur 2 hw
+  const a1 = 120, a2 = -150, t1 = Math.sqrt(2 * Ls / a1), vB = a1 * t1, t2 = -vB / a2, dB = -vB * vB / (2 * a2);
+  const u1 = [ca, sa], u2 = [1, 0];
   return {update(t){
-    let s, v;
+    let s, v;   // s : abscisse du centre de la base, comptée depuis A le long du chemin
     if (o.book){ s = L + dB * .45; v = 0; }
-    else { const c = t % (t1 + t2 + 1.6); if (c < t1){ s = .5 * a1 * c * c; v = a1 * c; } else { const u = Math.min(c - t1, t2); s = L + vB * u + .5 * a2 * u * u; v = vB + a2 * u; } }
+    else { const c = t % (t1 + t2 + 1.6); if (c < t1){ s = hw + .5 * a1 * c * c; v = a1 * c; } else { const u = Math.min(c - t1, t2); s = L - hw + vB * u + .5 * a2 * u * u; v = vB + a2 * u; } }
     let x, y, a;
-    if (s <= L){ x = A[0] + s * ca; y = A[1] + s * sa; a = al; } else { x = B[0] + (s - L); y = yb; a = 0; }
+    if (s <= L - hw){ x = A[0] + s * ca; y = A[1] + s * sa; a = al; }
+    else if (s < L + hw){ [x, y, a] = bridgeCorner(B, u1, u2, 2 * hw, s - (L - hw)); }
+    else { x = B[0] + (s - L); y = yb; a = 0; }
     setT(cr, x, y, a); setT(heat, x, y - 48, 0); heat.setAttribute('opacity', f2(clamp(v / 200, 0, 1) * (s > L ? 1 : .4)));
     glow.setAttribute('cx', f2(x)); glow.setAttribute('cy', f2(y)); glow.setAttribute('opacity', f2(clamp(v / 180, 0, 1)));
     disp.textContent = fr(Math.max(0, v) / 60, 2) + ' m/s';
@@ -1523,6 +1657,8 @@ SCENES.ex1Rampe = (host, o = {}) => {
     else if (c < t1){ x = 60 + v0 * c; y = A[1]; v = v0; onA = c > t1 - .45; }
     else { const u = c - t1; let s; if (u < t2){ s = v0 * u - .5 * dec * u * u; v = v0 - dec * u; } else { const w = u - t2; s = Math.max(0, Lp - .5 * dec * w * w); v = -dec * w; }
       if (s <= 0){ x = A[0] + (u - 2 * t2) * v0 * -1; y = A[1]; } else { x = A[0] + s * ca; y = A[1] - s * sa; a = -al; } }
+    // franchissement du creux en A (solide de 40 px) : base posée à la fois sur le plat et sur la pente
+    if (x > A[0] - 20 && x < A[0] + 20 * ca + 1 && !(c < 0)){ const sc_ = a === 0 ? x - A[0] : (x - A[0]) / ca; if (sc_ > -20 && sc_ < 20){ [x, y, a] = bridgeCorner(A, [1, 0], [ca, -sa], 40, sc_ + 20); } }
     setT(S, x, y, a);
     const show = onA || o.book; vV.setAttribute('display', show ? 'inline' : 'none'); lV.setAttribute('display', show ? 'inline' : 'none');
     if (show){ setVec(vV, x + 22, y - 13, x + 82, y - 13); setT(lV, x + 54, y - 22); }

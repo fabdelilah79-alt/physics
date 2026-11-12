@@ -204,8 +204,10 @@ SCENES.panneauSolaire = (host, o = {}) => {
   return {update(t){
     const ph = o.book ? 0 : t;
     fh.setAttribute('stroke-dashoffset', f2(-ph * 30)); fc.setAttribute('stroke-dashoffset', f2(-ph * 30));
-    rays.innerHTML = ''; [60, 140, 220].forEach(s => { const x = P0[0] + s * ca, y = P0[1] + s * sa - 40; const sx = 100, sy = 80;
-      vec(f, rays, lerp(sx, x, .2), lerp(sy, y, .2), x - 4, y - 6, C.amber, 2.2); });
+    // rayons du Soleil parallèles entre eux (le Soleil est très loin), dirigés vers la vitre
+    const mid = [P0[0] + 140 * ca, P0[1] + 140 * sa - 40], dir = [mid[0] - 70, mid[1] - 60], n_ = Math.hypot(...dir), ux = dir[0] / n_, uy = dir[1] / n_;
+    rays.innerHTML = ''; [60, 140, 220].forEach(s => { const x = P0[0] + s * ca, y = P0[1] + s * sa - 40;
+      vec(f, rays, x - 4 - 150 * ux, y - 6 - 150 * uy, x - 4, y - 6, C.amber, 2.2); });
   }};
 };
 
@@ -230,7 +232,7 @@ SCENES.balle = (host, o = {}) => {
     const c = o.book ? 0 : t % 5, u = clamp(c / 2, 0, 1), x = lerp(80, bx + 30, u);
     setT(ball_, x, 145); const inside = x > bx - 20; hole.setAttribute('opacity', inside ? 1 : 0);
     const heat = clamp((c - 2) / 1.5, 0, 1); glow.setAttribute('opacity', f2(.6 * heat)); hotB.setAttribute('opacity', f2(.6 * heat));
-    vV.setAttribute('display', u < 1 ? 'inline' : 'none'); lV.setAttribute('display', u < 1 ? 'inline' : 'none');
+    const showV = u < 1 && !inside; vV.setAttribute('display', showV ? 'inline' : 'none'); lV.setAttribute('display', showV ? 'inline' : 'none');   // dans le bois, la balle ralentit puis s'arrête
     setVec(vV, x + 28, 145, x + 88, 145); setT(lV, x + 60, 130);
   }};
 };

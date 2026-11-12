@@ -112,12 +112,12 @@ SCENES.barrage = (host, o = {}) => {
   const turb = f.g({parent: sc}); setT(turb, 304, 264);
   for (let k = 0; k < 6; k++) f.path('M0,0 L17,-5 L17,5 Z', {fill: '#ffc93c', transform: `rotate(${k * 60})`, parent: turb});
   f.circ(0, 0, 4, {fill: '#ffffff', parent: turb});
-  const out = f.path('M350,292 Q380,296 420,292', {stroke: '#7fc4ff', 'stroke-width': 6, 'stroke-dasharray': '12 8', parent: sc});
+  const out = f.path('M350,292 Q360,295 372,293', {stroke: '#7fc4ff', 'stroke-width': 6, 'stroke-dasharray': '12 8', parent: sc});
   // falaise et rocher
-  f.path('M470,300 L470,120 Q480,96 520,92 L640,88 L640,300 Z', {fill: f.lg('fal', [[0, '#b08a64'], [1, '#7a5a3c']], 0, 0, 1, 0), stroke: '#5a4030', 'stroke-width': 1.2, parent: sc});
+  f.path('M470,300 L470,96 Q471,92 476,92 L640,88 L640,300 Z', {fill: f.lg('fal', [[0, '#b08a64'], [1, '#7a5a3c']], 0, 0, 1, 0), stroke: '#5a4030', 'stroke-width': 1.2, parent: sc});
   for (let y = 130; y < 300; y += 26) f.path(`M470,${y} q20,6 40,-2 t40,4`, {stroke: '#6b4f36', 'stroke-width': 1.2, fill: 'none', opacity: .6, parent: sc});
-  const rock = f.g({parent: sc});
-  f.path('M-22,0 Q-26,-22 -6,-30 Q14,-34 22,-16 Q26,-2 14,2 Z', {fill: f.rg('rk', [[0, '#b7b0a6'], [1, '#5f574d']], .35, .3, .8), stroke: '#3f3830', 'stroke-width': 1, parent: rock});
+  const rock = f.g({parent: sc}), rk0 = f.g({parent: rock}); rk0.setAttribute('transform', 'translate(0,16)');   // rocher centré sur l'origine (rayon ≈ 20)
+  f.path('M-22,0 Q-26,-22 -6,-30 Q14,-34 22,-16 Q26,-2 14,2 Z', {fill: f.rg('rk', [[0, '#b7b0a6'], [1, '#5f574d']], .35, .3, .8), stroke: '#3f3830', 'stroke-width': 1, parent: rk0});
   tag(f, sc, 120, 30, 'eau retenue en altitude', {size: 14, w: 168});
   tag(f, sc, 330, 200, 'centrale : turbine', {size: 14, w: 132});
   tag(f, sc, 552, 60, 'rocher au sommet', {size: 14, w: 130});
@@ -126,11 +126,13 @@ SCENES.barrage = (host, o = {}) => {
     const tt = o.book ? 0 : t;
     flow.setAttribute('stroke-dashoffset', f2(-tt * 70)); out.setAttribute('stroke-dashoffset', f2(-tt * 40));
     setT(turb, 304, 264, tt * 240);
-    if (o.book){ setT(rock, 540, 92); return; }
-    const c = t % 5, u = c - 1;   // roule jusqu'au bord (1 s), puis chute libre
-    let x = 540, y = 92, a = 0;
-    if (u > 0 && u <= 1){ x = 540 - 82 * u * u; a = -82 * u * u / 24 * 57.3; }
-    else if (u > 1){ const w = u - 1; x = 458 - 20 * w; y = Math.min(300, 92 + 300 * w * w); a = -196 - 160 * w; }
+    const r = 19, yTop = 91 - r, vx = 60;   // centre du rocher posé sur le sommet ; vitesse horizontale au bord (px/s)
+    if (o.book){ setT(rock, 540, yTop); return; }
+    const c = t % 5, u = c - 1;   // roule jusqu'au bord (1 s), puis chute (parabole) jusqu'au sol, où il reste
+    let x = 560, y = yTop, a = 0;
+    if (u > 0 && u <= 1){ x = 560 - 90 * u; a = -(90 * u) / r * 57.3; }
+    else if (u > 1){ const w = u - 1, wl = Math.sqrt(2 * (300 - r - yTop) / 300); const ww = Math.min(w, wl);
+      x = 470 - vx * ww; y = yTop + 150 * ww * ww; a = -90 / r * 57.3 - 200 * ww; }
     setT(rock, x, y, a);
   }};
 };
@@ -231,14 +233,16 @@ SCENES.appDico = (host, o = {}) => {
     f.rect(-34, -20, 68, 20, {rx: 2, fill: '#fbf7ee', stroke: '#b9ad94', 'stroke-width': .8, parent: g});
     f.rect(-36, -24, 72, 5, {rx: 2, fill: '#b81f2a', parent: g}); f.rect(-36, -2, 72, 4, {rx: 2, fill: '#b81f2a', parent: g});
     f.rect(-38, -24, 6, 26, {rx: 2, fill: '#8e1520', parent: g}); return g; };
-  const ghost = book(.3); setT(ghost, 410, yS);
+  const ghost = book(.3); setT(ghost, 422, yS);
   const bk = book(1);
+  const hand = f.g({parent: sc}); fist(f, hand, 0, 0, -90, .8, {sleeve: '#3b4f6b'});   // la main qui porte le livre
   f.frame();
   return {update(t){
     let x = 170, y = yT;
     if (!o.book){ const c = t % 7, u = c < 1 ? 0 : c < 3.6 ? ease((c - 1) / 2.6) : c < 4.6 ? 1 : c < 6.6 ? 1 - ease((c - 4.6) / 2) : 0;
-      x = lerp(170, 410, u); y = lerp(yT, yS, u) - 60 * Math.sin(Math.PI * u); }
-    setT(bk, x, y); ghost.setAttribute('opacity', o.book ? .3 : 0);
+      x = lerp(170, 422, u); y = lerp(yT, yS, u) - 60 * Math.sin(Math.PI * u); }
+    setT(bk, x, y);
+    const moving = !o.book && Math.abs(y - yT) > .5 && Math.abs(y - yS) > .5; hand.setAttribute('display', moving ? 'inline' : 'none'); setT(hand, x, y + 13); ghost.setAttribute('opacity', o.book ? .3 : 0);
   }};
 };
 
@@ -280,8 +284,9 @@ SCENES.chuteBille = (host, o = {}) => {
   const sc = labScene(f, 392), d = realDefs(f);
   const xb = 220, yA = 96, yB = 318, yO = 392;
   standClamp(f, sc, 330, 392, 54, xb);
-  f.rect(xb - 16, 42, 32, 26, {rx: 4, fill: f.lg('em', [[0, '#d9483b'], [1, '#8e1f16']], 0, 0, 1, 0), stroke: '#5a120c', 'stroke-width': 1, parent: sc});
-  f.T(xb + 22, 84, 'électroaimant', {cls: 'lbl-s', size: 12, parent: sc});
+  f.rect(xb - 16, 58, 32, 26, {rx: 4, fill: f.lg('em', [[0, '#d9483b'], [1, '#8e1f16']], 0, 0, 1, 0), stroke: '#5a120c', 'stroke-width': 1, parent: sc});
+  f.rect(xb - 3, 54, 6, 5, {fill: '#3b4654', parent: sc});   // fixation de l'électroaimant au bras
+  f.T(xb + 22, 78, 'électroaimant', {cls: 'lbl-s', size: 12, parent: sc});
   f.line(60, yO, 60, 24, {stroke: C.ink, 'stroke-width': 1.8, 'marker-end': f.mk('ink'), parent: sc});
   f.T(72, 34, M('z', 22), {cls: 'm', size: 22, parent: sc});
   [[yA, 'z_A', 'A'], [yB, 'z_B', 'B']].forEach(([y, z, n]) => {
@@ -297,7 +302,7 @@ SCENES.chuteBille = (host, o = {}) => {
   const Tf = 2.4;
   const put = y => { setT(bG, xb, y); setVec(vP, xb, y + 13, xb, y + 66); setT(lP, xb + 9, y + 54); };
   return {update(t){
-    if (o.book){ put(yA + 6); ghosts.innerHTML = ''; ball(f, ghosts, xb, yB, 12).setAttribute('opacity', .35); return; }
+    if (o.book){ put(yA); ghosts.innerHTML = ''; ball(f, ghosts, xb, yB, 12).setAttribute('opacity', .35); return; }
     const c = t % (Tf + 1.2), u = Math.min(c, Tf) / Tf, y = yA + (yB - yA) * u * u;
     put(y);
     const n = Math.floor(u * 6 + 1e-6);
